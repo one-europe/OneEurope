@@ -1,0 +1,51 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- IF S_MODE_FACEBOOK --> 
+	
+	<!-- IF S_AL_FB_USER -->
+		<table>
+			<tr>
+				<th colspan="2">{L_UCP_AL_DISABLE_FACEBOOK_TEXT}</th>
+			</tr>
+			<tr>
+				<td>
+					{S_UCP_FACEBOOK_DESCRIPTION}
+				</td>
+				<td>
+					<form method="post" action="{U_ACTION}">
+						<input name="mode" id="mode" type="hidden" value="facebook" />
+						<input id="submit" name="submit" type="submit" value="{L_DISABLE_FACEBOOK}" />
+						{S_FORM_TOKEN}
+						<input name="mode" id="mode" type="hidden" value="facebook" />
+					</form>
+				</td>
+			</tr>
+		</table>	
+	<!-- ELSE -->
+		<table>
+			<tr>
+				<th colspan="2">{L_UCP_AL_ENABLE_FACEBOOK_TEXT}</th>
+			</tr>
+			<tr>
+				<td>
+					{S_UCP_FACEBOOK_DESCRIPTION}
+				</td>
+				<td>
+					<form method="post" action="{U_ACTION}">
+						<a onclick="window.location='alternatelogin/al_fb_connect.php';" href="#">
+							<img src="http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_medium_long.gif" alt="Login with your Facebook account!" />
+						</a>						
+						{S_FORM_TOKEN}
+						
+					</form>
+
+				</td>
+			</tr>
+		</table>
+		
+	<!-- ENDIF -->
+	
+<!-- ENDIF -->
+
+
+<!-- INCLUDE ucp_footer.html -->

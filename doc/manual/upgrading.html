@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title> Habari - User Manual </title>
+<link rel="stylesheet" type="text/css" media="screen" href="style.css">
+</head>
+<body>
+<div id="topMenu">
+	<a href="index.html#introduction" title="Introduction">Introduction</a>
+	<a href="habari.html" title="About Habari">About Habari</a>
+	<a href="new.html" title="What's New">What's New</a>
+	<a href="installation.html" title="Installation">Installation</a>
+	<a href="upgrading.html" title="Upgrading">Upgrading</a>
+	<a href="using.html" title="Using Habari">Using Habari</a>
+	<a href="developer.html" title="Developer Introduction">Developer Introduction</a>
+</div>
+
+<div id="wrapper">
+
+	<div id="upgrading">
+<h1>Upgrading</h1>
+<p>Habari's upgrade process is designed to be transparent, with the only indication that an upgrade is happening being a slightly longer page load time the first time the site is visited after the software is updated.</p>
+
+<h2>Before You Upgrade</h2>
+<p>Before making any major change in your Habari installation, it would be prudent to create a backup of your database and your installation, in particular all the files in your Habari /user directory. The /user directory should contain all files which you have customized - plugins you have installed, themes you have installed, class files you may have modified, or locale files you have installed.
+</p>
+<h2>The Upgrade Process</h2>
+
+<ol><li> Download the new version of Habari that you will be installing. Unzip it into the location of your choice.
+</li><li> Deactivate your active plugins. Some of the system plugins may have been changed. Some of the plugins you got in other places may not be compatible with the new version of Habari.
+</li><li> Delete the following directories
+<ol><li> /3rdparty
+</li><li> /scripts
+</li><li> /doc
+</li><li> /system
+</li></ol>
+</li><li> Delete the index.php, LICENSE, and NOTICE files from the root of your installation. Do <b>not</b> delete your config.php file if it is in the root of your Habari installation, or the .htaccess file.
+
+</li><li> Copy the new version of Habari to the same location as the old version.
+</li><li> Using your web browser, navigate to your site. If there are any database changes that need to be made, they will be made automatically at this time.
+</li><li> Log into your Habari administrative area. Navigate to the plugins page and reactivate the plugins one by one. 
+</li><li> Celebrate and enjoy the new features of your latest version of Habari!
+</li></ol>
+
+<h2>Upgrading from Version 0.7.x to Version 0.8</h2>
+
+<p>There are several changes that you should take into account when upgrading. </p>
+
+<p>All users will be affected by the change in <strong>theme functions</strong> and many will want to remove a <strong>potential path disclosure issue</strong>. Now that it has been removed from the Habari installation, users of the <strong>k2 theme</strong> will need to manually include it.
+</p>
+
+<h4>Theme Functions</span></h4>
+
+<p><a href="http://wiki.habariproject.org/en/Dev:Theme_Functions" title="Dev:Theme Functions">Theme functions</a> no longer print content by default but now return a value. This means that you need to tell your theme to <tt>echo</tt> the returned value. For example, all themes should call the <tt>header()</tt> function, which should be changed from this: </p>
+
+<code>
+&lt;?php $theme->header(); ?&gt;
+</code>
+
+<p>to this:</p>
+
+<code>
+&lt;?php echo $theme->header(); ?&gt;
+</code>
+
+<p>You should check your calls to at least <tt>header()</tt>, <tt>footer()</tt>, <tt>prev_page_link()</tt>, <tt>next_page_link()</tt>, <tt>page_selector()</tt>, and <tt>feed_alternate()</tt> in your theme.</p>
+
+<h4>k2 Theme Removal</h4>
+
+<p>If you are using the k2 theme that was previously included in Habari, you should download k2 and included it in your themes directory, <tt>user/themes</tt>. k2 can now be found in <a href="https://github.com/habari-extras/k2">habari-extras</a>.</p>
+
+<h4>Prevent Installation Path Disclosure</h4>
+
+<p>A path disclosure is an error that can show the directory where your software is installed, which can be seen as a security issue. To protect existing Habari installations from a potential path disclosure issue, you can modify your <tt>config.php</tt> file and include the following line at the start of the file. New installations will be protected by default.</p>
+
+<code>
+<?php if ( !defined( 'HABARI_PATH' ) ) { die( 'No direct access' ); }
+</code>
+</div>
+</body>
+</html>

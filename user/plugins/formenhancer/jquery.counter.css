@@ -1,0 +1,55 @@
+.container p {
+	position: relative;
+}
+.counter {
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 25px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #888;
+	width: 30px;
+	text-align: right;
+	}
+form .warning {
+	color: #600;
+}	
+form .exceeded {
+	color:#e00;
+}	
+#user-options .counter, admin-options .counter {
+	text-align: left;
+	margin: 12px 20px 0 0;
+}
+
+#user-options .pct5, #admin-options .pct5 {
+	margin: 3px 0 0;
+}
+#user-options .formcontrol span.pct25, #admin-options .formcontrol span.pct25 {
+	display: inline-box;
+	font-size: 13px;
+	line-height: 18px;	
+	margin: 5px 0 0;
+}
+#user-options label, #admin-options label {
+	margin: 0;
+}
+#user-options textarea, #admin-options textarea {
+	width: 534px;
+	min-height: 107px;
+}
+#2d7bee35 {
+	height: 107px;		/* about text */
+}
+#user-options textarea, #user-options input, #admin-options textarea, #admin-options input {
+	font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	border: 1px solid #BBB;
+	border-radius: 3px;
+	padding: 3px;
+	font-size: 14px;
+	color: #333;
+}
+#admin-options #title {
+	line-height: 1em;
+}

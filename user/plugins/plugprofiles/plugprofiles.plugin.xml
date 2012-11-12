@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>PlugProfiles</name>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<author url="http://valentinkotov.de">Valentin Kotov</author>
+	<version>0.5</version>
+	<description>Adds a Profile Content Type</description>
+</pluggable>

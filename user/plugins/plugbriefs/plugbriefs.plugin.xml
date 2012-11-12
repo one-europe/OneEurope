@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>PlugBriefs</name>
+	<author url="http://valentinkotov.de">Valentin Kotov</author>
+	<description>Adds the "brief" content type, which can be used in brief.single.php and brief.multiple.php
+		templates for the creation of a kind of 9gag-like content section, reachable via the URL /in-brief.</description>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<version>1.0</version>
+</pluggable>

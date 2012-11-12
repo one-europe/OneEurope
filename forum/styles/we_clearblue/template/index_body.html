@@ -1,0 +1,114 @@
+<!-- INCLUDE overall_header.html -->
+
+<fb:like href="http://facebook.com/OneEurope" show_faces="false" width="450" font="arial"></fb:like>
+
+<!-- IF S_DISPLAY_SEARCH or (S_USER_LOGGED_IN and not S_IS_BOT) -->
+<ul class="linklist">
+	<!-- IF S_DISPLAY_SEARCH -->
+		<li><a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a><!-- IF S_LOAD_UNREADS --> &bull; <a href="{U_SEARCH_UNREAD}">{L_SEARCH_UNREAD}</a><!-- ENDIF --><!-- IF S_USER_LOGGED_IN --> &bull; <a href="{U_SEARCH_NEW}">{L_SEARCH_NEW}</a><!-- ENDIF --> &bull; <a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></li>
+	<!-- ENDIF -->
+	<!-- IF not S_IS_BOT and U_MARK_FORUMS --><li class="rightside"><a href="{U_MARK_FORUMS}" accesskey="m">{L_MARK_FORUMS_READ}</a></li><!-- ENDIF -->
+</ul>
+<!-- ENDIF -->
+
+
+<!-- IF AL_FB_FACEPILE | AL_FB_ACTIVITY | AL_FB_STREAM --> 
+<table width="100%"> 
+    <tr> 
+        <td valign="top"> 
+<!-- ENDIF --> 
+            <!-- INCLUDE forumlist_body.html --> 
+<!-- IF AL_FB_FACEPILE | AL_FB_ACTIVITY | AL_FB_STREAM --> 
+        </td> 
+        
+        <!-- IF (AL_FB_ACTIVITY and not AL_FB_USER_HIDE_ACTIVITY) or (AL_FB_STREAM and not AL_FB_USER_HIDE_STREAM) --> 
+        <td width="185" valign="top"> 
+        <!-- ENDIF --> 
+        <!-- IF AL_FB_ACTIVITY and not AL_FB_USER_HIDE_ACTIVITY --> 
+			<div class="element">
+				<fb:activity site="{AL_FB_SITE_DOMAIN}" width="180" height="500" header="true" font="arial" border_color="" recommendations="true"></fb:activity> 
+        	</div>
+		<!-- ENDIF --> 
+		</td>
+		<td width="265" valign="top">
+        <!-- IF AL_FB_STREAM and not AL_FB_USER_HIDE_STREAM --> 
+			<div class="element">
+				<fb:live-stream event_app_id="{AL_FB_APPID}" width="260" height="500" xid="" always_post_to_friends="false"></fb:live-stream> 
+     		</div>
+   		<!-- ENDIF --> 
+        <!-- IF (AL_FB_ACTIVITY and not AL_FB_USER_HIDE_ACTIVITY) or (AL_FB_STREAM and not AL_FB_USER_HIDE_STREAM) --> 
+        </td> 
+        <!-- ENDIF --> 
+    </tr> 
+    <!-- IF AL_FB_FACEPILE and not AL_FB_USER_HIDE_FACEPILE --> 
+    <tr> 
+        <td<!-- IF AL_FB_ACTIVITY --> colspan="2"<!-- ENDIF -->>
+                <div class="forabg"> 
+		<div class="inner"><span class="corners-top"><span></span></span> 
+ 
+                    <div class="panel"> 
+                        
+                        <fb:facepile href="{AL_FB_SITE_DOMAIN}" width="200" max_rows="1"></fb:facepile> 
+                    </div> 
+                        <span class="corners-bottom"><span></span></span></div> 
+	</div> 
+ 
+ 
+        </td> 
+    </tr> 
+    <!-- ENDIF --> 
+</table> 
+<!-- ENDIF -->
+
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+	<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+	<h3><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED -->&nbsp; &bull; &nbsp;<a href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF --></h3>
+		<fieldset class="quick-login">
+			<label for="username">{L_USERNAME}:</label>&nbsp;<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" />
+			<label for="password">{L_PASSWORD}:</label>&nbsp;<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}" />
+			<!-- IF S_AUTOLOGIN_ENABLED -->
+				| <label for="autologin">{L_LOG_ME_IN} <input type="checkbox" name="autologin" id="autologin" /></label>
+			<!-- ENDIF -->
+			<input type="submit" name="login" value="{L_LOGIN}" class="button2" />
+			
+			<!-- IF (S_AL_WL_ENABLED or S_AL_FB_ENABLED or S_AL_TW_ENABLED) and not S_AL_LOGIN --> 	
+			<div class="alternate_login">
+			
+				<!-- IF S_AL_FB_ENABLED --> 
+					<a onclick="window.location='alternatelogin/al_fb_connect.php';" href="#" class="fb"> 
+						<img src="http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_medium_long.gif" alt="Login with your Facebook account!" style="margin-bottom: -9px;" /> 
+					</a> 
+				<!-- ENDIF --> 
+                
+				<!-- IF S_AL_TW_ENABLED --> 
+					<a href="{U_AL_TW_REQUEST}" class="tw"><img src="alternatelogin/images/sign-in-with-twitter-l.png" alt="Sign in with your Twitter account!" style="margin-bottom: -9px" /></a> 
+				<!-- ENDIF -->			
+							
+				<!-- IF S_AL_WL_ENABLED --> 
+		        	<a href="{U_AL_WL_AUTHORIZE}" class="wl"><img src="alternatelogin/images/windows_live_connect.png" alt="Windows Live Connect" style="margin-bottom: -9px" /></a> 
+				<!-- ENDIF --> 
+				
+			</div>
+			<!-- ENDIF -->
+			{S_LOGIN_REDIRECT}
+		</fieldset>
+	</form>
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
+	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+	<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
+	<h3>{L_BIRTHDAYS}</h3>
+	<p><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <strong>{BIRTHDAY_LIST}</strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p>
+<!-- ENDIF -->
+
+<!-- IF NEWEST_USER -->
+	<h3>{L_STATISTICS}</h3>
+	<p>{TOTAL_POSTS} &bull; {TOTAL_TOPICS} &bull; {TOTAL_USERS} &bull; {NEWEST_USER}</p>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

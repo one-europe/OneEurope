@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>PlugPosts</name>
+	<author url="http://valentinkotov.de">Valentin Kotov</author>
+	<description>Adds a content type "post" to the list of available content types. Unlike "articles" (PlugTicles Plugin), they're not showing up within the main post loop.</description>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<version>0.5</version>
+</pluggable>

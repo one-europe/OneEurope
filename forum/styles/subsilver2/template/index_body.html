@@ -1,0 +1,223 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+
+	<br clear="all" /><br />
+<!-- ENDIF -->
+
+<!-- IF AL_FB_FACEPILE | AL_FB_ACTIVITY | AL_FB_STREAM | AL_FB_LIKE_BOX -->  
+<table width="100%"> 
+    <tr> 
+        <td valign="top"> 
+<!-- ENDIF --> 
+            <!-- INCLUDE forumlist_body.html --> 
+<!-- IF AL_FB_FACEPILE | AL_FB_ACTIVITY | AL_FB_STREAM | AL_FB_LIKE_BOX --> 
+        </td> 
+        
+        <!-- IF (AL_FB_ACTIVITY and not AL_FB_USER_HIDE_ACTIVITY) or (AL_FB_STREAM and not AL_FB_USER_HIDE_STREAM) or (AL_FB_LIKE_BOX and not AL_FB_USER_HIDE_LIKE_BOX) --> 
+        <td width="200" valign="top"> 
+        <!-- ENDIF --> 
+        <!-- IF AL_FB_LIKE_BOX and not AL_FB_USER_HIDE_LIKE_BOX --> 
+        
+                <div class="forabg"> 
+		<div class="inner"><span class="corners-top"><span></span></span> 
+ 
+                    <div class="panel"> 
+                            <fb:like-box href="{AL_FB_PAGE_URL}" width="300" show_faces="true" stream="true" header="true"></fb:like-box>
+                    </div> 
+                        <span class="corners-bottom"><span></span></span></div> 
+	</div> 
+        <!-- ENDIF --> 
+        <!-- IF AL_FB_ACTIVITY and not AL_FB_USER_HIDE_ACTIVITY --> 
+        
+                <div class="forabg"> 
+		<div class="inner"><span class="corners-top"><span></span></span> 
+ 
+                    <div class="panel"> 
+                            <fb:activity site="{AL_FB_SITE_DOMAIN}" width="300" height="300" header="true" font="arial" border_color="" recommendations="true"></fb:activity> 
+                    </div> 
+                        <span class="corners-bottom"><span></span></span></div> 
+	</div> 
+        <!-- ENDIF --> 
+        <!-- IF AL_FB_STREAM and not AL_FB_USER_HIDE_STREAM --> 
+        <div class="forabg"> 
+		<div class="inner"><span class="corners-top"><span></span></span> 
+ 
+                    <div class="panel"> 
+                        <fb:live-stream event_app_id="{AL_FB_APPID}" width="300" height="500" xid="" always_post_to_friends="false"></fb:live-stream> 
+                    </div> 
+                        <span class="corners-bottom"><span></span></span></div> 
+	</div> 
+        <!-- ENDIF --> 
+        <!-- IF (AL_FB_ACTIVITY and not AL_FB_USER_HIDE_ACTIVITY) or (AL_FB_STREAM and not AL_FB_USER_HIDE_STREAM) --> 
+        </td> 
+        <!-- ENDIF --> 
+    </tr> 
+    <!-- IF AL_FB_FACEPILE and not AL_FB_USER_HIDE_FACEPILE --> 
+    <tr> 
+        <td<!-- IF AL_FB_ACTIVITY --> colspan="2"<!-- ENDIF -->>
+                <div class="forabg"> 
+		<div class="inner"><span class="corners-top"><span></span></span> 
+ 
+                    <div class="panel"> 
+                        
+                        <fb:facepile href="{AL_FB_SITE_DOMAIN}" width="200" max_rows="1"></fb:facepile> 
+                    </div> 
+                        <span class="corners-bottom"><span></span></span></div> 
+	</div> 
+ 
+ 
+        </td> 
+    </tr> 
+    <!-- ENDIF --> 
+</table> 
+<!-- ENDIF -->
+
+<!-- IF not S_IS_BOT or U_TEAM -->
+<span class="gensmall"><!-- IF not S_IS_BOT --><a href="{U_DELETE_COOKIES}">{L_DELETE_COOKIES}</a><!-- ENDIF --><!-- IF not S_IS_BOT and U_TEAM --> | <!-- ENDIF --><!-- IF U_TEAM --><a href="{U_TEAM}">{L_THE_TEAM}</a><!-- ENDIF --></span><br />
+<!-- ENDIF -->
+
+<br clear="all" />
+
+<!-- INCLUDE breadcrumbs.html -->
+
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<br clear="all" />
+
+	<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat" colspan="2"><!-- IF U_VIEWONLINE --><h4><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h4><!-- ELSE --><h4>{L_WHO_IS_ONLINE}</h4><!-- ENDIF --></td>
+	</tr>
+	<tr>
+	<!-- IF LEGEND -->
+		<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+	<!-- ELSE -->
+		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+	<!-- ENDIF -->
+		<td class="row1" width="100%"><span class="genmed">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}</span></td>
+	</tr>
+	<!-- IF LEGEND -->
+		<tr>
+			<td class="row1"><b class="gensmall">{L_LEGEND} :: {LEGEND}</b></td>
+		</tr>
+	<!-- ENDIF -->
+	</table>
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+	<br clear="all" />
+
+	<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat" colspan="2"><h4>{L_BIRTHDAYS}</h4></td>
+	</tr>
+	<tr>
+		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_BIRTHDAYS}" /></td>
+		<td class="row1" width="100%"><p class="genmed"><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <b>{BIRTHDAY_LIST}</b><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p></td>
+	</tr>
+	</table>
+<!-- ENDIF -->
+
+<br clear="all" />
+
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<td class="cat" colspan="2"><h4>{L_STATISTICS}</h4></td>
+</tr>
+<tr>
+	<td class="row1"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_STATISTICS}" /></td>
+	<td class="row1" width="100%" valign="middle"><p class="genmed">{TOTAL_POSTS} | {TOTAL_TOPICS} | {TOTAL_USERS} | {NEWEST_USER}</p></td>
+</tr>
+</table>
+
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+	<br clear="all" />
+
+	<form method="post" action="{S_LOGIN_ACTION}">
+
+	<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat"><h4><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></h4></td>
+	</tr>
+	<tr>
+		<td class="row1" align="center"><span class="genmed">{L_USERNAME}:</span> <input class="post" type="text" name="username" size="10" />&nbsp; <span class="genmed">{L_PASSWORD}:</span> <input class="post" type="password" name="password" size="10" />&nbsp; <!-- IF S_AUTOLOGIN_ENABLED --> <span class="gensmall">{L_LOG_ME_IN}</span> <input type="checkbox" class="radio" name="autologin" /><!-- ENDIF -->&nbsp; <input type="submit" class="btnmain" name="login" value="{L_LOGIN}" /></td>
+	</tr>
+	</table>
+
+                <!-- IF S_AL_WL_ENABLED or S_AL_FB_ENABLED or S_AL_TW_ENABLED or S_AL_OI_ENABLED --> 
+                <br /> 
+                
+                <center> 
+                    <div style="padding: 0px 10px 10px 10px; border-style: solid; border-color: grey; border-width: 1px; width: 500px;"> 
+                        <center> 
+                            <h3>{L_SOCIAL_LOGIN_OPTIONS}</h3> 
+                            <br /> 
+                            <!-- IF S_AL_WL_ENABLED --> 
+                            <a href="{U_AL_WL_AUTHORIZE}"><img src="alternatelogin/images/windows_live_connect.png" alt="Windows Live Connect" /></a> 
+                            <!-- ENDIF --> 
+ 
+                            <!-- IF S_AL_FB_ENABLED --> 
+                            <a onclick="window.location='alternatelogin/al_fb_connect.php';" href="#"> 
+                                    <img src="http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_medium_long.gif" alt="Login with your Facebook account!" /> 
+                            </a> 
+                            <!-- ENDIF --> 
+ 
+                            <!-- IF S_AL_TW_ENABLED --> 
+                            <a href="{U_AL_TW_REQUEST}"><img src="alternatelogin/images/sign-in-with-twitter-l.png" alt="Windows Live Connect" /></a> 
+                            <!-- ENDIF --> 
+                            
+                            <!-- IF S_AL_OI_ENABLED --> 
+<link type="text/css" rel="stylesheet" href="{T_TEMPLATE_PATH}/css/openid.css" />
+	<script type="text/javascript" src="{T_TEMPLATE_PATH}/js/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="{T_TEMPLATE_PATH}/js/openid-jquery.js"></script>
+	<script type="text/javascript" src="{T_TEMPLATE_PATH}/js/openid-en.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			openid.init('openid_identifier');
+			
+		});
+	</script>
+        <form action="alternatelogin/al_oi_connect.php" method="get" id="openid_form">
+		<input type="hidden" name="action" value="verify" />
+		<fieldset>
+			<div id="openid_choice">
+				<div id="openid_btns"></div>
+			</div>
+			<div id="openid_input_area">
+				<input id="openid_identifier" name="openid_identifier" type="text" value="http://" />
+				<input id="openid_submit" type="submit" value="Sign-In"/>
+			</div>
+			
+		</fieldset>
+	</form>
+        <!-- ENDIF --> 
+                        </center> 
+                    </div> 
+                </center> 
+                
+                <br /> 
+                <!-- ENDIF -->
+	{S_LOGIN_REDIRECT}
+	{S_FORM_TOKEN}
+	</form>
+<!-- ENDIF -->
+
+<br clear="all" />
+
+<table class="legend">
+<tr>
+	<td width="20" align="center">{FORUM_UNREAD_IMG}</td>
+	<td><span class="gensmall">{L_UNREAD_POSTS}</span></td>
+	<td>&nbsp;&nbsp;</td>
+	<td width="20" align="center">{FORUM_IMG}</td>
+	<td><span class="gensmall">{L_NO_UNREAD_POSTS}</span></td>
+	<td>&nbsp;&nbsp;</td>
+	<td width="20" align="center">{FORUM_LOCKED_IMG}</td>
+	<td><span class="gensmall">{L_FORUM_LOCKED}</span></td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

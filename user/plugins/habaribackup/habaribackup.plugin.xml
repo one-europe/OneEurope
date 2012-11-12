@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>Habari Backup</name>
+	<license url="">GPL v2.0</license>
+	<author url="http://skippy.net/">Scott Merrill</author>
+	<version>1.5</version>
+	<url>http://soullesssoftware.com/habari-backup</url>
+	<description><![CDATA[Generates a backup of your Habari blog and emails it to you.]]></description>
+	<copyright>2009</copyright>
+</pluggable>

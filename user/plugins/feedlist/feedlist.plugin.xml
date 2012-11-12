@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>Feed List</name>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">ASL</license>
+	<url>http://asymptomatic.net/</url>
+	<author url="http://asymptomatic.net/">Owen Winkler</author>
+	<author url="http://chrismeller.com">Chris Meller</author>
+	<version>0.5</version>
+	<guid>FBD20C54-E3CE-11E0-8601-7DBF4824019B</guid>
+	<description><![CDATA[Outputs an RSS or Atom feed as an unordered list.]]></description>
+	<help>
+		<value><![CDATA[In the plugin configuration can be added multiple feeds. The feeds can be added directly to the template with <?php echo feedlist[0];?> (the 0 stands for the first feed and so on.) or as a block to an area. For each block feed and item count could be set individually.  ]]></value>
+	</help>
+</pluggable>
+
+ 

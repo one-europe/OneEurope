@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>PlugTicles</name>
+	<author url="http://valentinkotov.de">Valentin Kotov</author>
+	<description>Adds an Article Content Type</description>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<version>0.5</version>
+</pluggable>

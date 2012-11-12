@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>Profilepages</name>
+	<author url="http://valentinkotov.de">Valentin Kotov</author>
+	<description>adds profilepage content type</description>
+	<license>ASL 2.0</license>
+	<version>0.1</version>
+</pluggable>

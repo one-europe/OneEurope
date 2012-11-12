@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pluggable type="theme">
+	<name>euro</name>
+	<author url="http://underweb.de/">Valentin Kotov</author>
+	<url>http://one1europe.eu/</url>
+	<version>1.0.1</version>
+	<template_engine>rawPHPengine</template_engine>
+	<description>Nice, neat theme.</description>
+	<copyright>2011</copyright>
+</pluggable>

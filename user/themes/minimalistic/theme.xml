@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pluggable type="theme">
+	<name>Minimal</name>
+	<author>Valentin Kotov</author>
+	<url>http://underweb.de/</url>
+	<version>0.1</version>
+	<template_engine>rawPHPengine</template_engine>
+	<description>A very nice and clean private theme made of neat html5 and css3 web technologies.</description>
+</pluggable>
