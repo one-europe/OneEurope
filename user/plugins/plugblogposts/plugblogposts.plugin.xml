@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>PlugBlogposts</name>
+	<author url="http://jonaskindler.de">Jonas Kindler</author>
+	<description>Adds a content type for displaying BlogPosts in the One-Europe Techblog.</description>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<version>0.1</version>
+</pluggable>
