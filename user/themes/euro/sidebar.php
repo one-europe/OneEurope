@@ -24,10 +24,15 @@
 			<ul>
 			<?php
 
-			$briefsteaser = Posts::get( array( 'content_type' => 'brief', 'limit' => '2' ) );
+			$briefsteaser = Posts::get( array( 'content_type' => 'brief', 'status' => 'published', 'limit' => '2' ) );
 			foreach ($briefsteaser as $brief ) { ?>
 
-					<li class="brief">
+					<li class="brief">						
+						<?php if ( $brief->status == 'scheduled' ) { ?>
+							<div class="content-badge">
+								<span>scheduled</span>
+							</div>
+						<?php } ?>
 			   	    	<a href="<?php echo $brief->permalink; ?>">
 							<img src="<?php echo $brief->info->photourl; ?>" width="270" />
 			   	    		<h3><?php echo $brief->title; ?></h3>
