@@ -315,7 +315,7 @@ class PlugBriefs extends Plugin
 	  // Retrieve future briefs.
 	  $briefs = Posts::get(array(
 	    'content_type' => Post::type('brief'),
-	    'status' => Post::status('published'),
+	    'status' => array( Post::status('published'), Post::status('scheduled') ),
 	    'nolimit' => TRUE
 	  ));
 

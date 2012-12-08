@@ -12,6 +12,12 @@
 
 					<li class="nibble">
 
+						<?php if ( $post->status == Post::status('scheduled') ) { ?>
+							<div class="content-badge scheduled">
+								<span>scheduled</span>
+							</div>
+						<?php } ?>
+						
 						<article>
 						<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img class="img" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a>
 						</article>
@@ -66,8 +72,6 @@
 					... list of entries....
 
 				</section> */ ?>
-
-				<?php echo $profile->title; ?>
 
 				<section class="fb">
 					<div class="h"><span>Stay Tuned</span></div>

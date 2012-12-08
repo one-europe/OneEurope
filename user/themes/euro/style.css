@@ -332,7 +332,7 @@ article.body {
 .initstitle {
 	padding-bottom: 5px;
 	margin-bottom:5px;
-	font-size: 16px;
+	font-size: 18px;
 }
 
 .message {
@@ -776,7 +776,7 @@ li.menu_4 .col3 {
 div#searchresults .tile:nth-of-type(3n+1) {
 	margin-left: 0;
 }
-#searchresults .tile .badge {
+#searchresults .tile .badge, .content-badge {
 	background: #F9F9F9;
 	border: 1px solid #666;
 	-webkit-box-shadow: 0 0 1px #000;
@@ -789,6 +789,9 @@ div#searchresults .tile:nth-of-type(3n+1) {
 	text-align: center;
   	-moz-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
+}
+.scheduled {
+	margin: 2px -37px -18px 0;
 }
 #searchresults .tile .badge span {
 	padding:2px;
@@ -1461,6 +1464,7 @@ ul.nibble-list {
 	   -moz-box-shadow: 0 0 4px rgba(0,0,0,.3);
 		  o-box-shadow: 0 0 4px rgba(0,0,0,.3);
 			box-shadow: 0 0 4px rgba(0,0,0,.3);
+	overflow: hidden;
 }
 .nibble article {
 	width: 400px;
@@ -1693,6 +1697,9 @@ article > footer nav {
 	color: #777;
 	line-height: 18px;
 	padding: 0;
+}
+.brief {
+	overflow: hidden;
 }
 .brief h3 {
 	margin: 5px 0;
@@ -2139,11 +2146,21 @@ aside.disqus h3, .similar-posts h3 {
 .featured-content-boxes .boxtitle {
 	display: inline-block;
 	color: #111;
-	padding: 2px 5px;
-	font-size: 14px;
-	width: 295px;
+	padding: 0 0 2px 0;
+	font-size: 16px;
+	width: 275px;
 	margin: 0;
 	border-bottom: 1px solid #999;
+}
+
+.welcome {
+	padding: 10px;
+	height: 224px;
+	width: 285px;
+}
+.welcome p {
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
 
 /* End Featured Boxes */

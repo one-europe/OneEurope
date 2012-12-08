@@ -29,7 +29,7 @@
 							</p>
 							
 							<h3>Licensing</h3>
-							<p>If not stated differently, all contents are distributed under a <a rel="nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons License</a> (click for details)
+							<p>If not stated differently, all contents are distributed under a <a rel="nofollow" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons License</a> (click for details)
 							<a rel="nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url( 'theme' )?>/img/creative-commons-240x134.png" /></a>
 							</p>
 						</div>

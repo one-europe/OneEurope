@@ -18,18 +18,18 @@
 		</div>
 	</section */ ?>
 	
-	<section class="inbrief">
+	<?php /* section class="inbrief">
 		<div class="h"><span>In Brief:</span></div>
 	
 			<ul>
 			<?php
 
-			$briefsteaser = Posts::get( array( 'content_type' => 'brief', 'status' => 'published', 'limit' => '2' ) );
+			$briefsteaser = Posts::get( array( 'content_type' => 'brief', 'status' => array('published', 'scheduled'), 'limit' => '2' ) );
 			foreach ($briefsteaser as $brief ) { ?>
 
 					<li class="brief">						
-						<?php if ( $brief->status == 'scheduled' ) { ?>
-							<div class="content-badge">
+						<?php if ( $brief->status == Post::status('scheduled') ) { ?>
+							<div class="content-badge scheduled">
 								<span>scheduled</span>
 							</div>
 						<?php } ?>
@@ -40,15 +40,15 @@
 						</a>
 					</li>   	    
 
-				<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span> */ ?>
+				<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span>  ?>
 			<?php } ?>
 
 				<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/in-brief">view all ›</a></li>
 
-	</section>
+	</section */ ?>
 		
 	<section class="pool">
-		<div class="h"><span>Who is who in Europe:</span></div>
+		<div class="h"><span>Profile Database:</span></div>
 	
 		<ul>
 		<?php

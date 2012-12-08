@@ -32,7 +32,7 @@
 								<span>Debate</span>
 							</div>
 					<?php }
-					if ( $post->typename == 'nibble' ) {?>
+					if ( $post->typename == 'brief' ) {?>
 							<div class="badge">
 								<span>Brief</span>
 							</div>

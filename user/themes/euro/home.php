@@ -11,7 +11,14 @@
 							
 				        	<?php // get all posts sys-tagged with 'featured-slideshow' to built the rotating menu
 							$i = 1;
-				        	foreach ( $sliders as $post ) {
+							// can't retrieve $briefs in home.php - why?
+							$briefs = Posts::get(array(
+						    		'content_type' => Post::type('brief'),
+							    	'status' => array( Post::status('published'), Post::status('scheduled') ),
+							    	'limit' => 4
+						  			));
+						  
+				        	foreach ( $briefs as $post ) { // we used to use $sliders instead of $briefs to retrieve all 'slideshow'-systagged posts
 								if ($post->info->shorttitle) {$title = $post->info->shorttitle; } else { $title = $post->title; };
 					 			?>
                                   
@@ -27,7 +34,7 @@
 						</ul>  
 						
 						<?php // same as above
-						$i = 1;	foreach ( $sliders as $post ) {	?>
+						$i = 1;	foreach ( $briefs as $post ) {	?>
 					    <div id="fragment-<?php echo $i; ?>" class="ui-tabs-panel <?php if ( $i != 1 ) { ?>ui-tabs-hide<?php } ?>" style="">
 							<a href="<?php echo $post->permalink; ?>">
 								<?php if ( $i == 1 ) { ?>
@@ -46,18 +53,29 @@
 				
 				</div>
 
-				<div class="featured-content-boxes">
+				<div class="featured-content-boxes welcome">
 					
-					<div class="boxtitle"><span class="inits">What's underway in Europe?</span></div>
+					<div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>
 	
-						<?php
+						<p>
+							We will fill a crucial gap in the landscape of European civil action online
+							by providing an information hub for getting informed about what is going on.
+						</p>
+						<p>
+							We will do this by maintaining an up-to-date database of civil initiatives, organizations
+							and online discussions and information flows - all on a highly interactive, engaging
+							platform.
+						</p>
+	
+	
+						<?/*php
 						foreach($sides as $post):
 						if ($post->info->shorttitle) {$title = $post->info->shorttitle; } else { $title = $post->title; };
 						echo '<div class="box">';
 						echo '<h4><a href="' . $post->permalink .'">' . $title . '</a></h4>';
 						echo '<a href="' . $post->permalink .'"><section class="excerpt">' . $post->info->excerpt . '</section></a>';
 						echo '</div>'; ?>
-						<?php endforeach; ?>							
+						<?php endforeach; */?>							
 
 				</div>
 				
@@ -109,17 +127,9 @@
 
 								<header>
 
-									<h1><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->info->shorttitle; ?>"><?php echo $post->info->shorttitle; ?></a></h1>
+									<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->info->shorttitle; ?>"><?php echo $post->info->shorttitle; ?></a></h1>
 
 								</header>
-								
-								<article class="body">
-								<?php if ( $post->info->teaser ) {
-										echo $post->info->teaser; } 
-									else {
-										echo $post->content_out;
-										}?>
-								</article>
 								
 							</div>
 							
