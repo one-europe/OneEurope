@@ -29,7 +29,7 @@
 				/* 
 				show only if not currently in the slideshow and if there aren't already two displayed
 				*/	
-				$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => Utils::slugify($brief->title) ) ));
+				$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $brief->slug ) ));
 				if ( $inslideshow == true ) { 
 					if ( $i < $nibblescount ) {
 						$i++;
