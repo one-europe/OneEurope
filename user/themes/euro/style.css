@@ -793,6 +793,7 @@ div#searchresults .tile:nth-of-type(3n+1) {
 .scheduled {
 	margin: 2px -37px -18px 0;
 }
+
 #searchresults .tile .badge span {
 	padding:2px;
 	font-size: 15px;
@@ -1914,6 +1915,9 @@ article > footer nav {
 	border: 1px solid #EEF1F5;
 	border-radius: 2px;
 	padding: 10px;
+}
+.article-single .scheduled {
+	margin: none;
 }
 
 ul.similar-posts {
