@@ -9,7 +9,7 @@
 			}?>
 
 			<?php 
-			if ( User::identify()->loggedin->id == $post->info->user ) { ?>
+			if ( User::identify()->id == $post->info->user ) { ?>
 			<section class="edit">
 				<div class="h"><span>Options:</span></div>
 				<span><a href="<?php Site::out_url( 'home' ) ?>/admin/user">Edit</a></span><br />

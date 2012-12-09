@@ -48,11 +48,11 @@ class Sitemaps extends Plugin {
 	    $xml = new SimpleXMLElement( $xml );
 
 	    // Retreive all published posts and pages from the database
-	    $content['debates']= Posts::get( array( 'content_type' => 'debate', 'status' => 'published', 'nolimit' => 1 ) );
+	    $content['briefs']= Posts::get( array( 'content_type' => 'brief', 'status' => 'published', 'nolimit' => 1 ) );
 	    $content['articles']= Posts::get( array( 'content_type' => 'article', 'status' => 'published', 'nolimit' => 1 ) );
-	    $content['profiles']= Posts::get( array( 'content_type' => 'profile', 'status' => 'published', 'nolimit' => 1 ) );
 	    $content['initiatives']= Posts::get( array( 'content_type' => 'initiative', 'status' => 'published', 'nolimit' => 1 ) );
-	    $content['nibbles']= Posts::get( array( 'content_type' => 'nibble', 'status' => 'published', 'nolimit' => 1 ) );
+	    $content['profiles']= Posts::get( array( 'content_type' => 'profile', 'status' => 'published', 'nolimit' => 1 ) );
+	    $content['debates']= Posts::get( array( 'content_type' => 'debate', 'status' => 'published', 'nolimit' => 1 ) );
 	    $content['pages']= Posts::get( array( 'content_type' => 'page', 'status' => 'published', 'nolimit' => 1 ) );
 
 	    // Add the index page first

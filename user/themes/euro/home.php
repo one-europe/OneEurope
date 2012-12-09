@@ -36,7 +36,10 @@
 									<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" />  
 								<?php } ?>
 			        			<div class="info">  
-					    	    	<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->info->excerpt; } ?>
+					    	    	<?php // show caption or excerpt in 155 characters length or 152 + '...'
+									if ( $post->info->photoinfo ) { $string = $post->info->photoinfo; } else { $string = $post->info->excerpt; } 
+									$text = (strlen($string) > 155) ? substr($string,0,152).'...' : $string;
+									echo $text; ?>
 					    	    </div>  
 							</a>
 					    </div>  
@@ -51,15 +54,16 @@
 					<div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>
 	
 						<p>
-							We will fill a crucial gap in the landscape of European civil action online
-							by providing an information hub for getting informed about what is going on.
+							We will fill a crucial gap in the landscape of how Europeans organize civil action
+							online by providing a hub for information about what is shaking European politics.
 						</p>
 						<p>
-							We will do this by maintaining an up-to-date database of civil initiatives, organizations
-							and online discussions and information flows - all on a highly interactive, engaging
-							platform.
+							We will do this through keeping an eye on civil initiatives, organizations 
+							and online discussions and embed this into a highly interactive platform.
 						</p>
-	
+						<p>
+							Learn how to <a title="Join us!" href="/join-us">join us on our journey</a>.
+						</p>	
 	
 						<?php /*php
 						foreach($sides as $post):

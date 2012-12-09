@@ -20,6 +20,9 @@ Format::apply( 'tag_and_list', 'post_tags_out' );
 //Format::apply( 'autop', 'post_content_excerpt' );
 
 
+Format::apply_with_hook_params( 'more', 'post_excerpt_slide', ' <span class="more-exc">...</span>', 17, 1 ); // short excerpt
+Format::apply_with_hook_params( 'more', 'post_photoinfo_slide', ' <span class="more-exc">...</span>', 17, 1 ); // short excerpt
+
 Format::apply_with_hook_params( 'more', 'post_content_excerpt', ' <span class="more-exc">more</span>', 17, 1 ); // big excerpt
 Format::apply_with_hook_params( 'more', 'post_content_out', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
 
