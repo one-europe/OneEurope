@@ -56,10 +56,6 @@ Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-ou
 
 		$this->assign('recent_posts', Posts::get( array( 'content_type' => array( 'article' ), 'limit'=>8, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); //Display the 8 most recent posts	
 
-		// email adress mail.php is using
-		// DEBUG: assigning vars in theme.php currently not working
-		$this->contact_email = 'info@one-europe.com';
-
 		if( !$this->template_engine->assigned( 'any' ) ) {
 			$this->assign('any', Posts::get( array( 'content_type' => 'any', 'status' => Post::status('published'), 'nolimit' => 1 ) ) );
 		}
@@ -77,7 +73,19 @@ Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-ou
 		$this->assign( 'sliders', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => 'published' ) ) );
 		$this->assign( 'menus', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'menu' ), 'limit' => 5, 'status' => 'published' ) ) );
 		$this->assign( 'inits', Posts::get( array( 'content_type' => 'initiative', 'limit' => 3, 'status' => 'published' ) ) );
+		$this->assign( 'briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => '6' ) ) );
 		
+		$nibblescount = 0;
+		$articlescount = 0;
+		$i = 0;
+    	foreach ( $this->sliders as $post ) { 
+			if ($post->info->shorttitle) {$title = $post->info->shorttitle; } else { $title = $post->title; };
+			if ($post->content_type == Post::type('brief') && $i < 5) { $nibblescount++; }; 		// increase nibble-counter by 1 if the current slider is a nibble 
+			if ($post->content_type == Post::type('article') && $i < 5) { $articlescount++; };		// same for articles
+			$i++; 
+		}
+		$this->assign( 'nibblescount', $nibblescount);
+		$this->assign( 'articlescount', $articlescount);		
 		
 	}
 	

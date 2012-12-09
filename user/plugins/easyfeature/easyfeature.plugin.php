@@ -7,7 +7,7 @@ class EasyFeature extends Plugin
 	protected $_vocabulary;
 
 
-	public function  __get( $name )
+	public function __get( $name )
 	{
 		switch ( $name ) {
 			case 'vocabulary':

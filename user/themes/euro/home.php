@@ -7,18 +7,11 @@
 			
 					<div id="featured" >
 												
-						<ul class="ui-tabs-nav">  
-							
-				        	<?php // get all posts sys-tagged with 'featured-slideshow' to built the rotating menu
+						<ul class="ui-tabs-nav">
+				        	<?php 
+							// get all posts sys-tagged with 'featured-slideshow' to built the rotating menu
 							$i = 1;
-							// can't retrieve $briefs in home.php - why?
-							$briefs = Posts::get(array(
-						    		'content_type' => Post::type('brief'),
-							    	'status' => array( Post::status('published'), Post::status('scheduled') ),
-							    	'limit' => 4
-						  			));
-						  
-				        	foreach ( $briefs as $post ) { // we used to use $sliders instead of $briefs to retrieve all 'slideshow'-systagged posts
+				        	foreach ( $sliders as $post ) { 
 								if ($post->info->shorttitle) {$title = $post->info->shorttitle; } else { $title = $post->title; };
 					 			?>
                                   
@@ -34,7 +27,7 @@
 						</ul>  
 						
 						<?php // same as above
-						$i = 1;	foreach ( $briefs as $post ) {	?>
+						$i = 1;	foreach ( $sliders as $post ) {	?>
 					    <div id="fragment-<?php echo $i; ?>" class="ui-tabs-panel <?php if ( $i != 1 ) { ?>ui-tabs-hide<?php } ?>" style="">
 							<a href="<?php echo $post->permalink; ?>">
 								<?php if ( $i == 1 ) { ?>
@@ -85,8 +78,7 @@
 
 
 			<div id="content" class="home">
-								
-								
+
 				<!-- last actions -->				
 				
 				<?php /*div class="tile-depth-1 tile-thumbs">
@@ -141,42 +133,56 @@
 					
 				<div class="tile-depth-1 list-1">
 				
-					<?php foreach ($posts as $post ) { ?>						
-
-					<div class="list">
-
-						<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" height="100" width="160"/></a>
-
-						<header>
-							
-							<h1><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h1>
-
-
-						</header>
-
-						<article class="body">
-						<?php if ( $post->info->excerpt ) {
-								echo $post->info->excerpt; } 
-							else {
-								echo $post->content_out;
-								}?>
-						</article>
-
-						<footer>
+					<?php 
+					$i = 0;
+					foreach ($posts as $post ) { 
 						
-							<span class="entry-tags">
-								<?php if ( $show_author ) { ?><span class="entry-autor"><a href="<?php
-								$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );
-								echo $publisher->permalink; ?>"><?php _e( '<span>%s</span>', array( $post->author->displayname ) ); ?> </a></span> <?php } ?>
-								&nbsp;on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-							</span>
-								<?php /*&nbsp;<a class="entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a> */ ?>
+						/* 
+						in case this post is featured, hide it. 
+						do this by looking up how many articles are in the slideshow.
+						hide as many slideshow-systagged articles in the main loop.
+						*/
+						if (Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow'))) && $i < $articlescount) { 
+							$i++;
+						} else {
+						?>						
 
-						</footer>
+							<div class="list">
 
-					</div>
+								<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" height="100" width="160"/></a>
 
-					<?php } ?>
+								<header>
+							
+									<h1><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h1>
+
+
+								</header>
+
+								<article class="body">
+								<?php if ( $post->info->excerpt ) {
+								        echo $post->info->excerpt; } 
+									else {
+								        echo $post->content_out;
+								        }?>
+								</article>
+
+								<footer>
+						
+									<span class="entry-tags">
+								        <?php if ( $show_author ) { ?><span class="entry-autor"><a href="<?php
+								        $publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );
+								        echo $publisher->permalink; ?>"><?php _e( '<span>%s</span>', array( $post->author->displayname ) ); ?> </a></span> <?php } ?>
+								        &nbsp;on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+									</span>
+								        <?php /*&nbsp;<a class="entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a> */ ?>
+
+								</footer>
+
+							</div>
+
+					<?php }
+						} 
+					?>
 					
 				</div>
 		

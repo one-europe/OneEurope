@@ -7,7 +7,6 @@
 	<div class="breadcrumb">
 		<span class="first"><a href="/in-brief">In Brief ›</a></span> <a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a>
 	</div>
-
 	
 <!-- nibble.single -->
 	<div id="content">
@@ -153,8 +152,6 @@
 
 		</section> */ ?>
 
-		<?php echo $profile->title; ?>
-
 		<?php if ( $post->info->showauthor == 1 ) { ?>
 			<section class="authorbox">
 				<div class="h"><span>Author</span></div>
@@ -177,7 +174,7 @@
 		<section class="fb">
 			<div class="h"><span>Stay Tuned</span></div>
 
-				<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="295" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
+				<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
 
 				<a href="https://twitter.com/one1europe" class="twitter-follow-button">Follow @one1europe</a>
 				<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>

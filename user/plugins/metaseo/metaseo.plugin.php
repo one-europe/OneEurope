@@ -256,7 +256,7 @@ class MetaSeo extends Plugin
 	* function theme_header
 	*
 	* called to added output to the head of a page before it is being displayed.
-	* Here it is being used to insert the keywords, description, and robot meta tags
+	* Here it is being used to insert the keywords, description, robot and fb:og meta tags
 	* into the page head.
 	* 
 	* @param $theme Theme object being displayed
@@ -265,7 +265,7 @@ class MetaSeo extends Plugin
 	public function theme_header($theme)
 	{
 		$this->theme = $theme;
-		return $this->get_og() . $this->get_keywords() . $this->get_description() . $this->get_robots();
+		return $this->get_keywords() . $this->get_description() . $this->get_robots() . $this->get_og();
 	}
 
 	/*
@@ -306,8 +306,13 @@ class MetaSeo extends Plugin
 		
 		if ( is_object( $matched_rule ) ) {
 			$rule = $matched_rule->name;
-			switch( $rule) {
-				case 'display_home':
+			switch( $rule) {				
+				case 'display_home':	
+				case 'display_debates':
+				case 'display_briefs':
+				case 'display_profiles':
+				case 'display_contributors':
+				case 'display_initiatives':
 					$desc = Options::get( 'MetaSEO__home_desc' );
 					break;
 				case 'display_entry':	
@@ -334,6 +339,12 @@ class MetaSeo extends Plugin
 						}
 					}
 					break;
+				case 'display_search':
+					$desc = "Search Results for \"" . $_GET['criteria'] . ".";
+					break;
+				case 'display_404':
+					$desc = "Nothing found under this URL.";
+					break;
 				default:
 					$desc = $this->theme->post->info->excerpt;
 					break;
@@ -344,7 +355,7 @@ class MetaSeo extends Plugin
 			$desc = str_replace( "\n", " ", $desc );
 			$desc = htmlspecialchars( strip_tags( $desc ), ENT_COMPAT, 'UTF-8' );
 			$desc = strip_tags( $desc );
-			$out = "<meta name=\"description\" content=\"{$desc}\" >\n";
+			$out = "<meta name=\"description\" content=\"{$desc}\" >\n\n";
 		}
 
 		return $out;
@@ -372,36 +383,8 @@ class MetaSeo extends Plugin
 			switch( $rule) {
 				case 'display_entry':
 				case 'display_debate':
-					if( isset( $this->theme->post ) ) {
-						if( strlen( $this->theme->post->info->metaseo_keywords ) ) {
-							$keywords = $this->theme->post->info->metaseo_keywords;
-						}
-						else if( count( $this->theme->post->tags ) > 0 ) {
-							$keywords = implode( ', ', $this->theme->post->tags );
-						}
-					}
-					break;
-
 				case 'display_profile':
-					if( isset( $this->theme->post ) ) {
-						if( strlen( $this->theme->post->info->metaseo_keywords ) ) {
-							$keywords = $this->theme->post->info->metaseo_keywords;
-						}
-						else if( count( $this->theme->post->tags ) > 0 ) {
-							$keywords = implode( ', ', $this->theme->post->tags );
-						}
-					}
-					break;				
 				case 'display_initiative':
-					if( isset( $this->theme->post ) ) {
-						if( strlen( $this->theme->post->info->metaseo_keywords ) ) {
-							$keywords = $this->theme->post->info->metaseo_keywords;
-						}
-						else if( count( $this->theme->post->tags ) > 0 ) {
-							$keywords = implode( ', ', $this->theme->post->tags );
-						}
-					}
-					break;
 				case 'display_page':
 					if( isset( $this->theme->post ) ) {
 						if( strlen( $this->theme->post->info->metaseo_keywords ) ) {
@@ -415,7 +398,12 @@ class MetaSeo extends Plugin
 				case 'display_entries_by_tag':
 					$keywords = Controller::get_var( 'tag' );
 					break;
-				case 'display_home':
+				case 'display_home':	
+				case 'display_debates':
+				case 'display_briefs':
+				case 'display_profiles':
+				case 'display_contributors':
+				case 'display_initiatives':
 					if( count( Options::get( 'MetaSEO__home_keywords' ) ) ) {
 						$keywords= implode( ', ', Options::get( 'MetaSEO__home_keywords' ) );
 					}
@@ -434,7 +422,7 @@ class MetaSeo extends Plugin
 		}
 		$keywords = htmlspecialchars( strip_tags( $keywords ), ENT_COMPAT, 'UTF-8' );
 		if( strlen( $keywords ) ) {
-			$out = "<meta name=\"keywords\" content=\"{$keywords}\">\n";
+			$out = "<meta name=\"keywords\" content=\"{$keywords}\">\n\n";
 		}
 		return $out;
 	}
@@ -456,8 +444,13 @@ class MetaSeo extends Plugin
 		if ( is_object( $matched_rule ) ) {
 			$rule = $matched_rule->name;
 			switch( $rule) {
-				case 'display_entry':
-				case 'display_page':
+  				case 'display_article':	
+  				case 'display_brief':
+  				case 'display_initiative':
+  				case 'display_profile':
+  				case 'display_debate':
+  				case 'display_entry':
+  				case 'display_page':
 					if( Options::get( 'MetaSEO__posts_index' ) ) {
 						$robots = 'index';
 					}
@@ -485,6 +478,13 @@ class MetaSeo extends Plugin
 						$robots .= ', nofollow';
 					}
 					break;
+				case 'display_debates':
+				case 'display_briefs':
+				case 'display_profiles':
+				case 'display_contributors':
+				case 'display_initiatives':
+					$robots = 'index, follow';
+					break;
 				case 'display_entries_by_tag':
 				case 'display_entries_by_date':
 				case 'display_entries':
@@ -507,7 +507,7 @@ class MetaSeo extends Plugin
 			}
 		}
 		if( strlen( $robots ) ) {
-			$out = "<meta name=\"robots\" content=\"{$robots}\" >\n";
+			$out = "<meta name=\"robots\" content=\"{$robots}\" >\n\n";
 		}
 		return $out;
 	}
@@ -565,25 +565,53 @@ class MetaSeo extends Plugin
 					$out = $this->get_tag_text(Controller::get_var( 'tag' ) ) . ' Archive';
 					$out .= ' - ' . Options::get( 'title' );
 					break;
-				case 'display_entry':
-				case 'display_page':
-					if( strlen( $this->theme->post->info->html_title ) ) {
-						$out = $this->theme->post->info->html_title;
-					}
-					else {
-						$out = $this->theme->post->title;
-					}
-					$out .= ' - ' . Options::get( 'title' );
-					break;
 				case 'display_search':
 					if ( isset( $_GET['criteria'] ) ) {
-						$out = 'Search Results for ' . $_GET['criteria'] . ' - ' ;
+						$out = 'Search Results for "' . $_GET['criteria'] . '" - ' ;
 					}
 					$out .= Options::get( 'title' );
 					break;
 				case 'display_404':
-					$out = 'Page Not Found';
+					$out = 'Page Not Found!';
 					$out .= ' - ' . Options::get( 'title' );
+					break;
+				case 'display_debates':
+					$out = 'All Debates';
+					$out .= ' - ' . Options::get('title');
+					break;
+				case 'display_briefs':
+					$out = 'All Briefs';
+					$out .= ' - ' . Options::get('title');
+					break;
+				case 'display_profiles':
+					$out = 'Profiles › All Profiles';
+					$out .= ' - ' . Options::get('title');
+					break;
+				case 'display_contributors':
+					$out = 'Profiles › All Contributors';
+					$out .= ' - ' . Options::get( 'title' );
+					break;
+				case 'display_initiatives':
+					$out = 'Initiatives';
+					$out .= ' - ' . Options::get( 'title' );
+					break;
+				case 'display_article':	
+				case 'display_brief':
+				case 'display_initiative':
+				case 'display_profile':
+				case 'display_debate':
+				case 'display_entry':
+				case 'display_page':
+				default:
+					if (isset($post)) {
+						if( strlen( $this->theme->post->info->html_title ) ) {
+							$out = $this->theme->post->info->html_title;
+						}
+						else {
+							$out = $this->theme->post->title . ' - ';
+						}
+					}
+					$out .= Options::get( 'title' );
 					break;
 			}
 
@@ -594,6 +622,12 @@ class MetaSeo extends Plugin
 		}
 
 		return $out;
+	}
+	
+	function action_add_template_vars( $theme )
+	{
+	  $theme->titleliblubb = 47;
+	  $theme->yourvariable = 'Sweet Plugin Output';
 	}
 	
 	
@@ -685,6 +719,20 @@ class MetaSeo extends Plugin
 					echo "<meta property=\"og:description\" content=\"Who's contributing to this project?\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
+				case 'display_search':
+					echo "\n<meta property=\"og:title\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
+					echo "<meta property=\"og:url\" content=\"" .$this->get_url() . "\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta property=\"og:description\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
+					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
+					break;
+				case 'display_404':
+					echo "\n<meta property=\"og:title\" content=\"Nothing Found!\" >\n";
+					echo "<meta property=\"og:url\" content=\"" .$this->get_url() . "\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta property=\"og:description\" content=\"The page you are trying to link to is not on our servers.\" >\n";
+					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
+					break;
 				default:
 					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta property=\"og:type\" content=\"article\" >\n";
@@ -698,8 +746,8 @@ class MetaSeo extends Plugin
 					}
 					echo "<meta property=\"og:article:author\" content=\"{$author}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
-				break;
 					break;
+				break;
 			}
 		}
 	}

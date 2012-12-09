@@ -78,7 +78,7 @@ class PlugDebate extends Plugin
 			$form->photolicense->tabindex = 5;
 		    $form->photolicense->move_after($form->content);
 		
-			$form->tags->remove();
+			$form->tags->tabindex = 6;
 			
 			// buggy, dunno why
 			$form->save->tabindex = $form->save->tabindex + 10;

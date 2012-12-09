@@ -18,15 +18,24 @@
 		</div>
 	</section */ ?>
 	
-	<?php /* section class="inbrief">
+	<section class="inbrief">
 		<div class="h"><span>In Brief:</span></div>
-	
+			
 			<ul>
 			<?php
+			$i = 0; $j = 1;
+			foreach ($briefsteaser as $brief ) { 	
 
-			$briefsteaser = Posts::get( array( 'content_type' => 'brief', 'status' => array('published', 'scheduled'), 'limit' => '2' ) );
-			foreach ($briefsteaser as $brief ) { ?>
+				/* 
+				show only if not currently in the slideshow and if there aren't already two displayed
+				*/	
+				if ( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ) ) ) && $i < $nibblescount ) { 
+					$i++;
+				} elseif ( $j <= 2 ) {
+					$j++;
+				?>
 
+				
 					<li class="brief">						
 						<?php if ( $brief->status == Post::status('scheduled') ) { ?>
 							<div class="content-badge scheduled">
@@ -40,49 +49,15 @@
 						</a>
 					</li>   	    
 
-				<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span>  ?>
-			<?php } ?>
+				<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span> */ ?>
+			<?php }
+			} ?>
 
 				<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/in-brief">view all ›</a></li>
 
-	</section */ ?>
-		
-	<section class="pool">
-		<div class="h"><span>Profile Database:</span></div>
-	
-		<ul>
-		<?php
-		
-		$profiles = Posts::get( array( 'content_type' => 'profile', 'status' => 'published', 'limit' => 2, 'all:info' => array('ccontributor' => 1), 'orderby' => 'RAND()' ) );
-		foreach ($profiles as $profile ) { 
-							
-				if ($profile->info->user) {
-					$source = User::get_by_id($profile->info->user)->info;
-					$title = User::get_by_id($profile->info->user)->displayname;
-			 	} else {
-					$source = $profile->info;
-					$title = $profile->title;
-				} 
-				?>
-				
-				<li class="profileteaser">
-		   	    	<a href="<?php echo $profile->permalink; ?>">
-						<img src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( !$source->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title ?>" />
-		   	    		<h3><?php echo $title; ?></h3>
-		   	    		<p class="teaser">
-							<?php echo $source->teaser; ?>
-		   	    		</p>
-						<div class="clear"></div>
-					</a>
-				</li>   	    
-
-			<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span> */ ?>
-		<?php } ?>
-				
-			<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/profiles">view all ›</a></li>
-				
-		</ul>	
 	</section>
+	
+	<?php echo $theme->display ('sidebar.elem.profilepool'); ?>
 	
 	<section class="trending">
 		<div class="h"><span>Debates</span></div>
@@ -185,6 +160,7 @@
 			</script>
 	
 	</section>	
+	
 	
 	<section>
 		<div class="h"><span>Newsletter</span></div>

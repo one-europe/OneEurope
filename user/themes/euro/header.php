@@ -9,20 +9,7 @@
 
 	<head>
 				
-		<title><?php $title = Options::get( 'title' ); 
-			if ( isset($post) && !$request->display_debates && !$request->display_profiles && !$request->display_contributors && !$request->display_nibbles ) {
-				echo "{$post->title} - {$title}"; 
-			} elseif ( $request->display_debates ) {
-				echo "All Debates - {$title}"; 
-			} elseif ( $request->display_profiles ) {
-				echo "Profiles › All Profiles - {$title}";
-			} elseif ( $request->display_contributors ) {
-				echo "Profiles › Contributors - {$title}";
-			} elseif ( $request->display_nibbles ) {
-				echo "In Brief - {$title}";
-			} else { 
-				Options::out( 'title' ); 
-		}?></title>
+		<title><?php echo Options::get( 'title' ); ?></title>
 		
 		<meta name="Generator" content="Habari" />		
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />

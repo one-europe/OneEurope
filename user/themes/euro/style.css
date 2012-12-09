@@ -1761,6 +1761,9 @@ article > footer nav {
 .fb-like-box {
 	margin: -11px -11px 10px -11px;
 }
+.fb-like-box .uiBoxWhite {
+	border-color: none!important;
+}
 
 #footwrap {
 	display: block;

@@ -13,9 +13,6 @@
 		
 	</section> */ ?>
 
-	<?php echo $profile->title; ?>
-
-
 	<section class="authorbox">
 		<div class="h"><span>Author</span></div>
 	
@@ -52,50 +49,8 @@
 	</section>
 	
 	
+	<?php echo $theme->display ('sidebar.elem.profilepool'); ?>
 	
-	<section class="pool">
-	
-		<div class="h"><span>Who is who in Europe:</span></div>
-		<ul>
-		<?php
-		
-		$profiles = Posts::get( array( 'content_type' => 'profile', 'status' => 'published', 'limit' => 2, 'all:info' => array('ccontributor' => 1), 'orderby' => 'RAND()' ) );
-		foreach ($profiles as $profile ) { 
-			
-			if ($profile->info->user != $post->author->id) {
-				
-				if ($profile->info->user) {
-					$source = User::get_by_id($profile->info->user)->info;
-					$title = User::get_by_id($profile->info->user)->displayname;
-			 	} else {
-					$source = $profile->info;
-					$title = $profile->title;
-				} 
-				?>
-				
-				<li class="profileteaser">
-		   	    	<a href="<?php echo $profile->permalink; ?>">
-						<img src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( !$source->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title ?>" />
-		   	    		<h3><?php echo $title; ?></h3>
-		   	    		<p class="teaser">
-							<?php echo $source->teaser; ?>
-		   	    		</p>
-						<div class="clear"></div>
-					</a>
-				</li>
-
-			<?php } ?>
-
-			<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span> */ ?>
-		<?php } ?>
-	
-		<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/profiles">view all ›</a></li>
-	
-		</ul>
-	
-		<div class="clear"></div>
-	
-	</section>
 		
 	<section class="recentposts">
 		<div class="h"><span>Other Recent Articles</span></div>
