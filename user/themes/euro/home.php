@@ -61,7 +61,7 @@
 						</p>
 	
 	
-						<?/*php
+						<?php /*php
 						foreach($sides as $post):
 						if ($post->info->shorttitle) {$title = $post->info->shorttitle; } else { $title = $post->title; };
 						echo '<div class="box">';
