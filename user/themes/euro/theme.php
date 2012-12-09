@@ -20,9 +20,6 @@ Format::apply( 'tag_and_list', 'post_tags_out' );
 //Format::apply( 'autop', 'post_content_excerpt' );
 
 
-Format::apply_with_hook_params( 'more', 'post_excerpt_slide', ' <span class="more-exc">...</span>', 17, 1 ); // short excerpt
-Format::apply_with_hook_params( 'more', 'post_photoinfo_slide', ' <span class="more-exc">...</span>', 17, 1 ); // short excerpt
-
 Format::apply_with_hook_params( 'more', 'post_content_excerpt', ' <span class="more-exc">more</span>', 17, 1 ); // big excerpt
 Format::apply_with_hook_params( 'more', 'post_content_out', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
 
@@ -75,20 +72,22 @@ Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-ou
 		$this->assign( 'sides', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'mini' ), 'limit' => 2, 'status' => 'published' ) ) );
 		$this->assign( 'sliders', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => 'published' ) ) );
 		$this->assign( 'menus', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'menu' ), 'limit' => 5, 'status' => 'published' ) ) );
-		$this->assign( 'inits', Posts::get( array( 'content_type' => 'initiative', 'limit' => 3, 'status' => 'published' ) ) );
+		$this->assign( 'inits', Posts::get( array( 'content_type' => 'initiative', 'limit' => 7, 'status' => 'published' ) ) );
 		$this->assign( 'briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => '6' ) ) );
 		
 		$nibblescount = 0;
 		$articlescount = 0;
+		$initscount = 0;
 		$i = 0;
     	foreach ( $this->sliders as $post ) { 
-			if ($post->info->shorttitle) {$title = $post->info->shorttitle; } else { $title = $post->title; };
 			if ($post->content_type == Post::type('brief') && $i < 5) { $nibblescount++; }; 		// increase nibble-counter by 1 if the current slider is a nibble 
 			if ($post->content_type == Post::type('article') && $i < 5) { $articlescount++; };		// same for articles
+			if ($post->content_type == Post::type('initiative') && $i < 5) { $initscount++; };		// same for articles
 			$i++; 
 		}
 		$this->assign( 'nibblescount', $nibblescount);
 		$this->assign( 'articlescount', $articlescount);		
+		$this->assign( 'initscount', $initscount);		
 		
 	}
 	

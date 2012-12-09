@@ -54,12 +54,12 @@
 					<div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>
 	
 						<p>
-							We will fill a crucial gap in the landscape of how Europeans organize civil action
-							online by providing a hub for information about what is shaking European politics.
+							We will fill a crucial gap as a hub for information about organized European civil 
+							action online and independent journalism from a European perspective.
 						</p>
 						<p>
-							We will do this through keeping an eye on civil initiatives, organizations 
-							and online discussions and embed this into a highly interactive platform.
+							We keep an eye on civil initiatives, cross-border debates and online discussions 
+							in order to embed it all into a highly interactive platform.
 						</p>
 						<p>
 							Learn how to <a title="Join us!" href="/join-us">join us on our journey</a>.
@@ -115,7 +115,23 @@
 
 				<div class="list-2">
 											
-					<?php foreach ( $inits as $post ) { ?>
+					<?php
+					
+							$i = 0;
+							$j = 0;
+
+							/* 
+							in case this post is featured, hide it. 
+							do this by looking up how many articles are in the slideshow.
+							hide as many slideshow-systagged articles in the main loop.
+							*/
+							foreach ($inits as $post ) { 
+
+								$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $post->slug ) ));
+								if ( $inslideshow == true && $i < $initscount ) { 
+										$i++; 
+								} elseif ($j < 3) {
+									$j++; ?>
 							
 							<div class="list">
 
@@ -129,7 +145,8 @@
 								
 							</div>
 							
-					<?php } ?>
+								<?php } 
+							} ?>
 					
 					<div class="clear"></div>
 					
@@ -138,17 +155,28 @@
 				<div class="tile-depth-1 list-1">
 				
 					<?php 
+					
+					
+					
 					$i = 0;
+					$j = 0;
+					
+					/* 
+					in case this post is featured, hide it. 
+					do this by looking up how many articles are in the slideshow.
+					hide as many slideshow-systagged articles in the main loop.
+					*/
 					foreach ($posts as $post ) { 
 						
-						/* 
-						in case this post is featured, hide it. 
-						do this by looking up how many articles are in the slideshow.
-						hide as many slideshow-systagged articles in the main loop.
-						*/
-						if (Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow'))) && $i < $articlescount) { 
-							$i++;
-						} else {
+						$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $post->slug ) ));
+						if ( $inslideshow == true && $i < $articlescount ) { 
+								$i++; $j++; /*?>
+								
+								<div class="list"><h1><?php echo $post->title . " is $i. of $articlescount featured.</br>";?></h1></div>
+								
+						<?php*/ } else {
+							$j++;
+
 						?>						
 
 							<div class="list">
@@ -157,7 +185,7 @@
 
 								<header>
 							
-									<h1><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h1>
+									<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
 
 
 								</header>

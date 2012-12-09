@@ -891,8 +891,10 @@ input {
 #content .list:last-child {
 	padding-bottom: 0;
 }
+
 #content h2 {
 	margin-top: 0;
+	line-height: 1.1em;
 }
 
 .tile-depth-1 {
@@ -1031,9 +1033,8 @@ span.entry-autor > a > span:hover {
 .list-1 div.list:last-child {
 	border: none;
 }
-.list-1 div.list h1 {
+.list-1 div.list h2 {
 	font-size: 1.7em;
-	margin-bottom: 5px;
 }
 .list-1 .list header, .list-1 .list article, .list-1 .list footer {
 	margin-left: 170px;
@@ -1061,8 +1062,8 @@ span.entry-autor > a > span:hover {
 
 .list-2 {
 	padding-top: 0;
+	padding-bottom: 10px;
 	margin-top: 0;
-	padding-bottom: 20px;
 	border-bottom: 2px solid #eee;
 	margin-bottom: 15px;
 }
@@ -1077,6 +1078,9 @@ span.entry-autor > a > span:hover {
 }
 div.list-2 .list:nth-of-type(3n+0) {
 	margin-right: 0;
+}
+.list-2 h2 {
+	margin: 5px 0 10px!important;
 }
 
 .pagination {
@@ -2055,6 +2059,7 @@ aside.disqus h3, .similar-posts h3 {
 	background: #EEF1F5;  
 	outline: none;  
 	padding: 5px 4px;
+	overflow-y: hidden;
 }  
 #featured li.ui-tabs-nav-item a:hover{  
     background:#9da6ad;  
@@ -2164,6 +2169,7 @@ aside.disqus h3, .similar-posts h3 {
 .welcome p {
 	padding-bottom: 0;
 	margin-bottom: 0;
+	line-height: 20px;
 }
 
 /* End Featured Boxes */

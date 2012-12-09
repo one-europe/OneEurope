@@ -29,8 +29,12 @@
 				/* 
 				show only if not currently in the slideshow and if there aren't already two displayed
 				*/	
-				if ( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ) ) ) && $i < $nibblescount ) { 
-					$i++;
+				$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => Utils::slugify($brief->title) ) ));
+				if ( $inslideshow == true ) { 
+					if ( $i < $nibblescount ) {
+						$i++;
+						//echo $brief->title . " is featured</br>";
+					}
 				} elseif ( $j <= 2 ) {
 					$j++;
 				?>

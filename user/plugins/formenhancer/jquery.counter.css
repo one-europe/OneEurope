@@ -54,6 +54,6 @@ form .exceeded {
 	line-height: 1em;
 }
 
-#origauthor, #shorttitle, #excerpt, #teaser {
+#origauthor, #shorttitle, #teaser, #excerpt {
 	width: 710px;
 }
