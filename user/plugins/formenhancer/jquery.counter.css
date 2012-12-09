@@ -3,7 +3,7 @@
 }
 .counter {
 	position: absolute;
-	right: 0;
+	right: 11;
 	top: 0;
 	line-height: 25px;
 	font-size: 14px;
@@ -52,4 +52,8 @@ form .exceeded {
 }
 #admin-options #title {
 	line-height: 1em;
+}
+
+#origauthor, #shorttitle, #excerpt, #teaser {
+	width: 710px;
 }

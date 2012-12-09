@@ -19,7 +19,7 @@ class PlugDebate extends Plugin
 				// Give anonymous users access, if the group exists
 				$group = UserGroup::get_by_name( 'anonymous ');
 				if ( $group ) {
-					$group->grant( self::CONTENT_TYPE, 'read' );
+					$group->grant( self::CONTENT_TYPE, 'read' );					
 				}
 			}
 	}
