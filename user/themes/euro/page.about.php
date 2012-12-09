@@ -10,6 +10,8 @@
 				</ul>
 			</div>
 
+			<?php phpinfo(); ?>
+
 			<div id="about-page">
 
 				<div class="about">
