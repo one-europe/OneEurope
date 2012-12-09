@@ -1917,7 +1917,7 @@ article > footer nav {
 	padding: 10px;
 }
 .article-single .scheduled {
-	margin: none;
+	margin: 0;
 }
 
 ul.similar-posts {
