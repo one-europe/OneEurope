@@ -265,7 +265,7 @@ class MetaSeo extends Plugin
 	public function theme_header($theme)
 	{
 		$this->theme = $theme;
-		return $this->get_keywords() . $this->get_description() . $this->get_robots() . $this->get_og();
+		return $this->get_keywords() . $this->get_description() . $this->get_robots() . $this->get_og() . $this->get_twitter();
 	}
 
 	/*
@@ -747,6 +747,135 @@ class MetaSeo extends Plugin
 					}
 					echo "<meta property=\"og:article:author\" content=\"{$author}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
+					break;
+				break;
+			}
+		}
+	}
+
+	private function get_twitter()
+	{
+		$matched_rule = URL::get_matched_rule();
+		if ( is_object( $matched_rule ) ) {
+			$rule = $matched_rule->name;
+			switch( $rule) {
+				case 'display_home':
+					echo "\n<meta name=\"twitter:title\" content=\"OneEurope\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"OneEurope creates a hub to exchange insights and breathe the spirit and the diversity of Europe. It's brought to you by a community of volunteers from all around Europe.\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n";
+					
+					break;
+				case 'display_nibble':
+					echo "\n<meta name=\"twitter:title\" content=\"{$this->theme->post->title}\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"photo\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->teaser}\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_nibbles':
+					echo "\n<meta property=\"twitter:title\" content=\"All image posts\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/nibbles\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"Our complete image post database.\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_initiative':
+					echo "\n<meta name=\"twitter:title\" content=\"{$this->theme->post->title}\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->teaser}\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_initiatives':
+					echo "\n<meta name=\"twitter:title\" content=\"All Initiatives\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/initiatives\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"Our complete initiative database.\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_debate':
+					echo "\n<meta name=\"twitter:title\" content=\"{$this->theme->post->title}\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_debates':
+					echo "\n<meta name=\"twitter:title\" content=\"All Debates\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/debates\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"Our complete debate database.\" >\n";
+					echo "<meta name=\"twitter:site_name\" content=\"OneEurope\" >\n\n";
+					break;	
+				case 'display_profile':
+					if ($this->theme->post->info->user) {
+						$source = User::get_by_id($this->theme->post->info->user)->info;
+						$displayname = User::get_by_id($this->theme->post->info->user)->displayname;
+				 	} else {
+						$source = $post->info;
+						$displayname = $post->title;
+					}
+					echo "\n<meta name=\"twitter:title\" content=\"{$displayname}\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"{$source->photourl}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"{$source->teaser}\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_profiles':
+					echo "\n<meta name=\"twitter:title\" content=\"All Profiles\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/profiles\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"Our cromplete profile database.\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_contributors':
+					echo "\n<meta name=\"twitter:title\" content=\"All Contrbutors\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/contributors\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"Who's contributing to this project?\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_search':
+					echo "\n<meta name=\"twitter:title\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"" .$this->get_url() . "\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				case 'display_404':
+					echo "\n<meta name=\"twitter:title\" content=\"Nothing Found!\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"" .$this->get_url() . "\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"The page you are trying to link to is not on our servers.\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
+					break;
+				default:
+					echo "\n<meta name=\"twitter:title\" content=\"{$this->theme->post->title}\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					if ( $this->theme->post->info->origsource ) { 
+						// don't do anything
+					} else { 
+						$author = $this->theme->post->author->info->userfield_Twitter;
+					}
+					echo "<meta name=\"twitter:creator\" content=\"{$author}\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				break;
 			}
