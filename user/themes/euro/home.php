@@ -37,7 +37,13 @@
 								<?php } ?>
 			        			<div class="info">  
 					    	    	<?php // show caption or excerpt in 155 characters length or 152 + '...'
-									if ( $post->info->photoinfo ) { $string = $post->info->photoinfo; } else { $string = $post->info->excerpt; } 
+									if ( $post->info->photoinfo ) { $string = $post->info->photoinfo; } else {
+																											if ($post->info->excerpt) {
+										 																		$string = $post->info->excerpt;
+										 																	} else {
+																												$string = $post->info->teaser;
+																											} 
+									}
 									$text = (strlen($string) > 155) ? substr($string,0,152).'...' : $string;
 									echo $text; ?>
 					    	    </div>  

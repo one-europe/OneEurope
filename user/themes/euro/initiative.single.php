@@ -88,7 +88,7 @@
 			</div>
 			
 		</div>
-	
+		
 <!-- /profile.single -->
 
 <?php echo $theme->display ( 'sidebar.initiative.right' ); ?>

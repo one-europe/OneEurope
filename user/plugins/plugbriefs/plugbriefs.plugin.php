@@ -233,6 +233,8 @@ class PlugBriefs extends Plugin
 		if ( $post->content_type == Post::type( self::CONTENT_TYPE ) ) {
  
 			// Save settings
+			$post->info->shorttitle = $form->shorttitle->value;
+			$post->info->excerpt = $form->excerpt->value;
 			$post->info->photourl = $form->photourl->value;
 			$post->info->photoinfo = $form->photoinfo->value;
 			$post->info->photolicense = $form->photolicense->value;

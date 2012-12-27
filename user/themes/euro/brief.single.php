@@ -29,7 +29,7 @@
 					<div class="metacat"><span><?php echo $post->info->metacat; ?></span></div>
 					<hgroup>
 						<h1><?php echo $post->title_out; ?></h1>
-						<h2 class="excerpt"><?php echo $post->info->excerpt; ?></h2>
+						<?php /*?><h2 class="excerpt"><?php echo $post->info->excerpt; ?></h2> */?>
 					</hgroup>
 				</header>
 				
