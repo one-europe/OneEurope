@@ -4,12 +4,23 @@
 
 <?php if ( $post ) { ?>
 	
-	<div class="breadcrumb">
-		<span class="first"><a href="/in-brief">In Brief ›</a></span> <a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a>
-	</div>
 	
 <!-- nibble.single -->
 	<div id="content">
+		
+		<div class="breadcrumb">
+			<span class="first"><a href="/in-brief">In Brief ›</a></span> <span class="brief-title"><a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a></span>
+
+			<div class="pager">
+				<?php if ($previous = $post->descend()): ?>
+				<a class="prev" href="<?php echo $previous->permalink ?>" title="<?php echo $previous->title; ?>">« Previous</a>
+				<?php endif; ?>
+				<?php if ($post->ascend() && $post->descend()) : echo " | "; endif; ?>
+				<?php if ($next = $post->ascend()): ?>
+				<a class="next" href="<?php echo $next->permalink ?>" title="<?php echo $next->title; ?>">Next »</a>
+				<?php endif; ?>
+			</div>
+		</div>
 		<div id="main" class="article-single">
 
     		<article id="post-<?php echo $post->id; ?>" class="<?php echo $post->statusname; ?> plugticle plugnibble">

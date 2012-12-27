@@ -35,19 +35,17 @@
 			</div>			
 			
 			<div class="secondary">
-				
-				<?php echo $post->info->initiative; ?>
+										
+				<?php 
 						
-				<aside>
-				
-					<?php 
-							
-					$news = Posts::get( array('content_type' => Post::type('article'), 'nolimit' => true, 'status' => Post::status('published'), 'all:info' => array ('initiative' => $post->id ) ) ) ;
-					$count = $news->count_all();
-							
-					?>
-			
-					<?php if ( $count > 0 ) { ?>
+				$news = Posts::get( array('content_type' => Post::type('article'), 'nolimit' => true, 'status' => Post::status('published'), 'all:info' => array ('initiative' => $post->id ) ) ) ;
+				$count = $news->count_all();
+						
+				?>
+		
+				<?php if ( $count > 0 ) { ?>
+					
+					<aside>
 						
 						<div class="h"><span>News about <?php echo $post->title; ?>:</span></div>					
 					
@@ -77,17 +75,23 @@
 						
 						</div>
 						
-					<?php } ?>
-															
-				</aside>
-				
+					</aside>
+						
+				<?php } ?>															
+			
 			</div>
-		
+			
+			<div class="disqus">
+
+				<?php $theme->comments( $post ); ?>
+
+			</div>
+			
 		</div>
 	
 <!-- /profile.single -->
 
-<?php echo $theme->display ( 'sidebar.action.right' ); ?>
+<?php echo $theme->display ( 'sidebar.initiative.right' ); ?>
 
 <?php } else { ?>
 	

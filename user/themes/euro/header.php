@@ -202,7 +202,8 @@
 									<div>
 										<p>More:</p>
 										<ul class="cats">
-											<li><a href="<?php Site::out_url( 'habari' ); ?>/about">› About us</a></li>
+											<li><a href="<?php Site::out_url( 'habari' ); ?>/about">› The Project</a></li>
+											<li><a href="<?php Site::out_url( 'habari' ); ?>/contributors">› The Team</a></li>
 											<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">› How to get involved</a></li>
 											<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">› Contact</a></li>
 										</ul>

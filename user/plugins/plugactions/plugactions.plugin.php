@@ -53,20 +53,23 @@ class Plugaction extends Plugin
 			$form->shorttitle->tabindex = 2;
 		    $form->shorttitle->move_after($form->title);
 
+			// add teaser input field
+			$form->append('text', 'teaser', 'null:null', _t('Teaser'), 'admincontrol_text');
+			$form->teaser->value = $post->info->teaser;
+			$form->teaser->tabindex = 3;
+		    $form->teaser->move_after($form->shorttitle);
+			
+			$form->tags->move_after($form->silos);
+			$form->tags->tabindex = 3; // same for correct tabbing
+
+			$form->content->tabindex = 4;
+
 			// insert photourl input field
 			$form->insert('tags', 'text', 'photourl', 'null:null', _t('Photo URL (upload it to mediasilo and grab its link)'), 'admincontrol_textArea');
 			$form->photourl->value = $post->info->photourl;
 			$form->photourl->template = 'admincontrol_text';
-			$form->photourl->tabindex = 3;
-		    $form->photourl->move_after($form->shorttitle);
-		
-			// add teaser input field
-			$form->append('text', 'teaser', 'null:null', _t('Teaser'), 'admincontrol_text');
-			$form->teaser->value = $post->info->teaser;
-			$form->teaser->tabindex = 4;
-		    $form->teaser->move_after($form->photourl);
-
-			$form->content->tabindex = 5;
+			$form->photourl->tabindex = 5;
+		    $form->photourl->move_after($form->content);
 
 			// insert external url input field
 			$form->insert('tags', 'text', 'url', 'null:null', _t('URL'), 'admincontrol_textArea');
@@ -88,9 +91,6 @@ class Plugaction extends Plugin
 			$form->more->template = 'admincontrol_text';
 			$form->more->tabindex = 8;
 			$form->more->move_after($form->twitter);
-
-			// we don't need no tagging
-			$form->tags->remove();
 			
 			$form->save->tabindex = $form->save->tabindex + 10;
 		}

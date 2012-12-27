@@ -1394,13 +1394,14 @@ div#profiles .item:nth-of-type(8n+0) {
 }
 .breadcrumb {
 	display: block;
+	width: 927px;
 	width: 100%;
 	margin: -15px 0 5px;
-	padding: 0 10px;
-	width: 927px;
+	padding: 0;
 }
 .breadcrumb .first {
 	font-size: 16px;
+	padding-left: 10px;
 }
 .breadcrumb .first a {
 	color: #333!important;
@@ -1411,6 +1412,14 @@ div#profiles .item:nth-of-type(8n+0) {
 }
 .breadcrumb .selected {
 	font-weight: bold;
+}
+.breadcrumb .brief-title {
+	max-width: 450px;
+}
+.breadcrumb .pager {
+	float: right;
+	padding-right: 10px;
+	margin-top: 3px;
 }
 
 /* end /profiles */

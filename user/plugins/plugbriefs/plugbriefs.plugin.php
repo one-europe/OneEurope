@@ -70,27 +70,38 @@ class PlugBriefs extends Plugin
 		// In case the post to publish is a brief
 		if ( $form->content_type->value == Post::type( self::CONTENT_TYPE ) ) {
 			
+			// add shorttitle input field
+			$form->append('text', 'shorttitle', 'null:null', _t('Short title (for display on frontpage - can be the actual title itself if it\'s short enough)'), 'admincontrol_text');
+			$form->shorttitle->value = $post->info->shorttitle;
+			$form->shorttitle->tabindex = 2;
+		    $form->shorttitle->move_after($form->title);
+			
+			// add excerpt field
+			$form->append('text', 'excerpt', 'null:null', _t('Excerpt'), 'admincontrol_text');
+			$form->excerpt->tabindex = 3;
+			$form->excerpt->value = $post->info->excerpt;
+			$form->excerpt->move_after($form->shorttitle);
 			
 			$form->tags->move_after($form->silos);
-			$form->tags->tabindex = 2;
+			$form->tags->tabindex = 3; // same for correct tabbing
 
-			$form->content->tabindex = 3;
+			$form->content->tabindex = 4;
 			
 			// add photo url input field
 			$form->append('text', 'photourl', 'null:null', _t('Photo URL (1. upload the image to the media silo, 2. grab its URL, 3. paste it here)'), 'admincontrol_text');
-			$form->photourl->tabindex = 4;
+			$form->photourl->tabindex = 5;
 			$form->photourl->value = $post->info->photourl;
 			$form->photourl->move_after($form->content);
 			
 			// add photo caption
 			$form->append('text', 'photoinfo', 'null:null', _t('Photo Caption'), 'admincontrol_text');
-			$form->photoinfo->tabindex = 5;
+			$form->photoinfo->tabindex = 6;
 			$form->photoinfo->value = $post->info->photoinfo;
 			$form->photoinfo->move_after($form->photourl);
 			
 			// add photo license
-			$form->append('text', 'photolicense', 'null:null', _t('Photo License'), 'admincontrol_text');
-			$form->photolicense->tabindex = 6;
+			$form->append('text', 'photolicense', 'null:null', _t('License Owner'), 'admincontrol_text');
+			$form->photolicense->tabindex = 7;
 			$form->photolicense->value = $post->info->photolicense;
 			$form->photolicense->move_after($form->photoinfo);
 			
@@ -122,14 +133,48 @@ class PlugBriefs extends Plugin
 			}
 			$key = array_search( $post->info->debate, $ids ); 
 			$form->debate->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
-			$form->debate->tabindex = 7;
+			$form->debate->tabindex = 8;
 			$form->debate->move_after($form->photolicense);			
+			
+			
+			// make a dropdown of all initiatives with set slugs
+			$initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
+			$slugs = array(); 								// create second, empty array
+			$i = 1;
+			foreach ($initiatives as $initiative) { 					// for every initiative of the first one... 
+				if ( $i == 1 ) {
+					$slugs[] = 'None';
+					$i++;
+				}
+				if ( $initiative->title ) {			// ...if it has a displayname...
+					$slugs[] = $initiative->title;	// ...fill an object in the new array aka [nr] => [displayname]
+				}
+			} 												// use this value in the dropdown
+			$form->append( 'select', 'initiative', 'null:null', _t( 'This is a report about this initiative:' ), $slugs, 'tabcontrol_select' ); 
+			$ids = array();
+			$i = 1;
+			foreach ($initiatives as $initiative) { 					// ..
+				if ( $i == 1 ) {
+					$ids[] = '0';
+					$i++;
+				}
+				if ( $initiative->title ) {
+					$ids[] = $initiative->id;						// overwrite the slugs with ids, cause this is what we receive from the db
+					$i++;
+				}
+			}
+			$key = array_search( $post->info->initiative, $ids ); 
+			$form->initiative->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
+			$form->initiative->tabindex = 9;
+			$form->initiative->move_after($form->debate);
+			
+			
 			
 			// add original source of the nibble
 			$form->append('text', 'origsource', 'null:null', _t('Is this content re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
 			$form->origsource->tabindex = 9;
 			$form->origsource->value = $post->info->origsource;
-			$form->origsource->move_after($form->debate);		
+			$form->origsource->move_after($form->initiative);		
 			// add field for the name of the source
 			$form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
 			$form->origauthor->tabindex = 10;
