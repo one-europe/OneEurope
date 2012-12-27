@@ -35,19 +35,6 @@
 
 				</div>
 			</section>
-<<<<<<< HEAD
-=======
-			<?php if ( User::identify()->loggedin ) { 
-				if ( $post->info->user == 0 ) { ?>
-					<span class="article-edit right"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span>
-				<?php } else { ?>
-					<p class="profile-edit right">
-						<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>">Edit original Entry</a>
-						| <a href="http://one-europe.info/admin/user/<?php echo User::get_by_id($post->info->user)->username; ?>">Edit User</a>
-					</p>
-				<?php } 
-			} ?>
->>>>>>> acd019875b9ad5d056d58915601f630325decff9
 		
 			<?php if ( $post->info->twitter ) { ?>
 	

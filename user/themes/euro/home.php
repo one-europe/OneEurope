@@ -42,7 +42,7 @@
 									} elseif ($post->info->teaser) {
 										$string = $post->info->teaser;
 									} elseif ($post->info->photoinfo) {
-										$string = $post->info->teaser;
+										$string = $post->info->photoinfo;
 									} else { $string = ""; }
 									$text = (strlen($string) > 155) ? substr($string,0,153).'...' : $string;
 									echo $text; ?>
