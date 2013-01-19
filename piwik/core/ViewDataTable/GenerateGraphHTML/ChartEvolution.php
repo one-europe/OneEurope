@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ChartEvolution.php 7075 2012-09-28 03:07:18Z matt $
+ * @version $Id: ChartEvolution.php 7612 2012-12-14 08:56:21Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -55,6 +55,7 @@ class Piwik_ViewDataTable_GenerateGraphHTML_ChartEvolution extends Piwik_ViewDat
 		$this->disableShowAllViewsIcons();
 		$this->disableShowTable();
 		$this->disableShowAllColumns();
+		$this->showAnnotationsView();
 	}
 	
 	/**
@@ -63,6 +64,11 @@ class Piwik_ViewDataTable_GenerateGraphHTML_ChartEvolution extends Piwik_ViewDat
 	protected function getJavascriptVariablesToSet()
 	{
 		$result = parent::getJavascriptVariablesToSet();
+
+		// Graphs use a Range instead of the input date - we will use this same range for "Export" icons
+		$result['dateUsedInGraph'] = $result['date'];
+
+		// Other datatable features may require the original input date (eg. the limit dropdown below evolution graph)
 		$result['date'] = $this->originalDate;
 		return $result;
 	}

@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: PluginsManager.php 7310 2012-10-26 01:29:06Z matt $
+ * @version $Id: PluginsManager.php 7657 2012-12-19 11:03:10Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -631,7 +631,8 @@ class Piwik_PluginsManager
 		$missingPlugins = array();
 		if (isset(Piwik_Config::getInstance()->Plugins['Plugins']))
 		{
-			foreach (Piwik_Config::getInstance()->Plugins['Plugins'] as $pluginName)
+			$plugins = Piwik_Config::getInstance()->Plugins['Plugins'];
+			foreach ($plugins as $pluginName)
 			{
 				// if a plugin is listed in the config, but is not loaded, it does not exist in the folder
 				if (!Piwik_PluginsManager::getInstance()->isPluginLoaded($pluginName))

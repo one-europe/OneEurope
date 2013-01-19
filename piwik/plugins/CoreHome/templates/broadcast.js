@@ -45,7 +45,12 @@ var broadcast = {
 	/**
 	 * Force reload once
 	 */
-	foceReload: false,
+	forceReload: false,
+
+    /**
+     * Suppress content update on hash changing
+     */
+    updateHashOnly: false,
 
     /**
      * Initializes broadcast object
@@ -70,6 +75,8 @@ var broadcast = {
      * 1. after calling $.history.init();
      * 2. after calling $.history.load();  //look at broadcast.changeParameter();
      * 3. after pushing "Go Back" button of a browser
+	 * 
+	 * * Note: the method is manipulated in Overlay/templates/index.js - keep this in mind when making changes.
      *
      * @param {string}  hash to load page with
      * @return {void}
@@ -80,6 +87,12 @@ var broadcast = {
 
         // Unbind any previously attached resize handlers
         $(window).off('resize');
+
+        // do not update content if it should be suppressed
+        if (broadcast.updateHashOnly) {
+            broadcast.updateHashOnly = false;
+            return;
+        }
 			
 		// hash doesn't contain the first # character.
 		if( hash ) {
@@ -153,19 +166,20 @@ var broadcast = {
      * NOTE: this method will only make ajax call and replacing main content.
      *
      * @param {string} ajaxUrl  querystring with parameters to be updated
+	 * @param {boolean} disableHistory  the hash change won't be available in the browser history
      * @return {void}
      */
-    propagateAjax: function (ajaxUrl)
+    propagateAjax: function (ajaxUrl, disableHistory)
     {
         broadcast.init();
 
         // abort all existing ajax requests
-        piwikHelper.abortQueueAjax();
+        globalAjaxQueue.abort();
 
         // available in global scope
         var currentHashStr = broadcast.getHash();
 
-        ajaxUrl = ajaxUrl.replace(/^\?|&#/,'');
+		ajaxUrl = ajaxUrl.replace(/^\?|&#/,'');
 		
         var params_vals = ajaxUrl.split("&");
         for( var i=0; i<params_vals.length; i++ )
@@ -186,9 +200,19 @@ var broadcast = {
         {
             currentHashStr = broadcast.updateParamValue('idDashboard=', currentHashStr);
         }
-        // Let history know about this new Hash and load it.
-		broadcast.forceReload = true;
-        $.history.load(currentHashStr);
+		
+		if (disableHistory)
+		{
+			var newLocation = window.location.href.split('#')[0] + '#' + currentHashStr;
+			// window.location.replace changes the current url without pushing it on the browser's history stack
+			window.location.replace(newLocation);
+		}
+		else
+		{
+			// Let history know about this new Hash and load it.
+			broadcast.forceReload = true;
+			$.history.load(currentHashStr);
+		}
     },
 
     /**
@@ -217,7 +241,7 @@ var broadcast = {
     propagateNewPage: function (str, showAjaxLoading)
     {
         // abort all existing ajax requests
-        piwikHelper.abortQueueAjax();
+        globalAjaxQueue.abort();
 		
 		if (typeof showAjaxLoading === 'undefined' || showAjaxLoading)
 		{
@@ -286,6 +310,8 @@ var broadcast = {
         }
         if( valFromUrl != '') {
             // replacing current param=value to newParamValue;
+			valFromUrl = valFromUrl.replace(/\$/g, '\\$');
+			valFromUrl = valFromUrl.replace(/\./g, '\\.');
             var regToBeReplace = new RegExp(paramName + '=' + valFromUrl, 'ig');
             if(newParamValue == '') {
                 // if new value is empty remove leading &, aswell
@@ -331,6 +357,8 @@ var broadcast = {
 
     /**
      * Loads the given url with ajax and replaces the content
+	 * 
+	 * Note: the method is replaced in Overlay/templates/index.js - keep this in mind when making changes. 
      *
      * @param {string} urlAjax  url to load
      * @return {Boolean}
@@ -374,7 +402,7 @@ var broadcast = {
             success: sectionLoaded, // Callback when the request succeeds
             data: new Object
         };
-        piwikHelper.queueAjaxRequest( $.ajax(ajaxRequest) );
+        globalAjaxQueue.push( $.ajax(ajaxRequest) );
         return false;
     },
 
@@ -523,7 +551,7 @@ var broadcast = {
             }
             var value = url.substring(startStr + param.length +1,endStr);
             // sanitize values
-            value = value.replace(/[^_%\-\<\>!@=,;0-9a-zA-Z]/gi, '');
+            value = value.replace(/[^_%\-\<\>!@\$\.=,;0-9a-zA-Z]/gi, '');
 
             return value;
         } else {

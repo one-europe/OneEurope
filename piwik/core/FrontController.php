@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: FrontController.php 7025 2012-09-19 22:20:56Z matt $
+ * @version $Id: FrontController.php 7612 2012-12-14 08:56:21Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -126,7 +126,7 @@ class Piwik_FrontController
 //		Piwik::log("Dispatching $module / $action, parameters: ".var_export($parameters, $return = true));
 		if( !is_callable(array($controller, $action)))
 		{
-			throw new Exception("Action $action not found in the controller $controllerClassName.");				
+			throw new Exception("Action '$action' not found in the controller '$controllerClassName'.");				
 		}
 		
 		// Generic hook that plugins can use to modify any input to the function, 

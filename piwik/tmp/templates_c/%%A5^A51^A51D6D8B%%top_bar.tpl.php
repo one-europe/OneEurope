@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:32
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:41
          compiled from CoreHome/templates/top_bar.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', 'CoreHome/templates/top_bar.tpl', 9, false),array('modifier', 'strtolower', 'CoreHome/templates/top_bar.tpl', 11, false),array('modifier', 'urlRewriteWithParameters', 'CoreHome/templates/top_bar.tpl', 11, false),)), $this); ?>

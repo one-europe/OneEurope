@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 6758 2012-08-14 20:59:30Z JulienM $
+ * @version $Id: API.php 7670 2012-12-19 22:13:38Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_MobileMessaging
@@ -52,7 +52,7 @@ class Piwik_MobileMessaging_API
 	 */
 	public function areSMSAPICredentialProvided()
 	{
-		Piwik::checkUserIsNotAnonymous();
+		Piwik::checkUserHasSomeViewAccess();
 
 		$credential = $this->getSMSAPICredential();
 		return isset($credential[Piwik_MobileMessaging::API_KEY_OPTION]);
@@ -117,10 +117,12 @@ class Piwik_MobileMessaging_API
 	{
 		Piwik::checkUserIsNotAnonymous();
 
+		$phoneNumber = self::sanitizePhoneNumber($phoneNumber);
+
 		$verificationCode = "";
 		for($i = 0; $i < self::VERIFICATION_CODE_LENGTH; $i++)
 		{
-			$verificationCode .= rand(0,9);
+			$verificationCode .= mt_rand(0,9);
 		}
 
 		$smsText = Piwik_Translate(
@@ -141,6 +143,18 @@ class Piwik_MobileMessaging_API
 		$this->increaseCount(Piwik_MobileMessaging::PHONE_NUMBER_VALIDATION_REQUEST_COUNT_OPTION, $phoneNumber);
 
 		return true;
+	}
+
+	/**
+	 * sanitize phone number
+	 *
+	 * @param string $phoneNumber
+	 *
+	 * @return string sanitized phone number
+	 */
+	public static function sanitizePhoneNumber($phoneNumber)
+	{
+		 return str_replace(' ', '', $phoneNumber);
 	}
 
 	/**
@@ -458,7 +472,7 @@ class Piwik_MobileMessaging_API
 	 */
 	public function getDelegatedManagement()
 	{
-		Piwik::checkUserIsNotAnonymous();
+		Piwik::checkUserHasSomeViewAccess();
 		return Piwik_GetOption(Piwik_MobileMessaging::DELEGATED_MANAGEMENT_OPTION) == 'true';
 	}
 }

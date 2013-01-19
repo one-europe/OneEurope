@@ -5,7 +5,7 @@
  *
  * @link http://dev.piwik.org/trac/browser/trunk/libs/UserAgentParser
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- * @version $Id: UserAgentParser.php 6913 2012-09-03 15:44:18Z vipsoft $
+ * @version $Id: UserAgentParser.php 7616 2012-12-14 21:36:03Z matt $
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -215,6 +215,7 @@ class UserAgentParser
 	static protected $operatingSystems = array(
 			'Android'				=> 'AND',
 			'Maemo'					=> 'MAE',
+			'CrOS '                 => 'LIN',
 			'Linux'					=> 'LIN',
 
 			// workaround for vendors who changed the WinPhone 7 user agent
@@ -316,6 +317,7 @@ class UserAgentParser
 			'BEOS'					=> 'BEO',
 			'Amiga'					=> 'AMI',
 			'AmigaOS'				=> 'AMI',
+
 		);
 	
 	// os family

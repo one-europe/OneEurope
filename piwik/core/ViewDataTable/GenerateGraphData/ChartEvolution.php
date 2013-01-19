@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ChartEvolution.php 7075 2012-09-28 03:07:18Z matt $
+ * @version $Id: ChartEvolution.php 7538 2012-11-25 00:31:34Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -28,11 +28,7 @@ class Piwik_ViewDataTable_GenerateGraphData_ChartEvolution extends Piwik_ViewDat
 	protected function checkStandardDataTable()
 	{
 		// DataTable_Array and DataTable allowed for the evolution chart
-		if(!($this->dataTable instanceof Piwik_DataTable_Array)
-			&& !($this->dataTable instanceof Piwik_DataTable))
-		{
-			throw new Exception("Unexpected data type to render.");
-		}
+		Piwik::checkObjectTypeIs($this->dataTable, array('Piwik_DataTable_Array', 'Piwik_DataTable'));
 	}
 	
 	protected function getViewDataTableId()

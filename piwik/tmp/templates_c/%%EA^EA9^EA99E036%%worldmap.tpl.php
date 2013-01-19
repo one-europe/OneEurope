@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:38
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:52
          compiled from /var/www/virtual/one/html/piwik/plugins/UserCountryMap/templates/worldmap.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/UserCountryMap/templates/worldmap.tpl', 2, false),array('modifier', 'escape', '/var/www/virtual/one/html/piwik/plugins/UserCountryMap/templates/worldmap.tpl', 31, false),)), $this); ?>

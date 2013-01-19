@@ -1,9 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-11 12:07:24
+<?php /* Smarty version 2.6.26, created on 2013-01-18 21:23:01
          compiled from /var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'loadJavascriptTranslations', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 4, false),array('function', 'ajaxErrorDiv', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 79, false),array('function', 'ajaxLoadingDiv', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 80, false),array('function', 'url', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 88, false),array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 5, false),)), $this); ?>
-<?php $this->assign('showSitesSelection', false); ?>
-<?php $this->assign('showPeriodSelection', false); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'loadJavascriptTranslations', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 2, false),array('function', 'ajaxErrorDiv', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 78, false),array('function', 'ajaxLoadingDiv', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 79, false),array('function', 'url', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 87, false),array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/UsersManager/templates/userSettings.tpl', 3, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "CoreAdminHome/templates/header.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -65,8 +63,9 @@ unset($_smarty_tpl_vars);
 </label><br />
 		<label style="padding-right:12px;"><input type="radio" value="1" name="defaultReport"<?php if ($this->_tpl_vars['defaultReport'] != 'MultiSites'): ?> checked="checked"<?php endif; ?> /> <?php echo ((is_array($_tmp='General_DashboardForASpecificWebsite')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 </label>
+		<?php if ($this->_tpl_vars['defaultReport'] == 'MultiSites'): ?><?php $this->assign('defaultReportIdSite', 1); ?><?php else: ?><?php $this->assign('defaultReportIdSite', $this->_tpl_vars['defaultReport']); ?><?php endif; ?>
 		<?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => "CoreHome/templates/sites_selection.tpl", 'smarty_include_vars' => array('siteName' => $this->_tpl_vars['defaultReportSiteName'],'idSite' => $this->_tpl_vars['defaultReport'],'switchSiteOnSelect' => false,'showAllSitesItem' => false,'showSelectedSite' => false)));
+$this->_smarty_include(array('smarty_include_tpl_file' => "CoreHome/templates/sites_selection.tpl", 'smarty_include_vars' => array('siteName' => $this->_tpl_vars['defaultReportSiteName'],'idSite' => $this->_tpl_vars['defaultReportIdSite'],'switchSiteOnSelect' => false,'showAllSitesItem' => false,'showSelectedSite' => false)));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>

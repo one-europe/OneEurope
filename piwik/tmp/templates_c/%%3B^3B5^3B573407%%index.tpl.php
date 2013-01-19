@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:32
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:40
          compiled from /var/www/virtual/one/html/piwik/plugins/CoreHome/templates/index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'ajaxRequestErrorDiv', '/var/www/virtual/one/html/piwik/plugins/CoreHome/templates/index.tpl', 13, false),array('function', 'ajaxLoadingDiv', '/var/www/virtual/one/html/piwik/plugins/CoreHome/templates/index.tpl', 16, false),)), $this); ?>

@@ -158,18 +158,17 @@ dataTable.prototype =
                 params[key] = self.param[key];
         }
 
-        piwikHelper.ajaxCall(
-            self.param.module,
-            self.param.action,
-            params,
+        var ajaxRequest = new ajaxHelper();
+        ajaxRequest.addParams(params, 'get');
+        ajaxRequest.setCallback(
             function (response) {
                 container.trigger('piwikDestroyPlot');
                 container.off('piwikDestroyPlot');
                 callbackSuccess(response);
-            },
-            'html',
-            true
+            }
         );
+        ajaxRequest.setFormat('html');
+        ajaxRequest.send(false);
 	},
 
 	// Function called when the AJAX request is successful
@@ -228,6 +227,8 @@ dataTable.prototype =
 		self.handleLimit(domElem);
 		self.handleSearchBox(domElem);
 		self.handleOffsetInformation(domElem);
+		self.handleAnnotationsButton(domElem);
+		self.handleEvolutionAnnotations(domElem);
 		self.handleExportBox(domElem);
 		self.applyCosmetics(domElem);
 		self.handleSubDataTable(domElem);
@@ -236,6 +237,7 @@ dataTable.prototype =
 		self.handleReportDocumentation(domElem);
 		self.handleRowActions(domElem);
 		self.handleRelatedReports(domElem);
+		self.handleTriggeredEvents(domElem);
 	},
 	
 	handleLimit: function(domElem)
@@ -536,7 +538,194 @@ dataTable.prototype =
 				}
 			);
 	},
+	
+	handleEvolutionAnnotations: function(domElem)
+	{
+		var self = this;
+		if (self.param.viewDataTable == 'graphEvolution'
+			&& $('.annotationView', domElem).length > 0)
+		{
+			// get dates w/ annotations across evolution period (have to do it through AJAX since we
+			// determine placement using the elements created by jqplot)
+			piwik.annotations.api.getEvolutionIcons(
+				self.param.idSite,
+				self.param.date,
+				self.param.period,
+				self.param['evolution_' + self.param.period + '_last_n'],
+				function (response)
+				{
+					var annotations = $(response),
+					    datatableFeatures = $('.dataTableFeatures', domElem),
+						noteSize = 16,
+						annotationAxisHeight = 30 // css height + padding + margin
+						;
+	
+					// set position of evolution annotation icons
+					annotations.css({
+						top: -datatableFeatures.height() - annotationAxisHeight + noteSize / 2,
+						left: 6 // padding-left of .jqplot-evolution element (in graph.tpl)
+					});
 
+					piwik.annotations.placeEvolutionIcons(annotations, domElem);
+					
+					// add new section under axis
+					datatableFeatures.append(annotations);
+					
+					// reposition annotation icons every time the graph is resized
+					$('.piwik-graph', domElem).on('resizeGraph', function() {
+						piwik.annotations.placeEvolutionIcons(annotations, domElem);
+					});
+					
+					// on hover of x-axis, show note icon over correct part of x-axis
+					$('span', annotations).hover(
+						function() { $(this).css('opacity', 1); },
+						function() {
+							if ($(this).attr('data-count') == 0) // only hide if there are no annotations for this note
+							{
+								$(this).css('opacity', 0);
+							}
+						}
+					);
+				
+					// when clicking an annotation, show the annotation viewer for that period
+					$('span', annotations).click(function() {
+						var spanSelf = $(this),
+							date = spanSelf.attr('data-date'),
+							oldDate = $('.annotation-manager', domElem).attr('data-date');
+						if (date)
+						{
+							var period = self.param.period;
+							if (period == 'range')
+							{
+								period = 'day';
+							}
+							
+							piwik.annotations.showAnnotationViewer(
+								domElem,
+								self.param.idSite,
+								date,
+								period,
+								undefined, // lastN
+								function (manager) {
+									manager.attr('data-is-range', 0);
+									$('.annotationView img', domElem)
+										.attr('title', _pk_translate('Annotations_IconDesc_js'));
+									
+									var viewAndAdd = _pk_translate('Annotations_ViewAndAddAnnotations_js'),
+										hideNotes = _pk_translate('Annotations_HideAnnotationsFor_js');
+									
+									// change the tooltip of the previously clicked evolution icon (if any)
+									if (oldDate)
+									{
+										$('span', annotations).each(function() {
+											if ($(this).attr('data-date') == oldDate)
+											{
+												$(this).attr('title', viewAndAdd.replace("%s", oldDate));
+												return false;
+											}
+										});
+									}
+									
+									// change the tooltip of the clicked evolution icon
+									if (manager.is(':hidden'))
+									{
+										spanSelf.attr('title', viewAndAdd.replace("%s", date));
+									}
+									else
+									{
+										spanSelf.attr('title', hideNotes.replace("%s", date));
+									}
+								}
+							);
+						}
+					});
+					
+					// when hover over annotation in annotation manager, highlight the annotation
+					// icon
+					var runningAnimation = null;
+					domElem.on('mouseenter', '.annotation', function(e) {
+						var date = $(this).attr('data-date');
+						
+						// find the icon for this annotation
+						var icon = $();
+						$('span', annotations).each(function() {
+							if ($(this).attr('data-date') == date)
+							{
+								icon = $('img', this);
+								return false;
+							}
+						});
+						
+						if (icon[0] == runningAnimation) // if the animation is already running, do nothing
+						{
+							return;
+						}
+						
+						// stop ongoing animations
+						$('span', annotations).each(function() {
+							$('img', this).removeAttr('style');
+						});
+						
+						// start a bounce animation
+						icon.effect("bounce", {times: 1, distance: 10}, 1000);
+						runningAnimation = icon[0];
+					});
+					
+					// reset running animation item when leaving annotations list 
+					domElem.on('mouseleave', '.annotations', function(e) {
+						runningAnimation = null;
+					});
+				}
+			);
+		}
+	},
+	
+	handleAnnotationsButton: function(domElem)
+	{
+		var self = this;
+		if (self.param.idSubtable) // no annotations for subtables, just whole reports
+		{
+			return;
+		}
+		
+		// show the annotations view on click
+		$('.annotationView', domElem).click(function() {
+			var annotationManager = $('.annotation-manager', domElem);
+			
+			if (annotationManager.length > 0
+				&& annotationManager.attr('data-is-range') == 1)
+			{
+				if (annotationManager.is(':hidden'))
+				{
+					annotationManager.slideDown('slow'); // showing
+					$('img', this).attr('title', _pk_translate('Annotations_IconDescHideNotes_js'));
+				}
+				else
+				{
+					annotationManager.slideUp('slow'); // hiding
+					$('img', this).attr('title', _pk_translate('Annotations_IconDesc_js'));
+				}
+			}
+			else
+			{
+				// show the annotation viewer for the whole date range
+				var lastN = self.param['evolution_' + self.param.period + '_last_n'];
+				piwik.annotations.showAnnotationViewer(
+					domElem,
+					self.param.idSite,
+					self.param.date,
+					self.param.period,
+					lastN,
+					function(manager) {
+						manager.attr('data-is-range', 1);
+					}
+				);
+				
+				// change the tooltip of the view annotation icon
+				$('img', this).attr('title', _pk_translate('Annotations_IconDescHideNotes_js'));
+			}
+		});
+	},
 	
 	// DataTable view box (simple table, all columns table, Goals table, pie graph, tag cloud, graph, ...)
 	handleExportBox: function(domElem)
@@ -690,6 +879,9 @@ dataTable.prototype =
 				if(typeof date != 'undefined') {
 					param_date = date; 
 				}
+                if( typeof self.param.dateUsedInGraph != 'undefined') {
+                    param_date = self.param.dateUsedInGraph;
+                }
 				var period = self.param.period;
 				
 				// RSS does not work for period=range
@@ -702,7 +894,7 @@ dataTable.prototype =
 						+'&format='+format
 						+'&idSite='+self.param.idSite
 						+'&period='+period
-						+'&date='+param_date
+						+'&date='+ param_date
 						+ ( typeof self.param.filter_pattern != "undefined" ? '&filter_pattern=' + self.param.filter_pattern : '')
 						+ ( typeof self.param.filter_pattern_recursive != "undefined" ? '&filter_pattern_recursive=' + self.param.filter_pattern_recursive : '');
 				
@@ -1279,6 +1471,35 @@ dataTable.prototype =
 		});
 	},
 	
+	/**
+	 * Handle events that other code triggers on this table.
+	 * 
+	 * You can trigger one of these events to get the datatable to do things,
+	 * such as reload its data.
+	 * 
+	 * Events handled:
+	 *  - reload: Triggering 'reload' on a datatable DOM element will
+	 *            reload the datatable's data. You can pass in an object mapping
+	 *            parameters to set before reloading data.
+	 *
+	 *    $(datatableDomElem).trigger('reload', {columns: 'nb_visits,nb_actions', idSite: 2});
+	 */
+	handleTriggeredEvents: function(domElem)
+	{
+		var self = this;
+		
+		// reload datatable w/ new params if desired (NOTE: must use 'bind', not 'on')
+		$(domElem).bind('reload', function(e, paramOverride) {
+			paramOverride = paramOverride || {};
+			for (var name in paramOverride)
+			{
+				self.param[name] = paramOverride[name];
+			};
+			
+			self.reloadAjaxDataTable(true);
+		});
+	},
+	
 	// also used in action data table
 	doHandleRowActions: function(trs)
 	{
@@ -1312,7 +1533,7 @@ dataTable.prototype =
 			}
 			
 			// if there are row actions, make sure the first column is not too narrow
-			td.css('minWidth', '130px');
+			td.css('minWidth', '145px');
 			
 			// show actions that are available for the row on hover
 			var actionsDom = null;
@@ -1361,17 +1582,20 @@ dataTable.prototype =
 				actionEl.addClass('rightmost');
 			}
 			
-			actionEl.click((function(action)
+			actionEl.click((function(action, el)
 			{
 				return function(e)
 				{
 					$(this).blur();
 					container.hide();
 					Piwik_Tooltip.hide();
+					if (typeof actionInstances[action.name].onClick == 'function') {
+						return actionInstances[action.name].onClick(el, tr, e);
+					}
 					actionInstances[action.name].trigger(tr, e);
 					return false;
 				}
-			})(action));
+			})(action, actionEl));
 			
 			if (typeof action.dataTableIconHover != 'undefined')
 			{
@@ -1467,6 +1691,7 @@ actionDataTable.prototype =
 	reloadAjaxDataTable: dataTable.prototype.reloadAjaxDataTable,
 	handleConfigurationBox: dataTable.prototype.handleConfigurationBox,
 	handleSearchBox: dataTable.prototype.handleSearchBox,
+	handleAnnotationsButton: dataTable.prototype.handleAnnotationsButton,
 	handleExportBox: dataTable.prototype.handleExportBox,
 	handleSort: dataTable.prototype.handleSort,
 	handleColumnDocumentation: dataTable.prototype.handleColumnDocumentation,
@@ -1484,6 +1709,7 @@ actionDataTable.prototype =
 	handleLimit: dataTable.prototype.handleLimit,
 	notifyWidgetParametersChange: dataTable.prototype.notifyWidgetParametersChange,
 	handleRelatedReports: dataTable.prototype.handleRelatedReports,
+	handleTriggeredEvents: dataTable.prototype.handleTriggeredEvents,
 	_findReportHeader: dataTable.prototype._findReportHeader,
 	
 	//initialisation of the actionDataTable
@@ -1521,6 +1747,7 @@ actionDataTable.prototype =
 		self.applyCosmetics(domElem);
 		self.handleRowActions(domElem);
 		self.handleLimit(domElem);
+		self.handleAnnotationsButton(domElem);
 		self.handleExportBox(domElem);
 		self.handleSort(domElem);
 		self.handleOffsetInformation(domElem);
@@ -1533,6 +1760,7 @@ actionDataTable.prototype =
 		self.handleColumnDocumentation(domElem);
 		self.handleReportDocumentation(domElem);
 		self.handleRelatedReports(domElem);
+		self.handleTriggeredEvents(domElem);
 	},
 	
 	//see dataTable::applyCosmetics

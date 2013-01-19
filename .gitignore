@@ -13,3 +13,4 @@ Thumbs.db
 ######################
 .htaccess
 config.php
+bareGitRepo/*

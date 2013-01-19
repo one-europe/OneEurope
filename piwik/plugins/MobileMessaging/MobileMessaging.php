@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: MobileMessaging.php 6738 2012-08-14 00:27:01Z matt $
+ * @version $Id: MobileMessaging.php 7715 2013-01-02 10:46:28Z SteveG $
  * 
  * @category Piwik_Plugins
  * @package Piwik_MobileMessaging
@@ -71,7 +71,6 @@ class Piwik_MobileMessaging extends Piwik_Plugin
 			'license' => 'GPL v3 or later',
 			'license_homepage' => 'http://www.gnu.org/licenses/gpl.html',
             'version' => Piwik_Version::VERSION,
-			'translationAvailable' => true,
 		);
 	}
 

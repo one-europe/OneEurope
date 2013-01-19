@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: CoreHome.php 7035 2012-09-21 13:30:18Z EZdesign $
+ * @version $Id: CoreHome.php 7747 2013-01-13 11:12:13Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_CoreHome
@@ -30,8 +30,19 @@ class Piwik_CoreHome extends Piwik_Plugin
 	{
 		return array(
 			'AssetManager.getCssFiles' => 'getCssFiles',
-			'AssetManager.getJsFiles' => 'getJsFiles'
+			'AssetManager.getJsFiles' => 'getJsFiles',
+			'WidgetsList.add' => 'addWidgets',
 		);
+	}
+	
+	/**
+	 * Adds the donate form widget.
+	 * 
+	 * @param Piwik_Event_Notification $notification  notification object
+	 */
+	public function addWidgets()
+	{
+		Piwik_AddWidget('Example Widgets', 'CoreHome_SupportPiwik', 'CoreHome', 'getDonateForm');
 	}
 
 	/**
@@ -49,6 +60,7 @@ class Piwik_CoreHome extends Piwik_Plugin
 		$cssFiles[] = "plugins/CoreHome/templates/cloud.css";
 		$cssFiles[] = "plugins/CoreHome/templates/jquery.ui.autocomplete.css";
 		$cssFiles[] = "plugins/CoreHome/templates/jqplot.css";
+		$cssFiles[] = "plugins/CoreHome/templates/donate.css";
 	}
 
 	/**
@@ -67,6 +79,7 @@ class Piwik_CoreHome extends Piwik_Plugin
 		$jsFiles[] = "libs/swfobject/swfobject.js";
 		$jsFiles[] = "libs/javascript/sprintf.js";
 		$jsFiles[] = "themes/default/common.js";
+		$jsFiles[] = "themes/default/ajaxHelper.js";
 		$jsFiles[] = "plugins/CoreHome/templates/tooltip.js";
 		$jsFiles[] = "plugins/CoreHome/templates/datatable.js";
 		$jsFiles[] = "plugins/CoreHome/templates/datatable_rowactions.js";
@@ -77,6 +90,8 @@ class Piwik_CoreHome extends Piwik_Plugin
 		$jsFiles[] = "plugins/CoreHome/templates/date.js";
 		$jsFiles[] = "plugins/CoreHome/templates/autocomplete.js";
 		$jsFiles[] = "plugins/CoreHome/templates/sparkline.js";
+		$jsFiles[] = "plugins/CoreHome/templates/misc.js";
+		$jsFiles[] = "plugins/CoreHome/templates/donate.js";
 		
 		$jsFiles[] = "plugins/CoreHome/templates/jqplot.js";
 		$jsFiles[] = "libs/jqplot/jqplot-custom.min.js";

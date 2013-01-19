@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:36
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:46
          compiled from /var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'count', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 8, false),array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 8, false),array('modifier', 'escape', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 28, false),array('modifier', 'money', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 44, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'count', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 8, false),array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 8, false),array('modifier', 'escape', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 11, false),array('modifier', 'money', '/var/www/virtual/one/html/piwik/plugins/Live/templates/lastVisits.tpl', 48, false),)), $this); ?>
 <?php $this->assign('maxPagesDisplayedByVisitor', 100); ?>
 
 <ul id='visitsLive'>
@@ -22,7 +22,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'count', '/v
  <?php if ($this->_tpl_vars['visitor']['visitDuration'] > 0): ?><i>(<?php echo $this->_tpl_vars['visitor']['visitDurationPretty']; ?>
 )</i><?php endif; ?>
 				&nbsp;<img src="<?php echo $this->_tpl_vars['visitor']['countryFlag']; ?>
-" title="<?php echo $this->_tpl_vars['visitor']['location']; ?>
+" title="<?php echo ((is_array($_tmp=$this->_tpl_vars['visitor']['location'])) ? $this->_run_mod_handler('escape', true, $_tmp, 'html') : smarty_modifier_escape($_tmp, 'html')); ?>
 , <?php echo ((is_array($_tmp='Provider_ColumnProvider')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
  <?php echo $this->_tpl_vars['visitor']['provider']; ?>
 " />
@@ -49,9 +49,15 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'count', '/v
 "/>
 				<?php endif; ?>
 				</span><?php endif; ?>
-				<?php if ($this->_tpl_vars['visitor']['visitorTypeIcon']): ?>&nbsp;- <img src="<?php echo $this->_tpl_vars['visitor']['visitorTypeIcon']; ?>
+				<?php if ($this->_tpl_vars['visitor']['visitorTypeIcon']): ?>
+					<a class="rightLink" href="javascript:broadcast.propagateAjax('module=Live&action=getVisitorLog&period=month&segment=visitorId==<?php echo $this->_tpl_vars['visitor']['visitorId']; ?>
+')">
+					&nbsp;- <img src="<?php echo $this->_tpl_vars['visitor']['visitorTypeIcon']; ?>
 " title="<?php echo ((is_array($_tmp='General_ReturningVisitor')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
-" /><?php endif; ?>
+ - <?php echo ((is_array($_tmp='General_ReturningVisitorAllVisits')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
+" />
+					</a>
+				<?php endif; ?>
 				<?php if ($this->_tpl_vars['visitor']['visitIp']): ?>- <span title="<?php if (! empty ( $this->_tpl_vars['visitor']['visitorId'] )): ?><?php echo ((is_array($_tmp='General_VisitorID')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 : <?php echo $this->_tpl_vars['visitor']['visitorId']; ?>
 <?php endif; ?>">IP: <?php echo $this->_tpl_vars['visitor']['visitIp']; ?>

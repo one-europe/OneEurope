@@ -26,10 +26,18 @@ $content   = array (
   ),
   'excluded_ips' => 
   array (
+    0 => 
+    array (
+      0 => '131.173.213.137',
+      1 => '131.173.213.137',
+    ),
   ),
   'excluded_parameters' => 
   array (
     1 => 'sid',
+  ),
+  'excluded_user_agents' => 
+  array (
   ),
   'sitesearch' => '1',
   'sitesearch_keyword_parameters' => 

@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Referers.php 7024 2012-09-19 10:53:53Z matt $
+ * @version $Id: Referers.php 7533 2012-11-22 22:36:18Z SteveG $
  *
  * @category Piwik_Plugins
  * @package Piwik_Referers
@@ -84,7 +84,6 @@ class Piwik_Referers extends Piwik_Plugin
 					'actionToLoadSubTables' => 'getSearchEnginesFromKeywordId',
         			'dimension' => Piwik_Translate('Referers_ColumnKeyword'),
         			'documentation' => Piwik_Translate('Referers_KeywordsReportDocumentation', '<br />'),
-        			'actionToLoadSubTables' => 'getSearchEnginesFromKeywordId',
         			'order' => 3,
         		),
 				array( // subtable report
@@ -162,6 +161,16 @@ class Piwik_Referers extends Piwik_Plugin
 					'isSubtableReport' => true,
 					'order' => 10,
 				),
+				array(
+					'category'  => Piwik_Translate('Referers_Referers'),
+					'name'   => Piwik_Translate('Referers_Socials'),
+					'module' => 'Referers',
+					'action' => 'getSocials',
+					'actionToLoadSubTables' => 'getUrlsForSocial',
+					'dimension' => Piwik_Translate('Referers_ColumnSocial'),
+					'documentation' => Piwik_Translate('Referers_WebsitesReportDocumentation', '<br />'),
+					'order' => 11,
+				),
     	));
 	}
 
@@ -213,6 +222,7 @@ class Piwik_Referers extends Piwik_Plugin
 	{
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetKeywords', 'Referers', 'getKeywords');
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetExternalWebsites', 'Referers', 'getWebsites');
+		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetSocials', 'Referers', 'getSocials');
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetSearchEngines', 'Referers', 'getSearchEngines');
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetCampaigns', 'Referers', 'getCampaigns');
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetOverview', 'Referers', 'getRefererType');

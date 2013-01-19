@@ -1432,7 +1432,7 @@ div#profiles .item:nth-of-type(8n+0) {
 	width: 350px;
 }
 .debate-single .primary figure {
-	margin-bottom: 5px;
+	margin-bottom: 20px;
 }
 .debate-single .primary .license {
 	margin-top: 5px;
@@ -1461,6 +1461,29 @@ div#profiles .item:nth-of-type(8n+0) {
 .debate-single .secondary .list {
 	padding: 15px;
 }
+.debate-single .share {
+	margin-top: 20px;
+	padding-top: 10px;
+}
+.debate-single .share .h {
+	color: #000;
+	font-family: Helvetica, serif;
+	font-size: 13px;
+	font-weight: normal;
+	text-transform: uppercase;
+	display: block;
+	border-top: 3px solid #333;
+	border-bottom: 1px solid #EEF1F5;
+	margin: 0 0 10px 0;
+	padding: 1px 2px;
+	background:#ffffff;
+	width: 95%;
+}
+.debate-single .share .h {
+	padding: 0 5px;
+	display: inline-block;
+}
+
 
 /* END DEBATES */
 

@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Exception.php 6385 2012-05-29 21:36:24Z SteveG $
+ * @version $Id: Exception.php 7670 2012-12-19 22:13:38Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -94,6 +94,6 @@ class Piwik_Log_Exception_Formatter_ScreenFormatter extends Piwik_Log_Formatter_
 		$outputFormat = strtolower(Piwik_Common::getRequestVar('format', 'html', 'string'));
 		$response = new Piwik_API_ResponseBuilder($outputFormat);
 		$message = $response->getResponseException(new Exception($errstr));
-		return parent::format($message);
+		return parent::format($message );
 	}
 }

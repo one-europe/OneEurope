@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Site.php 7190 2012-10-15 07:41:12Z matt $
+ * @version $Id: Site.php 7700 2012-12-24 20:52:18Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -212,6 +212,11 @@ class Piwik_Site
 	 */
 	static public function getIdSitesFromIdSitesString( $ids )
 	{
+		if ($ids === 'all')
+		{
+			return Piwik_SitesManager_API::getInstance()->getSitesIdWithAtLeastViewAccess();
+		}
+		
 		if(!is_array($ids))
 		{
 			$ids = explode(',', $ids);

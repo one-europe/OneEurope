@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: GeoIp.php 7180 2012-10-13 16:39:10Z capedfuzz $
+ * @version $Id: GeoIp.php 7576 2012-12-05 04:33:47Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -17,6 +17,10 @@
  */
 abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountry_LocationProvider
 {
+	/* For testing, use: 'http://piwik-team.s3.amazonaws.com/GeoLiteCity.dat.gz' */
+	const GEO_LITE_URL = 'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz';
+	const TEST_IP = '194.57.91.215';
+	
 	public static $geoIPDatabaseDir = 'misc';
 	
 	/**
@@ -176,16 +180,26 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
 	 */
 	public static function getPathToGeoIpDatabase( $possibleFileNames )
 	{
-		$dir = PIWIK_INCLUDE_PATH.'/'.self::$geoIPDatabaseDir;
 		foreach ($possibleFileNames as $filename)
 		{
-			$path = $dir.'/'.$filename;
+			$path = self::getPathForGeoIpDatabase($filename);
 			if (file_exists($path))
 			{
 				return $path;
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns full path for a GeoIP database managed by Piwik.
+	 * 
+	 * @param string $filename Name of the .dat file.
+	 * @return string
+	 */
+	public static function getPathForGeoIpDatabase( $filename )
+	{
+		return PIWIK_INCLUDE_PATH.'/'.self::$geoIPDatabaseDir.'/'.$filename;
 	}
 	
 	/**
@@ -202,9 +216,44 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
 			$expected = array(self::COUNTRY_CODE_KEY => 'FR',
 							  self::REGION_CODE_KEY => 'A6',
 							  self::CITY_NAME_KEY => 'Besançon');
-			$result = array('194.57.91.215', $expected);
+			$result = array(self::TEST_IP, $expected);
 		}
 		return $result;
+	}
+	
+	/**
+	 * Returns true if there is a GeoIP database in the 'misc' directory.
+	 * 
+	 * @return bool
+	 */
+	public static function isDatabaseInstalled()
+	{
+		return self::getPathToGeoIpDatabase(self::$dbNames['loc'])
+			|| self::getPathToGeoIpDatabase(self::$dbNames['isp'])
+			|| self::getPathToGeoIpDatabase(self::$dbNames['org']);
+	}
+	
+	/**
+	 * Returns the type of GeoIP database ('loc', 'isp' or 'org') based on the
+	 * filename (eg, 'GeoLiteCity.dat', 'GeoIPISP.dat', etc).
+	 * 
+	 * @param string $filename
+	 * @return string|false 'loc', 'isp', 'org', or false if cannot find a database
+	 *                      type.
+	 */
+	public static function getGeoIPDatabaseTypeFromFilename( $filename )
+	{
+		foreach (self::$dbNames as $key => $names)
+		{
+			foreach ($names as $name)
+			{
+				if ($name === $filename)
+				{
+					return $key;
+				}
+			}
+		}
+		return false;
 	}
 }
 

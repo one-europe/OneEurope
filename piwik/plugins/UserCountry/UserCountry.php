@@ -4,11 +4,16 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: UserCountry.php 7305 2012-10-24 20:11:24Z matt $
+ * @version $Id: UserCountry.php 7550 2012-11-26 22:14:37Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
  */
+
+/**
+ * @see plugins/UserCountry/GeoIPAutoUpdater.php
+ */
+require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/GeoIPAutoUpdater.php';
 
 /**
  *
@@ -48,12 +53,35 @@ class Piwik_UserCountry extends Piwik_Plugin
 			'Goals.getReportsWithGoalMetrics' => 'getReportsWithGoalMetrics',
 			'API.getReportMetadata' => 'getReportMetadata',
 			'API.getSegmentsMetadata' => 'getSegmentsMetadata',
+			'AssetManager.getCssFiles' => 'getCssFiles',
 			'AssetManager.getJsFiles' => 'getJsFiles',
 			'Tracker.getVisitorLocation' => 'getVisitorLocation',
+            'TaskScheduler.getScheduledTasks' => 'getScheduledTasks',
 		);
 		return $hooks;
 	}
 
+	/**
+	 * @param Piwik_Event_Notification $notification  notification object
+	 */
+	function getScheduledTasks($notification)
+	{
+		$tasks = &$notification->getNotificationObject();
+		
+		// add the auto updater task
+		$tasks[] = Piwik_UserCountry_GeoIPAutoUpdater::makeScheduledTask();
+	}
+	
+	/**
+	 * @param Piwik_Event_Notification $notification  notification object
+	 */
+	function getCssFiles( $notification )
+	{
+		$cssFiles = &$notification->getNotificationObject();
+		
+		$cssFiles[] = "plugins/UserCountry/templates/styles.css";
+	}
+	
 	/**
 	 * @param Piwik_Event_Notification $notification  notification object
 	 */
@@ -123,13 +151,10 @@ class Piwik_UserCountry extends Piwik_Plugin
 	 */
 	function addAdminMenu()
 	{
-		if (Piwik::isUserIsSuperUser())
-		{
-			Piwik_AddAdminMenu('UserCountry_Geolocation',
-							   array('module' => 'UserCountry', 'action' => 'adminIndex'),
-		                       Piwik::isUserHasSomeAdminAccess(),
-		                       $order = 8);
-		}
+		Piwik_AddAdminMenu('UserCountry_Geolocation',
+						   array('module' => 'UserCountry', 'action' => 'adminIndex'),
+	                       Piwik::isUserIsSuperUser(),
+	                       $order = 8);
 	}
 
 	/**
@@ -512,9 +537,9 @@ class Piwik_UserCountry extends Piwik_Plugin
 				$lat = round($lat, Piwik_UserCountry_LocationProvider::GEOGRAPHIC_COORD_PRECISION);
 				$long = round($long, Piwik_UserCountry_LocationProvider::GEOGRAPHIC_COORD_PRECISION);
 				
-				// append latitude + longitude to label
-				$newLabel = $label.self::LOCATION_SEPARATOR.$lat.self::LOCATION_SEPARATOR.$long;
-				$row->setColumn('label', $newLabel);
+				// set latitude + longitude metadata
+				$row->setMetadata('lat', $lat);
+				$row->setMetadata('long', $long);
 			}
 		}
 	}

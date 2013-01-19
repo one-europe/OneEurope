@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Date.php 6325 2012-05-26 21:08:06Z SteveG $
+ * @version $Id: Date.php 7612 2012-12-14 08:56:21Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -62,7 +62,7 @@ class Piwik_Date
 	 */
 	static public function factory($dateString, $timezone = null)
 	{
-		$invalidDateException = new Exception(Piwik_TranslateException('General_ExceptionInvalidDateFormat', array("YYYY-MM-DD, or 'today' or 'yesterday'", "strtotime", "http://php.net/strtotime")));
+		$invalidDateException = new Exception(Piwik_TranslateException('General_ExceptionInvalidDateFormat', array("YYYY-MM-DD, or 'today' or 'yesterday'", "strtotime", "http://php.net/strtotime")).": $dateString");
 		if($dateString instanceof self)
 		{
 			$dateString = $dateString->toString();

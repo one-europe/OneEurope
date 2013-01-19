@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7237 2012-10-19 16:07:08Z capedfuzz $
+ * @version $Id: API.php 7659 2012-12-19 12:38:15Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -123,17 +123,22 @@ class Piwik_UserCountry_API
 		
 		// split the label and put the elements into the 'city_name', 'region', 'country',
 		// 'lat' & 'long' metadata fields
+		$strUnknown = Piwik_Translate('General_Unknown');
 		$dataTable->filter('ColumnCallbackAddMetadata',
 			array('label', 'city_name', 'Piwik_UserCountry_getElementFromStringArray',
-				  array($separator, 0, Piwik_Translate('General_Unknown')) ));
+				  array($separator, 0, $strUnknown)));
+		$dataTable->filter('MetadataCallbackAddMetadata',
+			array('city_name', 'city', create_function('$city',' if ($city == "'.$strUnknown.'") { return "xx"; } else { return false; } ')));
 		$dataTable->filter('ColumnCallbackAddMetadata',
 			array('label', 'region', 'Piwik_UserCountry_getElementFromStringArray', array($separator, 1, $unk)));
 		$dataTable->filter('ColumnCallbackAddMetadata',
 			array('label', 'country', 'Piwik_UserCountry_getElementFromStringArray', array($separator, 2, $unk)));
+		
+		// backwards compatibility: for reports that have lat|long in label
 		$dataTable->filter('ColumnCallbackAddMetadata',
-			array('label', 'lat', 'Piwik_UserCountry_getElementFromStringArray', array($separator, 3)));
+			array('label', 'lat', 'Piwik_UserCountry_getElementFromStringArray', array($separator, 3, false)));
 		$dataTable->filter('ColumnCallbackAddMetadata',
-			array('label', 'long', 'Piwik_UserCountry_getElementFromStringArray', array($separator, 4)));
+			array('label', 'long', 'Piwik_UserCountry_getElementFromStringArray', array($separator, 4, false)));
 		
 		// add country name & region name metadata
 		$dataTable->filter('MetadataCallbackAddMetadata',
@@ -145,13 +150,48 @@ class Piwik_UserCountry_API
 		
 		// add the country flag as a url to the 'logo' metadata field
 		$dataTable->filter('MetadataCallbackAddMetadata', array('country', 'logo', 'Piwik_getFlagFromCode'));
-		
+
 		// prettify the label
 		$dataTable->filter('ColumnCallbackReplace', array('label', 'Piwik_UserCountry_getPrettyCityName'));
 		
 		$dataTable->queueFilter('ReplaceSummaryRowLabel');
 		
 		return $dataTable;
+	}
+	
+	/**
+	 * Uses a location provider to find/guess the location of an IP address.
+	 * 
+	 * See Piwik_UserCountry_LocationProvider::getLocation to see the details
+	 * of the result of this function.
+	 * 
+	 * @param string $ip The IP address.
+	 * @param string|false $provider The ID of the provider to use or false to use the
+	 *                               currently configured one.
+	 */
+	public function getLocationFromIP( $ip, $provider = false )
+	{
+		Piwik::checkUserHasSomeViewAccess();
+		
+		if ($provider === false)
+		{
+			$provider = Piwik_UserCountry_LocationProvider::getCurrentProviderId();
+		}
+		
+		$oProvider = Piwik_UserCountry_LocationProvider::getProviderById($provider);
+		if ($oProvider === false)
+		{
+			throw new Exception("Cannot find the '$provider' provider. It is either an invalid provider "
+				. "ID or the ID of a provider that is not working.");
+		}
+		
+		$location = $oProvider->getLocation(array('ip' => $ip));
+		if (empty($location))
+		{
+			throw new Exception("Could not geolocate '$ip'!");
+		}
+		$location['ip'] = $ip;
+		return $location;
 	}
 	
 	protected function getDataTable($name, $idSite, $period, $date, $segment)

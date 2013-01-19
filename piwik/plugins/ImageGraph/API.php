@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7188 2012-10-15 03:30:11Z matt $
+ * @version $Id: API.php 7687 2012-12-22 23:28:49Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_ImageGraph
@@ -160,7 +160,7 @@ class Piwik_ImageGraph_API
 
 			if(empty($legendFontSize))
 			{
-				$legendFontSize = $fontSize + self::DEFAULT_LEGEND_FONT_SIZE_OFFSET;
+				$legendFontSize = (int)$fontSize + self::DEFAULT_LEGEND_FONT_SIZE_OFFSET;
 			}
 
 			if(empty($graphType))
@@ -381,7 +381,8 @@ class Piwik_ImageGraph_API
 					$languageLoaded,
 					$showTimer = true,
 					$hideMetricsDoc = false,
-					$idSubtable
+					$idSubtable,
+					$showRawMetrics = false
 				);
 			}
 			// prepare abscissa and ordinate series

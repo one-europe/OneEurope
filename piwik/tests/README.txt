@@ -5,12 +5,17 @@ This document briefly describes how to use and modify Piwik tests.
 =======================
 To run tests, you must use the SVN trunk. Tests files are not in the Piwik zip archive.
 You can get the latest SVN at: http://dev.piwik.org/svn/
+ $ svn co http://dev.piwik.org/svn/trunk/
+
 To execute the tests:
-* Go to tests/index.php to see the various tests available
+ * In your php.ini make sure you have the setting to show all errors:
+ error_reporting = E_ALL | E_STRICT
+
+ * Go to tests/index.php to see the tests homepage and run the Integration tests via a visual UI, or run JS Tests
 
  INTEGRATION TESTS
 ==================
-Integration tests files are in tests/integration/*.test.php
+Integration tests files are in tests/PHPUnit/Integration/*Test.php
 
 Integration tests allow to test how major Piwik components interact together.
 A test will typically generate hits to the Tracker (record visits and page views)
@@ -20,9 +25,6 @@ text compare tool, such as WinMerge on Win, to easily view changes between files
 If changes are expected due to the code changes you make, simply copy the file from processed/ to 
 expected/, and test will then pass. Otherwise, if you didn't expect to modify the API outputs, 
 it might be that your changes are breaking some features unexpectedly.
-
-To run all integration tests at once, execute tests/integration_tests.php
-See also http://dev.piwik.org/trac/ticket/1465   
 
  PHPUNIT TESTS
 ==============
@@ -44,7 +46,7 @@ See also http://dev.piwik.org/trac/ticket/1465
 	$ phpunit
 	This will run all unit + integration tests. It might take 30 minutes to run.
 
-	You can also run tests of speciified "parts" of Piwik.
+	You can also run tests of specified "parts" of Piwik.
 	There are three main groups of tests: Core, Plugins and Integration
 	For example run
 	$ phpunit --group Core
@@ -54,6 +56,64 @@ See also http://dev.piwik.org/trac/ticket/1465
 4) Write more tests :)
 	See "Writing Unit tests with PHPUnit" 
 	http://www.phpunit.de/manual/current/en/writing-tests-for-phpunit.html
+
+ JAVASCRIPT TESTS
+=================
+piwik.js is unit tested and you can run tests via piwik/tests/javascript/
+
+ TESTING DATA
+=============
+You can import data over several days in Piwik
+1) Install Piwik
+2) Create a site with URL http://piwik.org/
+3) Create a Goal eg. URL Contains "blog"
+4) Import data from an anonimized test log file in piwik/tests/resources/ directory. Run the following command:
+     $ python /home/piwik/misc/log-analytics/import_logs.py --url=http://localhost/path/ /path/to/piwik/tests/resources/access.log-dev-anon-9-days-nov-2012.log.bz2 --idsite=1 --enable-http-errors --enable-http-redirects --enable-static --enable-bots
+   This will import 9 days worth of data from Nov 20th-Nov 29th 2012.
+5) You can then archive the reports with:
+     $ php5 /home/piwik/misc/cron/archive.php --url=http://localhost/path/
+
+You should now have some interesting data to test with in November 2012!
+
+ WEBTESTS
+=========
+We would like to add webtests testing installation, auto update, and initial user login.
+Task is tracked in: http://dev.piwik.org/trac/ticket/2935
+
+ SCHEDULED REPORTS TESTS
+========================
+Piwik scheduled reports (HTML, PDF & SMS) are part of the integration test suite.
+They follow the same principles described in the INTEGRATION TESTS section of this document.
+
+Piwik scheduled reports can contain PNG graphs when the user specifies it.
+Depending on the system under test, generated images differ slightly.
+
+Including all variations in the expected files would not be convenient. Developers would need to run the tests under
+several environments before being able to commit their work.
+Excluding images altogether is not an option as they are an important feature.
+
+Therefore, PNG graphs are only tested if the system under test has the same characteristics as the integration server.
+The characteristics of the integration server are described in IntegrationTestCase::canImagesBeIncludedInScheduledReports()
+
+If your system does not comply to those characteristics, images will not be tested and PHPUnit will display the
+warning message contained in IntegrationTestCase::alertWhenImagesExcludedFromTests().
+
+In this case, the integration test suite might pass on your box but fail on the integration server. This means your
+work altered the expected images. The standard procedure described in the INTEGRATION TESTS section needs to be applied :
+ 1 - find out if the change is expected (*)
+ 2 - a. if the change is expected, the expected files need to be updated (*)
+     b. if the change is not expected, there is a bug needing to be fixed
+
+(*) to analyse and/or generate the expected files, you can either
+	- set up the vagrant piwik vm (which is used by the integration server) or
+	- retrieve the files from the integration server.
+
+ CONTINOUS INTEGRATION
+======================
+We run a Jenkins server for continuous integration. It automatically downloads the latest version of the Piwik code
+from our SVN server and runs a battery of thousands of tests. More information at the links:
+ * Official Piwik Jenkins Server: http://qa.piwik.org:8080/
+ * QA in Piwik: http://piwik.org/qa/
 
  VISUALPHPUNIT
 =================
@@ -121,105 +181,7 @@ question, and code that can't is after it.
 
  BENCHMARKS
 =================
-Piwik comes with a system that can be used to benchmark certain Piwik processes. The benchmarking
-system relies both on PHPUnit and VisualPHPUnit.
-
-- Benchmarks & Fixtures -
-
-Piwik's benchmarks are written as unit tests. Except, they don't setup the database by themselves.
-Instead, there are several 'fixture' classes that do the setup. You can mix and match different
-benchmarks with different fixtures to time piwik processes under differing circumstances.
-
-For example, you can test how long it takes to generate reports for one site with ~230,000 visits
-in one day, or you can test how long it takes to generate reports for 1,000 sites w/ 12 visits
-each on one day, simply by changing the fixture.
-
-- Running Benchmarks -
-
-To run a benchmark, first load VisualPHPUnit by pointing your browser to:
-
-http://path/to/piwik/trunk/tests/lib/visualphpunit/
-
-  * On the left you will see a list of files and directories. Click on the 'Benchmarks' directory
-    to expand it. Then click on the 'Fixtures' directory to expand it.
-
-  * Click one of the benchmarks to run (see the next section for a list of benchmarks).
-
-  * Below the file listing is a section with the title 'GLOBALS'. In order to run a benchmark,
-    you'll have to enter some information here.
-
-  * Enter 'PIWIK_BENCHMARK_FIXTURE' in the left input. In the right input, pick one of the fixtures
-    in the 'Fixtures' folder and enter it (w/o the .php extension). For example, you can enter
-    'SqlDump' or 'ThousandSitesTwelveVisitsEachOneDay' (see the next section for a list of fixtures).
-
-  * Click the 'Add' link in the 'GLOBALS' section. In the new row enter 'PIWIK_BENCHMARK_DATABASE'
-    in the left input. On the right enter the name of a new database. This database will be created
-    and saved so you don't have to re-setup the database next time you run a benchmark. If you
-    plan on running the benchmark more than once, this can save a lot of time.
-    
-    NOTE: This option isn't required.
-  
-  * Now, click the 'Run Tests' link at the top of the page. This will run the test, which can take
-    a long time based on how fast your machine is. When the test finishes, you'll see the following
-    statistics:
-    
-    * Total Elapsed Time - the amount of time it took to run the test + setup the fixture + process
-                           PHPUnit's result + etc.
-    * Total Execution Time - the amount of time it took to run the test (this is an important
-                             metric).
-    * Peak Memory Use - The peak memory use for the test (this is an important metric).
-    * Total Memory Delta - The memory delta of every test run, summed up.
-
-NOTE: You cannot at present run more than one benchmark, so make sure you only select one.
-
-- Included Benchmarks and Fixtures -
-
-These are the benchmarks currently written for Piwik:
-
-  * Benchmarks/ArchivingProcessBenchmark.php
-    
-    This benchmark times the process Piwik uses to generate reports and calculate metrics.
-  
-  * Benchmarks/TrackerBenchmark.php
-  
-    This benchmark times how long it takes to track 12,500 pageviews in one bulk request.
-
-These are the fixtures currently included with Piwik:
-
-  * Benchmarks/Fixtures/OneSiteTwelveThousandVisitsOneYear.php
-    
-    This fixture adds one website and tracks twelve thousand visits over the course of
-    a year (1,000 visits per month).
-  
-  * Benchmarks/Fixtures/ThousandSitesTwelveVisitsEachOneDay.php
-    
-    This fixture adds one thousand websites and tracks 12 visits each on one day.
-  
-  * Benchmarks/Fixtures/SqlDump.php
-    
-    This fixture downloads and loads an SQL dump. The SQL dump is for a database with one
-    website with ~230,000 visits on one day. There are around ~2.3 pageviews per visit and
-    each visit resulted in at least one conversion.
-
-- Benchmarking with git -
-
-If you use git, you can use the benchmarking system to easily see if there are performance
-regressions caused by your changes.
-
-To do this, make sure you put your changes into a new git branch. You can create a new
-branch by running: 
-    $ git checkout -b branch_name
-
-Run a benchmark using the branch without changes ('master'). Load VisualPHPUnit in a new
-tab and switch branches to the new branch. You can switch branches by running:
-    $ git checkout branch_name
-
-In the new tab run the benchmark again. You can now compare how long it took to run the
-test w/o your changes and with your changes.
-
-NOTE:
-  - You don't need git to do this, but it's much easier w/ git.
-  - It's a good idea to make sure the tests pass before benchmarking.
+See tests/PHPUnit/Benchmarks/README.txt
 
  PROFILING WITH XHPROF
 ======================
@@ -271,23 +233,9 @@ NOTE:
     * XHProf will not delete old profiles, you must do that yourself, though individual
       profiles do not take much space.
 
- JAVASCRIPT TESTS
-=================
-piwik.js is unit tested and you can run tests via piwik/tests/javascript/
-
- WEBTESTS
-=========
-The Installation process and few other important tasks are also "webtested". 
-These webtests are ran by the continuous integration server Jenkins.
-http://dev.piwik.org/svn/trunk/tests/webtest/testcases/
-
- CONTINOUS INTEGRATION
-======================
-We currently use Jenkins as continuous integration build server. More information:
-http://piwik.org/qa/
-
  PARTICIPATE
 ============
 You can help by improving existing tests, or identify some missing tests and implement them.
 See http://piwik.org/participate/development-process
 Please contact us at hello@piwik.org
+

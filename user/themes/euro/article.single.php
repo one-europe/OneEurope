@@ -122,6 +122,9 @@
 							<a class="addthis_button_pinterest_pinit"></a>
 							<a class="addthis_button_facebook_send"></a>
 							
+							<a class="addthis_button_reddit"></a>
+							<a class="addthis_button_stumbleupon"></a>
+							
 							<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
 							<a class="addthis_button_tweet" tw:count="vertical"></a>
 							<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>	
@@ -139,7 +142,7 @@
 		
 			<aside>
 				
-				<h3>Further Reading</h3>
+				<h3>Further Reading:</h3>
 			
 			 	<ul class="meta similar-posts">
 				

@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: GenerateGraphData.php 6596 2012-07-30 20:01:36Z capedfuzz $
+ * @version $Id: GenerateGraphData.php 7537 2012-11-24 21:59:20Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -116,7 +116,8 @@ abstract class Piwik_ViewDataTable_GenerateGraphData extends Piwik_ViewDataTable
 	 */
 	protected function addSeriesPickerToView($multiSelect=true)
 	{
-		if (count($this->selectableColumns))
+		if (count($this->selectableColumns)
+			&& Piwik_Common::getRequestVar('showSeriesPicker', 1) == 1)
 		{
 			// build the final configuration for the series picker
 			$columnsToDisplay = $this->getColumnsToDisplay();

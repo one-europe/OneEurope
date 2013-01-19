@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 6957 2012-09-10 06:13:08Z matt $
+ * @version $Id: API.php 7670 2012-12-19 22:13:38Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_PDFReports
@@ -213,8 +213,7 @@ class Piwik_PDFReports_API
 	 */
 	public function getReports($idSite = false, $period = false, $idReport = false, $ifSuperUserReturnOnlySuperUserReports = false)
 	{
-		Piwik::checkUserIsNotAnonymous();
-
+		Piwik::checkUserHasSomeViewAccess();
 		$cacheKey = (int)$idSite .'.'. (string)$period .'.'. (int)$idReport .'.'. (int)$ifSuperUserReturnOnlySuperUserReports;
 		if(isset(self::$cache[$cacheKey]))
 		{

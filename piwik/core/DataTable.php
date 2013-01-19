@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: DataTable.php 7160 2012-10-12 00:36:14Z matt $
+ * @version $Id: DataTable.php 7648 2012-12-18 02:53:55Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -1469,5 +1469,38 @@ class Piwik_DataTable
 		}
 		
 		return array($next, $i);
+	}
+
+	/**
+	 * Returns a new DataTable that contains the rows of each of this table's
+	 * subtables.
+	 * 
+	 * @return Piwik_DataTable
+	 */
+	public function mergeSubtables()
+	{
+		$result = new Piwik_DataTable();
+		foreach ($this->getRows() as $row)
+		{
+			$subtable = $row->getSubtable();
+			if ($subtable !== false)
+			{
+				$result->addRowsFromArray($subtable->getRows());
+			}
+		}
+		return $result;
+	}
+	
+	/**
+	 * Returns a new DataTable created with data from a 'simple' array.
+	 * 
+	 * @param array $array
+	 * @return Piwik_DataTable
+	 */
+	public static function makeFromSimpleArray( $array )
+	{
+		$dataTable = new Piwik_DataTable();
+		$dataTable->addRowsFromSimpleArray($array);
+		return $dataTable;
 	}
 }

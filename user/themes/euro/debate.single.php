@@ -2,6 +2,7 @@
 
 <!-- debate.single -->
 
+
 	<div id="main" class="debate-single">
 	
 		<div id="post-<?php echo $post->id; ?>" class="primary <?php echo $post->statusname; ?>">
@@ -19,11 +20,30 @@
 			<?php echo $post->content_out; ?>
 
 			<?php if ( User::identify()->loggedin ) { ?>
-					<span class="article-edit right"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span>
-
+					</br></br><span class="article-edit right"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span>
 			<?php } ?>
 
 			<div class="clear"></div>
+			
+			
+			<section class="share">
+				<div class="h"><span>Share this debate</span></div>
+
+				<div class="addthis addthis_toolbox addthis_default_style ">
+
+					<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+					<a class="addthis_button_tweet" tw:count="vertical"></a>
+					<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>	
+					<a class="addthis_counter"></a>
+
+					<a class="addthis_button_facebook_send clear"></a>
+					<a class="addthis_button_pinterest_pinit"></a>
+					<a class="addthis_button_print"></a>
+					<a class="addthis_button_reddit"></a>
+					<a class="addthis_button_stumbleupon"></a>
+
+				</div>
+			</section>
 
 		</div>
 	

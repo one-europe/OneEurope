@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:32
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:41
          compiled from CoreHome/templates/top_screen.tpl */ ?>
 <div id="header">
 <?php $_smarty_tpl_vars = $this->_tpl_vars;

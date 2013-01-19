@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: View.php 6900 2012-09-02 11:14:40Z capedfuzz $
+ * @version $Id: View.php 7533 2012-11-22 22:36:18Z SteveG $
  *
  * @category Piwik
  * @package Piwik
@@ -34,7 +34,6 @@ class Piwik_View implements Piwik_View_Interface
 
 	private $template = '';
 	private $smarty = false;
-	private $variables = array();
 	private $contentType = 'text/html; charset=utf-8';
 	private $xFrameOptions = null;
 	

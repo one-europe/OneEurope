@@ -8,7 +8,7 @@
 			<div title="{$visitor.actionDetails|@count} {'Live_Actions'|translate}" class="datetime">
 				<span style='display:none' class='serverTimestamp'>{$visitor.serverTimestamp}</span>
 				{$visitor.serverDatePretty} - {$visitor.serverTimePretty} {if $visitor.visitDuration > 0}<i>({$visitor.visitDurationPretty})</i>{/if}
-				&nbsp;<img src="{$visitor.countryFlag}" title="{$visitor.location}, {'Provider_ColumnProvider'|translate} {$visitor.provider}" />
+				&nbsp;<img src="{$visitor.countryFlag}" title="{$visitor.location|escape:'html'}, {'Provider_ColumnProvider'|translate} {$visitor.provider}" />
 				&nbsp;<img src="{$visitor.browserIcon}" title="{$visitor.browserName}, {'UserSettings_Plugins'|translate}: {$visitor.plugins}" />
 				&nbsp;<img src="{$visitor.operatingSystemIcon}" title="{$visitor.operatingSystem}, {$visitor.resolution}" />
 				&nbsp;
@@ -20,7 +20,11 @@
 					&nbsp;- <img src="{$visitor.visitEcommerceStatusIcon}" title="{$visitor.visitEcommerceStatus}"/>
 				{/if}
 				</span>{/if}
-				{if $visitor.visitorTypeIcon}&nbsp;- <img src="{$visitor.visitorTypeIcon}" title="{'General_ReturningVisitor'|translate}" />{/if}
+				{if $visitor.visitorTypeIcon}
+					<a class="rightLink" href="javascript:broadcast.propagateAjax('module=Live&action=getVisitorLog&period=month&segment=visitorId=={$visitor.visitorId}')">
+					&nbsp;- <img src="{$visitor.visitorTypeIcon}" title="{'General_ReturningVisitor'|translate} - {'General_ReturningVisitorAllVisits'|translate}" />
+					</a>
+				{/if}
 				{if $visitor.visitIp}- <span title="{if !empty($visitor.visitorId)}{'General_VisitorID'|translate}: {$visitor.visitorId}{/if}">IP: {$visitor.visitIp}</span>{/if}
 			</div>
 			<!--<div class="settings"></div>-->

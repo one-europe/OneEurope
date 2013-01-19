@@ -91,6 +91,8 @@
             dashboardLayout = null;
             dashboardId     = dashboardIdToLoad;
             piwikHelper.showAjaxLoading();
+            broadcast.updateHashOnly = true;
+            broadcast.propagateAjax('?idDashboard='+dashboardIdToLoad);
             fetchLayout(generateLayout);
             buildMenu();
             return this;
@@ -163,17 +165,20 @@
          */
         resetLayout: function()
         {
-            piwikHelper.showAjaxLoading();
-            piwikHelper.ajaxCall(
-                'Dashboard',
-                'resetLayout',
-                {idDashboard: dashboardId},
-                function() {
+            var ajaxRequest = new ajaxHelper();
+            ajaxRequest.addParams({
+                module:      'Dashboard',
+                action:      'resetLayout',
+                idDashboard: dashboardId
+            }, 'get');
+            ajaxRequest.setCallback(
+                function () {
                     methods.loadDashboard.apply(this, [dashboardId])
-                },
-                'html',
-                false
+                }
             );
+            ajaxRequest.setLoadingElement();
+            ajaxRequest.setFormat('html');
+            ajaxRequest.send(true);
         },
 
         /**
@@ -233,14 +238,15 @@
      */
     function fetchLayout(callback)
     {
-        piwikHelper.abortQueueAjax();
-        piwikHelper.ajaxCall(
-            'Dashboard',
-            'getDashboardLayout',
-            {idDashboard: dashboardId},
-            callback,
-            'json'
-        );
+        globalAjaxQueue.abort();
+        var ajaxRequest = new ajaxHelper();
+        ajaxRequest.addParams({
+            module: 'Dashboard',
+            action: 'getDashboardLayout',
+            idDashboard: dashboardId
+        }, 'get');
+        ajaxRequest.setCallback(callback);
+        ajaxRequest.send(false);
     }
 
     /**
@@ -367,7 +373,8 @@
     /**
      * Make all widgets on the dashboard sortable
      */
-    function makeWidgetsSortable() {
+    function makeWidgetsSortable()
+    {
         function onStart(event, ui) {
             if (!jQuery.support.noCloneEvent) {
                 $('object', this).hide();
@@ -438,13 +445,13 @@
             });
         };
 
-        piwikHelper.ajaxCall(
-            'Dashboard',
-            'getAllDashboards',
-            {},
-            success,
-            'json'
-        );
+        var ajaxRequest = new ajaxHelper();
+        ajaxRequest.addParams({
+            module: 'Dashboard',
+            action: 'getAllDashboards'
+        }, 'get');
+        ajaxRequest.setCallback(success);
+        ajaxRequest.send(false);
     }
 
     /**
@@ -478,22 +485,26 @@
                 action = 'saveLayout';
             }
 
-            piwikHelper.ajaxCall(
-                'Dashboard',
-                action,
-                {
-                    layout: JSON.stringify(dashboardLayout),
-                    name: dashboardName,
-                    idDashboard: dashboardId
-                },
-                function() {
+            var ajaxRequest = new ajaxHelper();
+            ajaxRequest.addParams({
+                module: 'Dashboard',
+                action: action,
+                idDashboard: dashboardId
+            }, 'get');
+            ajaxRequest.addParams({
+                layout: JSON.stringify(dashboardLayout),
+                name: dashboardName
+            }, 'post');
+            ajaxRequest.setCallback(
+                function () {
                     if(dashboardChanged) {
                         dashboardChanged = false;
                         buildMenu();
                     }
-                },
-                'html'
+                }
             );
+            ajaxRequest.setFormat('html');
+            ajaxRequest.send(false);
         }
     }
 
@@ -505,19 +516,20 @@
             return; // dashboard with id 1 should never be deleted, as it is the default
         }
 
-        piwikHelper.showAjaxLoading();
-        piwikHelper.ajaxCall(
-            'Dashboard',
-            'removeDashboard',
-            {
-                idDashboard: dashboardId
-            },
-            function() {
+        var ajaxRequest = new ajaxHelper();
+        ajaxRequest.setLoadingElement();
+        ajaxRequest.addParams({
+            module: 'Dashboard',
+            action: 'removeDashboard',
+            idDashboard: dashboardId
+        }, 'get');
+        ajaxRequest.setCallback(
+            function () {
                 methods.loadDashboard.apply(this, [1]);
-            },
-            'html',
-            false
+            }
         );
+        ajaxRequest.setFormat('html');
+        ajaxRequest.send(true);
     }
 
     /**

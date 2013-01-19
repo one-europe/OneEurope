@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:38
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:52
          compiled from /var/www/virtual/one/html/piwik/plugins/SEO/templates/index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/SEO/templates/index.tpl', 6, false),array('modifier', 'ucfirst', '/var/www/virtual/one/html/piwik/plugins/SEO/templates/index.tpl', 6, false),array('modifier', 'escape', '/var/www/virtual/one/html/piwik/plugins/SEO/templates/index.tpl', 7, false),array('function', 'ajaxLoadingDiv', '/var/www/virtual/one/html/piwik/plugins/SEO/templates/index.tpl', 13, false),)), $this); ?>
@@ -46,9 +46,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 		   					<?php if (isset ( $this->_tpl_vars['rank']['rank'] )): ?><?php echo $this->_tpl_vars['rank']['rank']; ?>
 <?php else: ?>-<?php endif; ?>
 		   					<?php if ($this->_tpl_vars['rank']['id'] == 'pagerank'): ?> /10 
-		   					<?php elseif ($this->_tpl_vars['rank']['id'] == 'yahoo-bls'): ?> <?php echo ((is_array($_tmp='SEO_Backlinks')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
- 
-		   					<?php elseif ($this->_tpl_vars['rank']['id'] == 'yahoo-pages'): ?> <?php echo ((is_array($_tmp='SEO_Pages')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
+		   					<?php elseif ($this->_tpl_vars['rank']['id'] == 'google-index' || $this->_tpl_vars['rank']['id'] == 'bing-index'): ?> <?php echo ((is_array($_tmp='SEO_Pages')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 
 		   					<?php endif; ?>
 	   					</div>	

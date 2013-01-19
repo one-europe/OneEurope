@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Tracker.php 7400 2012-11-08 08:28:24Z matt $
+ * @version $Id: Tracker.php 7568 2012-12-04 00:14:41Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -142,7 +142,6 @@ class Piwik_Tracker
 
 	protected function initRequests($args)
 	{
-		$usingBulkTracking = false;
 		$rawData = file_get_contents("php://input");
 		if (!empty($rawData))
 		{
@@ -195,6 +194,7 @@ class Piwik_Tracker
 				}
 			}
 
+			// a Bulk Tracking request that is not authenticated should fail
 			if(!$this->authenticateSuperUserOrAdmin(array('idsite' => $idSiteForAuthentication)))
 			{
 				throw new Exception(" token_auth specified is not valid for site ". intval($idSiteForAuthentication));
@@ -464,7 +464,7 @@ class Piwik_Tracker
 
 		if(is_null($visit))
 		{
-			$visit = new Piwik_Tracker_Visit( self::$forcedIpString, self::$forcedDateTime );
+			$visit = new Piwik_Tracker_Visit( self::$forcedIpString, self::$forcedDateTime, $this->authenticated );
 			$visit->setForcedVisitorId(self::$forcedVisitorId);
 		}
 		elseif(!($visit instanceof Piwik_Tracker_Visit_Interface ))

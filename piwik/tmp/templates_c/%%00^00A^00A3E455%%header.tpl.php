@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:32
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:40
          compiled from CoreHome/templates/header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', 'CoreHome/templates/header.tpl', 4, false),array('function', 'loadJavascriptTranslations', 'CoreHome/templates/header.tpl', 9, false),)), $this); ?>
@@ -13,7 +13,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 <meta name="description" content="Web Analytics report for '<?php echo $this->_tpl_vars['siteName']; ?>
 ' - Piwik" />
 <link rel="shortcut icon" href="plugins/CoreHome/templates/images/favicon.ico" /> 
-<?php echo smarty_function_loadJavascriptTranslations(array('plugins' => 'CoreHome'), $this);?>
+<?php echo smarty_function_loadJavascriptTranslations(array('plugins' => 'CoreHome Annotations'), $this);?>
 
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "CoreHome/templates/js_global_variables.tpl", 'smarty_include_vars' => array()));
@@ -36,6 +36,8 @@ $this->_smarty_include(array('smarty_include_tpl_file' => "CoreHome/templates/if
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
+<?php if (isset ( $this->_tpl_vars['addToHead'] )): ?><?php echo $this->_tpl_vars['addToHead']; ?>
+<?php endif; ?>
 </head>
 <body>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;

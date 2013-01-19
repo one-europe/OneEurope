@@ -189,9 +189,9 @@ a {
 #header_message .header_short{ display:block; white-space:nowrap;  }
 #header_message .header_full{ display:none; }
 #header_message:hover .header_short,
-#header_message:active .header_short { display:none; } 
+#header_message.active .header_short { display:none; } 
 #header_message:hover .header_full,
-#header_message:hover .header_full { display:block; }
+#header_message.active .header_full { display:block; }
 
 .header_full {
 	padding-bottom:5px;
@@ -609,6 +609,7 @@ select {
 	background:#847b6d url(images/dashboard_h_bg_hover.png) repeat-x 0 0;
 	float:right; 
 	margin:12px 0 10px 0;
+	cursor:pointer;
 }
 /* on admin screen, Save button aligned on the left */
 .admin .submit {

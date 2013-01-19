@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: GoalManager.php 7190 2012-10-15 07:41:12Z matt $
+ * @version $Id: GoalManager.php 7485 2012-11-19 01:42:06Z vipsoft $
  * 
  * @category Piwik
  * @package Piwik
@@ -297,7 +297,7 @@ class Piwik_Tracker_GoalManager
         
         // 0) In some (unknown!?) cases the campaign is not found in the attribution cookie, but the URL ref was found.
 		//    In this case we look up if the current visit is credited to a campaign and will credit this campaign rather than the URL ref (since campaigns have higher priority)
-		if(empty($refererCampaignName)
+		if(empty($referrerCampaignName)
 			&& $type == Piwik_Common::REFERER_TYPE_CAMPAIGN
 			&& !empty($name)
 		)

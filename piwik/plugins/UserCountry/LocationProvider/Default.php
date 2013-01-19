@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Default.php 7203 2012-10-15 14:26:18Z matt $
+ * @version $Id: Default.php 7647 2012-12-17 16:02:48Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -30,7 +30,10 @@ class Piwik_UserCountry_LocationProvider_Default extends Piwik_UserCountry_Locat
 	public function getLocation( $info )
 	{
 		$enableLanguageToCountryGuess = Piwik_Config::getInstance()->Tracker['enable_language_to_country_guess'];
-		
+
+		if(empty($info['lang'])) {
+			$info['lang'] = Piwik_Common::getBrowserLanguage();
+		}
 		$country = Piwik_Common::getCountry($info['lang'], $enableLanguageToCountryGuess, $info['ip']);
 		
 		$location = array(parent::COUNTRY_CODE_KEY => $country);

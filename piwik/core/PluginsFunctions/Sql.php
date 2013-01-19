@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Sql.php 7096 2012-10-03 19:42:35Z capedfuzz $
+ * @version $Id: Sql.php 7739 2013-01-09 06:02:08Z matt $
  * 
  * @category Piwik
  * @package PluginsFunctions
@@ -150,6 +150,11 @@ class Piwik_Sql
 	 */
 	static public function optimizeTables( $tables )
 	{
+		$optimize = Piwik_Config::getInstance()->General['enable_sql_optimize_queries'];
+		if(empty($optimize)) {
+			return;
+		}
+
 		if(empty($tables))
 		{
 			return false;
@@ -163,7 +168,8 @@ class Piwik_Sql
 		$nonInnoDbTables = array();
 		foreach (Piwik_FetchAll("SHOW TABLE STATUS") as $row)
 		{
-			if (strtolower($row['Engine']) != 'innodb' && in_array($row['Name'], $tables))
+			if (strtolower($row['Engine']) != 'innodb'
+				&& in_array($row['Name'], $tables))
 			{
 				$nonInnoDbTables[] = $row['Name'];
 			}

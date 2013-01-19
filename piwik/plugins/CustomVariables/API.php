@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7190 2012-10-15 07:41:12Z matt $
+ * @version $Id: API.php 7593 2012-12-10 21:26:41Z SteveG $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CustomVariables
@@ -31,9 +31,16 @@ class Piwik_CustomVariables_API
 		return self::$instance;
 	}
 
-	/**
-	 * @return Piwik_DataTable
-	 */
+    /**
+     * @param int        $idSite
+     * @param string     $period
+     * @param Piwik_Date $date
+     * @param string     $segment
+     * @param bool       $expanded
+     * @param int        $idSubtable
+     *
+     * @return Piwik_DataTable|Piwik_DataTable_Array
+     */
 	protected function getDataTable($idSite, $period, $date, $segment, $expanded, $idSubtable)
 	{
 		$dataTable = Piwik_Archive::getDataTableFromArchive('CustomVariables_valueByName', $idSite, $period, $date, $segment, $expanded, $idSubtable);
@@ -42,9 +49,16 @@ class Piwik_CustomVariables_API
 		return $dataTable;
 	}
 
-	/**
-	 * @return Piwik_DataTable
-	 */
+    /**
+     * @param int               $idSite
+     * @param string            $period
+     * @param Piwik_Date        $date
+     * @param string|bool       $segment
+     * @param bool              $expanded
+     * @param bool              $_leavePiwikCoreVariables
+     *
+     * @return Piwik_DataTable|Piwik_DataTable_Array
+     */
 	public function getCustomVariables($idSite, $period, $date, $segment = false, $expanded = false, $_leavePiwikCoreVariables = false)
 	{
 		$dataTable = $this->getDataTable($idSite, $period, $date, $segment, $expanded, $idSubtable = null);
@@ -65,9 +79,16 @@ class Piwik_CustomVariables_API
 		return $dataTable;
 	}
 
-	/**
-	 * @return Piwik_DataTable
-	 */
+    /**
+     * @param int            $idSite
+     * @param string         $period
+     * @param Piwik_Date     $date
+     * @param int            $idSubtable
+     * @param string|bool    $segment
+     * @param bool           $_leavePriceViewedColumn
+     *
+     * @return Piwik_DataTable|Piwik_DataTable_Array
+     */
 	public function getCustomVariablesValuesFromNameId($idSite, $period, $date, $idSubtable, $segment = false, $_leavePriceViewedColumn = false)
 	{
 		$dataTable = $this->getDataTable($idSite, $period, $date, $segment, $expanded = false, $idSubtable);

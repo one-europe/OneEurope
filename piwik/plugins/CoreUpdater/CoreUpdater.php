@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: CoreUpdater.php 5101 2011-08-11 21:35:24Z matt $
+ * @version $Id: CoreUpdater.php 7692 2012-12-23 05:41:34Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CoreUpdater
@@ -56,6 +56,8 @@ class Piwik_CoreUpdater extends Piwik_Plugin
 	function dispatch()
 	{
 		$module = Piwik_Common::getRequestVar('module', '', 'string');
+		$action = Piwik_Common::getRequestVar('action', '', 'string');
+		
 		$updater = new Piwik_Updater();
 		$updater->addComponentToCheck('core', Piwik_Version::VERSION);
 		$updates = $updater->getComponentsWithNewVersion();
@@ -66,7 +68,9 @@ class Piwik_CoreUpdater extends Piwik_Plugin
 		if(self::getComponentUpdates($updater) !== null 
 			&& $module != 'CoreUpdater'
 			// Proxy module is used to redirect users to piwik.org, should still work when Piwik must be updated
-			&& $module != 'Proxy')
+			&& $module != 'Proxy'
+			&& !($module == 'LanguagesManager'
+				&& $action == 'saveLanguage'))
 		{
 			if(Piwik_FrontController::shouldRethrowException())
 			{

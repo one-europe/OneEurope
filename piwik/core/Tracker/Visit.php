@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Visit.php 7409 2012-11-09 03:57:42Z matt $
+ * @version $Id: Visit.php 7721 2013-01-03 02:00:18Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -51,6 +51,7 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 	// can be overwritten in constructor
 	protected $timestamp;
 	protected $ip;
+	protected $authenticated = false;
 	
 	// Set to true when we set some custom variables from the cookie
 	protected $customVariablesSetFromRequest = false;
@@ -60,7 +61,7 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 	 */
 	protected $goalManager;
 
-	public function __construct($forcedIpString = null, $forcedDateTime = null)
+	public function __construct($forcedIpString = null, $forcedDateTime = null, $authenticated = false)
 	{
 		$this->timestamp = time();
 		if(!empty($forcedDateTime))
@@ -79,6 +80,8 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 
 		$ip = Piwik_IP::P2N($ipString);
 		$this->ip = $ip;
+
+		$this->authenticated = $authenticated;
 	}
 
 	function setForcedVisitorId($visitorId)
@@ -345,20 +348,26 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 	{
 		// gather information that needs to be updated
 		$valuesToUpdate = array();
-
+		$incrementActions = false;
 		$sqlActionUpdate = '';
-		if($idActionUrl !== false)
-		{
-			$valuesToUpdate['visit_exit_idaction_url'] = $idActionUrl;
-			$sqlActionUpdate .= "visit_total_actions = visit_total_actions + 1, ";
-		}
+
 		if(!empty($idActionName))
 		{
 			$valuesToUpdate['visit_exit_idaction_name'] = (int)$idActionName;
 		}
+		if($idActionUrl !== false)
+		{
+			$valuesToUpdate['visit_exit_idaction_url'] = $idActionUrl;
+			$incrementActions = true;
+		}
 		if($actionType == Piwik_Tracker_Action::TYPE_SITE_SEARCH)
 		{
 			$sqlActionUpdate .= "visit_total_searches = visit_total_searches + 1, ";
+			$incrementActions = true;
+		}
+		if($incrementActions)
+		{
+			$sqlActionUpdate .= "visit_total_actions = visit_total_actions + 1, ";
 		}
 
 		$datetimeServer = Piwik_Tracker::getDatetimeFromTimestamp($this->getCurrentTimestamp());
@@ -528,7 +537,12 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		$refererUrl	= Piwik_Common::getRequestVar( 'urlref', '', 'string', $this->request);
 		$currentUrl	= Piwik_Common::getRequestVar( 'url', '', 'string', $this->request);
 		$refererInfo = $referrer->getRefererInformation($refererUrl, $currentUrl, $this->idsite);
-		
+
+		$visitorReturning = $isReturningCustomer
+								? 2 /* Returning customer */
+								: ($visitCount > 1 || $this->isVisitorKnown() || $daysSinceLastVisit > 0
+									? 1 /* Returning */
+									: 0 /* New */ );
 		/**
 		 * Save the visitor
 		 */
@@ -536,7 +550,7 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 			'idsite' 					=> $this->idsite,
 			'visitor_localtime' 		=> $localTime,
 			'idvisitor' 				=> $idcookie,
-			'visitor_returning' 		=> $isReturningCustomer ? 2 : ($visitCount > 1 || $this->isVisitorKnown() ? 1 : 0),
+			'visitor_returning' 		=> $visitorReturning,
 			'visitor_count_visits'		=> $visitCount,
 			'visitor_days_since_last'	=> $daysSinceLastVisit,
 			'visitor_days_since_order'	=> $daysSinceLastOrder,
@@ -550,7 +564,8 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 			'visit_total_actions' 		=> in_array($actionType,
 												array(Piwik_Tracker_Action::TYPE_ACTION_URL,
 													Piwik_Tracker_Action::TYPE_DOWNLOAD,
-													Piwik_Tracker_Action::TYPE_OUTLINK))
+													Piwik_Tracker_Action::TYPE_OUTLINK,
+													Piwik_Tracker_Action::TYPE_SITE_SEARCH))
 											? 1 : 0, // if visit starts with something else (e.g. ecommerce order), don't record as an action
 			'visit_total_searches'      => $actionType == Piwik_Tracker_Action::TYPE_SITE_SEARCH ? 1 : 0,
 			'visit_total_time' 			=> $defaultTimeOnePageVisit,
@@ -607,7 +622,29 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		$location = array();
 		$userInfo = array('lang' => $browserLang, 'ip' => Piwik_IP::N2P($this->getVisitorIp()));
 		Piwik_PostEvent('Tracker.getVisitorLocation', $location, $userInfo);
-		
+
+		if($this->authenticated)
+		{
+			// check for location override query parameters (ie, lat, long, country, region, city)
+			$locationOverrideParams = array(
+				'country' => array('string', Piwik_UserCountry_LocationProvider::COUNTRY_CODE_KEY),
+				'region' => array('string', Piwik_UserCountry_LocationProvider::REGION_CODE_KEY),
+				'city' => array('string', Piwik_UserCountry_LocationProvider::CITY_NAME_KEY),
+				'lat' => array('float', Piwik_UserCountry_LocationProvider::LATITUDE_KEY),
+				'long' => array('float', Piwik_UserCountry_LocationProvider::LONGITUDE_KEY),
+			);
+			foreach ($locationOverrideParams as $queryParamName => $info)
+			{
+				list($type, $locationResultKey) = $info;
+
+				$value = Piwik_Common::getRequestVar($queryParamName, false, $type, $this->request);
+				if (!empty($value))
+				{
+					$location[$locationResultKey] = $value;
+				}
+			}
+		}
+
 		if (empty($location['country_code'])) // sanity check
 		{
 			$location['country_code'] = self::UNKNOWN_CODE;
@@ -815,6 +852,10 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 						'207.46.0.0/16',
 						'207.68.128.0/18',
 						'207.68.192.0/20',
+						'131.253.26.0/20',
+						'131.253.24.0/20',
+						// Yahoo
+						'98.137.207.0/20',
 						// Chinese bot hammering websites
 						'1.202.218.8' 
 					)))) 
@@ -868,6 +909,16 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 			}
 		}
 		
+		// Check if user agent should be excluded
+		if (!$excluded)
+		{
+			$excluded = $this->isUserAgentExcluded($ua);
+			if ($excluded)
+			{
+				printDebug("User agent excluded.");
+			}
+		}
+		
 		if(!$excluded)
 		{
 			if( (isset($_SERVER["HTTP_X_PURPOSE"]) 
@@ -918,6 +969,32 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 			{
 				printDebug('Visitor IP '.Piwik_IP::N2P($ip).' is excluded from being tracked');
 				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns true if the specified user agent should be excluded for the current site or not.
+	 * 
+	 * Visits whose user agent string contains one of the excluded_user_agents strings for the
+	 * site being tracked (or one of the global strings) will be excluded.
+	 * 
+	 * @param string $ua The user agent string.
+	 * @return bool
+	 */
+	protected function isUserAgentExcluded( $ua )
+	{
+		$websiteAttributes = Piwik_Common::getCacheWebsiteAttributes($this->idsite);
+		if (!empty($websiteAttributes['excluded_user_agents']))
+		{
+			foreach ($websiteAttributes['excluded_user_agents'] as $excludedUserAgent)
+			{
+				// if the excluded user agent string part is in this visit's user agent, this visit should be excluded
+				if (stripos($ua, $excludedUserAgent) !== false)
+				{
+					return true;
+				}
 			}
 		}
 		return false;

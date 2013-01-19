@@ -1,33 +1,33 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:36
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:46
          compiled from /var/www/virtual/one/html/piwik/plugins/Live/templates/index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/Live/templates/index.tpl', 32, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/Live/templates/index.tpl', 38, false),)), $this); ?>
 <?php echo '
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function() {
-	// persist the &segment parameter so that the Live! widget is also segmented
-	var hash = broadcast.getHash();
-	var segment = broadcast.getValueFromUrl(\'segment\', hash);
-	var appendSegment = segment != \'\' ? \'&segment=\'+ segment : \'\';
-	
     $(\'#visitsLive\').liveWidget({
         interval: '; ?>
 <?php echo $this->_tpl_vars['liveRefreshAfterMs']; ?>
 <?php echo ',
         onUpdate: function(){
-        	
-		    //updates the numbers of total visits in startbox
-		    $("#visitsTotal").load("index.php?module=Live&idSite='; ?>
-<?php echo $this->_tpl_vars['idSite']; ?>
-<?php if (! empty ( $this->_tpl_vars['liveTokenAuth'] )): ?>&token_auth=<?php echo $this->_tpl_vars['liveTokenAuth']; ?>
-<?php endif; ?><?php echo '&action=ajaxTotalVisitors" + appendSegment);
-		},
+            //updates the numbers of total visits in startbox
+            var ajaxRequest = new ajaxHelper();
+            ajaxRequest.setFormat(\'html\');
+            ajaxRequest.addParams({
+                module: \'Live\',
+                action: \'ajaxTotalVisitors\'
+            }, \'GET\');
+            ajaxRequest.setCallback(function (r) {
+                $("#visitsTotal").html(r);
+            });
+            ajaxRequest.send(false);
+        },
         maxRows: 10,
         fadeInSpeed: 600,
-        dataUrl: \'index.php?module=Live&idSite='; ?>
-<?php echo $this->_tpl_vars['idSite']; ?>
-<?php if (! empty ( $this->_tpl_vars['liveTokenAuth'] )): ?>&token_auth=<?php echo $this->_tpl_vars['liveTokenAuth']; ?>
-<?php endif; ?><?php echo '&action=getLastVisitsStart\' + appendSegment
+        dataUrlParams: {
+            module: \'Live\',
+            action: \'getLastVisitsStart\'
+        }
     });
 });
 </script>

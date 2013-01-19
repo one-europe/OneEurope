@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ViewDataTable.php 7068 2012-09-27 04:45:55Z capedfuzz $
+ * @version $Id: ViewDataTable.php 7612 2012-12-14 08:56:21Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -292,6 +292,7 @@ abstract class Piwik_ViewDataTable
 		$this->viewProperties['show_table_all_columns'] = Piwik_Common::getRequestVar('show_table_all_columns', true);
 		$this->viewProperties['show_all_views_icons'] = Piwik_Common::getRequestVar('show_all_views_icons', true);
 		$this->viewProperties['hide_all_views_icons'] = Piwik_Common::getRequestVar('hide_all_views_icons', false);
+		$this->viewProperties['hide_annotations_view'] = Piwik_Common::getRequestVar('hide_annotations_view', true);
 		$this->viewProperties['show_bar_chart'] = Piwik_Common::getRequestVar('show_barchart', true);
 		$this->viewProperties['show_pie_chart'] = Piwik_Common::getRequestVar('show_piechart', true);
 		$this->viewProperties['show_tag_cloud'] = Piwik_Common::getRequestVar('show_tag_cloud', true);
@@ -434,10 +435,7 @@ abstract class Piwik_ViewDataTable
 	 */
 	protected function checkStandardDataTable()
 	{
-		if(!($this->dataTable instanceof Piwik_DataTable))
-		{
-			throw new Exception("Unexpected data type to render.");
-		}
+		Piwik::checkObjectTypeIs($this->dataTable, array('Piwik_DataTable'));
 	}
 	
 	/**
@@ -959,6 +957,20 @@ abstract class Piwik_ViewDataTable
 	{
 		$this->viewProperties['show_all_views_icons'] = false;
 		$this->viewProperties['hide_all_views_icons'] = true;
+	}
+	
+	/**
+	 * Whether or not to show the annotations view. This method has no effect if
+	 * the Annotations plugin is not loaded.
+	 */
+	public function showAnnotationsView()
+	{
+		if (!Piwik_PluginsManager::getInstance()->isPluginLoaded('Annotations'))
+		{
+			return;
+		}
+		
+		$this->viewProperties['hide_annotations_view'] = false;
 	}
 	
 	/**

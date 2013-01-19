@@ -1,3 +1,0 @@
-s:322:"<?xml version="1.0"?>
-<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom"><workspace><atom:title>OneEurope</atom:title><collection href="http://one-europe.info/atom/1"><atom:title>Blog Entries</atom:title><accept>application/atom+xml;type=entry</accept></collection></workspace></service>
-";

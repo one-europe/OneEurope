@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: DataTableManipulator.php 7064 2012-09-26 08:34:19Z matt $
+ * @version $Id: DataTableManipulator.php 7491 2012-11-20 04:05:14Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -113,13 +113,6 @@ abstract class Piwik_API_DataTableManipulator
 		}
 		
 		$request = $this->request;
-        
-		// loading subtables doesn't work if expanded=1 because when the entire table is loaded,
-		// the ids of sub-datatables have a different semantic.
-		if (Piwik_Common::getRequestVar('expanded', false, 'int', $this->request))
-		{
-			throw new Exception('Cannot load subtable if expanded=1 is set.');
-		}
 		
         $idSubTable = $row->getIdSubDataTable();
 		if ($idSubTable === null)
@@ -138,6 +131,12 @@ abstract class Piwik_API_DataTableManipulator
         
         $this->manipulateSubtableRequest($request);
         $request['serialize'] = 0;
+		$request['expanded'] = 0;
+        
+		// don't want to run recursive filters on the subtables as they are loaded,
+		// otherwise the result will be empty in places (or everywhere). instead we
+		// run it on the flattened table.
+		unset($request['filter_pattern_recursive']);
 		
 		$dataTable = Piwik_API_Proxy::getInstance()->call($class, $method, $request);
 		$response = new Piwik_API_ResponseBuilder($format = 'original', $request);

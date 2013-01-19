@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Html.php 6410 2012-05-31 00:16:14Z matt $
+ * @version $Id: Html.php 7648 2012-12-18 02:53:55Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -77,6 +77,11 @@ class Piwik_DataTable_Renderer_Html extends Piwik_DataTable_Renderer
 	 */
 	protected function renderTable($table)
 	{
+		if (is_array($table)) // convert array to DataTable
+		{
+			$table = Piwik_DataTable::makeFromSimpleArray($table);
+		}
+		
 		if($table instanceof Piwik_DataTable_Array)
 		{
 			foreach($table->getArray() as $date => $subtable )

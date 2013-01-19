@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Single.php 7095 2012-10-03 15:23:44Z capedfuzz $
+ * @version $Id: Single.php 7500 2012-11-21 07:23:34Z capedfuzz $
  * 
  * 
  * @category Piwik
@@ -593,7 +593,13 @@ class Piwik_Archive_Single extends Piwik_Archive
 		{
 			return 'Goals_Metrics';
 		}
-   		return $metric;
+		// Actions metrics are processed by the Actions plugin (HACK) (3RD HACK IN FACT) (YES, THIS IS TOO MUCH HACKING)
+		// (FIXME PLEASE).
+		if (in_array($metric, Piwik_Archive::$actionsMetrics))
+		{
+			return 'Actions_Metrics';
+		}
+		return $metric;
 	}
 	
 	/**

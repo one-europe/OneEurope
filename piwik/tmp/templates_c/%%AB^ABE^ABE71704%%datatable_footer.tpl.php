@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:36
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:46
          compiled from CoreHome/templates/datatable_footer.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', 'CoreHome/templates/datatable_footer.tpl', 11, false),)), $this); ?>
@@ -80,8 +80,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 				</span>
            </div>
            
-           <?php endif; ?>			
-           
+           <?php endif; ?>
 			<div class="tableIconsGroup">
 				<span class="exportToFormatIcons"><a class="tableIcon" var="export"><img width="16" height="16" src="themes/default/images/export.png" title="<?php echo ((is_array($_tmp='General_ExportThisReport')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 " /></a></span>
@@ -133,6 +132,14 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 				<?php endif; ?>
 			</ul>
 		</div>
+		<?php if (! $this->_tpl_vars['properties']['hide_annotations_view']): ?>
+		<div class="annotationView" title="<?php echo ((is_array($_tmp='Annotations_IconDesc_js')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
+">
+			<a class="tableIcon"><img width="16" height="16" src="themes/default/images/grey_marker.png"/></a>
+			<span><?php echo ((is_array($_tmp='Annotations_Annotations')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
+</span>
+		</div>
+		<?php endif; ?>
 	</div>
 <?php endif; ?>
 
@@ -162,5 +169,8 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 <?php endif; ?>
 
 </div>
+
+<span class="loadingPiwikBelow" style='display:none'><img src="themes/default/images/loading-blue.gif" /> <?php echo ((is_array($_tmp='General_LoadingData')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
+</span>
 
 <div class="dataTableSpacer"></div>

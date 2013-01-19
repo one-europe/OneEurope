@@ -1,9 +1,10 @@
-<?php /**
+<?php
+/**
  * Piwik - Open source web analytics
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Piwik.php 7190 2012-10-15 07:41:12Z matt $
+ * @version $Id: Piwik.php 7749 2013-01-13 11:20:54Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -137,6 +138,14 @@ class Piwik
 	}
 	
 	/**
+	 * Cache for result of getPiwikUrl.
+	 * Can be overwritten for testing purposes only.
+	 * 
+	 * @var string
+	 */
+	static public $piwikUrlCache = null;
+	
+	/**
 	 * Returns the cached the Piwik URL, eg. http://demo.piwik.org/ or http://example.org/piwik/ 
 	 * If not found, then tries to cache it and returns the value.
 	 *
@@ -146,6 +155,12 @@ class Piwik
 	 */
 	static public function getPiwikUrl()
 	{
+		// Only set in tests
+		if (self::$piwikUrlCache !== null)
+		{
+			return self::$piwikUrlCache;
+		}
+
 		$key = 'piwikUrl';
 		$url = Piwik_GetOption($key);
 		if(Piwik_Common::isPhpCliMode()
@@ -157,7 +172,7 @@ class Piwik
 		}
 
 		$currentUrl = Piwik_Common::sanitizeInputValue(Piwik_Url::getCurrentUrlWithoutFileName());
-		
+
 		if(empty($url)
 			// if URL changes, always update the cache
 			|| $currentUrl != $url)
@@ -171,9 +186,6 @@ class Piwik
 		return $url;
 	}
 	
-/*
- * HTTP headers
- */
 	/**
 	 * Returns true if this appears to be a secure HTTPS connection
 	 *
@@ -442,7 +454,7 @@ class Piwik
 		
 		// The error message mentions chmod 777 in case users can't chown
 		$directoryMessage = "<p><b>Piwik couldn't write to some directories</b>.</p> 
-							<p>Try to Execute the following commands on your server:</p>"
+							<p>Try to Execute the following commands on your server, to allow Write access on these directories:</p>"
 		                  . "<blockquote>$directoryList</blockquote>"
 		                  . "<p>If this doesn't work, you can try to create the directories with your FTP software, and set the CHMOD to 0755 (or 0777 if 0755 is not enough). To do so with your FTP software, right click on the directories then click permissions.</p>"
 		                  . "<p>After applying the modifications, you can <a href='index.php'>refresh the page</a>.</p>"
@@ -1627,10 +1639,12 @@ class Piwik
 			'Real Time Web Analytics',
 			'Analytics',
 			'Real Time Analytics',
+			'Analytics in Real time',
 			'Open Source Analytics',
 			'Open Source Web Analytics',
 			'Free Website Analytics',
 			'Free Web Analytics',
+			'Analytics Platform',
 		);
 		$id = abs(intval(md5(Piwik_Url::getCurrentHost())));
 		$title = $titles[ $id % count($titles)];
@@ -2383,6 +2397,7 @@ class Piwik
 	 * @param array   $fields     Field names
 	 * @param string  $filePath   Path name of a file.
 	 * @param array   $fileSpec   File specifications (delimiter, line terminator, etc)
+	 * @param book    $throwException Should re-throw any exception, used in system check
 	 * @return bool  True if successful; false otherwise
 	 */
 	static public function createTableFromCSVFile($tableName, $fields, $filePath, $fileSpec)
@@ -2438,13 +2453,15 @@ class Piwik
 		if(empty($openBaseDir) && empty($safeMode))
 		{
 			// php 5.x - LOAD DATA LOCAL INFILE is disabled if open_basedir restrictions or safe_mode enabled
-			$keywords[] = 'LOCAL';
+			$keywords[] = 'LOCAL ';
 		}
 
+		$exceptions = array();
 		foreach($keywords as $keyword)
 		{
 			try {
-				$sql = 'LOAD DATA '.$keyword.' INFILE '.$query;
+				$queryStart = 'LOAD DATA '.$keyword.'INFILE ';
+				$sql = $queryStart.$query;
 				$result = @Piwik_Exec($sql);
 				if(empty($result) || $result < 0)
 				{
@@ -2454,11 +2471,18 @@ class Piwik
 				return true;
 			} catch(Exception $e) {
 //				echo $sql . ' ---- ' .  $e->getMessage();
+				$code = $e->getCode();
+				$message =  $e->getMessage() . ($code ? "[$code]" : '');
 				if(!Zend_Registry::get('db')->isErrNo($e, '1148'))
 				{
-					Piwik::log("LOAD DATA INFILE failed... Error was:" . $e->getMessage());
+					Piwik::log("LOAD DATA INFILE failed... Error was:" . $message);
 				}
+				$exceptions[] = "\n  Try #" . (count($exceptions)+1) . ': ' . $queryStart .": ". $message;
 			}
+		}
+		if(count($exceptions))
+		{
+			throw new Exception( implode( ",", $exceptions ) );
 		}
 		return false;
 	}
@@ -2470,10 +2494,12 @@ class Piwik
 	 * @param string  $tableName  PREFIXED table name! you must call Piwik_Common::prefixTable() before passing the table name
 	 * @param array   $fields     array of unquoted field names
 	 * @param array   $values     array of data to be inserted
+	 * @param bool    $throwException Whether to throw an exception that was caught while trying
+	 *                                LOAD DATA INFILE, or not.
 	 * @throws Exception
 	 * @return bool  True if the bulk LOAD was used, false if we fallback to plain INSERTs
 	 */
-	static public function tableInsertBatch($tableName, $fields, $values)
+	static public function tableInsertBatch($tableName, $fields, $values, $throwException = false)
 	{
 		$filePath = PIWIK_USER_PATH . '/' . Piwik_AssetManager::MERGED_FILE_DIR . $tableName . '-'.Piwik_Common::generateUniqId().'.csv';
 
@@ -2499,24 +2525,23 @@ class Piwik
 
 				self::createCSVFile($filePath, $fileSpec, $values);
 
-				if(!file_exists($filePath))
+				if(!is_readable($filePath))
 				{
-					throw new Exception("File $filePath could not be created.");
+					throw new Exception("File $filePath could not be read.");
 				}
+
 				$rc = self::createTableFromCSVFile($tableName, $fields, $filePath, $fileSpec);
-				if($rc)
-				{
+				if($rc) {
 					unlink($filePath);
 					return true;
 				}
-				else
-				{
-					throw new Exception('unknown cause');
-				}
-
 			} catch(Exception $e) {
-//				echo "LOAD DATA INFILE failed or not supported, falling back to normal INSERTs... Error was:" . $e->getMessage();
 				Piwik::log("LOAD DATA INFILE failed or not supported, falling back to normal INSERTs... Error was:" . $e->getMessage());
+				
+				if ($throwException)
+				{
+					throw $e;
+				}
 			}
 		}
 
@@ -2634,4 +2659,115 @@ class Piwik
 		
 		return self::$lockPrivilegeGranted;
 	}
+	
+	/**
+	 * Utility function that checks if an object type is in a set of types.
+	 * 
+	 * @param mixed $o
+	 * @param array $types List of class names that $o is expected to be one of.
+	 * @throws Exception if $o is not an instance of the types contained in $types.
+	 */
+	static public function checkObjectTypeIs( $o, $types )
+	{
+		foreach ($types as $type)
+		{
+			if ($o instanceof $type)
+			{
+				return;
+			}
+		}
+		
+		$oType = is_object($o) ? get_class($o) : gettype($o);
+		throw new Exception("Invalid variable type '$oType', expected one of following: ".implode(', ', $types));
+	}
+	
+	/**
+	 * Returns true if an array is an associative array, false if otherwise.
+	 * 
+	 * This method determines if an array is associative by checking that the
+	 * first element's key is 0, and that each successive element's key is
+	 * one greater than the last.
+	 * 
+	 * @param array $array
+	 * @return bool
+	 */
+	static public function isAssociativeArray( $array )
+	{
+		reset($array);
+		if (!is_numeric(key($array))
+			|| key($array) != 0) // first key must be 0
+		{
+			return true;
+		}
+		
+		// check that each key is == next key - 1 w/o actually indexing the array
+		while (true)
+		{
+			$current = key($array);
+			
+			next($array);
+			$next = key($array);
+			
+			if ($next === null)
+			{
+				break;
+			}
+			else if ($current + 1 != $next)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Checks if the filesystem Piwik stores sessions in is NFS or not. This
+	 * check is done in order to avoid using file based sessions on NFS system,
+	 * since on such a filesystem file locking can make file based sessions
+	 * incredibly slow.
+	 * 
+	 * Note: In order to figure this out, we try to run the 'df' program. If
+	 * the 'exec' or 'shell_exec' functions are not available, we can't do
+	 * the check.
+	 * 
+	 * @return bool True if on an NFS filesystem, false if otherwise or if we
+	 *              can't use shell_exec or exec.
+	 */
+	public static function checkIfFileSystemIsNFS()
+	{
+		$sessionsPath = Piwik_Session::getSessionsDirectory();
+		
+		// this command will display details for the filesystem that holds the $sessionsPath
+		// path, but only if its type is NFS. if not NFS, df will return one or less lines
+		// and the return code 1. if NFS, it will return 0 and at least 2 lines of text.
+		$command = "df -T -t nfs \"$sessionsPath\" 2>&1";
+		
+		if (function_exists('exec')) // use exec
+		{
+			exec($command, $output, $returnCode);
+			
+			// check if filesystem is NFS
+			if ($returnCode == 0
+				&& count($output) > 1)
+			{
+				return true;
+			}
+		}
+		else if (function_exists('shell_exec')) // use shell_exec
+		{
+			$output = shell_exec($command);
+			if ($output)
+			{
+				$output = explode("\n", $output);
+				if (count($output) > 1) // check if filesystem is NFS
+				{
+					return true;
+				}
+			}
+		}
+		
+		return false; // not NFS, or we can't run a program to find out
+	}
+
 }

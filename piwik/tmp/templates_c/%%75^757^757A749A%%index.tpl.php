@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:34
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:43
          compiled from /var/www/virtual/one/html/piwik/plugins/Dashboard/templates/index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'loadJavascriptTranslations', '/var/www/virtual/one/html/piwik/plugins/Dashboard/templates/index.tpl', 1, false),array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/Dashboard/templates/index.tpl', 14, false),)), $this); ?>
@@ -93,7 +93,7 @@ $(document).ready(function() {
 " />
     </div>
 
-    <?php if (count ( $this->_tpl_vars['availableUsers'] ) > 0 && $this->_tpl_vars['isSuperUser']): ?>
+    <?php if ($this->_tpl_vars['isSuperUser']): ?>
     <div class="ui-confirm" id="copyDashboardToUserConfirm">
         <h2><?php echo ((is_array($_tmp='Dashboard_CopyDashboardToUser')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 </h2>
@@ -102,14 +102,6 @@ $(document).ready(function() {
         <label for="copyDashboardUser"><?php echo ((is_array($_tmp='General_Username')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
  </label>
         <select name="copyDashboardUser" id="copyDashboardUser">
-        <?php $_from = $this->_tpl_vars['availableUsers']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
-    foreach ($_from as $this->_tpl_vars['user']):
-?>
-            <option value="<?php echo $this->_tpl_vars['user']['login']; ?>
-"><?php echo $this->_tpl_vars['user']['login']; ?>
- <?php if (! empty ( $this->_tpl_vars['user']['alias'] )): ?>(<?php echo $this->_tpl_vars['user']['alias']; ?>
-)<?php endif; ?></option>
-        <?php endforeach; endif; unset($_from); ?>
         </select></div>
         <input role="yes" type="button" value="<?php echo ((is_array($_tmp='General_Ok')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 " />
@@ -171,10 +163,8 @@ $(document).ready(function() {
                     <?php if (( $this->_tpl_vars['isSuperUser'] )): ?>
                     <li onclick="setAsDefaultWidgets();"><?php echo ((is_array($_tmp='Dashboard_SetAsDefaultWidgets')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 </li>
-                    <?php if (count ( $this->_tpl_vars['availableUsers'] ) > 0): ?>
                     <li onclick="copyDashboardToUser();"><?php echo ((is_array($_tmp='Dashboard_CopyDashboardToUser')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 </li>
-                    <?php endif; ?>
                     <?php endif; ?>
                     <?php endif; ?>
                 </ul>

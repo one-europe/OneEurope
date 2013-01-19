@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-11 12:07:24
+<?php /* Smarty version 2.6.26, created on 2013-01-18 21:23:01
          compiled from CoreAdminHome/templates/header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', 'CoreAdminHome/templates/header.tpl', 5, false),array('function', 'loadJavascriptTranslations', 'CoreAdminHome/templates/header.tpl', 10, false),array('function', 'ajaxRequestErrorDiv', 'CoreAdminHome/templates/header.tpl', 37, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', 'CoreAdminHome/templates/header.tpl', 5, false),array('function', 'loadJavascriptTranslations', 'CoreAdminHome/templates/header.tpl', 10, false),array('function', 'ajaxRequestErrorDiv', 'CoreAdminHome/templates/header.tpl', 39, false),)), $this); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,6 +43,8 @@ unset($_smarty_tpl_vars);
  ?>
 <div id="root">
 <?php if (! isset ( $this->_tpl_vars['showTopMenu'] ) || $this->_tpl_vars['showTopMenu']): ?>
+<?php $this->assign('showSitesSelection', false); ?>
+<?php $this->assign('showPeriodSelection', false); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "CoreHome/templates/top_bar.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -92,7 +94,7 @@ unset($_smarty_tpl_vars);
 	<?php echo ((is_array($_tmp='General_ConfigFileIsNotWritable')) ? $this->_run_mod_handler('translate', true, $_tmp, "(config/config.ini.php)", "<br/>") : smarty_modifier_translate($_tmp, "(config/config.ini.php)", "<br/>")); ?>
 
 </div>
-<?php elseif (strpos ( $this->_tpl_vars['url'] , 'updated=1' )): ?>	
+<?php elseif (preg_match ( '/updated=[1-9]/' , $this->_tpl_vars['url'] )): ?>
 <div class="ajaxSuccess" style="display:inline-block">
 	<?php echo ((is_array($_tmp='General_YourChangesHaveBeenSaved')) ? $this->_run_mod_handler('translate', true, $_tmp) : smarty_modifier_translate($_tmp)); ?>
 

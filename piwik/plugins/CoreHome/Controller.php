@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7068 2012-09-27 04:45:55Z capedfuzz $
+ * @version $Id: Controller.php 7747 2013-01-13 11:12:13Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CoreHome
@@ -46,6 +46,9 @@ class Piwik_CoreHome_Controller extends Piwik_Controller
 	{
 		$controllerName = Piwik_Common::getRequestVar('moduleToLoad');
 		$actionName = Piwik_Common::getRequestVar('actionToLoad', 'index');
+		if($actionName == 'showInContext') {
+			throw new Exception("Preventing infinite recursion...");
+		}
 		$view = $this->getDefaultIndexView();
 		$view->content = Piwik_FrontController::getInstance()->fetchDispatch( $controllerName, $actionName );
 		echo $view->render();	
@@ -178,5 +181,37 @@ class Piwik_CoreHome_Controller extends Piwik_Controller
 		{
 			return new Piwik_CoreHome_DataTableRowAction_RowEvolution($this->idSite, $this->date, $graphType);
 		}
+	}
+	
+	/**
+	 * Forces a check for updates and re-renders the header message.
+	 * 
+	 * This will check piwik.org at most once per 10s.
+	 */
+	public function checkForUpdates()
+	{
+		Piwik::checkUserHasSomeAdminAccess();
+		$this->checkTokenInUrl();
+		
+		// perform check (but only once every 10s)
+		Piwik_UpdateCheck::check($force = false, Piwik_UpdateCheck::UI_CLICK_CHECK_INTERVAL);
+		
+		$view = Piwik_View::factory('header_message');
+		$this->setGeneralVariablesView($view);
+		echo $view->render();
+	}
+	
+	/**
+	 * Renders and echo's the in-app donate form w/ slider.
+	 */
+	public function getDonateForm()
+	{
+		$view = Piwik_View::factory('donate');
+		if (Piwik_Common::getRequestVar('widget', false)
+			&& Piwik::isUserIsSuperUser())
+		{
+			$view->footerMessage = Piwik_Translate('CoreHome_OnlyForAdmin');
+		}
+		echo $view->render();
 	}
 }

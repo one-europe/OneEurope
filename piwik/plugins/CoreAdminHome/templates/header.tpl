@@ -21,6 +21,8 @@
 {include file="CoreHome/templates/iframe_buster_body.tpl"}
 <div id="root">
 {if !isset($showTopMenu) || $showTopMenu}
+{assign var=showSitesSelection value=false}
+{assign var=showPeriodSelection value=false}
 {include file="CoreHome/templates/top_bar.tpl"}
 {/if}
 
@@ -44,7 +46,7 @@
 <div class="ajaxSuccess" style="display:inline-block">
 	{'General_ConfigFileIsNotWritable'|translate:"(config/config.ini.php)":"<br/>"}
 </div>
-{elseif strpos($url, 'updated=1')}	
+{elseif preg_match('/updated=[1-9]/', $url)}
 <div class="ajaxSuccess" style="display:inline-block">
 	{'General_YourChangesHaveBeenSaved'|translate}
 </div>

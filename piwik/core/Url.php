@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Url.php 7314 2012-10-26 02:00:20Z matt $
+ * @version $Id: Url.php 7702 2012-12-30 06:16:57Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -159,7 +159,8 @@ class Piwik_Url
 		if($assume_secure_protocol
 			|| (isset($_SERVER['HTTPS'])
 				&& ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] === true))
-			)
+			|| (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+		)
 		{
 			return 'https';
 		}
@@ -185,7 +186,7 @@ class Piwik_Url
 		
 		if ($host === false)
 		{
-			$host = $_SERVER['HTTP_HOST'];
+			$host = @$_SERVER['HTTP_HOST'];
 			if (empty($host)) // if no current host, assume valid
 			{
 				return true;

@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7405 2012-11-08 11:02:14Z EZdesign $
+ * @version $Id: API.php 7477 2012-11-15 10:24:31Z EZdesign $
  * 
  * @category Piwik_Plugins
  * @package Piwik_Transitions
@@ -143,8 +143,18 @@ class Piwik_Transitions_API
 		switch ($actionType)
 		{
 			case 'url':
+				$originalActionName = $actionName;
 				$actionName = Piwik_Common::unsanitizeInputValue($actionName);
-				return $actionsPlugin->getIdActionFromSegment($actionName, 'idaction_url');
+				$id = $actionsPlugin->getIdActionFromSegment($actionName, 'idaction_url');
+				
+				if ($id < 0)
+				{
+					// an example where this is needed is urls containing < or >
+					$actionName = $originalActionName;
+					$id = $actionsPlugin->getIdActionFromSegment($actionName, 'idaction_url');
+				}
+				
+				return $id;
 				
 			case 'title':
 				$id = $actionsPlugin->getIdActionFromSegment($actionName, 'idaction_name');

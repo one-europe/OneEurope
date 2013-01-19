@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: CoreAdminHome.php 7334 2012-10-30 20:57:37Z matt $
+ * @version $Id: CoreAdminHome.php 7747 2013-01-13 11:12:13Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CoreAdminHome
@@ -32,6 +32,7 @@ class Piwik_CoreAdminHome extends Piwik_Plugin
 			'AssetManager.getCssFiles' => 'getCssFiles',
 			'AssetManager.getJsFiles' => 'getJsFiles',
 			'AdminMenu.add' => 'addMenu',
+			'TopMenu.add' => 'addTopMenu',
 			'TaskScheduler.getScheduledTasks' => 'getScheduledTasks',
 		);
 	}
@@ -71,6 +72,7 @@ class Piwik_CoreAdminHome extends Piwik_Plugin
 		$cssFiles[] = "plugins/CoreAdminHome/templates/menu.css";	
 		$cssFiles[] = "themes/default/common.css";
 		$cssFiles[] = "plugins/CoreAdminHome/templates/styles.css";
+		$cssFiles[] = "plugins/CoreHome/templates/donate.css";
 	}
 
 	/**
@@ -84,9 +86,11 @@ class Piwik_CoreAdminHome extends Piwik_Plugin
 		$jsFiles[] = "libs/jquery/jquery-ui.js";
 		$jsFiles[] = "libs/javascript/sprintf.js";
 		$jsFiles[] = "themes/default/common.js";
+		$jsFiles[] = "themes/default/ajaxHelper.js";
 		$jsFiles[] = "libs/jquery/jquery.history.js";
 		$jsFiles[] = "plugins/CoreHome/templates/broadcast.js";
 		$jsFiles[] = "plugins/CoreAdminHome/templates/generalSettings.js";
+		$jsFiles[] = "plugins/CoreHome/templates/donate.js";
 	}
 	
 	function addMenu()
@@ -97,6 +101,17 @@ class Piwik_CoreAdminHome extends Piwik_Plugin
 							$order = 6);
 	}
 	
+	function addTopMenu()
+	{
+		$donateLinkTitle = Piwik_Translate('CoreHome_OnlyForAdmin');
+		Piwik_AddTopMenu('General_Donate',
+							'<a href="http://piwik.org/donate/" target="_blank" title="'.$donateLinkTitle.'">'
+								.Piwik_Translate('General_Donate').'</a> |',
+							Piwik::isUserIsSuperUser(),
+							$order = 21,
+							$isHTML = true);
+	}
+
 	function purgeOutdatedArchives()
 	{
 		$archiveTables = Piwik::getTablesArchivesInstalled();

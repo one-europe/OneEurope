@@ -54,4 +54,7 @@ PluginsInstalled[] = "PrivacyManager"
 PluginsInstalled[] = "ImageGraph"
 PluginsInstalled[] = "DoNotTrack"
 PluginsInstalled[] = "Transitions"
+PluginsInstalled[] = "Annotations"
+PluginsInstalled[] = "MobileMessaging"
+PluginsInstalled[] = "Overlay"
 

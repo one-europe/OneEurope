@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ArchiveProcessing.php 6811 2012-08-17 14:44:17Z EZdesign $
+ * @version $Id: ArchiveProcessing.php 7500 2012-11-21 07:23:34Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -662,7 +662,8 @@ abstract class Piwik_ArchiveProcessing
 		if(empty($plugin)
 		    || !Piwik_PluginsManager::getInstance()->isPluginActivated($plugin))
 	    {
-	        throw new Exception("Error: The report '$requestedReport' was requested but it is not available at this stage. You may also disable the related plugin to avoid this error.");
+	    	$pluginStr = empty($plugin) ? '' : "($plugin)";
+	        throw new Exception("Error: The report '$requestedReport' was requested but it is not available at this stage. You may also disable the related plugin $pluginStr to avoid this error.");
 	    }
 		return $plugin;
 	}

@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: MetadataCallbackAddMetadata.php 7144 2012-10-11 01:38:20Z capedfuzz $
+ * @version $Id: MetadataCallbackAddMetadata.php 7499 2012-11-21 03:56:17Z matt $
  * 
  * @category Piwik
  * @package Piwik
@@ -70,7 +70,10 @@ class Piwik_DataTable_Filter_MetadataCallbackAddMetadata extends Piwik_DataTable
 			}
 			
 			$newValue = call_user_func_array($this->functionToApply, $params);
-			$row->addMetadata($this->metadataToAdd, $newValue);
+			if($newValue !== false)
+			{
+				$row->addMetadata($this->metadataToAdd, $newValue);
+			}
 		}
 	}
 }

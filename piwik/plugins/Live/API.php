@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7264 2012-10-20 08:32:09Z matt $
+ * @version $Id: API.php 7607 2012-12-13 09:38:03Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_Live
@@ -208,8 +208,7 @@ class Piwik_Live_API
 				$customVariablesPage = array();
 				for($i = 1; $i <= Piwik_Tracker::MAX_CUSTOM_VARIABLES; $i++)
 				{
-					if(!empty($actionDetail['custom_var_k'.$i])
-						&& !empty($actionDetail['custom_var_v'.$i]))
+					if(!empty($actionDetail['custom_var_k'.$i]))
 					{
 						$cvarKey = $actionDetail['custom_var_k'.$i];
 						$cvarKey = $this->getCustomVariablePrettyKey($cvarKey);
@@ -542,6 +541,8 @@ class Piwik_Live_API
 		{
 			$toUnset[] = 'idvisitor';
 			$toUnset[] = 'location_ip';
+			$toUnset[] = 'location_latitude';
+			$toUnset[] = 'location_longitude';
 		}
 		foreach($toUnset as $keyName)
 		{

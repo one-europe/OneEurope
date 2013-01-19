@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:31:19
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:19:38
          compiled from /var/www/virtual/one/html/piwik/plugins/Live/templates/totalVisits.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', '/var/www/virtual/one/html/piwik/plugins/Live/templates/totalVisits.tpl', 6, false),)), $this); ?>

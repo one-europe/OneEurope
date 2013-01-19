@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7414 2012-11-09 06:43:19Z matt $
+ * @version $Id: Controller.php 7474 2012-11-14 21:31:35Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_Goals
@@ -108,7 +108,6 @@ class Piwik_Goals_Controller extends Piwik_Controller
 			$columns['quantity'] = Piwik_Translate('Goals_LeftInCart', Piwik_Translate('General_Quantity'));
 			$columns['avg_quantity'] = Piwik_Translate('Goals_LeftInCart', Piwik_Translate('General_AverageQuantity'));
 			unset($columns['orders']);
-			unset($columns['nb_visits']);
 			unset($columns['conversion_rate']);
 			$_GET['abandonedCarts'] = 1;
 		}

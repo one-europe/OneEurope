@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-11-09 15:26:36
+<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:53
          compiled from CoreHome/templates/datatable_cell.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'CoreHome/templates/datatable_cell.tpl', 2, false),array('function', 'logoHtml', 'CoreHome/templates/datatable_cell.tpl', 8, false),)), $this); ?>

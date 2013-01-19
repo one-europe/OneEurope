@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7354 2012-11-01 09:02:17Z matt $
+ * @version $Id: Controller.php 7683 2012-12-22 09:02:51Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -333,7 +333,10 @@ abstract class Piwik_Controller
 	{
 		$requestString = 'method='.$methodToCall.'&format=original';
 		$request = new Piwik_API_Request($requestString);
-		return $request->process();
+		$return = $request->process();
+		$columns = $return->getFirstRow()->getColumns();
+		$values = array_values($columns);
+		return $values[0];
 	}
 
 	/**
@@ -456,7 +459,7 @@ abstract class Piwik_Controller
 			
 			$this->setBasicVariablesView($view);
 		} catch(Exception $e) {
-			Piwik_ExitWithMessage($e->getMessage());
+			Piwik_ExitWithMessage($e->getMessage(), Piwik::shouldLoggerLog() ? $e->getTraceAsString() : '');
 		}
 	}
 	
@@ -470,6 +473,7 @@ abstract class Piwik_Controller
 		$view->topMenu = Piwik_GetTopMenu();
 		$view->debugTrackVisitsInsidePiwikUI = Piwik_Config::getInstance()->Debug['track_visits_inside_piwik_ui'];
 		$view->isSuperUser = Zend_Registry::get('access')->isSuperUser();
+		$view->hasSomeAdminAccess = Piwik::isUserHasSomeAdminAccess();
 		$view->isCustomLogo = Piwik_Config::getInstance()->branding['use_custom_logo'];
 		$view->logoHeader = Piwik_API_API::getInstance()->getHeaderLogoUrl();
 		$view->logoLarge = Piwik_API_API::getInstance()->getLogoUrl();

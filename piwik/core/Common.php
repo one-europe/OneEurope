@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Common.php 7286 2012-10-23 09:22:19Z matt $
+ * @version $Id: Common.php 7710 2013-01-02 07:51:35Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -102,7 +102,8 @@ class Piwik_Common
 		{
 			return $table;
 		}
-		return str_replace($prefixTable, '', $table, $count = 1);
+		$count = 1;
+		return str_replace($prefixTable, '', $table, $count);
 	}
 
 /*
@@ -1342,7 +1343,7 @@ class Piwik_Common
 			return strtolower($country);
 		}
 
-		if(empty($lang) || strlen($lang) < 2)
+		if(empty($lang) || strlen($lang) < 2 || $lang == 'xx')
 		{
 			return 'xx';
 		}

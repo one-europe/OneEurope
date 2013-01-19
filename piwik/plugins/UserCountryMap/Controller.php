@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 6972 2012-09-11 09:08:36Z matt $
+ * @version $Id: $
  *
  * @category Piwik_Plugins
  * @package Piwik_UserCountryMap

@@ -17,6 +17,11 @@ function DataTable_RowActions_Transitions(dataTable) {
 
 DataTable_RowActions_Transitions.prototype = new DataTable_RowAction;
 
+/** Static helper method to launch transitions from anywhere */
+DataTable_RowActions_Transitions.launchForUrl = function(url) {
+	broadcast.propagateNewPopoverParameter('RowAction', 'Transitions:url:' + url);
+};
+
 DataTable_RowActions_Transitions.isPageUrlReport = function(module, action) {
 	return module == 'Actions' &&
 		(action == 'getPageUrls' || action == 'getEntryPageUrls' || action == 'getExitPageUrls' || action == 'getPageUrlsFollowingSiteSearch');
@@ -75,6 +80,8 @@ DataTable_RowActions_Registry.register({
 
 	dataTableIcon: 'plugins/Transitions/templates/transitions_icon.png',
 	dataTableIconHover: 'plugins/Transitions/templates/transitions_icon_hover.png',
+	
+	order: 20,
 
 	dataTableIconTooltip: [
 		_pk_translate('CoreHome_TransitionsRowActionTooltipTitle_js'),
@@ -618,7 +625,12 @@ Piwik_Transitions.prototype.renderClosedGroup = function(groupName, side, onlyBg
 
 /** Reload the entire popover for a different URL */
 Piwik_Transitions.prototype.reloadPopover = function(url) {
-	this.rowAction.openPopover(this.actionType + ':' + url);
+	if (this.rowAction) {
+		this.rowAction.openPopover(this.actionType + ':' + url);
+	} else {
+		this.reset(this.actionType, url);
+		this.showPopover();
+	}
 };
 
 /** Redraw the left or right sides with a different group opened */
@@ -1377,64 +1389,70 @@ Piwik_Transitions_Ajax.prototype.loadTotalNbPageviews = function(callback) {
 };
 
 Piwik_Transitions_Ajax.prototype.callTransitionsController = function(action, callback) {
-	piwikHelper.queueAjaxRequest($.post('index.php', {
-		module: 'Transitions',
-		action: action,
-		date: piwik.currentDateString,
-		idSite: piwik.idSite,
-		period: piwik.period
-	}, callback));
+    var ajaxRequest = new ajaxHelper();
+    ajaxRequest.addParams({
+        module: 'Transitions',
+        action: action
+    }, 'get');
+    ajaxRequest.setCallback(callback);
+    ajaxRequest.setFormat('html');
+    ajaxRequest.send(false);
 };
 
 Piwik_Transitions_Ajax.prototype.callApi = function(method, params, callback) {
 	var self = this;
 
 	params.format = 'JSON';
-	
-	piwikHelper.ajaxCallApi(method, params, function(result) {
-        if (typeof result.result != 'undefined' && result.result == 'error')
-        {
-            var errorName = result.message;
-            var showError = function() {
-                var errorTitle, errorMessage, errorBack;
-                if (typeof Piwik_Transitions_Translations[errorName] == 'undefined') {
-                    errorTitle = 'Exception';
-                    errorMessage = errorName;
-                    errorBack = '<<<';
-                } else {
-                    errorTitle = Piwik_Transitions_Translations[errorName];
-                    errorMessage = Piwik_Transitions_Translations[errorName + 'Details'];
-                    errorBack = Piwik_Transitions_Translations[errorName + 'Back'];
-                }
+	params.module = 'API';
+    params.method = method;
 
-                if (typeof params.actionName != 'undefined') {
-                    var url = params.actionName;
-                    url = piwikHelper.addBreakpointsToUrl(url);
-                    errorTitle = errorTitle.replace(/%s/, '<span>' + url + '</span>');
-                }
-
-                errorMessage = errorMessage.replace(/%s/g, '<br />');
-                Piwik_Popover.showError(errorTitle, errorMessage, errorBack);
-            };
-
-            if (typeof Piwik_Transitions_Translations == 'undefined') {
-                self.callApi('Transitions.getTranslations', {}, function(response) {
-                    if (typeof response[0] == 'object') {
-                        Piwik_Transitions_Translations = response[0];
+    var ajaxRequest = new ajaxHelper();
+    ajaxRequest.addParams(params, 'get');
+    ajaxRequest.setCallback(
+        function (result) {
+            if (typeof result.result != 'undefined' && result.result == 'error') {
+                var errorName = result.message;
+                var showError = function () {
+                    var errorTitle, errorMessage, errorBack;
+                    if (typeof Piwik_Transitions_Translations[errorName] == 'undefined') {
+                        errorTitle = 'Exception';
+                        errorMessage = errorName;
+                        errorBack = '<<<';
                     } else {
-                        Piwik_Transitions_Translations = {};
+                        errorTitle = Piwik_Transitions_Translations[errorName];
+                        errorMessage = Piwik_Transitions_Translations[errorName + 'Details'];
+                        errorBack = Piwik_Transitions_Translations[errorName + 'Back'];
                     }
+
+                    if (typeof params.actionName != 'undefined') {
+                        var url = params.actionName;
+                        url = piwikHelper.addBreakpointsToUrl(url);
+                        errorTitle = errorTitle.replace(/%s/, '<span>' + url + '</span>');
+                    }
+
+                    errorMessage = errorMessage.replace(/%s/g, '<br />');
+                    Piwik_Popover.showError(errorTitle, errorMessage, errorBack);
+                };
+
+                if (typeof Piwik_Transitions_Translations == 'undefined') {
+                    self.callApi('Transitions.getTranslations', {}, function (response) {
+                        if (typeof response[0] == 'object') {
+                            Piwik_Transitions_Translations = response[0];
+                        } else {
+                            Piwik_Transitions_Translations = {};
+                        }
+                        showError();
+                    });
+                } else {
                     showError();
-                });
-            } else {
-                showError();
+                }
+            }
+            else {
+                callback(result);
             }
         }
-        else
-        {
-            callback(result);
-        }
-	});
+    );
+    ajaxRequest.send(false);
 };
 
 

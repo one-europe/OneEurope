@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7238 2012-10-19 16:49:18Z capedfuzz $
+ * @version $Id: Controller.php 7500 2012-11-21 07:23:34Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_VisitsSummary
@@ -95,7 +95,8 @@ class Piwik_VisitsSummary_Controller extends Piwik_Controller
 							// by a method that already calls the API with some generic filters applied
 							"&disable_generic_filters=1";
 		$request = new Piwik_API_Request($requestString);
-		return $request->process();
+		$result = $request->process();
+		return empty($result) ? new Piwik_DataTable() : $result;
 	}
 
 	static public function getVisits()

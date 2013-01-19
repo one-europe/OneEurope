@@ -5,7 +5,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7413 2012-11-09 05:32:55Z matt $
+ * @version $Id: API.php 7699 2012-12-24 05:25:32Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_API
@@ -558,6 +558,15 @@ class Piwik_API_API
 				// set metric documentation to default if it's not set 
 				$availableReport['metricsDocumentation'] = $this->getDefaultMetricsDocumentation();
 			}
+			
+			// if hide/show columns specified, hide/show metrics & docs
+			$availableReport['metrics'] = $this->hideShowMetrics($availableReport['metrics']);
+			$availableReport['processedMetrics'] = $this->hideShowMetrics($availableReport['processedMetrics']);
+			if (isset($availableReport['metricsDocumentation']))
+			{
+				$availableReport['metricsDocumentation'] =
+					$this->hideShowMetrics($availableReport['metricsDocumentation']);
+			}
 		}
 		
 		// Some plugins need to add custom metrics after all plugins hooked in
@@ -634,7 +643,7 @@ class Piwik_API_API
 			}
 		}
 		
-		return $availableReports;
+		return array_values($availableReports); // make sure array has contiguous key values
 	}
 	
 	
@@ -677,7 +686,7 @@ class Piwik_API_API
 
 	public function getProcessedReport( $idSite, $period, $date, $apiModule, $apiAction, $segment = false,
 										$apiParameters = false, $idGoal = false, $language = false,
-										$showTimer = true, $hideMetricsDoc = false, $idSubtable = false)
+										$showTimer = true, $hideMetricsDoc = false, $idSubtable = false, $showRawMetrics = false)
     {
     	$timer = new Piwik_Timer();
     	if($apiParameters === false)
@@ -720,7 +729,7 @@ class Piwik_API_API
         	throw new Exception("API returned an error: ".$e->getMessage()."\n");
         }
 
-    	list($newReport, $columns, $rowsMetadata) = $this->handleTableReport($idSite, $dataTable, $reportMetadata, isset($reportMetadata['dimension']));
+    	list($newReport, $columns, $rowsMetadata) = $this->handleTableReport($idSite, $dataTable, $reportMetadata,  isset($reportMetadata['dimension']), $showRawMetrics);
     	foreach($columns as $columnId => &$name)
     	{
     		$name = ucfirst($name);
@@ -762,10 +771,9 @@ class Piwik_API_API
 	 * @param boolean $hasDimension
 	 * @return array Piwik_DataTable_Simple|Piwik_DataTable_Array $newReport with human readable format & array $columns list of translated column names & Piwik_DataTable_Simple|Piwik_DataTable_Array $rowsMetadata
 	**/
-    private function handleTableReport($idSite, $dataTable, &$reportMetadata, $hasDimension)
+    private function handleTableReport($idSite, $dataTable, &$reportMetadata, $hasDimension, $showRawMetrics = false)
     {
     	$columns = $reportMetadata['metrics'];
-    	$columns = $this->hideShowMetrics($columns);
     	
 		if($hasDimension)
 		{
@@ -808,6 +816,8 @@ class Piwik_API_API
 			}
 		}
 
+		$columns = $this->hideShowMetrics($columns);
+    	
 		// $dataTable is an instance of Piwik_DataTable_Array when multiple periods requested
 		if ($dataTable instanceof Piwik_DataTable_Array)
 		{
@@ -824,7 +834,7 @@ class Piwik_API_API
 			// Process each Piwik_DataTable_Simple entry
 			foreach($dataTable->getArray() as $label => $simpleDataTable)
 			{
-				list($enhancedSimpleDataTable, $rowMetadata) = $this->handleSimpleDataTable($idSite, $simpleDataTable, $columns, $hasDimension);
+				list($enhancedSimpleDataTable, $rowMetadata) = $this->handleSimpleDataTable($idSite, $simpleDataTable, $columns, $hasDimension, $showRawMetrics);
 
 				$period = $dataTableMetadata[$label]['period']->getLocalizedLongString();
 				$newReport->addTable($enhancedSimpleDataTable, $period);
@@ -833,7 +843,7 @@ class Piwik_API_API
 		}
 		else
 		{
-			list($newReport, $rowsMetadata) = $this->handleSimpleDataTable($idSite, $dataTable, $columns, $hasDimension);
+			list($newReport, $rowsMetadata) = $this->handleSimpleDataTable($idSite, $dataTable, $columns, $hasDimension, $showRawMetrics);
 		}
 
     	return array(
@@ -853,6 +863,11 @@ class Piwik_API_API
      */
     private function hideShowMetrics( $columns )
     {
+    	if (!is_array($columns))
+    	{
+    		return $columns;
+    	}
+    	
     	// remove columns if hideColumns query parameters exist
     	$columnsToRemove = Piwik_Common::getRequestVar('hideColumns', '');
     	if ($columnsToRemove != '')
@@ -873,6 +888,8 @@ class Piwik_API_API
     	if ($columnsToKeep != '')
     	{
     		$columnsToKeep = explode(',', $columnsToKeep);
+			$columnsToKeep[] = 'label';
+			
     		foreach ($columns as $name => $ignore)
     		{
     			// if the current column should not be kept, remove it
@@ -899,9 +916,11 @@ class Piwik_API_API
 	 * @param Piwik_DataTable_Simple $simpleDataTable
 	 * @param array $metadataColumns
 	 * @param boolean $hasDimension
+	 * @param bool $returnRawMetrics If set to true, the original metrics will be returned
+	 *
 	 * @return array Piwik_DataTable $enhancedDataTable filtered metrics with human readable format & Piwik_DataTable_Simple $rowsMetadata
 	 */
-	private function handleSimpleDataTable($idSite, $simpleDataTable, $metadataColumns, $hasDimension)
+	private function handleSimpleDataTable($idSite, $simpleDataTable, $metadataColumns, $hasDimension, $returnRawMetrics = false)
 	{
 		// new DataTable to store metadata
 		$rowsMetadata = new Piwik_DataTable();
@@ -933,7 +952,6 @@ class Piwik_API_API
 		{
 			$enhancedRow = new Piwik_DataTable_Row();
 			$enhancedDataTable->addRow($enhancedRow);
-
 			$rowMetrics = $row->getColumns();
 			foreach($rowMetrics as $columnName => $columnValue)
 			{
@@ -941,8 +959,13 @@ class Piwik_API_API
 				if(isset($metadataColumns[$columnName]))
 				{
 					// generate 'human readable' metric values
-					$prettyValue = Piwik::getPrettyValue($idSite, $columnName, $columnValue, false, false);
+					$prettyValue = Piwik::getPrettyValue($idSite, $columnName, $columnValue, $htmlAllowed = false, $timeAsSentence = false);
 					$enhancedRow->addColumn($columnName, $prettyValue);
+				}
+				// For example the Maps Widget requires the raw metrics to do advanced datavis
+				elseif($returnRawMetrics)
+				{
+					$enhancedRow->addColumn($columnName, $columnValue);
 				}
 			}
 

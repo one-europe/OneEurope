@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7279 2012-10-22 04:29:38Z capedfuzz $
+ * @version $Id: Controller.php 7762 2013-01-15 21:40:53Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_Login
@@ -495,7 +495,13 @@ class Piwik_Login_Controller extends Piwik_Controller
 	public function logout()
 	{
 		self::clearSession();
-		Piwik::redirectToModule('CoreHome');
+
+		$logoutUrl = @Piwik_Config::getInstance()->General['login_logout_url'];
+		if(empty($logoutUrl)) {
+			Piwik::redirectToModule('CoreHome');
+		} else {
+			Piwik_Url::redirectToUrl($logoutUrl);
+		}
 	}
 
 	/**

@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7414 2012-11-09 06:43:19Z matt $
+ * @version $Id: Controller.php 7609 2012-12-13 10:49:29Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_Proxy
@@ -139,7 +139,11 @@ class Piwik_Proxy_Controller extends Piwik_Controller
 		{
 			Piwik::checkUserHasSomeViewAccess();
 		}
-		
+		if(!Piwik_Common::isLookLikeUrl($url))
+		{
+			die('Please check the &url= parameter: it should to be a valid URL');
+		}
+		@header('Content-Type: text/html; charset=utf-8');
 		echo '<html><head><meta http-equiv="refresh" content="0;url=' . $url . '" /></head></html>';
 		
 		exit;

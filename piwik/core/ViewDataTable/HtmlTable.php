@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: HtmlTable.php 7036 2012-09-21 20:37:53Z capedfuzz $
+ * @version $Id: HtmlTable.php 7491 2012-11-20 04:05:14Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -189,7 +189,8 @@ class Piwik_ViewDataTable_HtmlTable extends Piwik_ViewDataTable
 	protected function getRequestString()
 	{
 		$requestString = parent::getRequestString();
-		if($this->recursiveDataTableLoad)
+		if ($this->recursiveDataTableLoad
+			&& !Piwik_Common::getRequestVar('flat', false))
 		{
 			$requestString .= '&expanded=1';
 		}
@@ -233,4 +234,5 @@ class Piwik_ViewDataTable_HtmlTable extends Piwik_ViewDataTable
 	{
 		$this->variablesDefault['disable_row_actions'] = true;
 	}
+	
 }

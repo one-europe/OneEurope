@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Php.php 7290 2012-10-23 22:19:55Z capedfuzz $
+ * @version $Id: Php.php 7576 2012-12-05 04:33:47Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -32,6 +32,46 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
 	private $geoIpCache = array();
 	
 	/**
+	 * Possible filenames for each type of GeoIP database. When looking for a database
+	 * file in the 'misc' subdirectory, files with these names will be looked for.
+	 * 
+	 * This variable is an array mapping either the 'loc', 'isp' or 'org' strings with
+	 * an array of filenames.
+	 * 
+	 * By default, this will be set to Piwik_UserCountry_LocationProvider_GeoIp_Php::$dbNames.
+	 * 
+	 * @var array
+	 */
+	private $customDbNames;
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param array|false $customDbNames The possible filenames for each type of GeoIP database.
+	 *                                   eg array(
+	 *                                       'loc' => array('GeoLiteCity.dat'),
+	 *                                       'isp' => array('GeoIP.dat', 'GeoIPISP.dat')
+	 *                                       'org' => array('GeoIPOrg.dat')
+	 *                                   )
+	 *                                   If a key is missing (or the parameter not supplied), then the
+	 *                                   default database names are used.
+	 */
+	public function __construct( $customDbNames = false )
+	{
+		$this->customDbNames = parent::$dbNames;
+		if ($customDbNames !== false)
+		{
+			foreach ($this->customDbNames as $key => $names)
+			{
+				if (isset($customDbNames[$key]))
+				{
+					$this->customDbNames[$key] = $customDbNames[$key];
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Closes all open geoip instances.
 	 */
 	public function __destruct()
@@ -57,7 +97,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
 	 */
 	public function getLocation( $info )
 	{
-		$ip = $info['ip'];
+		$ip = $this->getIpFromInfo($info);
 		
 		$result = array();
 		
@@ -140,7 +180,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
 	 */
 	public function isAvailable()
 	{
-		$path = self::getPathToGeoIpDatabase(parent::$dbNames['loc']);
+		$path = self::getPathToGeoIpDatabase($this->customDbNames['loc']);
 		return $path !== false;
 	}
 	
@@ -253,10 +293,38 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
 		$installDocs = '<em><a target="_blank" href="http://piwik.org/faq/how-to/#faq_163">'
 	  		  . Piwik_Translate('UserCountry_HowToInstallGeoIPDatabases')
 	  		  . '</em></a>';
+	  	
+		$availableDatabaseTypes = array();
+		if (self::getPathToGeoIpDatabase(array('GeoIPCity.dat', 'GeoLiteCity.dat')) !== false)
+		{
+			$availableDatabaseTypes[] = Piwik_Translate('UserCountry_City');
+		}
+		if (self::getPathToGeoIpDatabase(array('GeoIPRegion.dat')) !== false)
+		{
+			$availableDatabaseTypes[] = Piwik_Translate('UserCountry_Region');
+		}
+		if (self::getPathToGeoIpDatabase(array('GeoIPCountry.dat')) !== false)
+		{
+			$availableDatabaseTypes[] = Piwik_Translate('UserCountry_Country');
+		}
+		if (self::getPathToGeoIpDatabase(array('GeoIPISP.dat')) !== false)
+		{
+			$availableDatabaseTypes[] = 'ISP';
+		}
+		if (self::getPathToGeoIpDatabase(array('GeoIPOrg.dat')) !== false)
+		{
+			$availableDatabaseTypes[] = Piwik_Translate('UserCountry_Organization');
+		}
+		
+		$extraMessage = '<strong><em>'.Piwik_Translate('General_Note').'</em></strong>:&nbsp;'
+			. Piwik_Translate('UserCountry_GeoIPImplHasAccessTo').':&nbsp;<strong><em>'
+			. implode(', ', $availableDatabaseTypes).'</em></strong>.';
+	  	
 		return array('id' => self::ID,
 					  'title' => self::TITLE,
 					  'description' => $desc,
 					  'install_docs' => $installDocs,
+					  'extra_message' => $extraMessage,
 					  'order' => 2);
 	}
 	
@@ -275,7 +343,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
 			parent::getRegionNames();
 			require_once PIWIK_INCLUDE_PATH . '/libs/MaxMindGeoIP/geoipcity.inc';
 			
-			$pathToDb = self::getPathToGeoIpDatabase(parent::$dbNames[$key]);
+			$pathToDb = self::getPathToGeoIpDatabase($this->customDbNames[$key]);
 			if ($pathToDb !== false)
 			{
 				$this->geoIpCache[$key] = geoip_open($pathToDb, GEOIP_STANDARD); // TODO support shared memory

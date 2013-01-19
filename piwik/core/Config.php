@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Config.php 6791 2012-08-16 13:59:34Z EZdesign $
+ * @version $Id: Config.php 7659 2012-12-19 12:38:15Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -114,6 +114,8 @@ class Piwik_Config
 		if(is_null($pathGlobal))
 		{
 			$this->configCache['Debug'] = $this->configGlobal['Debug'];
+			$this->configCache['branding'] = $this->configGlobal['branding'];
+			$this->configCache['mail'] = $this->configGlobal['mail'];
 			$this->configCache['General'] = $this->configGlobal['General'];
 			$this->configCache['Segments'] = $this->configGlobal['Segments'];
 			$this->configCache['Tracker'] = $this->configGlobal['Tracker'];

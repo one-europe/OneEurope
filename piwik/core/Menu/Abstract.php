@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Abstract.php 6828 2012-08-18 22:48:37Z capedfuzz $
+ * @version $Id: Abstract.php 7761 2013-01-15 21:39:22Z matt $
  *
  * @category Piwik
  * @package Piwik_Menu
@@ -55,6 +55,13 @@ abstract class Piwik_Menu_Abstract
 	{
 		if($displayedForCurrentUser)
 		{
+			// make sure the idSite value used is numeric (hack-y fix for #3426)
+			if (!is_numeric(Piwik_Common::getRequestVar('idSite', false)))
+			{
+				$idSites = Piwik_SitesManager_API::getInstance()->getSitesIdWithAtLeastViewAccess();
+				$url['idSite'] = reset($idSites);
+			}
+			
 			$this->menuEntries[] = array(
 				$menuName,
 				$subMenuName,

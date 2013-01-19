@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 6485 2012-06-20 03:57:35Z capedfuzz $
+ * @version $Id: Controller.php 7611 2012-12-14 08:37:47Z peterb $
  *
  * @category Piwik_Plugins
  * @package Piwik_PrivacyManager
@@ -109,8 +109,6 @@ class Piwik_PrivacyManager_Controller extends Piwik_Controller_Admin
 
 		if (Piwik::isUserIsSuperUser())
 		{
-			$deleteLogs = array();
-
 			$view->deleteData = $this->getDeleteDataInfo();
 			$view->anonymizeIP = $this->getAnonymizeIPInfo();
 			$view->dntSupport = $this->isDntSupport();
@@ -210,7 +208,9 @@ class Piwik_PrivacyManager_Controller extends Piwik_Controller_Admin
 					}
 					else // if just deleting rows
 					{
-						$totalAfterPurge -= ($tableTotalBytes / $status['Rows']) * $deletedDataSummary[$tableName];
+						if($status['Rows'] > 0) {
+							$totalAfterPurge -= ($tableTotalBytes / $status['Rows']) * $deletedDataSummary[$tableName];
+						}
 					}
 				}
 			}

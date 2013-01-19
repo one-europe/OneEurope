@@ -32,6 +32,8 @@
 					<a class="addthis_button_facebook_send clear"></a>
 					<a class="addthis_button_pinterest_pinit"></a>
 					<a class="addthis_button_print"></a>
+					<a class="addthis_button_reddit"></a>
+					<a class="addthis_button_stumbleupon"></a>
 
 				</div>
 			</section>
@@ -75,8 +77,8 @@
 			<section class="">
 				<div class="h"><span>Info</span></div>
 				<span>
-					<?php if ($post->info->url) { ?><a href="<?php echo $post->info->url; ?>" title="visit website">› Official website of <?php echo $post->title; ?></a><br/><?php } ?>
-					<?php if ($post->info->twitter) { ?><a href="http://twitter.com/<?php echo $post->info->twitter; ?>" title="<?php echo $post->title ?> on Twitter">› <?php echo $post->title ?> on Twitter</a><?php } ?>	
+					<?php if ($post->info->url) { ?><a href="<?php echo $post->info->url; ?>" title="visit website" target="_blank">› Official website of <?php echo $post->title; ?></a><br/><?php } ?>
+					<?php if ($post->info->twitter) { ?><a href="http://twitter.com/<?php echo $post->info->twitter; ?>" title="<?php echo $post->title ?> on Twitter" target="_blank">› <?php echo $post->title ?> on Twitter</a><?php } ?>	
 				</span>
 			</section>
 			<?php } ?>

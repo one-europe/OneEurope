@@ -90,7 +90,9 @@ class Archiving
 	 * It will be overwritten by the number of days since last archiving ran until completion.
 	 */
 	const DEFAULT_DATE_LAST = 52;
-	
+	// Since weeks are not used in yearly archives, we make sure that all possible weeks are processed
+	const DEFAULT_DATE_LAST_WEEKS = 520;
+
 	protected $timeLastCompleted = false;
 	protected $requestPrepend = '&trigger=archivephp';
 	protected $errors = array();
@@ -108,12 +110,12 @@ class Archiving
 		
 		$this->logSection("INIT");
 		$this->log("Querying Piwik API at: {$this->piwikUrl}");		
-		$this->log("Running as Super User: " . $this->login);
+		$this->log("Running Piwik ". Piwik_Version::VERSION ." as Super User: " . $this->login);
 		
 		$this->acceptInvalidSSLCertificate = $this->isParameterSet("accept-invalid-ssl-certificate");
 		
 		// Test the specified piwik URL is valid
-		$response = $this->request("?module=API&method=API.getDefaultMetricTranslations&format=php");
+		$response = $this->request("?module=API&method=API.getDefaultMetricTranslations&format=original&serialize=1");
 		$responseUnserialized = @unserialize($response);
 		if($response === false
 			|| !is_array($responseUnserialized))
@@ -155,6 +157,10 @@ class Archiving
 		if(empty($lastTimestampWebsiteProcessed))
 		{
 			$dateLast = self::DEFAULT_DATE_LAST;
+			if($period == 'week')
+			{
+				$dateLast = self::DEFAULT_DATE_LAST_WEEKS;
+			}
 		}
 		else
 		{
@@ -227,7 +233,8 @@ class Archiving
 
 		    // (*) If the website is archived because it is a new day in its timezone
 		    // We make sure all periods are archived, even if there is 0 visit today
-		    if(in_array($idsite, $this->websiteDayHasFinishedSinceLastRun))
+			$dayHasEndedMustReprocess = in_array($idsite, $this->websiteDayHasFinishedSinceLastRun);
+		    if($dayHasEndedMustReprocess)
 		    {
 		    	$shouldArchivePeriods = true;
 		    }
@@ -239,10 +246,12 @@ class Archiving
 		    {
 		    	$shouldArchivePeriods = true;
 		    }
-		    
+
 		    // Test if we should process this website at all
 		    $elapsedSinceLastArchiving = time() - $lastTimestampWebsiteProcessedDay;
-		    if( $elapsedSinceLastArchiving < $this->todayArchiveTimeToLive)
+		    if(    !$websiteIsOldDataInvalidate // Invalidate old website forces the archiving for this site
+			    && !$dayHasEndedMustReprocess   // Also reprocess when day has ended since last run
+			    && $elapsedSinceLastArchiving < $this->todayArchiveTimeToLive)
 		    {
 		    	$this->log("Skipped website id $idsite, already processed today's report in recent run, "
 					.Piwik::getPrettyTimeFromSeconds($elapsedSinceLastArchiving, true, $isHtml = false)
@@ -259,10 +268,10 @@ class Archiving
 		    $url = $this->getVisitsRequestUrl($idsite, "day",
 			    				// when some data was purged from this website
 			    				// we make sure we query all previous days/weeks/months
-		    				$websiteIsOldDataInvalidate
+		    				($websiteIsOldDataInvalidate
 								// when --force-all-websites option, 
 								// also forces to archive last52 days to be safe
-							|| $this->shouldArchiveAllWebsites 
+							|| $this->shouldArchiveAllWebsites)
 								? false 
 								: $lastTimestampWebsiteProcessedDay
 			);
@@ -321,10 +330,9 @@ class Archiving
 					
 					// Remove this website from the list of websites to be invalidated
 					// since it's now just been re-processing the reports, job is done!
-					if( in_array($idsite, $this->idSitesInvalidatedOldReports ) )
+					if( $websiteIsOldDataInvalidate )
 					{
 						$websiteIdsInvalidated = Piwik_CoreAdminHome_API::getWebsiteIdsToInvalidate();
-						
 						if(count($websiteIdsInvalidated))
 						{
 							$found = array_search($idsite, $websiteIdsInvalidated);
@@ -337,21 +345,18 @@ class Archiving
 						}
 					}
 				}
-				$archivedPeriodsArchivesWebsite++;
 			}
-			else
-			{
-				$skippedPeriodsArchivesWebsite++;
-			}
+			$archivedPeriodsArchivesWebsite++;
+
 			$requestsWebsite = $this->requests - $requestsBefore;
-			
 			$debug = $this->shouldArchiveAllWebsites ? ", last days = $visitsAllDays visits" : "";
 			Piwik::log("Archived website id = $idsite, today = $visitsToday visits"
-							.$debug.", $requestsWebsite API requests, "
-							. $timerWebsite->__toString() 
-							." [" . ($websitesWithVisitsSinceLastRun+$skipped) . "/" 
-							. count($this->websites) 
-							. " done]" );
+				.$debug.", $requestsWebsite API requests, "
+				. $timerWebsite->__toString()
+				." [" . ($websitesWithVisitsSinceLastRun+$skipped) . "/"
+				. count($this->websites)
+				. " done]" );
+
 		}
 		
 		$this->log("Done archiving!");

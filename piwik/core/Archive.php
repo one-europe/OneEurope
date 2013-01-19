@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Archive.php 7190 2012-10-15 07:41:12Z matt $
+ * @version $Id: Archive.php 7719 2013-01-03 00:14:21Z matt $
  * 
  * @category Piwik
  * @package Piwik
@@ -156,6 +156,24 @@ abstract class Piwik_Archive
 				'sum_daily_nb_uniq_visitors' => Piwik_Archive::INDEX_SUM_DAILY_NB_UNIQ_VISITORS,
 	);
 	
+	/**
+	 * Metrics calculated and archived by the Actions plugin.
+	 * 
+	 * @var array
+	 */
+	public static $actionsMetrics = array(
+		'nb_pageviews',
+		'nb_uniq_pageviews',
+		'nb_downloads',
+		'nb_uniq_downloads',
+		'nb_outlinks',
+		'nb_uniq_outlinks',
+		'nb_searches',
+		'nb_keywords',
+		'nb_hits',
+		'nb_hits_following_search',
+	);
+	
 	const LABEL_ECOMMERCE_CART = 'ecommerceAbandonedCart';
 	const LABEL_ECOMMERCE_ORDER = 'ecommerceOrder';
 	
@@ -199,8 +217,9 @@ abstract class Piwik_Archive
 		}
 		
 		// idSite=1,3 or idSite=all
-		if( count($sites) > 1 
-			|| $idSite === 'all' )
+		if( $idSite === 'all'
+			|| is_array($idSite)
+			|| count($sites) > 1 )
 		{
 			$archive = new Piwik_Archive_Array_IndexedBySite($sites, $period, $strDate, $segment, $_restrictSitesToLogin);
 		}
@@ -243,7 +262,8 @@ abstract class Piwik_Archive
 		}
 		else
 		{
-			if(is_string($strDate))
+			$oDate = $strDate;
+			if(!($strDate instanceof Piwik_Date))
 			{
 				if($strDate == 'now' || $strDate == 'today')
 				{
@@ -254,10 +274,6 @@ abstract class Piwik_Archive
 					$strDate = date('Y-m-d', Piwik_Date::factory('now', $tz)->subDay(1)->getTimestamp());
 				}
 				$oDate = Piwik_Date::factory($strDate);
-			}
-			else
-			{
-				$oDate = $strDate;
 			}
 			$date = $oDate->toString();
 			$oPeriod = Piwik_Period::factory($strPeriod, $oDate);
@@ -333,7 +349,7 @@ abstract class Piwik_Archive
 	 * @param string      $segment
 	 * @param bool        $expanded
 	 * @param null        $idSubtable
-	 * @return Piwik_DataTable
+	 * @return Piwik_DataTable|Piwik_DataTable_Array
 	 */
 	static public function getDataTableFromArchive($name, $idSite, $period, $date, $segment, $expanded, $idSubtable = null )
 	{
@@ -440,10 +456,10 @@ abstract class Piwik_Archive
 	static public function isMultiplePeriod($dateString, $period)
 	{
 		return 	(preg_match('/^(last|previous){1}([0-9]*)$/D', $dateString, $regs)
-				|| Piwik_Period_Range::parseDateRange($dateString))
-				&& $period != 'range';
+			|| Piwik_Period_Range::parseDateRange($dateString))
+			&& $period != 'range';
 	}
-	
+
 	/**
 	 * Indicate if $idSiteString corresponds to multiple sites.
 	 * 

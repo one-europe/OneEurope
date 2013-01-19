@@ -4,7 +4,7 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 6612 2012-07-31 09:10:14Z matt $
+ * @version $Id: Controller.php 7754 2013-01-15 15:25:41Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_Referers
@@ -144,9 +144,17 @@ class Piwik_Referers_Controller extends Piwik_Controller
 	
 	function indexWebsites($fetch = false)
 	{
-		return Piwik_View::singleReport(
-				Piwik_Translate('Referers_Websites'),
-				$this->getWebsites(true), $fetch);
+		$view = Piwik_View::factory('Websites_SocialNetworks');
+		$view->websites = $this->getWebsites(true) ;
+		$view->socials = $this->getSocials(true);
+		if ($fetch)
+		{
+			return $view->render();
+		}
+		else
+		{
+			echo $view->render();
+		}
 	}
 	
 	function getWebsites( $fetch = false)
@@ -161,6 +169,39 @@ class Piwik_Referers_Controller extends Piwik_Controller
 		$view->setLimit(25);
 		$view->disableSubTableWhenShowGoals();
 		$view->setColumnTranslation('label', Piwik_Translate('Referers_ColumnWebsite'));
+		
+		$this->setMetricsVariablesView($view);
+		
+		return $this->renderView($view, $fetch);
+	}
+	
+	function getSocials( $fetch = false)
+	{
+		$view = Piwik_ViewDataTable::factory();
+		$view->init($this->pluginName, __FUNCTION__, 'Referers.getSocials', 'getUrlsForSocial');
+		$view->disableExcludeLowPopulation();
+		$view->setLimit(10);
+		$view->enableShowGoals();
+		$view->disableSubTableWhenShowGoals();
+		$view->setColumnTranslation('label', Piwik_Translate('Referers_ColumnSocial'));
+
+		if(empty($_REQUEST['widget'])) {
+			$view->setFooterMessage(Piwik_Translate('Referers_SocialFooterMessage'));
+		}
+		
+		$this->setMetricsVariablesView($view);
+		
+		return $this->renderView($view, $fetch);
+	}
+	
+	function getUrlsForSocial( $fetch = false )
+	{
+		$view = Piwik_ViewDataTable::factory();
+		$view->init($this->pluginName, __FUNCTION__, 'Referers.getUrlsForSocial');
+		$view->disableExcludeLowPopulation();
+		$view->setLimit(10);
+		$view->enableShowGoals();
+		$view->setColumnTranslation('label', Piwik_Translate('Referers_ColumnWebsitePage'));
 		
 		$this->setMetricsVariablesView($view);
 		
@@ -415,6 +456,7 @@ function DisplayTopKeywords($url = "")
 	}
 
 	// Display the list in HTML
+	$url = htmlspecialchars($url, ENT_QUOTES);
 	$output = "<h2>Top Keywords for <a href=\'$url\'>$url</a></h2><ul>";
 	foreach($keywords as $keyword) {
 		$output .= "<li>". $keyword[0]. "</li>";
@@ -451,6 +493,7 @@ function DisplayTopKeywords($url = "")
 			}
 		
 			// Display the list in HTML
+			$url = htmlspecialchars($url, ENT_QUOTES);
 			$output = "<h2>Top Keywords for <a href=\'$url\'>$url</a></h2><ul>";
 			foreach($keywords as $keyword) {
 				$output .= "<li>". $keyword[0]. "</li>";

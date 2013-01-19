@@ -37,6 +37,9 @@ var DataTable_RowActions_Registry = {
 				available.push(this.registry[i]);
 			}
 		}
+		available.sort(function(a, b) {
+			return b.order - a.order;
+		});
 		return available;
 	},
 
@@ -58,6 +61,8 @@ DataTable_RowActions_Registry.register({
 
 	dataTableIcon: 'themes/default/images/row_evolution.png',
 	dataTableIconHover: 'themes/default/images/row_evolution_hover.png',
+	
+	order: 50,
 
 	dataTableIconTooltip: [
 		_pk_translate('CoreHome_RowEvolutionRowActionTooltipTitle_js'),
@@ -251,6 +256,12 @@ function DataTable_RowActions_RowEvolution(dataTable) {
 	this.multiEvolutionRows = [];
 }
 
+/** Static helper method to launch row evolution from anywhere */
+DataTable_RowActions_RowEvolution.launch = function(apiMethod, label) {
+	var param = 'RowEvolution:' + apiMethod + ':0:' + label;
+	broadcast.propagateNewPopoverParameter('RowAction', param);
+};
+
 DataTable_RowActions_RowEvolution.prototype = new DataTable_RowAction;
 
 DataTable_RowActions_RowEvolution.prototype.performAction = function(label, tr, e) {
@@ -324,7 +335,7 @@ DataTable_RowActions_RowEvolution.prototype.showRowEvolution = function(apiMetho
 		requestParams.column = multiRowEvolutionParam;
 	}
 
-	piwikHelper.ajaxCall('CoreHome', action, requestParams, function(html) {
+	var callback = function(html) {
 		Piwik_Popover.setContent(html);
 		
 		// use the popover title returned from the server
@@ -360,5 +371,14 @@ DataTable_RowActions_RowEvolution.prototype.showRowEvolution = function(apiMetho
 			self.openPopover(apiMethod, metric, label);
 			return true;
 		});
-	}, 'html');
+	};
+
+    requestParams.module = 'CoreHome';
+    requestParams.action = action;
+
+    var ajaxRequest = new ajaxHelper();
+    ajaxRequest.addParams(requestParams, 'get');
+    ajaxRequest.setCallback(callback);
+    ajaxRequest.setFormat('html');
+    ajaxRequest.send(false);
 };

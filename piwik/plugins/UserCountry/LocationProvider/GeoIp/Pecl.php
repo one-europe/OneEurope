@@ -4,7 +4,7 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Pecl.php 7290 2012-10-23 22:19:55Z capedfuzz $
+ * @version $Id: Pecl.php 7469 2012-11-14 07:43:58Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -47,14 +47,15 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
 	 */
 	public function getLocation( $info )
 	{
-		$ip = $info['ip'];
+		$ip = $this->getIpFromInfo($info);
 		
 		$result = array();
 		
 		// get location data
 		if (self::isCityDatabaseAvailable())
 		{
-			$location = geoip_record_by_name($ip);
+			// Must hide errors because missing IPV6:
+			$location = @geoip_record_by_name($ip);
 			if (!empty($location))
 			{
 				$result[self::COUNTRY_CODE_KEY] = $location['country_code'];
@@ -68,7 +69,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
 		}
 		else if (self::isRegionDatabaseAvailable())
 		{
-			$location = geoip_region_by_name($ip);
+			$location = @geoip_region_by_name($ip);
 			if (!empty($location))
 			{
 				$result[self::REGION_CODE_KEY] = $location['region'];
@@ -77,13 +78,13 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
 		}
 		else
 		{
-			$result[self::COUNTRY_CODE_KEY] = geoip_country_code_by_name($ip);
+			$result[self::COUNTRY_CODE_KEY] = @geoip_country_code_by_name($ip);
 		}
 		
 		// get organization data if the org database is available
 		if (self::isOrgDatabaseAvailable())
 		{
-			$org = geoip_org_by_name($ip);
+			$org = @geoip_org_by_name($ip);
 			if ($org !== false)
 			{
 				$result[self::ORG_KEY] = utf8_encode($org);
@@ -93,7 +94,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
 		// get isp data if the isp database is available
 		if (self::isISPDatabaseAvailable())
 		{
-			$isp = geoip_isp_by_name($ip);
+			$isp = @geoip_isp_by_name($ip);
 			if ($ip !== false)
 			{
 				$result[self::ISP_KEY] = utf8_encode($isp);
@@ -236,10 +237,53 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
 					 . Piwik_Translate('UserCountry_HowToInstallGeoIpPecl')
 					 . '</a>'
 					 . '</em>';
+		
+		$extraMessage = false;
+		if ($this->isAvailable())
+		{
+			$peclDir = ini_get('geoip.custom_directory');
+			if ($peclDir === false)
+			{
+				$extraMessage = Piwik_Translate('UserCountry_GeoIPPeclCustomDirNotSet', "'geoip.custom_directory'");
+			}
+			else
+			{
+				$extraMessage = 'The \'geoip.custom_directory\' PHP ini option is set to \''.$peclDir.'\'.';
+			}
+			
+			$availableDatabaseTypes = array();
+			if (self::isCityDatabaseAvailable())
+			{
+				$availableDatabaseTypes[] = Piwik_Translate('UserCountry_City');
+			}
+			if (self::isRegionDatabaseAvailable())
+			{
+				$availableDatabaseTypes[] = Piwik_Translate('UserCountry_Region');
+			}
+			if (self::isCountryDatabaseAvailable())
+			{
+				$availableDatabaseTypes[] = Piwik_Translate('UserCountry_Country');
+			}
+			if (self::isISPDatabaseAvailable())
+			{
+				$availableDatabaseTypes[] = 'ISP';
+			}
+			if (self::isOrgDatabaseAvailable())
+			{
+				$availableDatabaseTypes[] = Piwik_Translate('UserCountry_Organization');
+			}
+			
+			$extraMessage .= '<br/><br/>'.Piwik_Translate('UserCountry_GeoIPImplHasAccessTo').':&nbsp;<strong><em>'
+				. implode(', ', $availableDatabaseTypes).'</em></strong>.';
+			
+			$extraMessage = '<strong><em>'.Piwik_Translate('General_Note').':&nbsp;</em></strong>'.$extraMessage;
+		}
+		
 		return array('id' => self::ID,
 					  'title' => self::TITLE,
 					  'description' => $desc,
 					  'install_docs' => $installDocs,
+					  'extra_message' => $extraMessage,
 					  'order' => 3);
 	}
 	
