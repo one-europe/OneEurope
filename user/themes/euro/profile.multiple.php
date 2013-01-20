@@ -61,38 +61,65 @@
 							<li class="clear"></li>
 						</ul>
 					</div>
-								
+							
+
+
+						
 					<div class="list">
-						
-						
-						<div class="list">
+						<h2>Founders:</h2>
+						<?php foreach ( $founders as $profile ) { 
+							if ($profile->info->user) {
+							$source = User::get_by_id($profile->info->user)->info;
+								$title = User::get_by_id($profile->info->user)->displayname;
+						 	} else {
+								$source = $profile->info;
+								$title = $profile->title;
+							} ?>						
 
-							<h2>Founders:</h2>
+						<div class="item">
 
-							<?php foreach ( $founders as $profile ) { 
-								if ($profile->info->user) {
-									$source = User::get_by_id($profile->info->user)->info;
-									$title = User::get_by_id($profile->info->user)->displayname;
-							 	} else {
-									$source = $profile->info;
-									$title = $profile->title;
-								} ?>						
+							<a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $profile->info->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title; ?>" width="100" /></a>
 
-							<div class="item">
-
-								<a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $profile->info->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title; ?>" width="100" /></a>
-
-								<h3><a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><?php echo $title; ?></a></h1>
-
-							</div>
-
-							<?php } ?>
-
-							<div class="clear"></div>
+							<h3><a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><?php echo $title; ?></a></h1>
 
 						</div>
 
+						<?php } ?>
 
+						<div class="clear"></div>
+
+					</div>
+
+					<div class="list">
+						
+						
+						<h2>Editors and Moderators:</h2>
+						
+						<?php foreach ( $edmods as $profile ) { 
+							if ($profile->info->user) {
+								$source = User::get_by_id($profile->info->user)->info;
+								$title = User::get_by_id($profile->info->user)->displayname;
+						 	} else {
+								$source = $profile->info;
+								$title = $profile->title;
+							} ?>						
+
+						<div class="item">
+
+							<a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $profile->info->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title; ?>" width="100" /></a>
+							
+							<h3><a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><?php echo $title; ?></a></h1>
+
+						</div>
+
+						<?php } ?>
+					
+						<div class="clear"></div>
+				
+					</div>	
+	
+					<div class="list">
+						
 						
 						<h2>Authors:</h2>
 						

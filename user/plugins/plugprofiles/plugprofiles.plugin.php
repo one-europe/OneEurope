@@ -311,7 +311,7 @@ class PlugProfile extends Plugin
 	    'content_type' => Post::type('profile'),
 	    'status' => Post::status('published'),
 	    'all:info' => array('ccontributor' => 1),
-		//'vocabulary' => array('systags:not:term' => array('founder', 'author', 'ambassador', 'former')),
+		//'vocabulary' => array('systags:not:term' => array('founder', 'author', 'ambassador', 'former', 'edmod')),
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
@@ -350,6 +350,13 @@ class PlugProfile extends Plugin
 		'vocabulary' => array('systags:term' => 'former'),
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
+	  ));		  
+	  $edmods = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'edmod'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
 	  ));	
 	  
 
@@ -360,6 +367,7 @@ class PlugProfile extends Plugin
 	  $theme->ambassadors = $ambassadors;
 	  $theme->formerpartners = $formerpartners;
 	  $theme->partners = $partners;
+	  $theme->edmods = $edmods;
 
 	  $theme->act_display( $paramarray );
 

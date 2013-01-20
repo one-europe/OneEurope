@@ -8,13 +8,13 @@
 				$source = $post->info;
 			}?>
 
-			<?php 
+			<?php /* didn't work
 			if ( User::identify()->id == $post->info->user ) { ?>
 			<section class="edit">
 				<div class="h"><span>Options:</span></div>
 				<span><a href="<?php Site::out_url( 'home' ) ?>/admin/user">Edit</a></span><br />
 			</section>
-			<?php } ?>
+			<?php } */ ?>
 
 			<?php /* implement http://wiki.habariproject.org/en/Dev:Theme_Areas */?>
 		
