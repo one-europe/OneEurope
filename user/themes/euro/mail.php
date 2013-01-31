@@ -11,8 +11,19 @@ $senderName = isset( $_POST['senderName'] ) ? preg_replace( "/[^\.\-\' a-zA-Z0-9
 $senderEmail = isset( $_POST['senderEmail'] ) ? preg_replace( "/[^\.\-\_\@a-zA-Z0-9]/", "", $_POST['senderEmail'] ) : "";
 $message = isset( $_POST['message'] ) ? preg_replace( "/(From:|To:|BCC:|CC:|Subject:|Content-Type:)/", "", $_POST['message'] ) : "";
  
+// check whether mail body contains "http://"
+$spam = "http://";
+$pos = strpos($message,$spam);
+if($pos === false) {
+	$nospam == true;
+} else {
+	$nospam == false;
+}
+
+
+
 // If all values exist, send the email
-if ( $senderName && $senderEmail && $message ) {
+if ( $senderName && $senderEmail && $message && $nospam == true ) {
   $recipient = RECIPIENT_NAME . " <" . RECIPIENT_EMAIL . ">";
   $headers = "From: " . $senderName . " <" . $senderEmail . ">";
   $success = mail( $recipient, EMAIL_SUBJECT, $message, $headers );
@@ -29,7 +40,7 @@ if ( isset($_GET["ajax"]) ) {
   </head>
   <body>
   <?php if ( $success ) echo "<p>Thanks for sending your message! We'll get back to you shortly.</p>" ?>
-  <?php if ( !$success ) echo "<p>There was a problem sending your message. Please try again.</p>" ?>
+  <?php if ( !$success ) echo "<p>There was a problem sending your message. Please try again. If there were any links, try without \"http://\"</p>" ?>
   <p>Click your browser's Back button to return to the page.</p>
 <?php if ($foo) { echo 'here\'s the email: ' . $contact_email; } else { echo 'no email'; } ?>
   </body>

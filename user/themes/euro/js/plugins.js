@@ -20,7 +20,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
 // ===== ajaxform ===== //
 		
-		var messageDelay = 2500;  // How long to display status messages (in milliseconds)
+		var messageDelay = 5000;  // How long to display status messages (in milliseconds)
 
 		// Init the form once the document is ready
 		$( init );
@@ -49,7 +49,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
 		    return false;
 		  } );
-
+		/*	
 		  // When the "Cancel" button is clicked, close the form
 		  $('#cancel').click( function() { 
 		    $('#contactForm').fadeOut();
@@ -62,7 +62,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 		      $('#contactForm').fadeOut();
 		      $('#content').fadeTo( 'slow', 1 );
 		    }
-		  } );
+		  } );*/
 
 		}
 

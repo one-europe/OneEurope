@@ -72,7 +72,7 @@
 			
 			<div id="sendingMessage" class="statusMessage"><p>Sending your message.</p></div>
 			<div id="successMessage" class="statusMessage"><p>Thanks for sending your message! We'll get back to you shortly.</p></div>
-			<div id="failureMessage" class="statusMessage"><p>There was a problem sending your message. Please try again.</p></div>
+			<div id="failureMessage" class="statusMessage"><p>There was a problem sending your message. Please remove all contained "http://"s and try again.</p></div>
 			<div id="incompleteMessage" class="statusMessage"><p>Please complete all the fields before sending.</p></div>
 
 			

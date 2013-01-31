@@ -129,6 +129,7 @@
 							<a class="addthis_button_tweet" tw:count="vertical"></a>
 							<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>	
 							<a class="addthis_counter"></a>
+
 						
 						</div>
 					

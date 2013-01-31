@@ -1782,6 +1782,14 @@ article > footer nav {
 
 /* recent initiatives, sidebar front */
 
+#sidebar section.viral {
+	padding: 10px 0 0;
+}
+#sidebar section.viral .h {
+	margin-right: 0;
+	margin-left: 0;
+}
+
 .recentposts > ul > li {
 	margin: 0 -10px;
 	padding: 0 10px;
