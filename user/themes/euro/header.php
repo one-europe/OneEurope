@@ -29,6 +29,28 @@
 		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
 
+
+
+		<script type="text/javascript">
+		// ===== disqus ===== //
+		
+		    /* * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * */
+		    var disqus_shortname = 'oneeurope';
+		    var disqus_identifier = '<?php echo $post->id; ?>';
+		    var disqus_title = '<?php echo $post->title; ?>';
+		    var disqus_url = '<?php echo $post->permalink; ?>';
+		    var disqus_developer = 0; // or 1 based on if you're looking to skip URL authentication
+		
+		    /* * * DON'T EDIT BELOW THIS LINE * * */
+		    (function() {
+		        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		    })();
+		
+		</script>
+
+
 	</head>
 
 	<body id="top" onload="initmap()">

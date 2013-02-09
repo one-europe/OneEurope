@@ -311,7 +311,7 @@ class PlugProfile extends Plugin
 	    'content_type' => Post::type('profile'),
 	    'status' => Post::status('published'),
 	    'all:info' => array('ccontributor' => 1),
-		//'vocabulary' => array('systags:not:term' => array('founder', 'author', 'ambassador', 'former', 'edmod')),
+		//'vocabulary' => array('systags:not:term' => array('director', 'author', 'ambassador', 'former', 'editor')),
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
@@ -323,10 +323,10 @@ class PlugProfile extends Plugin
 	  	'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
-	  $founders = Posts::get(array(
+	  $directors = Posts::get(array(
 	    'content_type' => Post::type('profile'),
 	    'status' => Post::status('published'),
-		'vocabulary' => array('systags:term' => 'founder'),
+		'vocabulary' => array('systags:term' => 'director'),
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
@@ -351,10 +351,10 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));		  
-	  $edmods = Posts::get(array(
+	  $editors = Posts::get(array(
 	    'content_type' => Post::type('profile'),
 	    'status' => Post::status('published'),
-		'vocabulary' => array('systags:term' => 'edmod'),
+		'vocabulary' => array('systags:term' => 'editor'),
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));	
@@ -362,12 +362,12 @@ class PlugProfile extends Plugin
 
 	  // Add the profiles to the theme. Access this in your template with $allprofiles.
 	  $theme->contributors = $contributors;
-	  $theme->founders = $founders;
+	  $theme->directors = $directors;
 	  $theme->authors = $authors;
 	  $theme->ambassadors = $ambassadors;
 	  $theme->formerpartners = $formerpartners;
 	  $theme->partners = $partners;
-	  $theme->edmods = $edmods;
+	  $theme->editors = $editors;
 
 	  $theme->act_display( $paramarray );
 

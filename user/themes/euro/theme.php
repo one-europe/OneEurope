@@ -157,33 +157,33 @@ Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-ou
 	
 		function the_title( $head ) {
 
-		switch( $this->matched_rule->name ){
-			case 'display_entry':
-				$title .= $this->post->title;
-			break;
-			case 'display_page':
-				$title .= $this->post->title;
-			break;
-			case 'display_article':
-				$title .= $this->post->title;
-			break;
-			case 'display_nibble':
-				$title .= $this->post->title;
-			break;
-			case 'display_profile':
-				$title .= $this->post->title;
-			break;
-			case 'display_action':
-				$title .= $this->post->title;
-			break;
-		}
+			switch( $this->matched_rule->name ){
+				case 'display_entry':
+					$title .= $this->post->title;
+				break;
+				case 'display_page':
+					$title .= $this->post->title;
+				break;
+				case 'display_article':
+					$title .= $this->post->title;
+				break;
+				case 'display_nibble':
+					$title .= $this->post->title;
+				break;
+				case 'display_profile':
+					$title .= $this->post->title;
+				break;
+				case 'display_action':
+					$title .= $this->post->title;
+				break;
+			}
+	
+			if ( $head ){
+			  return ( empty($title)) ? Options::get( 'title' ) 
+			            : $title . ' - ' . Options::get( 'title' );
+			}	
 
-		if ( $head ){
-		  return ( empty($title)) ? Options::get( 'title' ) 
-		            : $title . ' - ' . Options::get( 'title' );
-		}
-
-		return $title;
+			return $title;
 
 		}
 
@@ -204,7 +204,7 @@ Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-ou
 
 		$types = Post::list_active_post_types();
 		$types = array_keys( $types );
-		$types = array_diff( $types, array( 'profile, article, nibble, debate, action' ) );
+		$types = array_diff( $types, array( 'profile, article, brief, debate, action' ) );
 		$default_filters = array(
 			'content_type' => $types,
 		);
@@ -212,16 +212,25 @@ Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-ou
 		$paramarray['user_filters'] = array_merge( $default_filters,
 		$user_filters );
 
-		$this->assign( 'criteria', htmlentities( Controller::get_var
-		('criteria'), ENT_QUOTES, 'UTF-8' ) );
+		$this->assign( 'criteria', htmlentities( Controller::get_var('criteria'), ENT_QUOTES, 'UTF-8' ) );
 		return $this->act_display( $paramarray );
 	}
 	
-	public function act_display_home($paramarray = array( 'user_filters'=> array() ) ) {
+	public function act_display_home( $user_filters = array() ) {
+		$paramarray['fallback'] = array(
+			'home',
+		);
+
+		// has no effect:
+		parent::act_display_home( array( 'content_type' => array( Post::type('article') ) ) );
+
+	}
+
+	/*public function act_display_home($paramarray = array( 'user_filters'=> array() ) ) {
 			$user_filters = array('all:info' => array( 'initiative' => '0' ), 'vocabulary' => array( 'systags:not:term' => 'mini' ) );
 			$paramarray['user_filters'] = array_merge($user_filters, $paramarray['user_filters']);
 			parent::act_display( $paramarray );
-		}
+		}*/
 
 }
 

@@ -285,11 +285,11 @@ $(document).ready(function(){
 	// PROFILE OPTIONS
 	
 	// this is the content
-	$("#profile-content").counter({
+	/*$("#profile-content").counter({
 		type: 'char',
 		goal: 1500,
 		count: 'down',
 		text: false
-	});
+	});*/
 	
 });

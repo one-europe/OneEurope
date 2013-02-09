@@ -65,45 +65,70 @@
 				<?php } ?>
 				
 				
-				<?php foreach ( $posts as $post ) { ?>						
 
+
+				<?php foreach ($posts as $post ) { ?>
+						
 					<?php if ($post) { ?>
 
-					<div class="list">
+							<div class="list">
 
-						<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a>
+								<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" height="100" width="160"/></a>
 
-						<header>
+								<header>
+							
+									<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
+
+
+								</header>
+
+								<article class="body">
+								<?php if ( $post->info->excerpt ) {
+								        echo $post->info->excerpt; } 
+									else {
+								        echo $post->content_out;
+								        }?>
+								</article>
+
+								<footer>
 						
-							<h1><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h1>
-							<span class="entry-tags">
-								<time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-								<a class="entry-comments" href="<?php echo $post->url ?>#disqus_thread" data-disqus-identifier="<?php echo $page ?> <?php echo $post->permalink; ?>">Comments</a>
-							</span>
+									<span class="entry-tags">
+								        <?php if ( $show_author && $post->typename == 'article' ) { ?>
 
-						</header>
+											<span class="entry-autor">
+												<?php if ( $post->info->origauthor ) { ?>
+													<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="Portrait"><span><?php echo $post->info->origauthor; ?></span></a>
+												<?php } elseif ($post->info->author) { ?>
+													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($post->info->author)->displayname; ?></span></a>
+												<?php } else { 
+													$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $post->author->displayname; ?></span></a>
+												<?php } ?>
+											</span>
 
-						<article class="body">
-						<?php if ( $post->info->excerpt ) {
-								echo $post->info->excerpt; } 
-							else {
-								echo $post->content_out;
-								}?>
-						</article>
+										<?php } ?>
 
-						<footer>
+								        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+									</span>
+								        <a class="alignright entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a>
 
-								<?php if ( $show_author ) { ?><span class="entry-autor"><?php _e( 'by <span>%s</span>', array( $post->author->displayname ) ); ?> </span> <?php } ?>
+								</footer>
 
-						</footer>
-
-					</div>
+							</div>
 
 					<?php } else { ?>
 
 						There's been no contribution considering this topic yet.
 
 					<?php } ?>
+
+				<?php } ?>
+
+
+
+				<?php foreach ( $posts as $post ) { ?>						
+
 
 				<?php } ?>
 				

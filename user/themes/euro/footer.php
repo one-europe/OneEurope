@@ -11,10 +11,10 @@
 						<a href="#top" id="up">top<img src="<?php Site::out_url( 'theme' ); ?>/img/up.png" alt="" height="20" width="20" /></a>
 					
 						<nav>
-							<div><a href="/about">About ›</a></div>
+							<div><a href="/about">About ›</a></div>													<div><a href="/contributors">Team ›</a></div>
 							<div><a href="/contact">Contact ›</a></div>
 							<div><a href="/join-us">Join us ›</a></div>
-							<div><a href="/imprint">Legal&nbsp;&nbsp;&nbsp;<br/> Advice ›</a></div>
+							<div><a href="/imprint">Legal ›</a></div>
 							<div><a href="/forum">Forums ›</a></div>
 							<div><a href="/auth/login">Login ›</a></div>
 						</nav>
@@ -89,7 +89,19 @@
 	// include 'db_profiling.php';
 	?>
 	
-	
+    <script type="text/javascript">
+    var disqus_shortname = 'oneeurope';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>	
+
+
+
 	<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="<?php Site::out_url( 'theme' ); ?>/js/libs/jquery-1.7.1.min.js"><\/script>')</script>

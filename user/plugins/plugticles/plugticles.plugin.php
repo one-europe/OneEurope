@@ -75,33 +75,61 @@ class Plugticles extends Plugin
 			$form->excerpt->value = $post->info->excerpt;
 			$form->excerpt->move_after($form->shorttitle);
 			
-			$form->content->tabindex = 4;
+			$form->tags->move_after($form->excerpt);
+			$form->tags->tabindex = 4;
+
+			$form->content->tabindex = 5;
 			
 			// add photo url input field
 			$form->append('text', 'photourl', 'null:null', _t('Photo URL (1. upload the image to the media silo, 2. grab its URL, 3. paste it here)'), 'admincontrol_text');
-			$form->photourl->tabindex = 5;
+			$form->photourl->tabindex = 6;
 			$form->photourl->value = $post->info->photourl;
 			$form->photourl->move_after($form->content);
 			
 			// add photo caption
 			$form->append('text', 'photoinfo', 'null:null', _t('Photo Caption'), 'admincontrol_text');
-			$form->photoinfo->tabindex = 6;
+			$form->photoinfo->tabindex = 7;
 			$form->photoinfo->value = $post->info->photoinfo;
 			$form->photoinfo->move_after($form->photourl);
 			
 			// add photo license
 			$form->append('text', 'photolicense', 'null:null', _t('Photo License'), 'admincontrol_text');
-			$form->photolicense->tabindex = 7;
+			$form->photolicense->tabindex = 8;
 			$form->photolicense->value = $post->info->photolicense;
 			$form->photolicense->move_after($form->photoinfo);
 			
 			// add the articles category
 			/*$form->append('text', 'metacat', 'null:null', _t('Category'), 'admincontrol_text');
-			$form->metacat->tabindex = 7;
+			$form->metacat->tabindex = 100;
 			$form->metacat->value = $post->info->metacat;
 			$form->metacat->move_after($form->photolicense);*/
 			
-			
+			// add original source of the article
+			$form->append('text', 'origsource', 'null:null', _t('Is this article re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
+			$form->origsource->tabindex = 9;
+			$form->origsource->value = $post->info->origsource;
+			$form->origsource->move_after($form->photolicense);	
+	
+			// add field for the name of the source
+			$form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
+			$form->origauthor->tabindex = 10;
+			$form->origauthor->value = $post->info->origauthor;
+			$form->origauthor->move_after($form->origsource);
+
+			// add field for additional desc of that source
+			$form->append('text', 'originfo', 'null:null', _t('Please add a describing sentence about that source here'), 'admincontrol_text');
+			$form->originfo->tabindex = 11;
+			$form->originfo->value = $post->info->originfo;
+			$form->originfo->move_after($form->origauthor);
+
+			// add field for the 1e-profile of that source
+			/*$form->append('text', 'origprofile', 'null:null', _t('The link of the source\'s 1E-profile, if there is one'), 'admincontrol_text');
+			$form->origprofile->tabindex = 12;
+			$form->origprofile->value = $post->info->origprofile;
+			$form->origprofile->move_after($form->originfo);*/
+
+
+
 			// make a dropdown of all debates with set slugs
 			$debates = Posts::get( array( 'content_type' => 'debate', 'status' => 'published' ) );
 			$slugs = array(); 								// create second, empty array
@@ -115,7 +143,7 @@ class Plugticles extends Plugin
 					$slugs[] = $debate->title;	// ...fill an object in the new array aka [nr] => [displayname]
 				}
 			} 												// use this value in the dropdown
-			$form->append( 'select', 'debate', 'null:null', _t( 'This post contributes to the following debate:' ), $slugs, 'tabcontrol_select' ); 
+			$form->append( 'select', 'debate', 'null:null', _t( 'Contributes to the following debate:' ), $slugs, 'tabcontrol_select' ); 
 			$ids = array();
 			$i = 1;
 			foreach ($debates as $debate) { 					// ..
@@ -130,8 +158,8 @@ class Plugticles extends Plugin
 			}
 			$key = array_search( $post->info->debate, $ids ); 
 			$form->debate->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
-			$form->debate->tabindex = 8;
-			$form->debate->move_after($form->tags);
+			$form->debate->tabindex = 13;
+			$form->debate->move_after($form->originfo);
 			
 			
 			
@@ -148,7 +176,7 @@ class Plugticles extends Plugin
 					$slugs[] = $initiative->title;	// ...fill an object in the new array aka [nr] => [displayname]
 				}
 			} 												// use this value in the dropdown
-			$form->append( 'select', 'initiative', 'null:null', _t( 'This is a report about this initiative:' ), $slugs, 'tabcontrol_select' ); 
+			$form->append( 'select', 'initiative', 'null:null', _t( 'Reports about the following initiative:' ), $slugs, 'tabcontrol_select' ); 
 			$ids = array();
 			$i = 1;
 			foreach ($initiatives as $initiative) { 					// ..
@@ -163,37 +191,16 @@ class Plugticles extends Plugin
 			}
 			$key = array_search( $post->info->initiative, $ids ); 
 			$form->initiative->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
-			$form->initiative->tabindex = 9;
-			$form->initiative->move_after($form->tags);
+			$form->initiative->tabindex = 14;
+			$form->initiative->move_after($form->debate);
 			
+							
 			
+			$form->save->tabindex = $form->save->tabindex + 20;
+			// nonworking
+			$form->publish->tabindex = $form->publish->tabindex + 20;
+			$form->delete->tabindex = $form->delete->tabindex + 20;
 			
-			
-			// add original source of the article
-			$form->append('text', 'origsource', 'null:null', _t('Is this article re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
-			$form->origsource->tabindex = 10;
-			$form->origsource->value = $post->info->origsource;
-			$form->origsource->move_after($form->photolicense);		
-			// add field for the name of the source
-			$form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
-			$form->origauthor->tabindex = 11;
-			$form->origauthor->value = $post->info->origauthor;
-			$form->origauthor->move_after($form->origsource);
-			// add field for additional desc of that source
-			$form->append('text', 'originfo', 'null:null', _t('Please add a describing sentence about that source here'), 'admincontrol_text');
-			$form->originfo->tabindex = 12;
-			$form->originfo->value = $post->info->originfo;
-			$form->originfo->move_after($form->origauthor);
-			// add field for additional desc of that source
-			$form->append('text', 'origprofile', 'null:null', _t('The link of the source\'s 1E-profile, if there is one'), 'admincontrol_text');
-			$form->origprofile->tabindex = 13;
-			$form->origprofile->value = $post->info->origprofile;
-			$form->origprofile->move_after($form->originfo);
-				
-			$form->tags->move_after($form->originfo);
-			$form->tags->tabindex = 14;
-			
-			$form->save->tabindex + 20;
 			
 			// append this post to the profile of ... need: list of profiles, similar to the list of authors in plugprofiles
 			//$form->append('text', 'append', 'null:null', _t('Append this article to the institution profile of ... (make sure that the name is spelled correctly!)'), 'admincontrol_text');
@@ -219,6 +226,13 @@ class Plugticles extends Plugin
 			$post->info->photolicense = $form->photolicense->value;
 			//$post->info->metacat = $form->metacat->value;
 			
+			
+			$post->info->origsource = $form->origsource->value;
+			$post->info->origauthor = $form->origauthor->value;			
+			$post->info->originfo = $form->originfo->value;
+			//$post->info->origprofile = $form->origprofile->value;
+
+
 			// create the same array for the dropdown as above, but now with id's, and save them as $post->info->debate object to the db
 			$debates = Posts::get( array( 'content_type' => 'debate', 'status' => 'published' ) );
 			$slugs = array();
@@ -256,11 +270,6 @@ class Plugticles extends Plugin
 				echo $initiative->title;
 			}
 			$post->info->initiative = $slugs[$form->initiative->value];
-			
-			$post->info->origsource = $form->origsource->value;
-			$post->info->origauthor = $form->origauthor->value;			
-			$post->info->originfo = $form->originfo->value;
-			$post->info->origprofile = $form->origprofile->value;
 			
 		}
 	}

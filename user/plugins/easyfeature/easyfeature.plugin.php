@@ -56,8 +56,21 @@ class EasyFeature extends Plugin
 		if ( User::identify()->can('manage_features') ) {
 			$form->append( 'text', 'systags', 'null:null', _t( 'System Tags, Separated by Commas (available: "slideshow", "menu", "edmod", "author", "ambassador", "partner", "former", "founder")' ), 'admincontrol_text' );
 			$form->systags->class = 'check-change';
-			$form->systags->tabindex = 3;
+			$form->systags->tabindex = 5;
 			$form->move_before( $form->systags, $form->content );
+
+			$form->content->tabindex = $form->content->tabindex + 1;
+			$form->photourl->tabindex = $form->photourl->tabindex + 1;
+			$form->photoinfo->tabindex = $form->photoinfo->tabindex + 1;
+			$form->photolicense->tabindex = $form->photolicense->tabindex + 1;
+			$form->metacat->tabindex = $form->metacat->tabindex + 1;
+			$form->origsource->tabindex = $form->origsource->tabindex + 1;
+			$form->origauthor->tabindex = $form->origauthor->tabindex + 1;
+			$form->originfo->tabindex = $form->originfo->tabindex + 1;
+			$form->origprofile->tabindex = $form->origprofile->tabindex + 1;
+			$form->debate->tabindex = $form->debate->tabindex + 1;
+			$form->initiative->tabindex = $form->initiative->tabindex + 1;
+			$form->append->tabindex = $form->append->tabindex + 1;
 			$form->save->tabindex = $form->save->tabindex + 1;
 
 			// If this is an existing post, see if it has systags already

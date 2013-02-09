@@ -66,8 +66,8 @@
 
 						
 					<div class="list">
-						<h2>Founders:</h2>
-						<?php foreach ( $founders as $profile ) { 
+						<h2>Directors:</h2>
+						<?php foreach ( $directors as $profile ) { 
 							if ($profile->info->user) {
 							$source = User::get_by_id($profile->info->user)->info;
 								$title = User::get_by_id($profile->info->user)->displayname;
@@ -93,9 +93,9 @@
 					<div class="list">
 						
 						
-						<h2>Editors and Moderators:</h2>
+						<h2>Editors:</h2>
 						
-						<?php foreach ( $edmods as $profile ) { 
+						<?php foreach ( $editors as $profile ) { 
 							if ($profile->info->user) {
 								$source = User::get_by_id($profile->info->user)->info;
 								$title = User::get_by_id($profile->info->user)->displayname;

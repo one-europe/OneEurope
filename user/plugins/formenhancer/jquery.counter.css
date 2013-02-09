@@ -37,7 +37,7 @@ form .exceeded {
 }
 #user-options textarea, #admin-options textarea {
 	width: 534px;
-	min-height: 107px;
+	min-height: 250px;
 }
 #2d7bee35 {
 	height: 107px;		/* about text */
@@ -49,6 +49,9 @@ form .exceeded {
 	padding: 3px;
 	font-size: 14px;
 	color: #333;
+}
+#user-options #teaser {
+	width: 534px;
 }
 #admin-options #title {
 	line-height: 1em;

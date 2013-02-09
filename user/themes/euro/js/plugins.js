@@ -128,15 +128,6 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 // ===== end ajaxform ==== //
 
 
-// ===== disqus ===== //
-var disqus_shortname = 'oneeurope';
-(function () {
-    var s = document.createElement('script'); s.async = true;
-    s.type = 'text/javascript';
-    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-}());
-// ===== end disqus ===== //
 
 
 // ===== flattr code, not in use atm

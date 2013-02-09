@@ -207,10 +207,23 @@
 								<footer>
 						
 									<span class="entry-tags">
-								        <?php if ( $show_author ) { ?><span class="entry-autor"><a href="<?php
-								        $publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );
-								        echo $publisher->permalink; ?>"><?php _e( '<span>%s</span>', array( $post->author->displayname ) ); ?> </a></span> <?php } ?>
-								        &nbsp;on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+								        <?php if ( $show_author && $post->typename == 'article' ) { ?>
+
+											<span class="entry-autor">
+												<?php if ( $post->info->origauthor ) { ?>
+													<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="Portrait"><span><?php echo $post->info->origauthor; ?></span></a>
+												<?php } elseif ($post->info->author) { ?>
+													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($post->info->author)->displayname; ?></span></a>
+												<?php } else { 
+													$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $post->author->displayname; ?></span></a>
+												<?php } ?>
+											</span>
+
+										<?php } ?>
+
+								        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
 									</span>
 								        <?php /*&nbsp;<a class="entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a> */ ?>
 
@@ -226,7 +239,7 @@
 		
 				<div class="pagination">
 					<?php echo $theme->prev_page_link( '&laquo;' . _t('Newer Posts') ); ?>
-					<?php echo $theme->page_selector ( null, array( 'leftSide' => 2, 'rightSide' => 2 ) ); ?>
+					<?php echo $theme->page_selector ( $briefs, array( 'leftSide' => 20, 'rightSide' => 20 ) ); ?>
 					<?php echo $theme->next_page_link( _t('&nbsp;Older Posts') . '&raquo;' ); ?>
 				</div>
 		

@@ -23,6 +23,9 @@
 							
 							<?php if ( $post->info->origsource ) { ?>
 								<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="Portrait"><?php echo $post->info->origauthor; ?></a>
+							<?php } elseif ($post->info->author) { ?>
+								<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
+								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><?php echo User::get($post->info->author)->displayname; ?></a>
 							<?php } else { 
 								$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
 								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><?php echo $post->author->displayname; ?></a>
@@ -149,6 +152,7 @@
 				
 					<?php $list = Posts::get( array( 'content_type' => Post::type( 'article' ),
 							'status' => Post::status( 'published' ),
+							'order' => 'DESC',
 							'limit' => 3,
 							'vocabulary' => array('any' => $post->tags ),
 							'not:id' => $post->id ) );

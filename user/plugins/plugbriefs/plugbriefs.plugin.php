@@ -360,14 +360,23 @@ class PlugBriefs extends Plugin
 	  );
 
 	  // Retrieve future briefs.
+
+		$page =Controller::get_var( 'page' );
+		$pagination = 5;
+		if ( $page == '' ) { $page = 1; }
+		$theme->current_page = $page;
+
 	  $briefs = Posts::get(array(
 	    'content_type' => Post::type('brief'),
 	    'status' => array( Post::status('published'), Post::status('scheduled') ),
-	    'nolimit' => TRUE
+		'offset' => ($pagination)*($page)-$pagination,
+	    'limit' => $pagination
 	  ));
-
 	  // Add the briefs to the theme. Access this in your template with $briefs.
 	  $theme->briefs = $briefs;
+
+
+
 
 	  $theme->act_display( $paramarray );
 

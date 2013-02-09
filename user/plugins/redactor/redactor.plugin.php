@@ -15,6 +15,13 @@ class Redactor extends Plugin {
 			$js = "$(document).ready( function(){ $('#content').redactor(); });";
 			Stack::add( 'admin_header_javascript', $js, 'redactor_init', 'redactor' );
 		}
+		if ( $theme->page == 'user' ) {
+			Stack::add( 'admin_header_javascript', $this->get_url() . '/redactor/redactor.min.js', 'redactor', 'jquery' );
+			Stack::add( 'admin_stylesheet', array( $this->get_url() . '/redactor/css/redactor.css', 'screen' ), 'redactor', 'admin-css' );
+
+			$js = "$(document).ready( function(){ $('#profile-content').redactor(); });";
+			Stack::add( 'admin_header_javascript', $js, 'redactor_init', 'redactor' );
+		}
 	}
 
 	/**

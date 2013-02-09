@@ -116,20 +116,38 @@
 						
 						<?php 
 						
-												
-							$items = Posts::get( array('content_type' => Post::type('article'), 'nolimit' => true, 'status' => Post::status('published'), 'user_id' => $post->info->user ) ) ;
-							$count = $items->count_all();
-						
+							// all posts that are either by me or where I was added as author			
+							$items = Posts::get( 
+								array( 'where' => 
+									array(
+										array('user_id' => $post->info->user),
+										array('all:info' => array('author' => $post->info->user ) )
+									), 
+									'content_type' => Post::type('article'), 
+									'nolimit' => true, 
+									'status' => Post::status('published'),
+								) 
+							);
+				
+							// now exclude all that are by me but where I added an author
+							foreach ($items as $item) {
+								if ( $item->info->author && $item->info->author != $post->info->user && $item->info->author != 0 ) {$i++;}
+							}
+
+							$count = $items->count_all() - $i;
+
 							if ($count > 0 ) {
 						
 							?>
 						
-							<div class="h"><span><?php echo $post->title; ?>'s Posts:</span></div>					
+								<div class="h"><span><?php echo $post->title; ?>'s Posts:</span></div>					
 								
-							<div class="affiliated-posts tile-thumbs list-1">
+								<div class="affiliated-posts tile-thumbs list-1">
 					
 									<?php foreach ($items as $item ) { ?>
-																		
+															
+										<?php if (!$item->info->author || $item->info->author == $post->info->user || $item->info->author == 0 ) { ?>
+			
 										<div class="list">
 
 											<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php echo $item->info->photoinfo; ?>" height="100" width="160"/></a>
@@ -147,6 +165,8 @@
 											<article class="body"><?php echo $item->info->excerpt; ?></article>
 
 										</div>
+										
+										<?php } ?>
 													
 									<?php } ?>
 										
