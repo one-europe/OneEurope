@@ -239,7 +239,7 @@
 		
 				<div class="pagination">
 					<?php echo $theme->prev_page_link( '&laquo;' . _t('Newer Posts') ); ?>
-					<?php echo $theme->page_selector ( $briefs, array( 'leftSide' => 20, 'rightSide' => 20 ) ); ?>
+					<?php echo $theme->page_selector ( null, array( 'leftSide' => 20, 'rightSide' => 20 ) ); ?>
 					<?php echo $theme->next_page_link( _t('&nbsp;Older Posts') . '&raquo;' ); ?>
 				</div>
 		

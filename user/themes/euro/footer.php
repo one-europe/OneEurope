@@ -16,7 +16,12 @@
 							<div><a href="/join-us">Join us ›</a></div>
 							<div><a href="/imprint">Legal ›</a></div>
 							<div><a href="/forum">Forums ›</a></div>
-							<div><a href="/auth/login">Login ›</a></div>
+							<?php if ( User::identify()->loggedin ) { ?>
+								<div><a href="/admin">Admin ›</a></div>
+								<div><a href="/auth/logout">Logout ›</a></div>
+							<?php } else { ?>
+								<div><a href="/auth/login">Login ›</a></div>
+							<?php } ?>
 						</nav>
 					
 					</div>

@@ -276,7 +276,7 @@ h3 {
 	text-decoration: underline;
 }
 p {
-	color: #555;
+	color: #333;
 	padding: 10px 0;
 	margin: 0;
 }
@@ -308,7 +308,7 @@ article img {
 	max-width: 100%;
 }
 article.body {
-	color: #555;
+	color: #444;
 }
 #sidebar {
 	font-size: 0.95em;
@@ -1030,6 +1030,7 @@ span.entry-autor > a > span:hover {
 .list-1 div.list {
 	border-bottom: 1px solid #EEF1F5;
 	padding-bottom: 5px;
+	min-height: 100px
 }
 .list-1 div.list:first-child {
 	padding-top: 15px;
@@ -1039,6 +1040,11 @@ span.entry-autor > a > span:hover {
 }
 .list-1 div.list h2 {
 	font-size: 1.7em;
+}
+.list-1 div.list h2, .list-1 div.list h3 {
+	line-height: 1.1em;
+	margin: 0;
+	padding: 5px 0;
 }
 .list-1 .list header, .list-1 .list article, .list-1 .list footer {
 	margin-left: 170px;
