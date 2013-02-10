@@ -2,7 +2,7 @@
 
 $content   = array (
   'isBrowserTriggerArchivingEnabled' => true,
-  'lastTrackerCronRun' => 1360512320,
+  'lastTrackerCronRun' => 1360516527,
   'currentLocationProviderId' => 'geoip_php',
 );
 
