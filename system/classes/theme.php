@@ -90,7 +90,8 @@ class Theme extends Pluggable
 	public function info()
 	{
 
-		$xml_file = $this->theme_dir . '/theme.xml';
+		//$xml_file = $this->theme_dir . '/theme.xml'; original, patched in habari core
+		$xml_file = end($this->theme_dir) . '/theme.xml';
 		if(!file_exists($xml_file)) {
 			return new SimpleXMLElement('<?xml version="1.0" encoding="utf-8" ?>
 <pluggable type="theme">

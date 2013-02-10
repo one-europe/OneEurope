@@ -24,12 +24,31 @@
 			.. this is linking to his/her profiles on twitter, flattr etc. .. and a link to the organisation they
 			come from, with profile here if existing.<br /> */ ?>
 
-		<?php } else { ?>
+		<?php } elseif ($post->info->author) { ?>
 			
-			<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) ); ?>
-			
+			<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
+
 			<a href="<?php echo $publisher->permalink; ?>">
-				<img src="<?php if ( $post->author->info->photourl ) { echo $post->author->info->photourl; } else { echo $publisher->info->photurl; } ?>" />
+				<img alt="<?php echo User::get($post->info->author)->displayname; ?>" src="<?php if ( User::get($post->info->author)->info->photourl ) { echo User::get($post->info->author)->info->photourl; } else { echo $publisher->info->photurl; } ?>" />
+				<h3><?php if (  User::get($post->info->author)->info->displayname ) { echo User::get($post->info->author)->info->displayname; } else { echo $publisher->title; } ?></h3>
+				<p><?php if ( User::get($post->info->author)->info->teaser ) { echo User::get($post->info->author)->info->teaser; } else { echo $publisher->info->teaser; } ?></p>
+				<p>read more › </p>
+				<div class="clear"></div>
+			</a>
+
+			<?php if (User::get($post->info->author)->info->twitter) { ?>
+				<a href="https://twitter.com/<?php echo User::get($post->info->author)->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			<?php } else { ?>
+				<a href="https://twitter.com/<?php echo $publisher->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			<?php } ?>
+
+		<?php } else { 
+			$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
+
+			<a href="<?php echo $publisher->permalink; ?>">
+				<img alt="<?php echo $post->author->displayname; ?>" src="<?php if ( $post->author->info->photourl ) { echo $post->author->info->photourl; } else { echo $publisher->info->photurl; } ?>" />
 				<h3><?php if (  $post->author->displayname ) { echo $post->author->displayname; } else { echo $publisher->title; } ?></h3>
 				<p><?php if ( $post->author->info->teaser ) { echo $post->author->info->teaser; } else { echo $publisher->info->teaser; } ?></p>
 				<p>read more › </p>
@@ -66,12 +85,11 @@
 	<section class="fb">
 		<div class="h"><span>Stay Tuned</span></div>
 	
-			<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="true" data-border-color="#eee" data-header="false"></div>
+		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="true" data-border-color="#eee" data-header="false"></div>
 	
-			<a href="https://twitter.com/one1europe" class="twitter-follow-button">Follow @one1europe</a>
-			<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+		<a href="https://twitter.com/one1europe" class="twitter-follow-button">Follow @one1europe</a>
+		<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 		
-		</ul>
 	</section>
 	
 	<section>

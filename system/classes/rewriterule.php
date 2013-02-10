@@ -109,7 +109,7 @@ class RewriteRule extends QueryRecord
 		$named_args_combined = array_flip( array_merge( $named_args['required'], $named_args['optional'] ) );
 
 		$args_defined = array_intersect_key( $args, $named_args_combined );
-		$args_query = array_diff( $args, $args_defined );
+		// $args_query = array_diff( $args, $args_defined ); // as to core commit ea7860e7971eb78cc5aa82ff3493711c6c009306
 		$args = Plugins::filter( 'rewrite_args', $args, $this->name );
 		// Replace defined arguments with their value
 		$searches = array();

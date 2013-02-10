@@ -14,13 +14,19 @@
 		<meta name="Generator" content="Habari" />		
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 
-		<link type="application/xml" title="Sitemap" href="/sitemap.xml" />
+		<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
 		
 		<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="/atom/1" />
 		<!-- link rel="EditURI" type="application/rsd+xml" title="RSD" href="<?php URL::out( 'rsd' ); ?>" / -->
 		
-		<!-- link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/images/favicon.ico" / -->
-		<link rel="stylesheet" media="screen" type="text/css" href="<?php Site::out_url( 'theme' ); ?>/style.css" />
+		<link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/img/favicon.ico" />
+
+		<link href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon.png" rel="apple-touch-icon" />
+		<link href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72" />
+		<link href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114" />
+		<link href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144" />
+
+		<link rel="stylesheet" media="screen" type="text/css" href="<?php Site::out_url( 'theme' ); ?>/css/style.css" />
 				
 		<?php echo $theme->header(); ?>		
 		
@@ -77,25 +83,11 @@
 				<nav>
 					
 					<ul class="sf-menu">
-						<?php /*<li>
-							<a href="#">YourEurope</a>
-							<ul class="menu_1">
-								<li>
-									<h5>Why should I care?</h5>
-									<p>This section is completely about the european idea, the european integration, facts about its history and perspectives and other general information about pros and cons of an united Europe.</p>
-								<li>
-									<a href="#">YourSociety</a></br>
-									<img src="http://wirtschaft.t-online.de/b/42/00/08/12/id_42000812/tid_da/die-europaeische-zentralbank-ezb-verteidigt-das-rettungspaket-fuer-den-euro-foto-imago-.jpg" height="100" width="140" /></li>
-								</li>
-								<li><a href="#">YourEconomy</a></li>
-								<li><a href="#">YourPolitics</a></li>
-							</ul>
-						</li> */ ?>
 						<li class="menu_1_5">
 							<a href="<?php Site::out_url( 'habari' ); ?>/forum">Forum</a>
 						</li>
 						<li class="menu_2">
-							<a class="sf-with-ul" href="#">Debate</a>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/debates">Debate</a>
 							<ul class="subnav">
 								<li class="col1">
 									<div>
@@ -168,13 +160,13 @@
 										
 								</li>
 								<li class="col4">
-									<h3><a href="/forum">Forum ›</a></h3>
+									<h3><a href="<?php Site::out_url( 'habari' ); ?>/forum">Forum ›</a></h3>
 									<p>Get involved. Join the discussion, see different perspectives and come to new insights!</p>
 								</li>
 							</ul>
 						</li>
 						<li class="menu_3">
-							<a href="#">Network</a>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/profiles">Network</a>
 							<ul class="subnav">
 								<li class="col1">
 									<div>
@@ -203,7 +195,7 @@
 							</ul>
 						</li>
 						<li class="menu_4">
-							<a href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
 							<ul class="subnav">
 								<li class="col1">
 									<div>

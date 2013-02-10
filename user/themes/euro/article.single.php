@@ -83,9 +83,13 @@
 				
 				<footer>
 					
-					<?php if ( $post->author->info->userfield_Description || $post->info->origauthor ) { ?>
+
+					<?php /*	Show an info sentence, if there is one (there can be one either as 'originfo', as that of the assigned author or
+								as that of the actual author, each of which should first be looked up from their user table and then from their profile 								post table. */
+
+							if ( $post->info->origauthor || ($post->author->info->description && !$post->info->author) || (Post::get(array('all:info' => array('user' => $post->author)))->info->description && !$post->info->author) || User::get($post->info->author)->info->description || Post::get(array('all:info' => array('user' => $post->info->author)))->info->description ) { ?>
+					
 						<section class="meta authorbox">
-						
 						
 							<?php if ( $post->info->origauthor && $post->info->origsource ) { ?>
 								
@@ -95,14 +99,31 @@
 								.. this is linking to his/her profiles on twitter, flattr etc. .. and a link to the organisation they
 								come from, with profile here if existing.<br /> */ ?>
 	
-							<?php } elseif ( $post->author->info->userfield_Description ) { ?>
+							<?php } elseif ( User::get($post->info->author)->info->description ) { ?>
+
+								<span>
+									<?php echo User::get($post->info->author)->info->description; ?>
+								</span>
+
+							<?php } elseif ( Post::get(array('all:info' => array('user' => $post->info->author)))->info->description ) { ?>
 								
 								<span>
-									<?php echo $post->author->info->userfield_Description; ?>
+									<?php echo Post::get(array('all:info' => array('user' => $post->info->author)))->info->description; ?>
+								</span>
+
+							<?php } elseif ( !$post->info->author && $post->author->info->description ) { ?>
+								
+								<span>
+									<?php echo $post->author->info->description; ?>
 								</span>
 						
+							<?php } elseif ( !$post->info->author && Post::get(array('all:info' => array('user' => $post->author)))->info->description ) { ?>
+			
+								<span>
+									<?php echo Post::get(array('all:info' => array('user' => $post->author)))->info->description; ?>
+								</span>
+
 							<?php } ?>
-						
 						</section>
 					<?php } ?>
 					
@@ -148,7 +169,7 @@
 				
 				<h3>Further Reading:</h3>
 			
-			 	<ul class="meta similar-posts">
+			 	<div class="meta similar-posts list-1">
 				
 					<?php $list = Posts::get( array( 'content_type' => Post::type( 'article' ),
 							'status' => Post::status( 'published' ),
@@ -158,34 +179,59 @@
 							'not:id' => $post->id ) );
 							foreach ($list as $item ) { ?>
 							
-							<li>
 
-								<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a>
+							<div class="list">
+
+								<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/></a>
 
 								<header>
+							
+									<h3><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h3>
 
-									<h3><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title; ?></a></h3>
-									<!-- span class="entry-tags">
-										<time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>" pubdate><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-										<a class="entry-comments" href="<?php echo $post->url ?>#disqus_thread" data-disqus-identifier="<?php echo $page ?> <?php echo $item->permalink; ?>">Comments</a>
-									</span -->
 
 								</header>
 
-								<article class="body"><?php echo $item->info->excerpt; ?></article>
+								<article class="body">
+								<?php if ( $item->info->excerpt ) {
+								        echo $item->info->excerpt; } 
+									else {
+								        echo $item->content_out;
+								        }?>
+								</article>
 
 								<footer>
+						
+									<span class="entry-tags">
+								        <?php if ( $show_author && $item->typename == 'article' ) { ?>
 
-										<?php /* if ( $show_author ) { ?><span class="entry-autor"><?php _e( 'by <span>%s</span>', array( $post->author->displayname ) ); ?> </span> <?php } */ ?>
+											<span class="entry-autor">
+												<?php if ( $item->info->origauthor ) { ?>
+													<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="Portrait"><span><?php echo $item->info->origauthor; ?></span></a>
+												<?php } elseif ($item->info->author) { ?>
+													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $item->info->author ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($item->info->author)->displayname; ?></span></a>
+												<?php } else { 
+													$publisher = Post::get(array( 'all:info' => array( 'user' => $item->author->id ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $item->author->displayname; ?></span></a>
+												<?php } ?>
+											</span>
+
+										<?php } ?>
+
+								        on <time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+									</span>
+								        <a class="alignright entry-comments" href="<?php echo $item->permalink ?>#disqus_thread">Comments</a>
 
 								</footer>
 
-							</li>
+							</div>
 																			
 					<?php } ?>
-								
-				</ul>
-				
+							
+					<div class="clear"></div>
+	
+				</div>
+
 				<?php /* <div class="meta affiliated-posts">
 				
 					<span>{articles of affiliated sites?}</span>
@@ -199,6 +245,8 @@
 				
 				</div> */ ?>
 				
+				<div class="clear"></div>
+
 			</aside>
 		
 			<aside class="disqus">

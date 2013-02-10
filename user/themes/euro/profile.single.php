@@ -28,13 +28,13 @@
 
 		<div id="profile">
 			
-			<div class="primary">
+			<div class="primary vcard">
 
-				<h1><?php echo $displayname; ?></h1>
+				<h1 class="fn"><?php echo $displayname; ?></h1>
 
 				<section class="right-col">
 					
-					<img class="pic" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
+					<img class="pic photo" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
 						
 					<div class="social">
 					
@@ -63,13 +63,13 @@
 						</div>
 					<?php } elseif ( !($source->url && $source->more) && $post->info->url || $post->info->more ) { ?>
 						<div class="info">
-							<span><?php if ($post->info->url) { ?><a href="<?php echo $post->info->url; ?>" target="_blank" title="visit website">› Website</a></span><?php } ?><br/><?php echo $post->info->more; ?></span>
+							<span><?php if ($post->info->url) { ?><a class="url" href="<?php echo $post->info->url; ?>" target="_blank" title="visit website">› Website</a></span><?php } ?><br/><?php echo $post->info->more; ?></span>
 						</div>
 					<?php } ?>
 
 				</section>
 
-	 			<section <?php if ( $post->info->user ) { ?> id="user-<?php echo $post->info->user ?>" <?php } else { ?> id="post-<?php echo $post->id; ?>" <?php } ?> class="card <?php echo $post->statusname; ?>">
+	 			<section <?php if ( $post->info->user ) { ?> id="user-<?php echo $post->info->user ?>" <?php } else { ?> id="post-<?php echo $post->id; ?>" <?php } ?> class="note card <?php echo $post->statusname; ?>">
 										
 							<?php if ($post->info->user) { 
 								if ($source->content) {
