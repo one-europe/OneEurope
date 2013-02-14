@@ -18,4 +18,7 @@ bareGitRepo/*
 # unnecessary for deving #
 ##########################
 piwik/*
+piwik/tmp/cache/*
 forum_backup/*
+forum/cache/*
+user/cache/*
