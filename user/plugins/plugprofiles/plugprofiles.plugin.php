@@ -260,7 +260,7 @@ class PlugProfile extends Plugin
 			 'single', //single.php
 			 'multiple', //multiple.php
 		);
- 
+
 		// This is like Post::get().. Get one row, one item
 		$paramarray['user_filters'] = array(
 		 'nolimit' => TRUE,

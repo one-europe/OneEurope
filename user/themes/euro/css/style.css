@@ -1730,6 +1730,30 @@ article > footer nav {
 	font-style: normal;
 }
 
+.contactus #senderName, .contactus #senderEmail, .contactus textarea {
+	border: 1px solid #EEF1F5;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.1);
+	   -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
+		  o-box-shadow: 0 0 2px rgba(0,0,0,.1);
+			box-shadow: 0 0 2px rgba(0,0,0,.1);
+	margin-bottom: 10px;
+	padding: 3px;
+	font-size: 12px;
+	width: 265px;
+}
+.contactus #senderName, .contactus #senderEmail {
+	height: 20px;
+}
+.contactus textarea {
+	height: 80px;
+}
+.contactus .container span {
+	display: block;
+	margin-bottom: 10px;
+}
+
+
 /* briefs section */
 .inbrief ul li {
 	border-top: 1px solid #EEF1F5;

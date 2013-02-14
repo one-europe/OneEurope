@@ -116,8 +116,14 @@
 						
 						<?php 
 						
-							// all posts that are either by me or where I was added as author			
-							$items = Posts::get( 
+							
+						// Retrieve future briefs.
+
+							$page =Controller::get_var( 'page' );
+							if ( $page == '' ) { $page = 1; }
+							$theme->current_page = $page;
+							$pagination = 5;
+							$pieces = Posts::get( 
 								array( 'where' => 
 									array(
 										array('user_id' => $post->info->user),
@@ -126,15 +132,18 @@
 									'content_type' => Post::type('article'), 
 									'nolimit' => true, 
 									'status' => Post::status('published'),
+									'offset' => ($pagination)*($page)-$pagination,
+									'limit' => $pagination
 								) 
 							);
 				
 							// now exclude all that are by me but where I added an author
-							foreach ($items as $item) {
-								if ( $item->info->author && $item->info->author != $post->info->user && $item->info->author != 0 ) {$i++;}
+							$i = 0;
+							foreach ($pieces as $piece) {
+								if ( $piece->info->author && $piece->info->author != $post->info->user && $piece->info->author != 0 ) {$i++;}
 							}
 
-							$count = $items->count_all() - $i;
+							$count = $pieces->count_all() - $i;
 
 							if ($count > 0 ) {
 						
@@ -144,52 +153,52 @@
 								
 								<div class="affiliated-posts tile-thumbs list-1">
 					
-									<?php foreach ($items as $item ) { ?>
+									<?php foreach ($pieces as $piece ) { ?>
 															
-										<?php if (!$item->info->author || $item->info->author == $post->info->user || $item->info->author == 0 ) { ?>
+										<?php if (!$piece->info->author || $piece->info->author == $post->info->user || $piece->info->author == 0 ) { ?>
 			
 
 							<div class="list">
 
-								<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/></a>
+								<a href="<?php echo $piece->permalink; ?>" title="<?php echo $piece->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $piece->info->photourl; ?>" alt="<?php if ( $piece->info->photoinfo ) { echo $piece->info->photoinfo; } else { echo $piece->title; } ?>" height="100" width="160"/></a>
 
 								<header>
 							
-									<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
+									<h2><a href="<?php echo $piece->permalink; ?>" title="<?php echo $piece->title; ?>"><?php echo $piece->title_out; ?></a></h2>
 
 
 								</header>
 
 								<article class="body">
-								<?php if ( $item->info->excerpt ) {
-								        echo $item->info->excerpt; } 
+								<?php if ( $piece->info->excerpt ) {
+								        echo $piece->info->excerpt; } 
 									else {
-								        echo $item->content_out;
+								        echo $piece->content_out;
 								        }?>
 								</article>
 
 								<footer>
 						
 									<span class="entry-tags">
-								        <?php if ( $show_author && $item->typename == 'article' ) { ?>
+								        <?php if ( $show_author && $piece->typename == 'article' ) { ?>
 
 											<span class="entry-autor">
-												<?php if ( $item->info->origauthor ) { ?>
-													<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="Portrait"><span><?php echo $item->info->origauthor; ?></span></a>
-												<?php } elseif ($item->info->author) { ?>
-													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $item->info->author ) ) );?>
-													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($item->info->author)->displayname; ?></span></a>
+												<?php if ( $piece->info->origauthor ) { ?>
+													<a href="<?php if ( $piece->info->origprofile ) { echo $piece->info->origprofile; } else { echo $piece->info->origsource; } ?>" title="Portrait"><span><?php echo $piece->info->origauthor; ?></span></a>
+												<?php } elseif ($piece->info->author) { ?>
+													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $piece->info->author ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($piece->info->author)->displayname; ?></span></a>
 												<?php } else { 
-													$publisher = Post::get(array( 'all:info' => array( 'user' => $item->author->id ) ) );?>
-													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $item->author->displayname; ?></span></a>
+													$publisher = Post::get(array( 'all:info' => array( 'user' => $piece->author->id ) ) );?>
+													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $piece->author->displayname; ?></span></a>
 												<?php } ?>
 											</span>
 
 										<?php } ?>
 
-								        on <time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+								        on <time datetime="<?php echo $piece->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $piece->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
 									</span>
-								        <a class="alignright entry-comments" href="<?php echo $item->permalink ?>#disqus_thread">Comments</a>
+								        <a class="alignright entry-comments" href="<?php echo $piece->permalink ?>#disqus_thread">Comments</a>
 
 								</footer>
 

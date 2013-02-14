@@ -205,6 +205,25 @@
 		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for the newsletter! ›</a></big></p>
 	</section>
 	
+	
+	
+	<section class="contactus">
+		<div class="h"><span>Say Hello</span></div>
+		
+		<form id="contactForm" action="<?php Site::out_url('theme') ?>/mail.php" method="post">
+
+			<div class="container">
+				<span>Want to get involved, give some feedback or found an error? No Problem! Drop us a line:</span>
+			    <input id="senderName" placeholder="Name" name="senderName" required="required" type="text" />
+			    <input id="senderEmail" placeholder="Email" name="senderEmail" required="required" type="email" />
+			    <textarea id="message" name="message" required="required"></textarea>
+			    <input id="sendMessage" type="submit" name="sendMessage" value="Send message" />
+				<div class="clear"></div>
+			</div>
+
+		</form>
+		
+	</section>
 		
 	<?php /* section id="subscribe">	
 		<a href="<?php echo Options::out('habari') ?>/atom/1" rel="nofollow"><img src="<?php echo Site::out_url('theme')?>/img/atomfeed.png" alt="Atom Feed" height="25" width="25" /></a>
