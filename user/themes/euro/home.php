@@ -216,8 +216,8 @@
 													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
 													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($post->info->author)->displayname; ?></span></a>
 												<?php } else { 
-													$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
-													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $post->author->displayname; ?></span></a>
+													$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) ); ?>
+													<a href="<?php echo $publisher->permalink; ?>" title="More about <?php echo $post->author->displayname; ?>"><span><?php echo $post->author->displayname; ?></span></a>
 												<?php } ?>
 											</span>
 
@@ -225,7 +225,7 @@
 
 								        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
 									</span>
-								        <?php /*&nbsp;<a class="entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a> */ ?>
+								        <?php /* &nbsp;<a class="entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a> */ ?>
 
 								</footer>
 

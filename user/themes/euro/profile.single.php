@@ -130,6 +130,7 @@
 							);
 				
 							// now exclude all that are by me but where I added an author
+							$i = 0;
 							foreach ($items as $item) {
 								if ( $item->info->author && $item->info->author != $post->info->user && $item->info->author != 0 ) {$i++;}
 							}

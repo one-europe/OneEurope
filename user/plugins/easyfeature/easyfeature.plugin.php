@@ -60,20 +60,20 @@ class EasyFeature extends Plugin
 			$form->move_before( $form->systags, $form->content );
 
 			$form->content->tabindex = $form->content->tabindex + 1;
-			$form->photourl->tabindex = $form->photourl->tabindex + 1;
-			$form->photoinfo->tabindex = $form->photoinfo->tabindex + 1;
-			$form->photolicense->tabindex = $form->photolicense->tabindex + 1;
-			$form->metacat->tabindex = $form->metacat->tabindex + 1;
-			$form->origsource->tabindex = $form->origsource->tabindex + 1;
-			$form->origauthor->tabindex = $form->origauthor->tabindex + 1;
-			$form->originfo->tabindex = $form->originfo->tabindex + 1;
-			$form->origprofile->tabindex = $form->origprofile->tabindex + 1;
-			$form->debate->tabindex = $form->debate->tabindex + 1;
-			$form->initiative->tabindex = $form->initiative->tabindex + 1;
-			$form->append->tabindex = $form->append->tabindex + 1;
-			$form->save->tabindex = $form->save->tabindex + 1;
+			if ($form->photourl) {		$form->photourl->tabindex = $form->photourl->tabindex + 1; }
+			/*if ($form->photoinfo) {		$form->photoinfo->tabindex = $form->photoinfo->tabindex + 1; }
+			if ($form->photolicense) {	$form->photolicense->tabindex = $form->photolicense->tabindex + 1; }
+			if ($form->metacat) {		$form->metacat->tabindex = $form->metacat->tabindex + 1; }
+			if ($form->origsource) {	$form->origsource->tabindex = $form->origsource->tabindex + 1; }
+			if ($form->origauthor) {	$form->origauthor->tabindex = $form->origauthor->tabindex + 1; }
+			if ($form->originfo) {		$form->originfo->tabindex = $form->originfo->tabindex + 1; }
+			if ($form->origprofile) {	$form->origprofile->tabindex = $form->origprofile->tabindex + 1; }
+			if ($form->debate) {		$form->debate->tabindex = $form->debate->tabindex + 1; }
+			if ($form->initiative) {	$form->initiative->tabindex = $form->initiative->tabindex + 1; }
+			if ($form->append) {		$form->append->tabindex = $form->append->tabindex + 1; }
+			form->save->tabindex = $form->save->tabindex + 1; */
 
-			// If this is an existing post, see if it has systags already
+			// If this is an existing post, see if it has systags already and implode them
 			if ( 0 != $post->id ) {
 				$form->systags->value = implode( ', ', array_values( $this->get_systags( $post ) ) );
 			}
