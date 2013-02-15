@@ -36,7 +36,7 @@
 		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
 
 
-
+		<?php if (is_object($post)) { // only show disqus code if there is a post ?>
 		<script type="text/javascript">
 		// ===== disqus ===== //
 		
@@ -55,6 +55,7 @@
 		    })();
 		
 		</script>
+		<?php } ?>
 
 
 	</head>
