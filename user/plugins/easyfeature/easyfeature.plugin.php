@@ -60,6 +60,7 @@ class EasyFeature extends Plugin
 			$form->move_before( $form->systags, $form->content );
 
 			$form->content->tabindex = $form->content->tabindex + 1;
+		
 		if (is_object($form->photourl)) {
 			$form->photourl->tabindex = $form->photourl->tabindex + 1;
 		}
@@ -97,7 +98,8 @@ class EasyFeature extends Plugin
 			$form->save->tabindex = $form->save->tabindex + 1;
 		}
 
-			// If this is an existing post, see if it has systags already
+
+			// If this is an existing post, see if it has systags already and implode them
 			if ( 0 != $post->id ) {
 				$form->systags->value = implode( ', ', array_values( $this->get_systags( $post ) ) );
 			}

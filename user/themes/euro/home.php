@@ -229,7 +229,7 @@
 
 								        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
 									</span>
-								        <?php /*&nbsp;<a class="entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a> */ ?>
+								        <?php /* &nbsp;<a class="entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a> */ ?>
 
 								</footer>
 

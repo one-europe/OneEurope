@@ -414,6 +414,7 @@ class MetaSeo extends Plugin
 							$keywords = $this->theme->post->info->metaseo_keywords;
 						}
 						else if( count( $this->theme->post->tags ) > 0 ) {
+							// something's strange here!!
 							$keywords = implode( ', ', $this->theme->post->tags );
 						}
 					}
@@ -646,7 +647,7 @@ class MetaSeo extends Plugin
 					echo "<meta property=\"og:description\" content=\"OneEurope creates a hub to exchange insights and breathe the spirit and the diversity of Europe. It's brought to you by a community of volunteers from all around Europe.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
-				case 'display_nibble':
+				case 'display_brief':
 					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta property=\"og:type\" content=\"article\" >\n";
 					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
@@ -654,7 +655,7 @@ class MetaSeo extends Plugin
 					echo "<meta property=\"og:description\" content=\"{$this->theme->post->info->teaser}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
-				case 'display_nibbles':
+				case 'display_briefs':
 					echo "\n<meta property=\"og:title\" content=\"All image posts\" >\n";
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info/nibbles\" >\n";
 					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
@@ -768,7 +769,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n";
 					
 					break;
-				case 'display_nibble':
+				case 'display_brief':
 					echo "\n<meta name=\"twitter:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"photo\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
@@ -776,7 +777,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->teaser}\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
-				case 'display_nibbles':
+				case 'display_briefs':
 					echo "\n<meta property=\"twitter:title\" content=\"All image posts\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/nibbles\" >\n";
@@ -870,9 +871,9 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
 					if ( $this->theme->post->info->origsource ) { 
-						// don't do anything
+						$author = $this->theme->post->info->origauthor;
 					} else { 
-						$author = $this->theme->post->author->info->userfield_Twitter;
+						$author = $this->theme->post->author->info->twitter;
 					}
 					echo "<meta name=\"twitter:creator\" content=\"{$author}\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
