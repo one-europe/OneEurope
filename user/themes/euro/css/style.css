@@ -443,8 +443,10 @@ body {
 .sm-buttons {
 	float: right;
 }
-.sm-buttons ul li {
+.sm-buttons ul {
 	list-style: none outside none;
+}
+.sm-buttons ul li {
 	float: left;
 	margin: 0 0 0 5px;
 }
