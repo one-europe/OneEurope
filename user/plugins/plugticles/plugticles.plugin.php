@@ -197,9 +197,9 @@ class Plugticles extends Plugin
 							
 			
 			$form->save->tabindex = $form->save->tabindex + 20;
-			// nonworking
-			$form->publish->tabindex = $form->publish->tabindex + 20;
-			$form->delete->tabindex = $form->delete->tabindex + 20;
+			// nonworking & causing errors on MAMP
+			//$form->publish->tabindex = $form->publish->tabindex + 20;
+			//$form->delete->tabindex = $form->delete->tabindex + 20;
 			
 			
 			// append this post to the profile of ... need: list of profiles, similar to the list of authors in plugprofiles

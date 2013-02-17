@@ -14,10 +14,10 @@ $message = isset( $_POST['message'] ) ? preg_replace( "/(From:|To:|BCC:|CC:|Subj
 // check whether mail body contains "http://"
 $spam = "http://";
 $pos = strpos($message,$spam);
-if($pos === false) {
-	$nospam == true;
+if($pos == false) {
+	$nospam = true;
 } else {
-	$nospam == false;
+	$nospam = false;
 }
 
 
@@ -42,7 +42,6 @@ if ( isset($_GET["ajax"]) ) {
   <?php if ( $success ) echo "<p>Thanks for sending your message! We'll get back to you shortly.</p>" ?>
   <?php if ( !$success ) echo "<p>There was a problem sending your message. Please try again. If there were any links, try without \"http://\"</p>" ?>
   <p>Click your browser's Back button to return to the page.</p>
-<?php if ($foo) { echo 'here\'s the email: ' . $contact_email; } else { echo 'no email'; } ?>
   </body>
 </html>
 <?php

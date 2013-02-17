@@ -27,8 +27,12 @@
 								<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
 								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><?php echo User::get($post->info->author)->displayname; ?></a>
 							<?php } else { 
-								$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
-								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><?php echo $post->author->displayname; ?></a>
+									if (is_object(Post::get(array( 'all:info' => array( 'user' => $post->author->id ) )))) { 
+										$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
+								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $post->author->displayname; ?></span></a>
+									<?php } else { ?>
+								<span><?php echo $post->author->displayname; ?></span>
+									<?php } ?>
 							<?php } ?>
 							
 						|</span>
@@ -85,9 +89,14 @@
 					
 
 					<?php /*	Show an info sentence, if there is one (there can be one either as 'originfo', as that of the assigned author or
-								as that of the actual author, each of which should first be looked up from their user table and then from their profile 								post table. */
+								as that of the actual author, each of which should first be looked up from their user table and then from their profile
+								post table. */
 
-							if ( $post->info->origauthor || ($post->author->info->description && !$post->info->author) || (Post::get(array('all:info' => array('user' => $post->author)))->info->description && !$post->info->author) || User::get($post->info->author)->info->description || Post::get(array('all:info' => array('user' => $post->info->author)))->info->description ) { ?>
+							if ( $post->info->origauthor 
+							|| ($post->author->info->description && !$post->info->author) 
+							|| (Post::get(array('all:info' => array('user' => $post->author)))->info->description && !$post->info->author) 
+							|| User::get($post->info->author)->info->description 
+							|| Post::get(array('all:info' => array('user' => $post->info->author)))->info->description ) { ?>
 					
 						<section class="meta authorbox">
 						

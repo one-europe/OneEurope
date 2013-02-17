@@ -1008,7 +1008,7 @@ span.entry-autor {
 	color: #666;
 	font-size: 0.9em;
 }
-span.entry-autor > a > span {
+span.entry-autor > * {
 	text-transform: uppercase;
 	font-family: Arial, sans-serif;
 	color: #555

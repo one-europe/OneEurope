@@ -216,8 +216,12 @@
 													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
 													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($post->info->author)->displayname; ?></span></a>
 												<?php } else { 
-													$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
+														if (is_object(Post::get(array( 'all:info' => array( 'user' => $post->author->id ) )))) { 
+															$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
 													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $post->author->displayname; ?></span></a>
+														<?php } else { ?>
+													<span><?php echo $post->author->displayname; ?></span>
+														<?php } ?>
 												<?php } ?>
 											</span>
 
