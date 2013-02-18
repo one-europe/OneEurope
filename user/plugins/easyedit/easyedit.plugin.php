@@ -56,36 +56,50 @@ class EasyEdit extends Plugin
 		if ( User::identify()->can('post_as') && $form->content_type->value == Post::type( 'article' ) ) {
 
 
-			// make a dropdown of all users with set display names
-			$users = Users::get_all(); 						// put all user-objects in one array 
-			$names = array(); 								// create second, empty array
-			$i = 1;
-			foreach ($users as $user) { 					// for every user of the first one... 
-				if ( $i == 1 ) {
-					$names[] = 'Yourself';
-					$i++;
-				}
-				if ( $user->info->displayname ) {			// ...if he has a displayname...
-					$names[] = $user->info->displayname;	// ...fill an object in the new array aka [nr] => [displayname]
-				}
-			} 												// use this value in the dropdown
-			$form->append( 'select', 'user', 'null:null', _t( 'Post as:' ), $names, 'tabcontrol_select' ); 
-			$ids = array();
-			$i = 1;
-			foreach ($users as $user) { 					// ..
-				if ( $i == 1 ) {
-					$ids[] = '0';
-					$i++;
-				}
-				if ( $user->info->displayname ) {
-					$ids[] = $user->id;						// overwrite the displaynames with ids, cause this is what we receive from the db
-					$i++;
-				}
+			// Get author list
+			$author_list = Users::get_all();
+			$authors[0] = 'Select author';
+			foreach ( $author_list as $author ) {
+				$authors[ $author->id ] = $author->displayname;
 			}
-			$key = array_search( $post->info->author, $ids ); 
+			$form->append( 'select', 'user', 'null:null', _t( 'Post as:' ), $authors, 'tabcontrol_select' ); 
+
+			// retrieve current db entry
+			if ($post->info->author && $post->info->author != 0 ) {
+				$selected_user = $post->info->author;
+			} else {
+				$selected_user = User::identify()->id;
+			}
+			
+			$author_ids[0] = '';
+			foreach ($author_list as $author) { 					// ..
+					$author_ids[ $author->id ] = $author->id;		// overwrite the displaynames with ids, cause this is what we receive from the db
+			}
+
+			$key = array_search( $selected_user, $author_ids ); 
 			$form->user->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
 			$form->user->tabindex = 4;
 			$form->user->move_after($form->tags);
+
+
+
+
+
+			// make a dropdown of all users with set display names
+			/*$users = Users::get_all(); 						// create array with all users 
+			$names = array(); 								// create another, empty array
+			$i = 1;
+			foreach ($users as $user) { 					// for every user in the first array.. 
+				if ( $i == 1 ) {							// if current index == 0, show my own name
+					$myname = User::identify()->displayname;
+					$names[] = 'You, resp. the account which created this post (that is: ' . $myname . ')';
+					$i++;
+				}
+				if ( $user->info->displayname ) {			// ...if he has a displayname...
+					$names[] = $user->info->displayname;	// ...add [id] => [displayname] to the array
+				}
+			} 												// use this value in the dropdown*/
+
 
 		}
 	}
@@ -99,20 +113,15 @@ class EasyEdit extends Plugin
 
 			// create exactly the same array as above, but with id's 
 			// and save them as $post->info->user object to the db
-			$users = Users::get_all();
-			$names = array();
-			$i = 1;
-			foreach ($users as $user) { 
-				if ( $i == 1 ) {
-					$names[] = '0';
-					$i++;
-				}
-				if ( $user->info->displayname ) {
-					$names[] = $user->id;
-					$i++;
-				}
+			
+			// Get author list
+			$author_list = Users::get_all();
+			$authors[0] = '';
+			foreach ( $author_list as $author ) {
+				$authors[ $author->id ] = $author->id;
 			}
-			$post->info->author = $names[$form->user->value];
+
+			$post->info->author = $authors[$form->user->value];
 
 	}
 

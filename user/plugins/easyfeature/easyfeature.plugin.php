@@ -61,42 +61,42 @@ class EasyFeature extends Plugin
 
 			$form->content->tabindex = $form->content->tabindex + 1;
 		
-		if (is_object($form->photourl)) {
-			$form->photourl->tabindex = $form->photourl->tabindex + 1;
-		}
-		if (is_object($form->photoinfo)) {
-			$form->photoinfo->tabindex = $form->photoinfo->tabindex + 1;
-		}
-		if (is_object($form->photolicense)) {
-			$form->photolicense->tabindex = $form->photolicense->tabindex + 1;
-		}
-		if (is_object($form->metacat)) {
-			$form->metacat->tabindex = $form->metacat->tabindex + 1;
-		}
-		if (is_object($form->origsource)) {
-			$form->origsource->tabindex = $form->origsource->tabindex + 1;
-		}
-		if (is_object($form->origauthor)) {
-			$form->origauthor->tabindex = $form->origauthor->tabindex + 1;
-		}
-		if (is_object($form->originfo)) {
-			$form->originfo->tabindex = $form->originfo->tabindex + 1;
-		}
-		if (is_object($form->origprofile)) {
-			$form->origprofile->tabindex = $form->origprofile->tabindex + 1;
-		}
-		if (is_object($form->debate)) {
-			$form->debate->tabindex = $form->debate->tabindex + 1;
-		}
-		if (is_object($form->initiative)) {
-			$form->initiative->tabindex = $form->initiative->tabindex + 1;
-		}
-		if (is_object($form->append)) {
-			$form->append->tabindex = $form->append->tabindex + 1;
-		}
-		if (is_object($form->save)) {
-			$form->save->tabindex = $form->save->tabindex + 1;
-		}
+			if (is_object($form->photourl)) {
+				$form->photourl->tabindex = $form->photourl->tabindex + 1;
+			}
+			if (is_object($form->photoinfo)) {
+				$form->photoinfo->tabindex = $form->photoinfo->tabindex + 1;
+			}
+			if (is_object($form->photolicense)) {
+				$form->photolicense->tabindex = $form->photolicense->tabindex + 1;
+			}
+			if (is_object($form->metacat)) {
+				$form->metacat->tabindex = $form->metacat->tabindex + 1;
+			}
+			if (is_object($form->origsource)) {
+				$form->origsource->tabindex = $form->origsource->tabindex + 1;
+			}
+			if (is_object($form->origauthor)) {
+				$form->origauthor->tabindex = $form->origauthor->tabindex + 1;
+			}
+			if (is_object($form->originfo)) {
+				$form->originfo->tabindex = $form->originfo->tabindex + 1;
+			}
+			if (is_object($form->origprofile)) {
+				$form->origprofile->tabindex = $form->origprofile->tabindex + 1;
+			}
+			if (is_object($form->debate)) {
+				$form->debate->tabindex = $form->debate->tabindex + 1;
+			}
+			if (is_object($form->initiative)) {
+				$form->initiative->tabindex = $form->initiative->tabindex + 1;
+			}
+			if (is_object($form->append)) {
+				$form->append->tabindex = $form->append->tabindex + 1;
+			}
+			if (is_object($form->save)) {
+				$form->save->tabindex = $form->save->tabindex + 1;
+			}
 
 
 			// If this is an existing post, see if it has systags already and implode them

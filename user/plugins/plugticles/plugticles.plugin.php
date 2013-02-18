@@ -29,6 +29,11 @@ class Plugticles extends Plugin
 		if ( $group ) {
 			$group->grant( self::CONTENT_TYPE, 'read' );
 		}
+		// create default access token to re-publish fields
+		ACL::create_token( 'republish', _t( 'Allow re-publishing' ), 'Administration', false );
+		$group = UserGroup::get_by_name( 'admin' );
+		$group->grant( 'republish' );
+
 	}
 	/**
 	 * Run deactivation routines.
@@ -36,6 +41,9 @@ class Plugticles extends Plugin
 	public function action_plugin_deactivation( $plugin_file )
 	{
 		Post::deactivate_post_type( self::CONTENT_TYPE );
+		// delete access tokens to re-publish fields
+		ACL::destroy_token( 'republish' );
+
 	}
 	
 	/**
@@ -57,7 +65,7 @@ class Plugticles extends Plugin
 	 *
 	 * @todo category dropdown, savebutton->tabindex
 	 **/
-	public function action_form_publish($form, $post, $context)
+	public function action_form_publish($form, $post)
 	{
 		// only edit the form if it's an article
 		if ( $form->content_type->value == Post::type( self::CONTENT_TYPE ) ) {
@@ -92,8 +100,8 @@ class Plugticles extends Plugin
 			$form->photoinfo->value = $post->info->photoinfo;
 			$form->photoinfo->move_after($form->photourl);
 			
-			// add photo license
-			$form->append('text', 'photolicense', 'null:null', _t('Photo License'), 'admincontrol_text');
+			// add photo licensor field
+			$form->append('text', 'photolicense', 'null:null', _t('Photo Licensor'), 'admincontrol_text');
 			$form->photolicense->tabindex = 8;
 			$form->photolicense->value = $post->info->photolicense;
 			$form->photolicense->move_after($form->photoinfo);
@@ -103,31 +111,36 @@ class Plugticles extends Plugin
 			$form->metacat->tabindex = 100;
 			$form->metacat->value = $post->info->metacat;
 			$form->metacat->move_after($form->photolicense);*/
-			
-			// add original source of the article
-			$form->append('text', 'origsource', 'null:null', _t('Is this article re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
-			$form->origsource->tabindex = 9;
-			$form->origsource->value = $post->info->origsource;
-			$form->origsource->move_after($form->photolicense);	
+
+
+			// only allow re-publish data if user is in that group
+			if ( User::identify()->can('republish') ) {
+
+				// add original source of the article
+				$form->append('text', 'origsource', 'null:null', _t('Is this article re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
+				$form->origsource->tabindex = 9;
+				$form->origsource->value = $post->info->origsource;
+				$form->origsource->move_after($form->photolicense);	
 	
-			// add field for the name of the source
-			$form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
-			$form->origauthor->tabindex = 10;
-			$form->origauthor->value = $post->info->origauthor;
-			$form->origauthor->move_after($form->origsource);
+				// add field for the name of the source
+				$form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
+				$form->origauthor->tabindex = 10;
+				$form->origauthor->value = $post->info->origauthor;
+				$form->origauthor->move_after($form->origsource);
 
-			// add field for additional desc of that source
-			$form->append('text', 'originfo', 'null:null', _t('Please add a describing sentence about that source here'), 'admincontrol_text');
-			$form->originfo->tabindex = 11;
-			$form->originfo->value = $post->info->originfo;
-			$form->originfo->move_after($form->origauthor);
+				// add field for additional desc of that source
+				$form->append('text', 'originfo', 'null:null', _t('Please add a describing sentence about that source here'), 'admincontrol_text');
+				$form->originfo->tabindex = 11;
+				$form->originfo->value = $post->info->originfo;
+				$form->originfo->move_after($form->origauthor);
 
-			// add field for the 1e-profile of that source
-			/*$form->append('text', 'origprofile', 'null:null', _t('The link of the source\'s 1E-profile, if there is one'), 'admincontrol_text');
-			$form->origprofile->tabindex = 12;
-			$form->origprofile->value = $post->info->origprofile;
-			$form->origprofile->move_after($form->originfo);*/
+				// add field for the 1e-profile of that source
+				/*$form->append('text', 'origprofile', 'null:null', _t('The link of the source\'s 1E-profile, if there is one'), 'admincontrol_text');
+				$form->origprofile->tabindex = 12;
+				$form->origprofile->value = $post->info->origprofile;
+				$form->origprofile->move_after($form->originfo);*/
 
+			}
 
 
 			// make a dropdown of all debates with set slugs
@@ -159,7 +172,7 @@ class Plugticles extends Plugin
 			$key = array_search( $post->info->debate, $ids ); 
 			$form->debate->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
 			$form->debate->tabindex = 13;
-			$form->debate->move_after($form->originfo);
+			$form->debate->move_after($form->photolicense);
 			
 			
 			
@@ -210,6 +223,7 @@ class Plugticles extends Plugin
 			//$form->append('file', 'photo', 'path:' . Site::get_dir('files') . '/photos', 'Thumbnail Image');
 			// load values and display the fields
 		}
+
 	}
 	
 	/**
@@ -226,12 +240,13 @@ class Plugticles extends Plugin
 			$post->info->photolicense = $form->photolicense->value;
 			//$post->info->metacat = $form->metacat->value;
 			
-			
-			$post->info->origsource = $form->origsource->value;
-			$post->info->origauthor = $form->origauthor->value;			
-			$post->info->originfo = $form->originfo->value;
-			//$post->info->origprofile = $form->origprofile->value;
-
+			// only change db entry if user can have entered something new
+			if ( User::identify()->can('republish') ) {
+				$post->info->origsource = $form->origsource->value;
+				$post->info->origauthor = $form->origauthor->value;			
+				$post->info->originfo = $form->originfo->value;
+				//$post->info->origprofile = $form->origprofile->value;
+			}
 
 			// create the same array for the dropdown as above, but now with id's, and save them as $post->info->debate object to the db
 			$debates = Posts::get( array( 'content_type' => 'debate', 'status' => 'published' ) );
