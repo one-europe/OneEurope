@@ -70,7 +70,7 @@ Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-ou
 		
 		// work with systags.plugin
 		$this->assign( 'sides', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'mini' ), 'limit' => 2, 'status' => 'published' ) ) );
-		$this->assign( 'sliders', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => array('published', 'scheduled') ) ) );
+		$this->assign( 'sliders', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => array('published') ) ) );
 		$this->assign( 'menus', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'menu' ), 'limit' => 5, 'status' => 'published' ) ) );
 		$this->assign( 'inits', Posts::get( array( 'content_type' => 'initiative', 'limit' => 7, 'status' => 'published' ) ) );
 		$this->assign( 'briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => '6' ) ) );
