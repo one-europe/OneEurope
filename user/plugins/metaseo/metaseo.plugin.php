@@ -765,7 +765,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"OneEurope creates a hub to exchange insights and breathe the spirit and the diversity of Europe. It's brought to you by a community of volunteers from all around Europe.\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"" . htmlspecialchars( strip_tags( Options::get( 'about' ) ), ENT_COMPAT, 'UTF-8' ) . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n";
 					
 					break;
@@ -774,7 +774,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:card\" content=\"photo\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->teaser}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"" . echo $this->theme->post->info->teaser; . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				case 'display_briefs':
@@ -782,7 +782,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/nibbles\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.jpg\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"Our complete image post database.\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"The best image and info graphic content about European politics on the web.\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				case 'display_initiative':
@@ -790,7 +790,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->teaser}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"" . $this->theme->post->info->teaser; . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				case 'display_initiatives':
@@ -806,7 +806,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"" . echo $this->theme->post->info->excerpt; . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				case 'display_debates':
@@ -829,7 +829,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"{$source->photourl}\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"{$source->teaser}\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"" . echo $source->teaser; . \" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				case 'display_profiles':
@@ -865,17 +865,17 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				default:
-					echo "\n<meta name=\"twitter:title\" content=\"{$this->theme->post->title}\" >\n";
+					echo "\n<meta name=\"twitter:title\" content=\"" . echo $this->theme->post->title; . "\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
-					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"" . echo $this->theme->post->info->photourl; . \" >\n";
+					echo "<meta name=\"twitter:description\" content=\"" . echo $this->theme->post->info->excerpt; . "\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"" echo . $this->theme->post->permalink; . "\" >\n";
 					if ( $this->theme->post->info->origsource ) { 
 						$author = $this->theme->post->info->origauthor;
 					} else { 
 						$author = $this->theme->post->author->info->twitter;
 					}
-					echo "<meta name=\"twitter:creator\" content=\"{$author}\" >\n";
+					echo "<meta name=\"twitter:creator\" content=\"" . echo $author; . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				break;
