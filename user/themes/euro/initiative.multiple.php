@@ -30,6 +30,20 @@
 					</div>
 
 					<?php } ?>
+
+
+							<?php if ( $current_page >= 2 || $there_are_more ) { ?>
+								<div class="pagination">
+									<?php if ( $current_page >= 2 ) { ?>
+										<a href="<?php Site::out_url( 'home' ); ?>/initiatives/page/<?php echo $current_page - 1; ?>" title="Previous Page" class="alignleft">&laquo; Newer Initiatives</a>
+									<?php }
+									if ( $there_are_more ) { ?>
+									<a href="<?php Site::out_url( 'home' ); ?>/initiatives/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="alignright">Older Initiatives &raquo;</a>
+									<?php } ?>
+									<div class="clear"></div>
+								</div>
+
+							<?php } ?>
 					
 				</div>
 		

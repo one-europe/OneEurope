@@ -197,7 +197,7 @@
 							</ul>
 						</li>
 						<li class="menu_4">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
+							<a rel="section" class="sf-with-ul" href="#">About</a>
 							<ul class="subnav">
 								<li class="col1">
 									<div>

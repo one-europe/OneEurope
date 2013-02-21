@@ -176,7 +176,7 @@ class PlugProfile extends Plugin
 		if ( $post->content_type == Post::type( self::CONTENT_TYPE ) ) {
  
 			// Save settings
-			$post->info->teaser = $form->teaser->value;
+			$post->info->teaser = $form->teaser->value;			
 			$post->info->photourl = $form->photourl->value;
 			$post->info->url = $form->url->value;
 			$post->info->twitter = $form->twitter->value;
@@ -234,8 +234,8 @@ class PlugProfile extends Plugin
 		);
 		$rules[] = new RewriteRule( array( 
 			'name' => 'display_profile',
-			'parse_regex' => '%profiles/(?P<slug>[^/]+)/?$%i',
-			'build_str' => 'profiles/{$slug}',
+			'parse_regex' => '%profiles/(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$%i',
+			'build_str' => 'profiles/{$slug}(/page/{$page})',
 			'handler' => 'UserThemeHandler',
 			'action' => 'display_profile',
 			'priority' => 2,
@@ -265,7 +265,50 @@ class PlugProfile extends Plugin
 		$paramarray['user_filters'] = array(
 		 'nolimit' => TRUE,
 		);
- 
+
+
+		// Retrieve the paginated list of the autor's pieces
+		// therefore, set some pagination variables
+		$page =Controller::get_var( 'page' );
+		$pagination = 5;
+		if ( $page == '' ) { $page = 1; }
+		$theme->current_page = $page;
+
+		// Retrieve our post object of the profile in display
+		$post_slug = $theme->matched_rule->named_arg_values['slug'];
+		$post = Post::get( array( 'slug' => $post_slug ) );
+
+		$pieces = Posts::get(
+			array('where' => 
+				array(
+					array('user_id' => $post->info->user),
+					array('all:info' => array('author' => $post->info->user ) )
+				), 
+			    'content_type' => Post::type('article'),
+			    'status' => Post::status('published'),
+				'offset' => ($pagination)*($page)-$pagination,
+			    'limit' => $pagination
+			)
+		);
+
+		$theme->pieces = $pieces;
+		
+		$all = Posts::get(
+			array('where' => 
+				array(
+					array('user_id' => $post->info->user),
+					array('all:info' => array('author' => $post->info->user ) )
+				), 
+			    'content_type' => Post::type('article'),
+			    'status' => Post::status('published'),
+				'nolimit' => true
+			)
+		);
+	    $theme->there_are_more = false;
+	    if ( $all->count_all() > $pagination*$page ) {
+	 		$theme->there_are_more = true;
+	    }
+
 		return $theme->act_display( $paramarray );
 	}
 	
@@ -305,16 +348,6 @@ class PlugProfile extends Plugin
 	    'profile.multiple',
 	    'multiple',
 	  );
-
-	  // Retrieve contributors. Not in use atm, but kept as code.
-	  $contributors = Posts::get(array(
-	    'content_type' => Post::type('profile'),
-	    'status' => Post::status('published'),
-	    'all:info' => array('ccontributor' => 1),
-		//'vocabulary' => array('systags:not:term' => array('director', 'author', 'ambassador', 'former', 'editor')),
-		'orderby' => 'title ASC',
-	    'nolimit' => TRUE
-	  ));
 	
 	  $authors = Posts::get(array(
 	    'content_type' => Post::type('profile'),
@@ -381,7 +414,6 @@ class PlugProfile extends Plugin
 		$fieldset = $form->append( 'wrapper', 'profile', 'Profile' );
 		$fieldset->class = 'container settings';
 		$fieldset->append( 'static', 'profile', '<h2>Profile Options</h2>' );
-
 
 		$teaser = $fieldset->append( 'text', 'teaser', 'null:null', _t('Teaser'), 'optionscontrol_text' );
 		$teaser->class[] = 'item clear';

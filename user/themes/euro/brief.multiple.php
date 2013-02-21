@@ -62,14 +62,20 @@
 					
 				</ul>
 
-				<div class="pagination">
 
-					<?php if ( $current_page >= 2 ) { ?>
-						<a href="<?php Site::out_url( 'home' ); ?>/in-brief/page/<?php echo $current_page - 1; ?>" title="Previous Page" class="alignleft">&laquo; Newer Posts</a>
-					<?php } ?>
-					<a href="<?php Site::out_url( 'home' ); ?>/in-brief/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="alignright">Older Posts &raquo;</a>
 
-				</div>
+				<?php if ( $current_page >= 2 || $all > $pagination ) { ?>
+
+					<div class="pagination">
+						<?php if ( $current_page >= 2 ) { ?>
+							<a href="<?php Site::out_url( 'home' ); ?>/in-brief/page/<?php echo $current_page - 1; ?>" title="Previous Page" class="alignleft">&laquo; Newer Posts</a>
+						<?php } if ( $all > $pagination ) { ?>
+							<a href="<?php Site::out_url( 'home' ); ?>/in-brief/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="alignright">Older Posts &raquo;</a>
+						<?php } ?>
+					</div>
+
+				<?php } ?>
+
 		
 			</div>
 

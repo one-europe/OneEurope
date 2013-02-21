@@ -35,15 +35,10 @@
 			</div>			
 			
 			<div class="secondary">
-										
+					
 				<?php 
-						
-				$news = Posts::get( array('content_type' => Post::type('article'), 'nolimit' => true, 'status' => Post::status('published'), 'all:info' => array ('initiative' => $post->id ) ) ) ;
 				$count = $news->count_all();
-						
-				?>
-		
-				<?php if ( $count > 0 ) { ?>
+				if ( $count > 0 ) { ?>
 					
 					<aside>
 						
@@ -53,23 +48,52 @@
 		
 							<?php foreach ($news as $item ) { ?>
 														
-								<div class="list">
 
-									<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php echo $item->info->photoinfo; ?>" height="100" width="160"/></a>
+<div class="list">
 
-									<header>
+	<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/></a>
 
-										<h3><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h3>
-										<span class="entry-tags">
-											<time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-											<a class="entry-comments" href="<?php echo $item->url ?>#disqus_thread" data-disqus-identifier="<?php echo $page ?> <?php echo $item->permalink; ?>">Comments</a>
-										</span>
+	<header>
 
-									</header>
+		<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
 
-									<article class="body"><?php echo $item->content_out; ?></article>
 
-								</div>
+	</header>
+
+	<article class="body">
+	<?php if ( $item->info->excerpt ) {
+	        echo $item->info->excerpt; } 
+		else {
+	        echo $item->content_out;
+	        }?>
+	</article>
+
+	<footer>
+
+		<span class="entry-tags">
+	        <?php if ( $show_author && $item->typename == 'article' ) { ?>
+
+				<span class="entry-autor">
+					<?php if ( $item->info->origauthor ) { ?>
+						<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="Portrait"><span><?php echo $item->info->origauthor; ?></span></a>
+					<?php } elseif ($item->info->author) { ?>
+						<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $item->info->author ) ) );?>
+						<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($item->info->author)->displayname; ?></span></a>
+					<?php } else { 
+						$publisher = Post::get(array( 'all:info' => array( 'user' => $item->author->id ) ) );?>
+						<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $item->author->displayname; ?></span></a>
+					<?php } ?>
+				</span>
+
+			<?php } ?>
+
+	        on <time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+		</span>
+	        <a class="alignright entry-comments" href="<?php echo $item->permalink ?>#disqus_thread">Comments</a>
+
+	</footer>
+
+</div>
 									
 							<?php } ?>
 						
@@ -80,6 +104,8 @@
 				<?php } ?>															
 			
 			</div>
+
+			<div class="clear"></br></br></div>
 			
 			<div class="disqus">
 

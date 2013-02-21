@@ -116,28 +116,8 @@
 						
 						<?php 
 						
-							
-						// Retrieve future briefs.
-
-							$page =Controller::get_var( 'page' );
-							if ( $page == '' ) { $page = 1; }
-							$theme->current_page = $page;
-							$pagination = 5;
-							$pieces = Posts::get( 
-								array( 'where' => 
-									array(
-										array('user_id' => $post->info->user),
-										array('all:info' => array('author' => $post->info->user ) )
-									), 
-									'content_type' => Post::type('article'), 
-									'nolimit' => true, 
-									'status' => Post::status('published'),
-									'offset' => ($pagination)*($page)-$pagination,
-									'limit' => $pagination
-								) 
-							);
-				
-							// now exclude all that are by me but where I added an author
+											
+							// exclude all that are by me but where I added an author
 							$i = 0;
 							foreach ($pieces as $piece) {
 								if ( $piece->info->author && $piece->info->author != $post->info->user && $piece->info->author != 0 ) {$i++;}
@@ -208,11 +188,21 @@
 													
 									<?php } ?>
 										
-									<?php /* echo $theme->prev_page_link('&laquo;' . _t('Newer Posts') ); ?>
-									<?php echo $theme->page_selector ( null, array( 'leftSide' => 2, 'rightSide' => 2 ) ); ?>
-									<?php echo $theme->next_page_link('&raquo;' . _t('Older Posts') ); */ ?>
-										
-								</div>
+								</div>		
+		
+								<div class="clear"></div>
+
+								<?php if ( $current_page >= 2 || $there_are_more ) { ?>
+									<div class="pagination">
+										<?php if ( $current_page >= 2 ) { ?>
+											<a href="<?php Site::out_url( 'home' ); ?>/profiles/<?php echo $post->slug; ?>/page/<?php echo $current_page - 1; ?>" title="Previous Page" class="alignleft">&laquo; Newer Posts</a>
+										<?php }
+										if ( $there_are_more ) { ?>
+										<a href="<?php Site::out_url( 'home' ); ?>/profiles/<?php echo $post->slug; ?>/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="alignright">Older Posts &raquo;</a>
+										<?php } ?>
+									</div>
+
+								<?php } ?>
 
 							<?php } else { ?>
 						

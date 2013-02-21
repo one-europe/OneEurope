@@ -374,7 +374,18 @@ class PlugBriefs extends Plugin
 	  ));
 	  // Add the briefs to the theme. Access this in your template with $briefs.
 	  $theme->briefs = $briefs;
+	  $theme->pagination = $pagination;
+	 
+	  $allbriefs = Posts::get(array(
+	    'content_type' => Post::type('brief'),
+	    'status' => array( Post::status('published'), Post::status('scheduled') ),
+		'offset' => ($pagination)*($page)-$pagination,
+	    'limit' => $pagination
+	  ));
+	  // Add the briefs to the theme. Access this in your template with $briefs.
+	  $theme->all = $allbriefs->count_all();
 
+	
 
 
 

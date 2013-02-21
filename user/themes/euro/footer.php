@@ -41,11 +41,11 @@
 					</div>
 			
 					<div class="element partners">
-						<h3>Media Partners</h3>
-						<br/>
+						<h3>Partners</h3>
 						<!-- a href="http://one-europe.info/profiles/european-federalist-party-efp" title="European Federalist Party"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/efp.png" title="European Federalist Party" alt="European Federalist Party" height="" width="" /></a -->
 						<a href="http://debatingeurope.eu/" target="_blank" title="debatingeurope.eu"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/debatingeurope.png" title="Debating Europe" alt="Debating Europe" height="137" width="250" /></a>
 						<a href="http://thinkyoung.eu/" target="_blank" title="Think Young"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/thinkyoung.png" title="Think Young" alt="Think Young" height="48" width="250" /></a>
+						<!-- <a href="http://beta-europe.org/" target="_blank" title="BETA - Simulation of European Politics"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/beta.jpg" title="BETA Europe" alt="BETA Europe" height="137" width="250" /></a> -->
 					</div>
 					
 					<div class="element">

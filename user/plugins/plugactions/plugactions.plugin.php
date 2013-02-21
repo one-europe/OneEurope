@@ -130,8 +130,8 @@ class Plugaction extends Plugin
 		);
 		$rules[] = new RewriteRule( array( 
 			'name' => 'display_initiative',
-			'parse_regex' => '%initiatives/(?P<slug>[^/]+)/?$%i',
-			'build_str' => 'initiatives/{$slug}',
+			'parse_regex' => '%initiative/(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$%i',
+			'build_str' => 'initiative/{$slug}(/page/{$page})',
 			'handler' => 'UserThemeHandler',
 			'action' => 'display_initiative',
 			'priority' => 2,
@@ -161,6 +161,45 @@ class Plugaction extends Plugin
 		$paramarray['user_filters'] = array(
 		 'nolimit' => TRUE,
 		);
+
+
+
+		// Retrieve the paginated list of the autor's pieces
+		// therefore, set some pagination variables
+		$page =Controller::get_var( 'page' );
+		$pagination = 5;
+		if ( $page == '' ) { $page = 1; }
+		$theme->current_page = $page;
+
+		// Retrieve our post object of the profile in display
+		$post_slug = $theme->matched_rule->named_arg_values['slug'];
+		$post = Post::get( array( 'slug' => $post_slug ) );
+
+		$news = Posts::get(
+			array(
+				'content_type' => Post::type('article'),
+				'status' => Post::status('published'),
+				'all:info' => array ('initiative' => $post->id ),
+				'offset' => ($pagination)*($page)-$pagination,
+			    'limit' => $pagination
+			)
+		);
+
+		$theme->news = $news;
+		
+		$all = Posts::get(
+			array(
+				'all:info' => array ('initiative' => $post->id ),
+				'content_type' => Post::type('article'),
+				'status' => Post::status('published'),
+				'nolimit' => true
+			)
+		);
+	    $theme->there_are_more = false;
+	    if ( $all->count_all() > $pagination*$page ) {
+	 		$theme->there_are_more = true;
+	    }
+
  
 		return $theme->act_display( $paramarray );
 	}
@@ -177,15 +216,38 @@ class Plugaction extends Plugin
 	    'multiple',
 	  );
 
+		// Retrieve the paginated list of initiatives
+		// therefore, set some pagination variables
+		$page =Controller::get_var( 'page' );
+		$pagination = Options::get( 'pagination' );
+		if ( $page == '' ) { $page = 1; }
+		$theme->current_page = $page;
+
 	  // Retrieve future initiatives.
 	  $initiatives = Posts::get(array(
 	    'content_type' => Post::type( self::CONTENT_TYPE ),
 	    'status' => Post::status('published'),
-	    'nolimit' => TRUE
+		'offset' => ($pagination)*($page)-$pagination,
+		'limit' => $pagination
 	  ));
 
 	  // Add the initiatives to the theme. Access this in your template with $initiatives.
 	  $theme->initiatives = $initiatives;
+
+
+	  $all = Posts::get(
+		array(
+	    'content_type' => Post::type( self::CONTENT_TYPE ),
+	    'status' => Post::status('published'),
+	    'nolimit' => TRUE
+		)
+	  );
+	  $theme->there_are_more = false;
+	  if ( $all->count_all() > $pagination*$page ) {
+		$theme->there_are_more = true;
+	  }
+
+
 
 	  $theme->act_display( $paramarray );
 

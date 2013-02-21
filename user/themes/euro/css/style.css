@@ -2083,6 +2083,12 @@ aside.disqus h3, .similar-posts h3 {
 .admininfo {
 	margin-left: 10px !important;
 }
+.nombottom {
+	margin-bottom: 0;
+}
+.nopbottom {
+	padding-bottom: 0;
+}
 
 .hl1 {
 	margin-bottom: 20px;

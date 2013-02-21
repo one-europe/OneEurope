@@ -166,15 +166,40 @@ class PlugDebate extends Plugin
 	    'multiple',
 	  );
 
-	  // Retrieve future debates.
-	  $debates = Posts::get(array(
-	    'content_type' => Post::type('debate'),
-	    'status' => Post::status('published'),
-	    'nolimit' => TRUE
-	  ));
+		// Retrieve the paginated list of debates
+		// therefore, set some pagination variables
+		$page =Controller::get_var( 'page' );
+		if (is_object(htmlspecialchars( strip_tags( Options::get( 'debatepagination' ) ), ENT_COMPAT, 'UTF-8' ) ) ) {
+			$pagination = htmlspecialchars( strip_tags( Options::get( 'debatepagination' ) ), ENT_COMPAT, 'UTF-8' );
+		} else {
+			$pagination = 2;
+		}
+		if ( $page == '' ) { $page = 1; }
+		$theme->current_page = $page;
+
+		$debates = Posts::get(
+			array(
+	    		'content_type' => Post::type('debate'),
+	    		'status' => Post::status('published'),
+				'offset' => ($pagination)*($page)-$pagination,
+			    'limit' => $pagination
+			)
+		);
 
 	  // Add the debates to the theme. Access this in your template with $debates.
 	  $theme->debates = $debates;
+
+	
+		$all = Posts::get(
+			array(
+	    		'content_type' => Post::type('debate'),
+	    		'status' => Post::status('published'),
+			)
+		);
+	  $theme->there_are_more = false;
+	  if ( $all->count_all() > $pagination*$page ) {
+		$theme->there_are_more = true;
+	  }
 
 	  $theme->act_display( $paramarray );
 
