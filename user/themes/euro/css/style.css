@@ -1549,7 +1549,6 @@ ul.nibble-list {
 	   -moz-box-shadow: 0 0 4px rgba(0,0,0,.3);
 		  o-box-shadow: 0 0 4px rgba(0,0,0,.3);
 			box-shadow: 0 0 4px rgba(0,0,0,.3);
-	overflow: hidden;
 }
 .nibble article {
 	width: 400px;
@@ -2125,6 +2124,10 @@ aside.disqus h3, .similar-posts h3 {
 	clear: both;
 	width: 630px;
 	margin-left: -1px;
+	-webkit-box-shadow: 0 0px 5px rgba(0,0,0,.15);
+	   -moz-box-shadow: 0 0px 5px rgba(0,0,0,.15);
+		  o-box-shadow: 0 0px 5px rgba(0,0,0,.15);
+			box-shadow: 0 0px 5px rgba(0,0,0,.15);
 }
 
 #featured {  
@@ -2201,10 +2204,6 @@ aside.disqus h3, .similar-posts h3 {
 	margin: 0 5px 0 0;  
 	background: #fff;  
 	padding: 0;  
-	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.2);
-	   -moz-box-shadow: 0 0 2px rgba(0,0,0,.2);
-		  o-box-shadow: 0 0 2px rgba(0,0,0,.2);
-			box-shadow: 0 0 2px rgba(0,0,0,.2);
 }
 #featured .ui-tabs-panel img {
 	width: 450px;
@@ -2284,9 +2283,8 @@ aside.disqus h3, .similar-posts h3 {
 }
 
 .welcome {
-	padding: 10px;
-	height: 224px;
-	width: 285px;
+	height: 250px;
+	width: 305px;
 }
 .welcome p {
 	padding-bottom: 0;

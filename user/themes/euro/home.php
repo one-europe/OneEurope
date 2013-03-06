@@ -57,7 +57,9 @@
 
 				<div class="featured-content-boxes welcome">
 					
-					<div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>
+					<a href="/about" title="Welcome"><img src="<?php echo Site::out_url('theme'); ?>/img/static/welcome.jpg" alt="We incite cross-border debate for the emerging European society." width="305" height="250"/></a>
+					
+					<?php /* div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>
 	
 						<p>
 							We will fill a crucial gap as a hub for information about organized European civil 
