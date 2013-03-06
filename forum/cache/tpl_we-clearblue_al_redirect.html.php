@@ -1,1 +1,0 @@
-<?php if (!defined('IN_PHPBB')) exit; ?><script> top.location.href="<?php echo (isset($this->_rootref['S_DIALOG_URL'])) ? $this->_rootref['S_DIALOG_URL'] : ''; ?>"</script>

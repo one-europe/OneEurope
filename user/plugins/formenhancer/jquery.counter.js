@@ -277,7 +277,7 @@ $(document).ready(function(){
 	});
 	$("#shorttitle").counter({
 		type: 'char',
-		goal: 30,
+		goal: 35,
 		count: 'down',
 		text: false
 	});
