@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: StaticGraph.php 7314 2012-10-26 02:00:20Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_ImageGraph

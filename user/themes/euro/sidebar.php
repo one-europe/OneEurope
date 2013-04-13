@@ -60,7 +60,7 @@
 				<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/in-brief">view all ›</a></li>
 
 	</section>
-	
+
 	<section class="viral">
 		<div class="h"><span>Most Shared:</span></div>
 

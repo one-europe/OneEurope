@@ -1,10 +1,10 @@
 {include file="Login/templates/header.tpl"}
 
-<div id="login">
+<section id="login">
 
 {* untrusted host warning *}
 {if isset($isValidHost) && isset($invalidHostMessage) && !$isValidHost}
-<div id="login_error" style='width:400px'>
+<div id="login_error">
 	<strong>{'General_Warning'|translate}:&nbsp;</strong>{$invalidHostMessage}
 
 	<br><br>{$invalidHostMessageHowToFix}
@@ -31,47 +31,35 @@
 	{/if}
 </div>
 
-<form id="login_form" {$form_data.attributes}>
-	<p>
-		<label>{'General_Username'|translate}:<br/>
-		<input type="text" name="form_login" id="login_form_login" class="input" value="" size="20" tabindex="10" />
-		<input type="hidden" name="form_nonce" id="login_form_nonce" value="{$nonce}" /></label>
-	</p>
+<form {$form_data.attributes}>
+	<h1>{'Login_LogIn'|translate}</h1>
+	<fieldset class="inputs">
+		<input type="text" name="form_login" id="login_form_login" class="input" value="" size="20" tabindex="10" placeholder="{'General_Username'|translate}" autofocus="autofocus" />
+		<input type="password" name="form_password" id="login_form_password" class="input" value="" size="20" tabindex="20" placeholder="{'Login_Password'|translate}" />
+		<input type="hidden" name="form_nonce" id="login_form_nonce" value="{$nonce}" />
+	</fieldset>
 
-	<p>
-		<label>{'Login_Password'|translate}:<br />
-		<input type="password" name="form_password" id="login_form_password" class="input" value="" size="20" tabindex="20" /></label>
-	</p>
-	
-	<p class="forgetmenot">
-		<label><input name="form_rememberme" type="checkbox" id="login_form_rememberme" value="1" tabindex="90" {if $form_data.form_rememberme.value}checked="checked" {/if}/> {'Login_RememberMe'|translate} </label>
-	</p>
-	<p>
+	<fieldset class="actions">
+		<input name="form_rememberme" type="checkbox" id="login_form_rememberme" value="1" tabindex="90" {if $form_data.form_rememberme.value}checked="checked" {/if}/>
+		<label for="login_form_rememberme">{'Login_RememberMe'|translate}</label>
 		<input class="submit" id='login_form_submit' type="submit" value="{'Login_LogIn'|translate}" tabindex="100" />
-	</p>
+	</fieldset>
 </form>
 
 <form id="reset_form" style="display:none;">
-	<p>
-		<label>{'Login_LoginOrEmail'|translate}:<br />
-		<input type="text" name="form_login" id="reset_form_login" class="input" value="" size="20" tabindex="10" />
-		<input type="hidden" name="form_nonce" id="reset_form_nonce" value="{$nonce}" /></label>
-	</p>
+	<fieldset class="inputs">
+		<input type="text" name="form_login" id="reset_form_login" class="input" value="" size="20" tabindex="10" placeholder="{'Login_LoginOrEmail'|translate}" />
+		<input type="hidden" name="form_nonce" id="reset_form_nonce" value="{$nonce}" />
 
-	<p>
-		<label>{'Login_Password'|translate}:<br />
-		<input type="password" name="form_password" id="reset_form_password" class="input" value="" size="20" tabindex="20" /></label>
-	</p>
+		<input type="password" name="form_password" id="reset_form_password" class="input" value="" size="20" tabindex="20" placeholder="{'Login_Password'|translate}" />
+
+		<input type="password" name="form_password_bis" id="reset_form_password_bis" class="input" value="" size="20" tabindex="30" placeholder="{'Login_PasswordRepeat'|translate}" />
+	</fieldset>
 	
-	<p>
-		<label>{'Login_PasswordRepeat'|translate}:<br />
-		<input type="password" name="form_password_bis" id="reset_form_password_bis" class="input" value="" size="20" tabindex="30" /></label>
-	</p>
-	
-	<p>
-		<span class="loadingPiwik" style="display:none;"><img src="themes/default/images/loading-blue.gif" /></span>
+	<fieldset class="actions">
+		<span class="loadingPiwik" style="display:none;"><img alt="Loading" src="themes/default/images/loading-blue.gif" /></span>
 		<input class="submit" id='reset_form_submit' type="submit" value="{'Login_ChangePassword'|translate}" tabindex="100"/>
-	</p>
+	</fieldset>
 	
 	<input type="hidden" name="module" value="Login"/>
 	<input type="hidden" name="action" value="resetPassword"/>
@@ -92,6 +80,6 @@
 	<p class="message">{'Login_ResetPasswordInstructions'|translate}</p>
 </div>
 {/if}
-</div>
+</section>
 </body>
 </html>

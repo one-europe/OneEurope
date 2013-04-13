@@ -168,6 +168,7 @@
 					
 					$i = 0;
 					$j = 0;
+					$h = 0;
 					
 					/* 
 					in case this post is featured, hide it. 
@@ -177,11 +178,18 @@
 					foreach ($posts as $post ) { 
 						
 						$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $post->slug ) ));
+						$isbrief = is_object( Post::get( array( $post->typename => 'brief', 'slug' => $post->slug ) ) );
+
 						if ( $inslideshow == true && $i < $articlescount ) { 
 								$i++; $j++; /*?>
 								
 								<div class="list"><h1><?php echo $post->title . " is $i. of $articlescount featured.</br>";?></h1></div>
 								
+						<?php*/ } elseif ( $isbrief == true && $h <= 2 ) { $h++; /*?>
+
+								<div class="list"><h1><?php echo $post->title . " is $h. of 2 briefs.</br>";?></h1></div>
+
+
 						<?php*/ } else {
 							$j++;
 

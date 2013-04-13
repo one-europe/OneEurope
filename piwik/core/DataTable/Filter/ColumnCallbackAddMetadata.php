@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ColumnCallbackAddMetadata.php 7144 2012-10-11 01:38:20Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik

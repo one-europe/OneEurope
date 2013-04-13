@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:40
+<?php /* Smarty version 2.6.26, created on 2013-03-25 18:18:33
          compiled from CoreHome/templates/js_global_variables.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'CoreHome/templates/js_global_variables.tpl', 5, false),)), $this); ?>
@@ -47,3 +47,4 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'C
 ";
 	<?php endif; ?>
 </script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=IE8" />

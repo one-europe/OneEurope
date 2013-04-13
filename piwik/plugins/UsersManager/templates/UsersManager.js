@@ -64,7 +64,7 @@ function sendAddUserAJAX( row )
 
 function getIdSites()
 {
-	return $('#sitesSelectionSearch .custom_select_main_link').attr('siteid');
+	return $('.custom_select_main_link').attr('siteid');
 }
 
 function sendUpdateUserAccess(login, access, successCallback)
@@ -118,7 +118,9 @@ function bindUpdateAccess()
 	// callback called when the ajax request Update the user permissions is successful
 	function successCallback (response)
 	{
-        $(self).parent().parent().find('.accessGranted')
+        var mainDiv = $(self).parent().parent();
+        var login = $('#login', mainDiv).text();
+        mainDiv.find('.accessGranted')
             .attr("src","plugins/UsersManager/images/no-access.png" )
             .attr("class","updateAccess" )
             .click(bindUpdateAccess)
@@ -129,6 +131,11 @@ function bindUpdateAccess()
             ;
         $('#accessUpdated').css('display', 'inline-block');
         hideAccessUpdated();
+
+        // reload if user anonymous was updated, since we display a Notice message when anon has view access
+        if(login == 'anonymous') {
+            window.location.reload();
+        }
 	}
 	
 	var idSite = getIdSites();
@@ -234,4 +241,17 @@ $(document).ready( function() {
 
 	$('.updateAccess')
 		.click( bindUpdateAccess );
+	
+	// when a site is selected, reload the page w/o showing the ajax loading element
+	$('#usersManagerSiteSelect').bind('piwik:siteSelected', function(e, site) {
+		if (site.id != piwik.idSite)
+		{
+			switchSite(
+				site.id,
+				site.name,
+				false /* do not show main ajax loading animation */,
+				true /* do not go to all websites dash */
+			);
+		}
+	});
 });

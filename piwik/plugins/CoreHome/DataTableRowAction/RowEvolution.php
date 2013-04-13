@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: RowEvolution.php 7075 2012-09-28 03:07:18Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CoreHome
@@ -291,4 +290,9 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
 		return '<img src="data:image/png;base64,'.$spark.'" />';
 	}
 	
+	/** Use the available metrics for the metrics of the last requested graph. */
+	public function useAvailableMetrics()
+	{
+		$this->graphMetrics = $this->availableMetrics;
+	}
 }

@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Tracker.php 7568 2012-12-04 00:14:41Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -266,12 +265,9 @@ class Piwik_Tracker
 		// run scheduled task
 		try
 		{
-			// don't run scheduled tasks in CLI mode from Tracker, this is the case
-			// where we bulk load logs & don't want to lose time with tasks
-			if(!Piwik_Common::isPhpCliMode()
-				&& !$this->authenticated)
+			if($this->shouldRunScheduledTasks())
 			{
-				Piwik_Common::runScheduledTasks($now = $this->getCurrentTimestamp());
+				self::runScheduledTasks($now = $this->getCurrentTimestamp());
 			}
 		}
 		catch (Exception $e)
@@ -281,7 +277,115 @@ class Piwik_Tracker
 
 		$this->end();
 	}
-	
+
+	protected function shouldRunScheduledTasks()
+	{
+		// don't run scheduled tasks in CLI mode from Tracker, this is the case
+		// where we bulk load logs & don't want to lose time with tasks
+		return !Piwik_Common::isPhpCliMode()
+			&& !$this->authenticated
+			&& $this->getState() != self::STATE_LOGGING_DISABLE;
+	}
+
+	/**
+	 * Tracker requests will automatically trigger the Scheduled tasks.
+	 * This is useful for users who don't setup the cron,
+	 * but still want daily/weekly/monthly PDF reports emailed automatically.
+	 *
+	 * This is similar to calling the API CoreAdminHome.runScheduledTasks (see misc/cron/archive.php)
+	 *
+	 * @param int  $now  Current timestamp
+	 */
+	protected static function runScheduledTasks($now)
+	{
+		// Currently, there is no hourly tasks. When there are some,
+		// this could be too agressive minimum interval (some hours would be skipped in case of low traffic)
+		$minimumInterval = Piwik_Config::getInstance()->Tracker['scheduled_tasks_min_interval'];
+
+		// If the user disabled browser archiving, he has already setup a cron
+		// To avoid parallel requests triggering the Scheduled Tasks,
+		// Get last time tasks started executing
+		$cache = Piwik_Tracker_Cache::getCacheGeneral();
+		if($minimumInterval <= 0
+			|| empty($cache['isBrowserTriggerArchivingEnabled']))
+		{
+			printDebug("-> Scheduled tasks not running in Tracker: Browser archiving is disabled.");
+			return;
+		}
+		$nextRunTime = $cache['lastTrackerCronRun'] + $minimumInterval;
+		if(	(isset($GLOBALS['PIWIK_TRACKER_DEBUG_FORCE_SCHEDULED_TASKS']) && $GLOBALS['PIWIK_TRACKER_DEBUG_FORCE_SCHEDULED_TASKS'])
+			|| $cache['lastTrackerCronRun'] === false
+			|| $nextRunTime < $now )
+		{
+			$cache['lastTrackerCronRun'] = $now;
+			Piwik_Tracker_Cache::setCacheGeneral( $cache );
+			self::initCorePiwikInTrackerMode();
+			Piwik_SetOption('lastTrackerCronRun', $cache['lastTrackerCronRun']);
+			printDebug('-> Scheduled Tasks: Starting...');
+
+			// save current user privilege and temporarily assume super user privilege
+			$isSuperUser = Piwik::isUserIsSuperUser();
+
+			// Scheduled tasks assume Super User is running
+			Piwik::setUserIsSuperUser();
+
+			// While each plugins should ensure that necessary languages are loaded,
+			// we ensure English translations at least are loaded
+			Piwik_Translate::getInstance()->loadEnglishTranslation();
+
+			$resultTasks = Piwik_TaskScheduler::runTasks();
+
+			// restore original user privilege
+			Piwik::setUserIsSuperUser($isSuperUser);
+
+			printDebug($resultTasks);
+			printDebug('Finished Scheduled Tasks.');
+		}
+		else
+		{
+			printDebug("-> Scheduled tasks not triggered.");
+		}
+		printDebug("Next run will be from: ". date('Y-m-d H:i:s', $nextRunTime) .' UTC');
+	}
+
+	static public $initTrackerMode = false;
+
+	/*
+	 * Used to initialize core Piwik components on a piwik.php request
+	 * Eg. when cache is missed and we will be calling some APIs to generate cache
+	 */
+	static public function initCorePiwikInTrackerMode()
+	{
+		if(!empty($GLOBALS['PIWIK_TRACKER_MODE'])
+			&& self::$initTrackerMode === false)
+		{
+			self::$initTrackerMode = true;
+			require_once PIWIK_INCLUDE_PATH . '/core/Loader.php';
+			require_once PIWIK_INCLUDE_PATH . '/core/Option.php';
+			try {
+				$access = Zend_Registry::get('access');
+			} catch (Exception $e) {
+				Piwik::createAccessObject();
+			}
+			try {
+				$config = Piwik_Config::getInstance();
+			} catch (Exception $e) {
+				Piwik::createConfigObject();
+			}
+			try {
+				$db = Zend_Registry::get('db');
+			} catch (Exception $e) {
+				Piwik::createDatabaseObject();
+			}
+
+			$pluginsManager = Piwik_PluginsManager::getInstance();
+			$pluginsToLoad = Piwik_Config::getInstance()->Plugins['Plugins'];
+			$pluginsForcedNotToLoad = Piwik_Tracker::getPluginsNotToLoad();
+			$pluginsToLoad = array_diff($pluginsToLoad, $pluginsForcedNotToLoad);
+			$pluginsManager->loadPlugins( $pluginsToLoad );
+		}
+	}
+
 	/**
 	 * Echos an error message & other information, then exits.
 	 * 
@@ -480,7 +584,16 @@ class Piwik_Tracker
 		{
 			$trans_gif_64 = "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 			$this->sendHeader('Content-Type: image/gif');
-			$this->sendHeader('Access-Control-Allow-Origin: *');
+
+			$requestMethod = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+
+			if ($requestMethod !== 'GET')
+			{
+				$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
+				$this->sendHeader('Access-Control-Allow-Origin: ' . $origin);
+				$this->sendHeader('Access-Control-Allow-Credentials: true');
+			}
+
 			print(base64_decode($trans_gif_64));
 		}
 	}
@@ -575,7 +688,7 @@ class Piwik_Tracker
 		if(!empty($idSite)
 			&& $idSite > 0)
 		{
-			$website = Piwik_Common::getCacheWebsiteAttributes( $idSite );
+			$website = Piwik_Tracker_Cache::getCacheWebsiteAttributes( $idSite );
 			$adminTokenAuth = $website['admin_token_auth'];
 			if(in_array($tokenAuth, $adminTokenAuth))
 			{
@@ -599,7 +712,7 @@ class Piwik_Tracker
 	}
 
 	/**
-	 * This method allows to set custom IP + server time when using Tracking API.
+	 * This method allows to set custom IP + server time + visitor ID, when using Tracking API.
 	 * These two attributes can be only set by the Super User (passing token_auth).
 	 */
 	protected function handleTrackingApi( $request )
@@ -694,7 +807,7 @@ class Piwik_Tracker
 			self::setForceDateTime($customDatetime);
 		}
 
-		// Custom server date time to use
+		// Custom visitor id
 		$customVisitorId = Piwik_Common::getRequestVar('cid', false, null, $args);
 		if(!empty($customVisitorId))
 		{

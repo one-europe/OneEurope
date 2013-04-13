@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: GoalManager.php 7485 2012-11-19 01:42:06Z vipsoft $
  * 
  * @category Piwik
  * @package Piwik
@@ -80,7 +79,7 @@ class Piwik_Tracker_GoalManager
 	
 	static public function getGoalDefinitions( $idSite )
 	{
-		$websiteAttributes = Piwik_Common::getCacheWebsiteAttributes( $idSite );
+		$websiteAttributes = Piwik_Tracker_Cache::getCacheWebsiteAttributes( $idSite );
 		if(isset($websiteAttributes['goals']))
 		{
 			return $websiteAttributes['goals'];
@@ -427,6 +426,8 @@ class Piwik_Tracker_GoalManager
 		{
 			$this->recordEcommerceItems($goal, $items);
 		}
+		
+		Piwik_PostEvent('Tracker.recordEcommerceGoal', $goal);
 	}
 	
 	/**
@@ -659,14 +660,10 @@ class Piwik_Tracker_GoalManager
 		}
 		
 		$actionsLookedUp = Piwik_Tracker_Action::loadActionId($actionsToLookupAllItems);
-//		var_dump($actionsLookedUp);
-
 		
 		// Replace SKU, name & category by their ID action
 		foreach($cleanedItems as $index => &$item)
 		{
-			list($sku, $name, $category, $price, $quantity) = $item;
-			
 			// SKU
 			$item[0] = $actionsLookedUp[ $index * $columnsInEachRow + 0][2];
 			// Name
@@ -804,6 +801,8 @@ class Piwik_Tracker_GoalManager
 										: $visitorInformation['visit_last_action_time'];
 										
 			$this->recordGoal($newGoal);
+			
+			Piwik_PostEvent('Tracker.recordStandardGoals', $newGoal);
 		}
 	}
 	/**

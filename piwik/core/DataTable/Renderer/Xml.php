@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Xml.php 7648 2012-12-18 02:53:55Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -42,7 +41,7 @@ class Piwik_DataTable_Renderer_Xml extends Piwik_DataTable_Renderer
 	{
 		$this->renderHeader();
 
-		$exceptionMessage = self::renderHtmlEntities($this->exception->getMessage());
+		$exceptionMessage = $this->getExceptionMessage();
 		
 		$return = '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
 			"<result>\n".

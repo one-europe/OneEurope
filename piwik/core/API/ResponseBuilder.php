@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ResponseBuilder.php 7670 2012-12-19 22:13:38Z matt $
  * 
  * @category Piwik
  * @package Piwik
@@ -115,7 +114,7 @@ class Piwik_API_ResponseBuilder
 	public function getResponseException(Exception $e)
 	{
 		$format = strtolower($this->outputFormat);
-		
+
 		if( $format == 'original' )
 		{
 			throw $e;
@@ -123,8 +122,8 @@ class Piwik_API_ResponseBuilder
 		
 		try {
 			$renderer = Piwik_DataTable_Renderer::factory($format);
-		} catch (Exception $e) {
-			return "Error: " . $e->getMessage();
+		} catch (Exception $exceptionRenderer) {
+			return "Error: " . $e->getMessage() . " and: " . $exceptionRenderer->getMessage();
 		}
 		
 		$renderer->setException($e);

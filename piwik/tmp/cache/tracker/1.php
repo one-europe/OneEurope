@@ -1,5 +1,4 @@
 <?php
-
 $content   = array (
   'goals' => 
   array (
@@ -39,6 +38,7 @@ $content   = array (
   'excluded_user_agents' => 
   array (
   ),
+  'keep_url_fragment' => false,
   'sitesearch' => '1',
   'sitesearch_keyword_parameters' => 
   array (
@@ -55,7 +55,6 @@ $content   = array (
     0 => '',
   ),
 );
-
+$expires_on   = 1365879905;
 $cache_complete   = true;
-
 ?>

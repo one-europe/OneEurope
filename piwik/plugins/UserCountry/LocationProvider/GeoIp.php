@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: GeoIp.php 7576 2012-12-05 04:33:47Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -53,8 +52,9 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
 	 */
 	public function completeLocationResult( &$location )
 	{
+		$this->fixupLocation($location);
 		parent::completeLocationResult($location);
-		
+
 		// set region name if region code is set
 		if (empty($location[self::REGION_NAME_KEY])
 			&& !empty($location[self::REGION_CODE_KEY])
@@ -65,8 +65,22 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
 			$location[self::REGION_NAME_KEY] = self::getRegionNameFromCodes($countryCode, $regionCode);
 		}
 	}
-	
-	
+
+	/**
+	 * Fix up data to work with our SVG maps which include 'Tib' boundaries
+	 */
+	protected function fixupLocation( &$location )
+	{
+		if(!empty($location[self::REGION_CODE_KEY])
+			&& $location[self::REGION_CODE_KEY] == '14'
+			&& !empty($location[self::COUNTRY_CODE_KEY])
+			&& strtoupper($location[self::COUNTRY_CODE_KEY]) == 'CN')
+		{
+			$location[self::COUNTRY_CODE_KEY] = 'ti';
+			$location[self::REGION_CODE_KEY] = '1';
+		}
+	}
+
 	/**
 	 * Returns true if this provider has been setup correctly, the error message if
 	 * otherwise.

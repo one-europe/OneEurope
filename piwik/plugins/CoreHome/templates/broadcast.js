@@ -490,7 +490,7 @@ var broadcast = {
     	var result = {};
     	for (var i = 0; i != pairs.length; ++i)
     	{
-    		var pair = pairs[i].split('=');
+    		var pair = pairs[i].split(/=(.+)?/); // split only on first '='
     		result[pair[0]] = pair[1];
     	}
     	return result;
@@ -526,6 +526,7 @@ var broadcast = {
 			hashStr = hashStr.substr(1);
 		}
 		hashStr = hashStr.split('#')[0];
+
 		return broadcast.getParamValue(param,hashStr);
     },
 
@@ -542,7 +543,8 @@ var broadcast = {
      */
     getParamValue: function (param, url)
     {
-        var startStr = url.indexOf(param);
+        var lookFor = param + '=';
+        var startStr = url.indexOf(lookFor);
 
         if( startStr  >= 0 ) {
             var endStr = url.indexOf("&", startStr);
@@ -551,7 +553,7 @@ var broadcast = {
             }
             var value = url.substring(startStr + param.length +1,endStr);
             // sanitize values
-            value = value.replace(/[^_%\-\<\>!@\$\.=,;0-9a-zA-Z]/gi, '');
+            value = value.replace(/[^_%\+\-\<\>!@\$\.=,;0-9a-zA-Z]/gi, '');
 
             return value;
         } else {

@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Piwik.php 7749 2013-01-13 11:20:54Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -134,7 +133,7 @@ class Piwik
 	{
 		Piwik_AssetManager::removeMergedAssets();
 		Piwik_View::clearCompiledTemplates();
-		Piwik_Common::deleteTrackerCache();
+		Piwik_Tracker_Cache::deleteTrackerCache();
 	}
 	
 	/**
@@ -584,7 +583,7 @@ class Piwik
 
 		// more selective allow/deny filters
 		$allowAny = "<Files \"*\">\n".$allow."Satisfy any\n</Files>\n";
-		$allowStaticAssets = "<Files ~ \"\\.(test\.php|gif|ico|jpg|png|js|css|swf)$\">\n".$allow."Satisfy any\n</Files>\n";
+		$allowStaticAssets = "<Files ~ \"\\.(test\.php|gif|ico|jpg|png|svg|js|css|swf)$\">\n".$allow."Satisfy any\n</Files>\n";
 		$denyDirectPhp = "<Files ~ \"\\.(php|php4|php5|inc|tpl|in)$\">\n".$deny."</Files>\n";
 
 		$directoriesToProtect = array(
@@ -671,7 +670,7 @@ class Piwik
 		$messages[] = true;
 
 		// ignore dev environments
-		if(file_exists(PIWIK_INCLUDE_PATH . '/.svn'))
+		if(file_exists(PIWIK_INCLUDE_PATH . '/.git'))
 		{
 			$messages[] = Piwik_Translate('General_WarningFileIntegritySkipped');
 			return $messages;
@@ -1076,6 +1075,8 @@ class Piwik
  * Logging and error handling
  */
 
+	public static $shouldLog = null;
+	
 	/**
 	 * Log a message
 	 *
@@ -1083,20 +1084,19 @@ class Piwik
 	 */
 	static public function log($message = '')
 	{
-		static $shouldLog = null;
-		if(is_null($shouldLog))
+		if(is_null(self::$shouldLog))
 		{
-			$shouldLog = self::shouldLoggerLog();
+			self::$shouldLog = self::shouldLoggerLog();
 			// It is possible that the logger is not setup:
 			// - Tracker request, and debug disabled, 
 			// - and some scheduled tasks call code that tries and log something  
 			try {
 				Zend_Registry::get('logger_message');
 			} catch(Exception $e) {
-				$shouldLog = false;
+				self::$shouldLog = false;
 			}
 		}
-		if($shouldLog)
+		if(self::$shouldLog)
 		{
 			Zend_Registry::get('logger_message')->logEvent($message);
 		}
@@ -1181,7 +1181,7 @@ class Piwik
 	{
 		$totalTime = self::getDbElapsedSecs();
 		$queryCount = self::getQueryCount();
-		Piwik::log("Total queries = $queryCount (total sql time = ".round($totalTime,2)."s)");
+		Piwik::log(sprintf("Total queries = %d (total sql time = %.2fs)", $queryCount, $totalTime));
 	}
 
 	/**
@@ -1618,12 +1618,11 @@ class Piwik
 	static public function getJavascriptCode($idSite, $piwikUrl)
 	{
 		$jsCode = file_get_contents( PIWIK_INCLUDE_PATH . "/core/Tracker/javascriptCode.tpl");
-		$jsCode = nl2br(htmlentities($jsCode));
-		$piwikUrl = preg_match('~^(http|https)://(.*)$~D', $piwikUrl, $matches);
+		$jsCode = htmlentities($jsCode);
+		preg_match('~^(http|https)://(.*)$~D', $piwikUrl, $matches);
 		$piwikUrl = @$matches[2];
 		$jsCode = str_replace('{$idSite}', $idSite, $jsCode);
 		$jsCode = str_replace('{$piwikUrl}', Piwik_Common::sanitizeInputValue($piwikUrl), $jsCode);
-		$jsCode = str_replace('{$hrefTitle}', Piwik::getRandomTitle(), $jsCode);
 		return $jsCode;
 	}
 
@@ -2411,7 +2410,7 @@ class Piwik
 				'$filePath'
 			REPLACE
 			INTO TABLE
-				".$tableName;
+				`".$tableName."`";
 
 		if(isset($fileSpec['charset']))
 		{
@@ -2475,7 +2474,7 @@ class Piwik
 				$message =  $e->getMessage() . ($code ? "[$code]" : '');
 				if(!Zend_Registry::get('db')->isErrNo($e, '1148'))
 				{
-					Piwik::log("LOAD DATA INFILE failed... Error was:" . $message);
+					Piwik::log(sprintf("LOAD DATA INFILE failed... Error was: %s", $message));
 				}
 				$exceptions[] = "\n  Try #" . (count($exceptions)+1) . ': ' . $queryStart .": ". $message;
 			}
@@ -2536,8 +2535,8 @@ class Piwik
 					return true;
 				}
 			} catch(Exception $e) {
-				Piwik::log("LOAD DATA INFILE failed or not supported, falling back to normal INSERTs... Error was:" . $e->getMessage());
-				
+				Piwik::log(sprintf("LOAD DATA INFILE failed or not supported, falling back to normal INSERTs... Error was: %s", $e->getMessage()));
+
 				if ($throwException)
 				{
 					throw $e;
@@ -2745,7 +2744,8 @@ class Piwik
 		
 		if (function_exists('exec')) // use exec
 		{
-			exec($command, $output, $returnCode);
+			$output = $returnCode = null;
+			@exec($command, $output, $returnCode);
 			
 			// check if filesystem is NFS
 			if ($returnCode == 0
@@ -2756,7 +2756,7 @@ class Piwik
 		}
 		else if (function_exists('shell_exec')) // use shell_exec
 		{
-			$output = shell_exec($command);
+			$output = @shell_exec($command);
 			if ($output)
 			{
 				$output = explode("\n", $output);

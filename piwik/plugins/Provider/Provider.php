@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Provider.php 7398 2012-11-07 22:17:51Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_Provider
@@ -103,7 +102,7 @@ class Piwik_Provider extends Piwik_Plugin
 	
 	function addWidget()
 	{
-		Piwik_AddWidget('General_Visitors', 'Provider_WidgetProviders', 'Provider', 'getProvider');
+		Piwik_AddWidget( 'General_Visitors', 'Provider_WidgetProviders', 'Provider', 'getProvider');
 	}
 	
 	function addMenu()

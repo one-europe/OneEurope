@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7500 2012-11-21 07:23:34Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_VisitsSummary
@@ -33,7 +32,7 @@ class Piwik_VisitsSummary_Controller extends Piwik_Controller
 		echo $view->render();
 	}
 
-	public function getEvolutionGraph( $fetch = false, $columns = false )
+	public function getEvolutionGraph( $fetch = false, array $columns = array())
 	{
 		if(empty($columns))
 		{

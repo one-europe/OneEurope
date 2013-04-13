@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: GridGraph.php 7102 2012-10-04 21:46:25Z JulienM $
  *
  * @category Piwik_Plugins
  * @package Piwik_ImageGraph_StaticGraph

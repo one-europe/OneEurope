@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7157 2012-10-11 21:10:20Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_UserSettings
@@ -92,16 +91,30 @@ class Piwik_UserSettings_API
 		$dataTable->filter('GroupBy', array('label', 'Piwik_UserSettings_getDeviceTypeFromOS'));
 		
 		// make sure the datatable has a row for mobile & desktop (if it has rows)
-		$empty = new Piwik_DataTable();
-		$empty->addRowsFromSimpleArray(array(
-			array('label' => 'General_Desktop', Piwik_Archive::INDEX_NB_VISITS => 0),
-			array('label' => 'General_Mobile', Piwik_Archive::INDEX_NB_VISITS => 0)
-		));
-		if($dataTable->getRowsCount() > 0)
-		{
-			$dataTable->addDataTable($empty);
-		}
-		
+        $dataTables = array($dataTable);
+        if ($dataTable instanceof Piwik_DataTable_Array) {
+            $dataTables = $dataTable->getArray();
+        }
+
+        $requiredRows = array(
+            'General_Desktop' => Piwik_Archive::INDEX_NB_VISITS,
+            'General_Mobile' => Piwik_Archive::INDEX_NB_VISITS
+        );
+
+        foreach ($dataTables AS $table) {
+            if ($table->getRowsCount() == 0) {
+                continue;
+            }
+            foreach ($requiredRows AS $requiredRow => $key) {
+                $row = $table->getRowFromLabel($requiredRow);
+                if (empty($row)) {
+                    $table->addRowsFromSimpleArray(array(
+                        array('label' => $requiredRow, $key => 0)
+                    ));
+                }
+            }
+        }
+
 		// set the logo metadata
 		$dataTable->queueFilter('MetadataCallbackReplace',
 			array('logo', 'Piwik_UserSettings_getDeviceTypeImg', null, array('label')));
@@ -215,5 +228,12 @@ class Piwik_UserSettings_API
 
 		return $dataTable;
 	}
-	
+
+    public function getLanguage( $idSite, $period, $date, $segment = false )
+    {
+        $dataTable = $this->getDataTable('UserSettings_language', $idSite, $period, $date, $segment);
+        $dataTable->filter('ColumnCallbackReplace', array('label', 'Piwik_LanguageTranslate'));
+        $dataTable->filter('ReplaceColumnNames');
+        return $dataTable;
+    }
 }

@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: SearchEngines.php 7556 2012-11-28 22:58:20Z SteveG $
  *
  * @category Piwik
  * @package DataFiles

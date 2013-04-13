@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: FrontController.php 7612 2012-12-14 08:56:21Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -122,8 +121,7 @@ class Piwik_FrontController
 		{
 			$action = $controller->getDefaultAction();
 		}
-		
-//		Piwik::log("Dispatching $module / $action, parameters: ".var_export($parameters, $return = true));
+
 		if( !is_callable(array($controller, $action)))
 		{
 			throw new Exception("Action '$action' not found in the controller '$controllerClassName'.");				
@@ -141,7 +139,7 @@ class Piwik_FrontController
 		} catch(Exception $e) {
 			$debugTrace = $e->getTraceAsString();
 			$message = Piwik_Common::sanitizeInputValue($e->getMessage());
-			Piwik_ExitWithMessage($message, Piwik::shouldLoggerLog() ? $debugTrace : '', true);
+			Piwik_ExitWithMessage($message, '' /* $debugTrace */, true);
 		}
 	}
 	
@@ -329,8 +327,6 @@ class Piwik_FrontController
 						
 			Piwik_ExitWithMessage($e->getMessage(), false, true);
 		}
-		
-//		Piwik::log('End FrontController->init() - Request: '. var_export($_REQUEST, true));
 	}
 	
 	protected function handleMaintenanceMode()

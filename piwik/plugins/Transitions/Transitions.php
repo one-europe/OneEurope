@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Transitions.php 7405 2012-11-08 11:02:14Z EZdesign $
  *
  * @category Piwik_Plugins
  * @package Piwik_Transitions

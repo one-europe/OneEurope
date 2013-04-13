@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Visitor.php 7721 2013-01-03 02:00:18Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_Live
@@ -73,7 +72,9 @@ class Piwik_Live_Visitor
 			'daysSinceFirstVisit' => $this->getDaysSinceFirstVisit(),
 			'daysSinceLastEcommerceOrder' => $this->getDaysSinceLastEcommerceOrder(),
 			'continent' => $this->getContinent(),
+			'continentCode' => $this->getContinentCode(),
 			'country' => $this->getCountryName(),
+			'countryCode' => $this->getCountryCode(),
 			'countryFlag' => $this->getCountryFlag(),
 			'region' => $this->getRegionName(),
 			'city' => $this->getCityName(),
@@ -214,19 +215,29 @@ class Piwik_Live_Visitor
 		return strtotime($this->details['visit_last_action_time']);
 	}
 
+	function getCountryCode()
+	{
+		return $this->details['location_country'];
+	}
+
 	function getCountryName()
 	{
-		return Piwik_CountryTranslate($this->details['location_country']);
+		return Piwik_CountryTranslate($this->getCountryCode());
 	}
 
 	function getCountryFlag()
 	{
-		return Piwik_getFlagFromCode($this->details['location_country']);
+		return Piwik_getFlagFromCode($this->getCountryCode());
 	}
 
 	function getContinent()
 	{
-		return Piwik_ContinentTranslate(Piwik_Common::getContinent($this->details['location_country']));
+		return Piwik_ContinentTranslate($this->getContinentCode());
+	}
+
+	function getContinentCode()
+	{
+		return Piwik_Common::getContinent($this->details['location_country']);
 	}
 
 	function getCityName()

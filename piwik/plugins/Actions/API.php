@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7593 2012-12-10 21:26:41Z SteveG $
  * 
  * @category Piwik_Plugins
  * @package Piwik_Actions
@@ -312,6 +311,7 @@ class Piwik_Actions_API
 				Piwik_Archive::INDEX_SITE_SEARCH_HAS_NO_RESULT,
 				create_function ( '$value', 'return $value >= 1;')
 			));
+		$dataTable->deleteRow(Piwik_DataTable::ID_SUMMARY_ROW);
 		$dataTable->deleteColumn(Piwik_Archive::INDEX_SITE_SEARCH_HAS_NO_RESULT);
 		$this->filterPageDatatable($dataTable);
 		$this->filterActionsDataTable($dataTable);

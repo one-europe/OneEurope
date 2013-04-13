@@ -5,7 +5,7 @@
 #
 # @link http://piwik.org
 # @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
-# @version $Id: import_logs.py 7731 2013-01-04 04:30:42Z capedfuzz $
+# @version $Id$
 #
 # For more info see: http://piwik.org/log-analytics/
 
@@ -30,6 +30,7 @@ import threading
 import time
 import urllib
 import urllib2
+import urlparse
 
 try:
     import json
@@ -76,6 +77,7 @@ EXCLUDED_USER_AGENTS = (
     'libwww',
     'mediapartners-google',
     'msnbot',
+    'netcraftsurvey',
     'robot',
     'spider',
     'surveybot',
@@ -103,7 +105,7 @@ class RegexFormat(object):
 
     def __init__(self, name, regex, date_format='%d/%b/%Y:%H:%M:%S'):
         self.name = name
-        self.regex = re.compile(regex)
+        self.regex = re.compile(regex + '\s*$') # make sure regex includes end of line
         self.date_format = date_format
 
     def check_format(self, file):
@@ -158,6 +160,11 @@ _COMMON_LOG_FORMAT = (
 _NCSA_EXTENDED_LOG_FORMAT = (_COMMON_LOG_FORMAT +
     ' "(?P<referrer>.*?)" "(?P<user_agent>.*?)"'
 )
+_S3_LOG_FORMAT = (
+    '\S+ (?P<host>\S+) \[(?P<date>.*?) (?P<timezone>.*?)\] (?P<ip>\S+) '
+    '\S+ \S+ \S+ \S+ "\S+ (?P<path>.*?) \S+" (?P<status>\S+) \S+ (?P<length>\S+) '
+    '\S+ \S+ \S+ "(?P<referrer>.*?)" "(?P<user_agent>.*?)" \S+'
+)
 
 FORMATS = {
     'common': RegexFormat('common', _COMMON_LOG_FORMAT),
@@ -165,6 +172,7 @@ FORMATS = {
     'ncsa_extended': RegexFormat('ncsa_extended', _NCSA_EXTENDED_LOG_FORMAT),
     'common_complete': RegexFormat('common_complete', _HOST_PREFIX + _NCSA_EXTENDED_LOG_FORMAT),
     'iis': IisFormat(),
+    's3': RegexFormat('s3', _S3_LOG_FORMAT),
 }
 
 
@@ -349,6 +357,11 @@ class Configuration(object):
         option_parser.add_option(
             '--recorder-max-payload-size', dest='recorder_max_payload_size', default=200, type='int',
             help="Maximum number of log entries to record in one tracking request (default: %default). "
+        )
+        option_parser.add_option(
+            '--replay-tracking', dest='replay_tracking',
+            action='store_true', default=False,
+            help="Replay piwik.php requests found in custom logs (only piwik.php requests expected)"
         )
         option_parser.add_option(
             '--output', dest='output',
@@ -866,6 +879,9 @@ class DynamicResolver(object):
 
     def __init__(self):
         self._cache = {}
+        if config.options.replay_tracking:
+            # get existing sites
+            self._cache['sites'] = piwik.call_api('SitesManager.getAllSites')
 
     def _get_site_id_from_hit_host(self, hit):
         main_url = 'http://' + hit.host
@@ -926,9 +942,21 @@ class DynamicResolver(object):
             stats.piwik_sites.add(site_id)
         return site_id
 
-    def resolve(self, hit):
+    def _resolve_when_replay_tracking(self, hit):
         """
-        Return the site ID from the cache if found, otherwise call _resolve.
+        If parsed site ID found in the _cache['sites'] return site ID and main_url,
+        otherwise return (None, None) tuple.
+        """
+        site_id = hit.args['idsite']
+        if site_id in self._cache['sites']:
+            stats.piwik_sites.add(site_id)
+            return (site_id, self._cache['sites'][site_id]['main_url'])
+        else:
+            return (None, None)
+    
+    def _resolve_by_host(self, hit):
+        """
+        Returns the site ID and site URL for a hit based on the hostname.
         """
         try:
             site_id = self._cache[hit.host]
@@ -941,9 +969,22 @@ class DynamicResolver(object):
             self._cache[hit.host] = site_id
         return (site_id, 'http://' + hit.host)
 
+    def resolve(self, hit):
+        """
+        Return the site ID from the cache if found, otherwise call _resolve.
+        If replay_tracking option is enabled, call _resolve_when_replay_tracking.
+        """
+        if config.options.replay_tracking:
+            # We only consider requests with piwik.php which don't need host to be imported
+            return self._resolve_when_replay_tracking(hit)
+        else:
+            return self._resolve_by_host(hit)
+
 
     def check_format(self, format):
-        if 'host' not in format.regex.groupindex and not config.options.log_hostname:
+        if config.options.replay_tracking:
+            pass
+        elif 'host' not in format.regex.groupindex and not config.options.log_hostname:
             fatal_error(
                 "the selected log format doesn't include the hostname: you must "
                 "specify the Piwik site ID with the --idsite argument"
@@ -1055,7 +1096,10 @@ class Recorder(object):
         site_id, main_url = resolver.resolve(hit)
         if site_id is None:
             # This hit doesn't match any known Piwik site.
-            stats.piwik_sites_ignored.add(hit.host)
+            if config.options.replay_tracking:
+                stats.piwik_sites_ignored.add('unrecognized site ID %s' % hit.args.get('idsite'))
+            else:
+                stats.piwik_sites_ignored.add(hit.host)
             stats.count_lines_no_site.increment()
             return
 
@@ -1076,6 +1120,9 @@ class Recorder(object):
             'dp': '0' if config.options.reverse_dns else '1',
             'ua': hit.user_agent.encode('utf8'),
         }
+        if config.options.replay_tracking:
+            # prevent request to be force recorded when option replay-tracking
+            args['rec'] = '0'
         args.update(hit.args)
 
         if hit.is_download:
@@ -1398,6 +1445,21 @@ class Parser(object):
 
             if timezone:
                 hit.date -= datetime.timedelta(hours=timezone/100)
+            if config.options.replay_tracking:
+                # we need a query string and we only consider requests with piwik.php
+                if not hit.query_string or not hit.path.lower().endswith('piwik.php'):
+                    continue
+
+                query_arguments = urlparse.parse_qs(hit.query_string)
+                if not "idsite" in query_arguments:
+                    invalid_line(line, 'missing idsite')
+                    continue
+
+                try:
+                    hit.args.update((k, v.pop().encode('raw_unicode_escape').decode(config.options.encoding)) for k, v in query_arguments.iteritems())
+                except UnicodeDecodeError:
+                    invalid_line(line, 'invalid encoding')
+                    continue
 
             # Check if the hit must be excluded.
             if all((method(hit) for method in self.check_methods)):

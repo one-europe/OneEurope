@@ -234,7 +234,6 @@
 					
 				</nav>
 
-
 				<div class="sm-buttons">
 				
 					<ul>

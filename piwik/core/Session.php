@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Session.php 7681 2012-12-22 02:05:40Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -130,10 +129,13 @@ class Piwik_Session extends Zend_Session
 			            			we recommend that you <a href='http://piwik.org/faq/how-to-install/#faq_133' target='_blank'>enable database session storage</a>.";
 			}
 
-			$message = 'Error: ' . Piwik_Translate('General_ExceptionUnableToStartSession')
-			            . ' ' .Piwik::getErrorMessageMissingPermissions(Piwik_Common::getPathToPiwikRoot() . '/tmp/sessions/')
-			            . $enableDbSessions
-			            . "\n<pre>Debug: the original error was \n". $e->getMessage()."</pre>";
+            $message = sprintf("Error: %s %s %s\n<pre>Debug: the original error was \n%s</pre>",
+                Piwik_Translate('General_ExceptionUnableToStartSession'),
+                Piwik::getErrorMessageMissingPermissions(Piwik_Common::getPathToPiwikRoot() . '/tmp/sessions/'),
+                $enableDbSessions,
+                $e->getMessage()
+            );
+
 			Piwik_ExitWithMessage($message);
 		}
 	}

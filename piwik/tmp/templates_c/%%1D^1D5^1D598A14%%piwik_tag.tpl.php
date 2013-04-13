@@ -1,32 +1,42 @@
-<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:41
+<?php /* Smarty version 2.6.26, created on 2013-03-25 18:18:33
          compiled from CoreHome/templates/piwik_tag.tpl */ ?>
+
 <?php if ($this->_tpl_vars['piwikUrl'] == 'http://demo.piwik.org/' || $this->_tpl_vars['debugTrackVisitsInsidePiwikUI']): ?>
 
 <div class="clear"></div>
 <?php echo '
 <!-- Piwik -->
-<script src="js/piwik.js" type="text/javascript"></script>
-<script type="text/javascript">
-try {
- var piwikTracker = Piwik.getTracker("piwik.php", 1);
- '; ?>
+<script type="text/javascript"> 
+  var _paq = _paq || [];
+  _paq.push([\'setTrackerUrl\', \'piwik.php\']);
+  _paq.push([\'setSiteId\', '; ?>
+<?php echo $this->_tpl_vars['idSite']; ?>
+<?php echo ']);
+'; ?>
+<?php if ($this->_tpl_vars['piwikUrl'] == 'http://demo.piwik.org/'): ?><?php echo '
+  _paq.push([\'setCookieDomain\', \'*.piwik.org\']);
+'; ?>
+<?php endif; ?><?php echo '
+  // set the domain the visitor landed on, in the Custom Variable
+  _paq.push([function () {
+    if (!this.getCustomVariable(1))
+    {
+      this.setCustomVariable(1, "Domain landed", document.domain);
+    }
+  }]);
+  // Set the selected Piwik language in a custom var
+  _paq.push([\'setCustomVariable\', 2, "Demo language", piwik.languageName]);
+  _paq.push([\'setDocumentTitle\', document.domain + "/" + document.title]);
+  _paq.push([\'trackPageView\']);
+  _paq.push([\'enableLinkTracking\']);
 
- <?php if ($this->_tpl_vars['piwikUrl'] == 'http://demo.piwik.org/'): ?>
- 	piwikTracker.setCookieDomain('*.piwik.org');
- <?php endif; ?>
- <?php echo '
- //Set the domain the visitor landed on, in the Custom Variable
- if(!piwikTracker.getCustomVariable(1)) { 
-   piwikTracker.setCustomVariable(1, "Domain landed", document.domain );
- }
- //Set the selected Piwik language in a custom var
- piwikTracker.setCustomVariable(2, "Demo language", piwik.languageName );
- piwikTracker.setDocumentTitle(document.domain + "/" + document.title);
- piwikTracker.trackPageView();
- piwikTracker.enableLinkTracking();
-} catch(err) {}
+  (function() {
+    var d=document, g=d.createElement(\'script\'), s=d.getElementsByTagName(\'script\')[0]; g.type=\'text/javascript\';
+    g.defer=true; g.async=true; g.src=\'js/piwik.js\'; s.parentNode.insertBefore(g,s);
+  })();
 </script>
 <!-- End Piwik Code -->
 '; ?>
+
 
 <?php endif; ?>

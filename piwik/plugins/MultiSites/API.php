@@ -4,16 +4,10 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php$
  * 
  * @category Piwik_Plugins
- * @package Piwik_Goals
+ * @package Piwik_MultiSites
  */
-
-/**
- * @see plugins/MultiSites/CalculateEvolutionFilter.php
- */
-require_once PIWIK_INCLUDE_PATH . '/plugins/MultiSites/CalculateEvolutionFilter.php';
 
 /**
  * The MultiSites API lets you request the key metrics (visits, page views, revenue) for all Websites in Piwik.
@@ -240,27 +234,17 @@ class Piwik_MultiSites_API
 
 		// if the period isn't a range & a lastN/previousN date isn't used, we get the same
 		// data for the last period to show the evolution of visits/actions/revenue
-		if ($period != 'range' && !preg_match('/(last|previous)([0-9]*)/', $date, $regs))
+		list($strLastDate, $lastPeriod) = Piwik_Period_Range::getLastDate($date, $period);
+		if ($strLastDate !== false)
 		{
-			if (strpos($date, ',')) // date in the form of 2011-01-01,2011-02-02
+			if ($lastPeriod !== false)
 			{
-				$rangePeriod = new Piwik_Period_Range($period, $date);
-
-				$lastStartDate = Piwik_Period_Range::removePeriod($period, $rangePeriod->getDateStart(), $n = 1);
-				$lastEndDate = Piwik_Period_Range::removePeriod($period, $rangePeriod->getDateEnd(), $n = 1);
-
-				$strLastDate = "$lastStartDate,$lastEndDate";
-			}
-			else
-			{
-				$lastPeriod = Piwik_Period_Range::removePeriod($period, Piwik_Date::factory($date), $n = 1);
-				$strLastDate = $lastPeriod->toString();
-				
 				// NOTE: no easy way to set last period date metadata when range of dates is requested.
 				//       will be easier if DataTable_Array::metadata is removed, and metadata that is
 				//       put there is put directly in Piwik_DataTable::metadata.
 				$dataTable->setMetadata(self::getLastPeriodMetadataName('date'), $lastPeriod);
 			}
+			
 			$pastArchive = Piwik_Archive::build('all', $period, $strLastDate, $segment, $_restrictSitesToLogin);
 			$pastData = $pastArchive->getDataTableFromNumeric($fieldsToGet);
 
@@ -354,12 +338,12 @@ class Piwik_MultiSites_API
 			foreach ($apiMetrics as $metricSettings)
 			{
 				$currentData->filter(
-					'Piwik_MultiSites_CalculateEvolutionFilter',
+					'CalculateEvolutionFilter',
 					array(
 						$pastData,
 						$metricSettings[self::METRIC_EVOLUTION_COL_NAME_KEY],
 						$metricSettings[self::METRIC_RECORD_NAME_KEY],
-						$quotientPrecision = 2)
+						$quotientPrecision = 1)
 				);
 			}
 		}
@@ -451,7 +435,7 @@ class Piwik_MultiSites_API
 				
 				// calculate & set evolution
 				$currentTotal = $dataTable->getMetadata($totalMetadataName);
-				$evolution = Piwik_MultiSites_CalculateEvolutionFilter::calculate($currentTotal, $pastTotal);
+				$evolution = Piwik_DataTable_Filter_CalculateEvolutionFilter::calculate($currentTotal, $pastTotal);
 				$dataTable->setMetadata($totalEvolutionMetadataName, $evolution);
 			}
 		}

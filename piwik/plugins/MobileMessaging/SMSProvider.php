@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: SMSProvider.php 7661 2012-12-19 13:56:21Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_MobileMessaging

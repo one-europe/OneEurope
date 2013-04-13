@@ -14,9 +14,8 @@ $message = isset( $_POST['message'] ) ? preg_replace( "/(From:|To:|BCC:|CC:|Subj
 // check whether mail body contains "http://"
 $spam = "http://";
 $pos = strpos($message,$spam);
-if($pos == false) {
-	$nospam = true;
-} else {
+$nospam = true;
+if($pos != false) {
 	$nospam = false;
 }
 

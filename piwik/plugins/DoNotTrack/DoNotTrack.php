@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: DoNotTrack.php 7409 2012-11-09 03:57:42Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_DoNotTrack
@@ -29,7 +28,7 @@ class Piwik_DoNotTrack extends Piwik_Plugin
 	public function getInformation()
 	{
 		return array(
-			'description' => 'Ignore visits with X-Do-Not-Track or DNT header',
+			'description' => Piwik_Translate('DoNotTrack_PluginDescription'),
 			'author' => 'Piwik',
 			'author_homepage' => 'http://piwik.org/',
 			'version' => Piwik_Version::VERSION,

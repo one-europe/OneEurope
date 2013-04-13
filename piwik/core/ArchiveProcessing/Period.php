@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Period.php 7510 2012-11-21 20:09:06Z matt $
  * 
  * @category Piwik
  * @package Piwik

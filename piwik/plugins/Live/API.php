@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7607 2012-12-13 09:38:03Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_Live
@@ -403,8 +402,6 @@ class Piwik_Live_API
 	
 	private function loadLastVisitorDetailsFromDatabase($idSite, $period = false, $date = false, $segment = false, $filter_limit = false, $maxIdVisit = false, $visitorId = false, $minTimestamp = false)
 	{
-//		var_dump($period); var_dump($date); var_dump($filter_limit); var_dump($maxIdVisit); var_dump($visitorId);
-//var_dump($minTimestamp);
 		if(empty($filter_limit))
 		{
 			$filter_limit = 100;
@@ -541,8 +538,6 @@ class Piwik_Live_API
 		{
 			$toUnset[] = 'idvisitor';
 			$toUnset[] = 'location_ip';
-			$toUnset[] = 'location_latitude';
-			$toUnset[] = 'location_longitude';
 		}
 		foreach($toUnset as $keyName)
 		{

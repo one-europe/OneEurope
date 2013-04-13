@@ -358,7 +358,26 @@ dataTable.prototype =
 	handleSort: function(domElem)
 	{
 		var self = this;
-		if( self.param.enable_sort )
+
+    function getSortImageSrc() {
+      var imageSortSrc = false;
+      if (currentIsSubDataTable) {
+        if (self.param.filter_sort_order == 'asc') {
+          imageSortSrc = 'themes/default/images/sort_subtable_asc.png';
+        } else {
+          imageSortSrc = 'themes/default/images/sort_subtable_desc.png';
+        }
+      } else {
+        if (self.param.filter_sort_order == 'asc') {
+          imageSortSrc = 'themes/default/images/sortasc.png';
+        } else {
+          imageSortSrc = 'themes/default/images/sortdesc.png';
+        }
+      }
+      return imageSortSrc;
+    }
+
+    if( self.param.enable_sort )
 		{
 			$('.sortable', domElem).off('click.dataTableSort').on('click.dataTableSort',
 				function()
@@ -372,19 +391,14 @@ dataTable.prototype =
 			{
 				// are we in a subdatatable?
 				var currentIsSubDataTable = $(domElem).parent().hasClass('cellSubDataTable');
-				
-				var prefixSortIcon = ''; 
-				if(currentIsSubDataTable)
-				{
-					prefixSortIcon = '_subtable_';
-				}
-				var imageSortWidth = 16;
-				var imageSortHeight = 16;
+        var imageSortSrc = getSortImageSrc();
+        var imageSortWidth = 16;
+        var imageSortHeight = 16;
 				// we change the style of the column currently used as sort column
 				// adding an image and the class columnSorted to the TD
 				$(".sortable#"+self.param.filter_sort_column+' #thDIV', domElem).parent()
 					.addClass('columnSorted')
-					.prepend('<div id="sortIconContainer"><img id="sortIcon" width="'+imageSortWidth+'" height="'+imageSortHeight+'" src="themes/default/images/sort'+prefixSortIcon+ self.param.filter_sort_order+'.png" /></div>');
+					.prepend('<div id="sortIconContainer"><img id="sortIcon" width="'+imageSortWidth+'" height="'+imageSortHeight+'" src="'+ imageSortSrc +'" /></div>');
 			}
 		}
 	},
@@ -898,8 +912,8 @@ dataTable.prototype =
 						+ ( typeof self.param.filter_pattern != "undefined" ? '&filter_pattern=' + self.param.filter_pattern : '')
 						+ ( typeof self.param.filter_pattern_recursive != "undefined" ? '&filter_pattern_recursive=' + self.param.filter_pattern_recursive : '');
 				
-				if (typeof self.param.flat != "undefined" && self.param.flat) {
-					str += '&flat=1';
+				if (typeof self.param.flat != "undefined") {
+					str += '&flat=' + (self.param.flat == 0 ? '0' : '1');
 					if (typeof self.param.include_aggregate_rows != "undefined" && self.param.include_aggregate_rows) {
 						str += '&include_aggregate_rows=1';
 					}
@@ -1454,7 +1468,7 @@ dataTable.prototype =
 				var newParams = broadcast.getValuesFromUrl(url);
 				for (var key in newParams)
 				{
-					self.param[key] = newParams[key];
+					self.param[key] = decodeURIComponent(newParams[key]);
 				}
 				
 				// do ajax request
@@ -1888,7 +1902,7 @@ actionDataTable.prototype =
 			var plusDetected = $('td img.plusMinus', domElem).attr('src').indexOf('plus') >= 0;
 			
 			$(domElem).siblings().each( function(){
-				var parents = $(this).prop('parent');
+				var parents = $(this).prop('parent').split(' ');
 				if(parents)
 				{
 					if(parents.indexOf(idSubTable) >= 0 

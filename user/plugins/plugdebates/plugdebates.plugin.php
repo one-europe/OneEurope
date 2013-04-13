@@ -172,7 +172,7 @@ class PlugDebate extends Plugin
 		if (is_object(htmlspecialchars( strip_tags( Options::get( 'debatepagination' ) ), ENT_COMPAT, 'UTF-8' ) ) ) {
 			$pagination = htmlspecialchars( strip_tags( Options::get( 'debatepagination' ) ), ENT_COMPAT, 'UTF-8' );
 		} else {
-			$pagination = 2;
+			$pagination = 10;
 		}
 		if ( $page == '' ) { $page = 1; }
 		$theme->current_page = $page;

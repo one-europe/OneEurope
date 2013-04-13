@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ChartEvolution.php 7538 2012-11-25 00:31:34Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik

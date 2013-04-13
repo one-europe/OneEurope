@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: piwik.php 7286 2012-10-23 09:22:19Z matt $
  *
  * @package Piwik
  */
@@ -44,6 +43,7 @@ require_once PIWIK_INCLUDE_PATH .'/core/IP.php';
 require_once PIWIK_INCLUDE_PATH .'/core/Tracker.php';
 require_once PIWIK_INCLUDE_PATH .'/core/Config.php';
 require_once PIWIK_INCLUDE_PATH .'/core/Translate.php';
+require_once PIWIK_INCLUDE_PATH .'/core/Tracker/Cache.php';
 require_once PIWIK_INCLUDE_PATH .'/core/Tracker/Db.php';
 require_once PIWIK_INCLUDE_PATH .'/core/Tracker/Db/Exception.php';
 require_once PIWIK_INCLUDE_PATH .'/core/Tracker/IgnoreCookie.php';

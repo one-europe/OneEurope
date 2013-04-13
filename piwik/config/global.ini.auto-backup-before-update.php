@@ -147,6 +147,11 @@ enable_browser_archiving_triggering = 1
 ; At the moment, this is not needed in core but it can be handy for plugins
 enable_archive_parents_of_datatable = 0
 
+; By default Piwik runs OPTIMIZE TABLE SQL queries to free spaces after deleting some data.
+; If your Piwik tracks millions of pages, the OPTIMIZE TABLE queries might run for hours (seen in "SHOW FULL PROCESSLIST \g")
+; so you can disable these special queries here:
+enable_sql_optimize_queries = 1
+
 ; MySQL minimum required version
 ; note: timezone support added in 4.1.3
 minimum_mysql_version = 4.1
@@ -198,6 +203,10 @@ login_cookie_path =
 login_password_recovery_email_address = "password-recovery@{DOMAIN}"
 ; name that appears as a Sender in the password recovery email
 login_password_recovery_email_name = Piwik
+
+; By default when user logs out he is redirected to Piwik "homepage" usually the Login form.
+; Uncomment the next line to set a URL to redirect the user to after he logs out of Piwik.
+; login_logout_url = http://...
 
 ; Set to 1 to disable the framebuster on standard Non-widgets pages (a click-jacking countermeasure).
 ; Default is 0 (i.e., bust frames on all non Widget pages such as Login, API, Widgets, Email reports, etc.).
@@ -298,7 +307,7 @@ enable_trusted_host_check = 1
 
 ; The release server is an essential part of the Piwik infrastructure/ecosystem
 ; to provide the latest software version.
-latest_version_url = http://piwik.org/latest.zip
+latest_version_url = http://builds.piwik.org/latest.zip
 
 ; The API server is an essential part of the Piwik infrastructure/ecosystem to
 ; provide services to Piwik installations, e.g., getLatestVersion and
@@ -311,9 +320,12 @@ api_service_url = http://api.piwik.org
 ; eg. $period=range&date=previous10 becomes $period=day&date=previous10. Use this setting to override the $period value.
 graphs_default_period_to_plot_when_period_range = day
 
-; The Insight plugin shows the Top X following pages, Top X downloads and Top X outlinks which followed
+; The Overlay plugin shows the Top X following pages, Top X downloads and Top X outlinks which followed
 ; a view of the current page. The value X can be set here.
-insight_limit = 300
+overlay_following_pages_limit = 300
+
+; With this option, you can disable the framed mode of the Overlay plugin. Use it if your website contains a framebuster.
+overlay_disable_framed_mode = 0
 
 [Tracker]
 ; Piwik uses first party cookies by default. If set to 1,
@@ -517,6 +529,9 @@ Plugins[]		= CustomVariables
 Plugins[]		= PrivacyManager
 Plugins[]		= ImageGraph
 Plugins[]		= DoNotTrack
+Plugins[]		= Annotations
+Plugins[]		= MobileMessaging
+Plugins[]		= Overlay
 
 [PluginsInstalled]
 PluginsInstalled[] = Login

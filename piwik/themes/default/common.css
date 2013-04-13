@@ -28,6 +28,12 @@ blockquote,q {
 label {
 	cursor:pointer;
 }
+
+/* IE < 9 will use this */
+html.old-ie .ie-hide { 
+	display: none; 
+}
+
 /* remember to define focus styles! */
 :focus {
 	outline: 0;
@@ -89,7 +95,7 @@ a {
 .top_controls{ 
 	position:relative; 
 	height:32px;
-	.z-index:11;
+	.z-index:9999;
 }
 
 .top_controls_inner{ 
@@ -110,7 +116,7 @@ a {
 	-webkit-border-radius:4px;
 	float:left; 
 	margin-right:12px;
-	z-index:11;
+	z-index:999;
 	position:absolute;
 }
 #periodString:hover {
@@ -344,7 +350,7 @@ a {
 .custom_select_block_show{ height:auto; overflow:visible;padding-top:5px;  }
 
 
-#siteSelect a {
+.siteSelect a {
     white-space:normal;
     text-align:left;
 }
@@ -448,9 +454,13 @@ a {
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 }
-/* extending the jquery UI css for inline help */
-.ui-widget { 
-	text-align:justify;
+/* extending the jquery UI css, for visitor Log popover */
+.ui-widget .dataTable {
+    font-size: 14px;
+}
+/* for inline help */
+.ui-widget {
+    text-align:justify;
 }
 
 .ui-inline-help {
@@ -762,4 +772,28 @@ table.entityTable tr td a {
 	height: 16px;
 	background: url(images/help.png);
 	overflow: hidden;
+}
+
+.section-toggler-link {
+	font-size:.8em;
+	font-style:italic;
+	text-decoration:none;
+}
+.section-toggler-link:hover {
+	text-decoration:underline;
+}
+
+.metricEvolution {
+    display:inline-block;
+    font-size:9pt;
+    opacity:0.75;
+}
+
+.reportsByDimensionView > .entityList {
+	float: left;
+	width: 220px; 
+	min-height:450px;
+}
+.dimensionCategory {
+	margin-top:10px;
 }

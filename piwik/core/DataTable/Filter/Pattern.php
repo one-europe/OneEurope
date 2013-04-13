@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Pattern.php 7173 2012-10-13 08:05:55Z matt $
  * 
  * @category Piwik
  * @package Piwik

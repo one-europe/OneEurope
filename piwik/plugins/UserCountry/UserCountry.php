@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: UserCountry.php 7550 2012-11-26 22:14:37Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -137,8 +136,8 @@ class Piwik_UserCountry extends Piwik_Plugin
 		
 		Piwik_AddWidget( 'General_Visitors', $widgetContinentLabel, 'UserCountry', 'getContinent');
 		Piwik_AddWidget( 'General_Visitors', $widgetCountryLabel, 'UserCountry', 'getCountry');
-		Piwik_AddWidget('General_Visitors', $widgetRegionLabel, 'UserCountry', 'getRegion');
-		Piwik_AddWidget('General_Visitors', $widgetCityLabel, 'UserCountry', 'getCity');
+		Piwik_AddWidget( 'General_Visitors', $widgetRegionLabel, 'UserCountry', 'getRegion');
+		Piwik_AddWidget( 'General_Visitors', $widgetCityLabel, 'UserCountry', 'getCity');
 	}
 
 	function addMenu()
@@ -151,7 +150,7 @@ class Piwik_UserCountry extends Piwik_Plugin
 	 */
 	function addAdminMenu()
 	{
-		Piwik_AddAdminMenu('UserCountry_Geolocation',
+		Piwik_AddAdminSubMenu('General_Settings', 'UserCountry_Geolocation',
 						   array('module' => 'UserCountry', 'action' => 'adminIndex'),
 	                       Piwik::isUserIsSuperUser(),
 	                       $order = 8);
@@ -370,7 +369,6 @@ class Piwik_UserCountry extends Piwik_Plugin
 			return;
 		}
 		
-		$emptyInterestColumns = $archiveProcessing->getNewInterestRow();
 		while ($row = $query->fetch())
 		{
 			// get latitude/longitude if there's a city

@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Php.php 7576 2012-12-05 04:33:47Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -134,7 +133,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
 					$result[self::COUNTRY_CODE_KEY] = geoip_country_code_by_addr($locationGeoIp, $ip);
 					break;
 				default: // unknown database type, log warning and fallback to country edition
-					Piwik::log("Found unrecognized database type: ".$locationGeoIp->databaseType);
+					Piwik::log(sprintf("Found unrecognized database type: %s", $locationGeoIp->databaseType));
 					
 					$result[self::COUNTRY_CODE_KEY] = geoip_country_code_by_addr($locationGeoIp, $ip);
 					break;

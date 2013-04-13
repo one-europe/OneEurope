@@ -68,8 +68,8 @@ var Piwik_Popover = (function() {
 		showLoading: function(popoverName, popoverSubject, height) {
 			var loading = $(document.createElement('div')).addClass('Piwik_Popover_Loading');
 
-			var loadingMessage = popoverSubject ? translations.CoreHome_LoadingPopoverFor_js :
-				translations.CoreHome_LoadingPopover_js;
+			var loadingMessage = popoverSubject ? translations.General_LoadingPopoverFor_js :
+				translations.General_LoadingPopover_js;
 
 			loadingMessage = loadingMessage.replace(/%s/, popoverName);
 			
@@ -177,8 +177,33 @@ var Piwik_Popover = (function() {
 			if (isOpen) {
 				container.dialog('close');
 			}
-		}
+		},
 
+    /**
+     * Create a Popover and load the specified URL in it
+     * @param url
+     */
+    createPopupAndLoadUrl: function(url, loadingName) {
+      // open the popover
+      var box = Piwik_Popover.showLoading(loadingName);
+
+      var callback = function(html) {
+        function setPopoverTitleIfOneFoundInContainer() {
+          var title = $('h1,h2', container);
+          if (title.length == 1) {
+            Piwik_Popover.setTitle(title.text());
+            $(title).hide();
+          }
+        }
+        Piwik_Popover.setContent(html);
+        setPopoverTitleIfOneFoundInContainer();
+      }
+      var ajaxRequest = new ajaxHelper();
+      ajaxRequest.addParams(piwikHelper.getArrayFromQueryString(url), 'get');
+      ajaxRequest.setCallback(callback);
+      ajaxRequest.setFormat('html');
+      ajaxRequest.send(false);
+    }
 	};
 
 })();

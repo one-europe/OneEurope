@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7683 2012-12-22 09:02:51Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -150,6 +149,7 @@ abstract class Piwik_Controller
 				);
 
 		$view->main();
+
 		$rendered = $view->getView()->render();
 		if($fetch)
 		{
@@ -327,16 +327,17 @@ abstract class Piwik_Controller
 	 * Works only for API methods that originally returns numeric values (there is no cast here)
 	 *
 	 * @param string  $methodToCall  Name of method to call, eg. Referers.getNumberOfDistinctSearchEngines
+	 * @param string|false $date A custom date to use when getting the value. If false, the 'date' query
+	 *                           parameter is used.
 	 * @return int|float
 	 */
-	protected function getNumericValue( $methodToCall )
+	protected function getNumericValue( $methodToCall, $date = false )
 	{
-		$requestString = 'method='.$methodToCall.'&format=original';
-		$request = new Piwik_API_Request($requestString);
-		$return = $request->process();
+		$params = $date === false ? array() : array('date' => $date);
+		
+		$return = Piwik_API_Request::processRequest($methodToCall, $params);
 		$columns = $return->getFirstRow()->getColumns();
-		$values = array_values($columns);
-		return $values[0];
+		return reset($columns);
 	}
 
 	/**
@@ -362,7 +363,7 @@ abstract class Piwik_Controller
 		{
 			if(is_array($value))
 			{
-				$value = implode(',', $value);
+				$value = rawurlencode(implode(',', $value));
 			}
 		}
 		$url = Piwik_Url::getCurrentQueryStringWithParametersModified($params);
@@ -456,38 +457,41 @@ abstract class Piwik_Controller
 			$view->language = !empty($language) ? $language : Piwik_LanguagesManager::getLanguageCodeForCurrentUser();
 			
 			$view->config_action_url_category_delimiter = Piwik_Config::getInstance()->General['action_url_category_delimiter'];
-			
+
 			$this->setBasicVariablesView($view);
+
+			$view->topMenu = Piwik_GetTopMenu();
 		} catch(Exception $e) {
-			Piwik_ExitWithMessage($e->getMessage(), Piwik::shouldLoggerLog() ? $e->getTraceAsString() : '');
+			Piwik_ExitWithMessage($e->getMessage(), '' /* $e->getTraceAsString() */ );
 		}
 	}
-	
+
 	/**
 	 * Set the minimal variables in the view object
-	 * 
+	 *
 	 * @param Piwik_View  $view
 	 */
 	protected function setBasicVariablesView($view)
 	{
-		$view->topMenu = Piwik_GetTopMenu();
 		$view->debugTrackVisitsInsidePiwikUI = Piwik_Config::getInstance()->Debug['track_visits_inside_piwik_ui'];
 		$view->isSuperUser = Zend_Registry::get('access')->isSuperUser();
 		$view->hasSomeAdminAccess = Piwik::isUserHasSomeAdminAccess();
 		$view->isCustomLogo = Piwik_Config::getInstance()->branding['use_custom_logo'];
 		$view->logoHeader = Piwik_API_API::getInstance()->getHeaderLogoUrl();
 		$view->logoLarge = Piwik_API_API::getInstance()->getLogoUrl();
-		
+		$view->logoSVG = Piwik_API_API::getInstance()->getSVGLogoUrl();
+		$view->hasSVGLogo = Piwik_API_API::getInstance()->hasSVGLogo();
+
 		$view->enableFrames = Piwik_Config::getInstance()->General['enable_framed_pages']
 			|| @Piwik_Config::getInstance()->General['enable_framed_logins'];
 		if(!$view->enableFrames)
 		{
 			$view->setXFrameOptions('sameorigin');
 		}
-		
+
 		self::setHostValidationVariablesView($view);
 	}
-	
+
 	/**
 	 * Checks if the current host is valid and sets variables on the given view, including:
 	 * 
@@ -839,5 +843,82 @@ abstract class Piwik_Controller
 		{
 			return $period->getPrettyString();
 		}
+	}
+
+
+
+	/**
+	 * Returns the pretty date representation
+	 *
+	 * @param $date string
+	 * @param $period string
+	 * @return string Pretty date
+	 */
+	public static function getPrettyDate($date, $period)
+	{
+		return self::getCalendarPrettyDate( Piwik_Period::factory($period, Piwik_Date::factory($date)) );
+	}
+
+
+	/**
+	 * Calculates the evolution from one value to another and returns HTML displaying
+	 * the evolution percent. The HTML includes an up/down arrow and is colored red, black or
+	 * green depending on whether the evolution is negative, 0 or positive.
+	 * 
+	 * No HTML is returned if the current value and evolution percent are both 0.
+	 * 
+	 * @param string $date The date of the current value.
+	 * @param int $currentValue The value to calculate evolution to.
+	 * @param string $pastDate The date of past value.
+	 * @param int $pastValue The value in the past to calculate evolution from.
+	 * @return string|false The HTML or false if the evolution is 0 and the current value is 0.
+	 */
+	protected function getEvolutionHtml( $date, $currentValue, $pastDate, $pastValue)
+	{
+		$evolutionPercent = Piwik_DataTable_Filter_CalculateEvolutionFilter::calculate(
+			$currentValue, $pastValue, $precision = 1);
+		
+		// do not display evolution if evolution percent is 0 and current value is 0
+		if ($evolutionPercent == 0
+			&& $currentValue == 0)
+		{
+			return false;
+		}
+		
+		$titleEvolutionPercent = $evolutionPercent;
+		if ($evolutionPercent < 0)
+		{
+			$color = "#e02a3b"; //red
+			$img = "arrow_down.png";
+		}
+		else if ($evolutionPercent == 0)
+		{
+			$img = "stop.png";
+		}
+		else
+		{
+			$color = "green";
+			$img = "arrow_up.png";
+			$titleEvolutionPercent = '+'.$titleEvolutionPercent;
+		}
+		
+		$title = Piwik_Translate('General_EvolutionSummaryGeneric', array(
+				Piwik_Translate('General_NVisits', $currentValue),
+				$date,
+				Piwik_Translate('General_NVisits', $pastValue),
+				$pastDate,
+				$titleEvolutionPercent
+		));
+		
+		$result = '<span class="metricEvolution" title="'.$title
+				. '"><img style="padding-right:4px" src="plugins/MultiSites/images/'.$img.'"/><strong';
+		
+		if (isset($color))
+		{
+			$result .= ' style="color:'.$color.'"';
+		}
+		$result .= '>'.$evolutionPercent.'</strong></span>';
+		
+		return $result;
 	}
 }

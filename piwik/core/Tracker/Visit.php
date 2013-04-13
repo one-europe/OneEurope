@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Visit.php 7721 2013-01-03 02:00:18Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -41,18 +40,19 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 	 * @var Piwik_Cookie
 	 */
 	protected $cookie = null;
-	protected $visitorInfo = array();
-	protected $userSettingsInformation = null;
-	protected $visitorCustomVariables = array();
-	protected $idsite;
-	protected $visitorKnown;
-	protected $request;
+    protected $visitorInfo = array();
+    protected $userSettingsInformation = null;
+    protected $visitorCustomVariables = array();
+    protected $idsite;
+    protected $visitorKnown;
+    protected $request;
+    protected $forcedVisitorId = null;
 
-	// can be overwritten in constructor
-	protected $timestamp;
-	protected $ip;
-	protected $authenticated = false;
-	
+    // can be overwritten in constructor
+    protected $timestamp;
+    protected $ip;
+    protected $authenticated = false;
+
 	// Set to true when we set some custom variables from the cookie
 	protected $customVariablesSetFromRequest = false;
 	
@@ -756,13 +756,19 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		{
 			return $this->visitorInfo['idvisitor'];
 		}
+        return Piwik_Common::hex2bin($this->generateUniqueVisitorId());
+    }
 
-		// Return Random UUID
-		$uniqueId = substr($this->getVisitorUniqueId(), 0, Piwik_Tracker::LENGTH_HEX_ID_STRING);
-		return Piwik_Common::hex2bin($uniqueId);
-	}
+    /**
+     * @return string returns random 16 chars hex string
+     */
+    static public function generateUniqueVisitorId()
+    {
+        $uniqueId = substr(Piwik_Common::generateUniqId(), 0, Piwik_Tracker::LENGTH_HEX_ID_STRING);
+        return $uniqueId;
+    }
 
-	/**
+    /**
 	 * Returns the visitor's IP address
 	 *
 	 * @return long
@@ -855,6 +861,8 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 						'131.253.26.0/20',
 						'131.253.24.0/20',
 						// Yahoo
+						'72.30.198.0/20',
+						'72.30.196.0/20',
 						'98.137.207.0/20',
 						// Chinese bot hammering websites
 						'1.202.218.8' 
@@ -962,7 +970,7 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 	 */
 	protected function isVisitorIpExcluded($ip)
 	{
-		$websiteAttributes = Piwik_Common::getCacheWebsiteAttributes( $this->idsite );
+		$websiteAttributes = Piwik_Tracker_Cache::getCacheWebsiteAttributes( $this->idsite );
 		if(!empty($websiteAttributes['excluded_ips']))
 		{
 			if(Piwik_IP::isIpInRange($ip, $websiteAttributes['excluded_ips']))
@@ -985,7 +993,7 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 	 */
 	protected function isUserAgentExcluded( $ua )
 	{
-		$websiteAttributes = Piwik_Common::getCacheWebsiteAttributes($this->idsite);
+		$websiteAttributes = Piwik_Tracker_Cache::getCacheWebsiteAttributes($this->idsite);
 		if (!empty($websiteAttributes['excluded_user_agents']))
 		{
 			foreach ($websiteAttributes['excluded_user_agents'] as $excludedUserAgent)
@@ -1044,12 +1052,12 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		$found = false;
 
 		// Was a Visitor ID "forced" (@see Tracking API setVisitorId()) for this request?
-		$idVisitor = $this->forcedVisitorId;
+		$idVisitor = $this->getForcedVisitorId();
 		if(!empty($idVisitor))
 		{
 			if(strlen($idVisitor) != Piwik_Tracker::LENGTH_HEX_ID_STRING)
 			{
-				throw new Exception("Visitor ID (cid) must be ".Piwik_Tracker::LENGTH_HEX_ID_STRING." characters long");
+				throw new Exception("Visitor ID (cid) $idVisitor must be ".Piwik_Tracker::LENGTH_HEX_ID_STRING." characters long");
 			}
 			printDebug("Request will be recorded for this idvisitor = ".$idVisitor);
 			$found = true;
@@ -1089,7 +1097,12 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		}
 	}
 
-	/**
+    protected function getForcedVisitorId()
+    {
+        return $this->forcedVisitorId;
+    }
+
+    /**
 	 * This methods tries to see if the visitor has visited the website before.
 	 *
 	 * We have to split the visitor into one of the category
@@ -1109,9 +1122,9 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		$configId = $userInfo['config_id'];
 		
 		$this->assignVisitorIdFromRequest();
-		$matchVisitorId = !empty($this->visitorInfo['idvisitor']);
+		$isVisitorIdToLookup = !empty($this->visitorInfo['idvisitor']);
 		
-		if($matchVisitorId)
+		if($isVisitorIdToLookup)
 		{
 			printDebug("Matching visitors with: visitorId=".bin2hex($this->visitorInfo['idvisitor'])." OR configId=".bin2hex($configId));
 		}
@@ -1155,29 +1168,26 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		";
 		$from = "FROM ".Piwik_Common::prefixTable('log_visit');
 
-		
 		$bindSql = array();
-		
-		$timeLookBack = date('Y-m-d H:i:s', $this->getCurrentTimestamp() - Piwik_Config::getInstance()->Tracker['visit_standard_length']);
 
-		// This setting would be enabled for Intranet websites, to ensure that visitors using all the same computer config, same IP
-		// are not counted as 1 visitor. In this case, we want to enforce and trust the visitor ID from the cookie.
-		$trustCookiesOnly = Piwik_Config::getInstance()->Tracker['trust_visitors_cookies'];
-		
-		$shouldMatchOneFieldOnly = ($matchVisitorId && $trustCookiesOnly) || !$matchVisitorId;
-		
-		// Two use cases:
+
+        $timeLookBack = $this->getWindowLookupPreviousVisit();
+
+        $shouldMatchOneFieldOnly = $this->shouldLookupOneVisitorFieldOnly($isVisitorIdToLookup);
+
+        // Two use cases:
 		// 1) there is no visitor ID so we try to match only on config_id (heuristics)
 		// 		Possible causes of no visitor ID: no browser cookie support, direct Tracking API request without visitor ID passed, etc.
 		// 		We can use config_id heuristics to try find the visitor in the past, there is a risk to assign 
 		// 		this page view to the wrong visitor, but this is better than creating artificial visits.
-		// 2) there is a visitor ID and we trust it (config setting trust_visitors_cookies), so we force to look up this visitor id
+		// 2) there is a visitor ID and we trust it (config setting trust_visitors_cookies, OR it was set using &cid= in tracking API),
+        //      and in these cases, we force to look up this visitor id
 		if($shouldMatchOneFieldOnly)
 		{
 			$where = "visit_last_action_time >= ? AND idsite = ?";
 			$bindSql[] = $timeLookBack;
 			$bindSql[] = $this->idsite;
-			if(!$matchVisitorId)
+			if(!$isVisitorIdToLookup)
 			{
 				$where .= ' AND config_id = ?';
 				$bindSql[] = $configId;
@@ -1304,7 +1314,42 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 		}
 	}
 
-	static public function getCustomVariables($scope, $request)
+    /**
+     * By default, we look back 30 minutes to find a previous visitor (for performance reasons).
+     * In some cases, it is useful to look back and count unique visitors more accurately. You can set custom lookback window in
+     * [Tracker] window_look_back_for_visitor
+     *
+     * @return string
+     *
+     */
+    protected function getWindowLookupPreviousVisit()
+    {
+        $lookbackNSeconds = Piwik_Config::getInstance()->Tracker['visit_standard_length'];
+
+        $lookbackNSecondsCustom = Piwik_Config::getInstance()->Tracker['window_look_back_for_visitor'];
+        if ($lookbackNSecondsCustom > $lookbackNSeconds) {
+            $lookbackNSeconds = $lookbackNSecondsCustom;
+        }
+        $timeLookBack = date('Y-m-d H:i:s', $this->getCurrentTimestamp() - $lookbackNSeconds);
+        return $timeLookBack;
+    }
+
+    protected function shouldLookupOneVisitorFieldOnly($isVisitorIdToLookup)
+    {
+        // This setting would be enabled for Intranet websites, to ensure that visitors using all the same computer config, same IP
+        // are not counted as 1 visitor. In this case, we want to enforce and trust the visitor ID from the cookie.
+        $trustCookiesOnly = Piwik_Config::getInstance()->Tracker['trust_visitors_cookies'];
+
+        // If a &cid= was set, we force to select this visitor (or create a new one)
+        $isForcedVisitorIdMustMatch = ($this->getForcedVisitorId() != null);
+
+        $shouldMatchOneFieldOnly = (($isVisitorIdToLookup && $trustCookiesOnly)
+                                    || $isForcedVisitorIdMustMatch
+                                    || !$isVisitorIdToLookup);
+        return $shouldMatchOneFieldOnly;
+    }
+
+    static public function getCustomVariables($scope, $request)
 	{
 		if($scope == 'visit') {
 			$parameter = '_cvar';
@@ -1558,7 +1603,7 @@ class Piwik_Tracker_Visit implements Piwik_Tracker_Visit_Interface
 	// is the referer host any of the registered URLs for this website?
 	static public function isHostKnownAliasHost($urlHost, $idSite)
 	{
-		$websiteData = Piwik_Common::getCacheWebsiteAttributes($idSite);
+		$websiteData = Piwik_Tracker_Cache::getCacheWebsiteAttributes($idSite);
 		if(isset($websiteData['hosts']))
 		{
 			$canonicalHosts = array();
@@ -1590,6 +1635,10 @@ class Piwik_Tracker_Visit_Referer
 	protected $refererUrlParse;
 	protected $currentUrlParse;
 	protected $idsite;
+
+	// Used to prefix when a adsense referer is detected
+	const LABEL_PREFIX_ADSENSE_KEYWORD = '(adsense) ';
+
 
 	/**
 	 * Returns an array containing the following information:
@@ -1728,6 +1777,44 @@ class Piwik_Tracker_Visit_Referer
 					break;
 				}
 			}
+			
+			// if the campaign keyword is empty, try to get a keyword from the referrer URL
+			if (empty($this->keywordRefererAnalyzed))
+			{
+				// Set the Campaign keyword to the keyword found in the Referer URL if any
+				$referrerUrlInfo = Piwik_Common::extractSearchEngineInformationFromUrl($this->refererUrl);
+				if (!empty($referrerUrlInfo['keywords']))
+				{
+					$this->keywordRefererAnalyzed = $referrerUrlInfo['keywords'];
+				}
+
+				// Set the keyword, to the hostname found, in a Adsense Referer URL '&url=' parameter
+				if(empty($this->keywordRefererAnalyzed)
+					&& !empty($this->refererUrlParse['query'])
+					&& !empty($this->refererHost)
+					&& (strpos($this->refererHost, 'google') !== false || strpos($this->refererHost,'doubleclick') !== false)
+					)
+				{
+					// This parameter sometimes is found & contains the page with the adsense ad bringing visitor to our site
+					$adsenseReferrerParameter = 'url';
+					$value = trim(urldecode(Piwik_Common::getParameterFromQueryString($this->refererUrlParse['query'], $adsenseReferrerParameter)));
+					if(!empty($value))
+					{
+						$parsedAdsenseReferrerUrl = parse_url($value);
+						if(!empty($parsedAdsenseReferrerUrl['host']))
+						{
+							$this->keywordRefererAnalyzed = self::LABEL_PREFIX_ADSENSE_KEYWORD . $parsedAdsenseReferrerUrl['host'];
+						}
+					}
+				}
+
+				// or we default to the referrer hostname otherwise
+				if(empty($this->keywordRefererAnalyzed))
+				{
+					$this->keywordRefererAnalyzed = $this->refererHost;
+				}
+			}
+			
 			return true;
 		}
 		return false;

@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7645 2012-12-17 02:18:03Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_VisitorInterest

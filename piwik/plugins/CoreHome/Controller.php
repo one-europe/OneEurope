@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7747 2013-01-13 11:12:13Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CoreHome
@@ -163,6 +162,7 @@ class Piwik_CoreHome_Controller extends Piwik_Controller
 			$isMultiRowEvolution = Piwik_Common::getRequestVar($paramName, false, 'int');
 			
 			$rowEvolution = $this->makeRowEvolution($isMultiRowEvolution, $graphType = 'graphEvolution');
+			$rowEvolution->useAvailableMetrics();
 			self::$rowEvolutionCache = $rowEvolution;
 		}
 		
@@ -212,6 +212,18 @@ class Piwik_CoreHome_Controller extends Piwik_Controller
 		{
 			$view->footerMessage = Piwik_Translate('CoreHome_OnlyForAdmin');
 		}
+		echo $view->render();
+	}
+	
+	/**
+	 * Renders and echo's HTML that displays the Piwik promo video.
+	 */
+	public function getPromoVideo()
+	{
+		$view = Piwik_View::factory('promo_video');
+		$view->shareText = Piwik_Translate('CoreHome_SharePiwikShort');
+		$view->shareTextLong = Piwik_Translate('CoreHome_SharePiwikLong');
+		$view->promoVideoUrl = 'http://www.youtube.com/watch?v=OslfF_EH81g';
 		echo $view->render();
 	}
 }

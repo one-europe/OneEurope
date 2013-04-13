@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: HtmlTable.php 7491 2012-11-20 04:05:14Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -82,6 +81,8 @@ class Piwik_ViewDataTable_HtmlTable extends Piwik_ViewDataTable
 		} catch(Piwik_Access_NoAccessException $e) {
 			throw $e;
 		} catch(Exception $e) {
+			Piwik::log("Failed to get data from API: ".$e->getMessage());
+			
 			$this->isDataAvailable = false;
 		}
 

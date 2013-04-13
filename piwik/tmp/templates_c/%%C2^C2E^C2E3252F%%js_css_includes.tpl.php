@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:40
+<?php /* Smarty version 2.6.26, created on 2013-03-25 18:18:33
          compiled from CoreHome/templates/js_css_includes.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'includeAssets', 'CoreHome/templates/js_css_includes.tpl', 1, false),array('modifier', 'translate', 'CoreHome/templates/js_css_includes.tpl', 3, false),)), $this); ?>

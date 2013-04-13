@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: CoreHome.php 7747 2013-01-13 11:12:13Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_CoreHome
@@ -43,6 +42,7 @@ class Piwik_CoreHome extends Piwik_Plugin
 	public function addWidgets()
 	{
 		Piwik_AddWidget('Example Widgets', 'CoreHome_SupportPiwik', 'CoreHome', 'getDonateForm');
+		Piwik_AddWidget('Example Widgets', 'Installation_Welcome', 'CoreHome', 'getPromoVideo');
 	}
 
 	/**
@@ -76,7 +76,6 @@ class Piwik_CoreHome extends Piwik_Plugin
 		$jsFiles[] = "libs/jquery/jquery.truncate.js";
 		$jsFiles[] = "libs/jquery/jquery.scrollTo.js";
 		$jsFiles[] = "libs/jquery/jquery.history.js";
-		$jsFiles[] = "libs/swfobject/swfobject.js";
 		$jsFiles[] = "libs/javascript/sprintf.js";
 		$jsFiles[] = "themes/default/common.js";
 		$jsFiles[] = "themes/default/ajaxHelper.js";
@@ -86,6 +85,7 @@ class Piwik_CoreHome extends Piwik_Plugin
 		$jsFiles[] = "plugins/CoreHome/templates/popover.js";
 		$jsFiles[] = "plugins/CoreHome/templates/broadcast.js";
 		$jsFiles[] = "plugins/CoreHome/templates/menu.js";
+		$jsFiles[] = "plugins/CoreHome/templates/menu_init.js";
 		$jsFiles[] = "plugins/CoreHome/templates/calendar.js";
 		$jsFiles[] = "plugins/CoreHome/templates/date.js";
 		$jsFiles[] = "plugins/CoreHome/templates/autocomplete.js";

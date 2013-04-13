@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Admin.php 7297 2012-10-24 06:19:29Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -32,6 +31,12 @@ abstract class Piwik_Controller_Admin extends Piwik_Controller
 
 	static public function setBasicVariablesAdminView($view)
 	{
+		$statsEnabled = Piwik_Config::getInstance()->Tracker['record_statistics'];
+		if($statsEnabled == "0"){
+			$view->statisticsNotRecorded = true;
+		}
+
+		$view->topMenu = Piwik_GetTopMenu();
 		$view->currentAdminMenuName = Piwik_GetCurrentAdminMenuName();
 
 		$view->enableFrames = Piwik_Config::getInstance()->General['enable_framed_settings'];

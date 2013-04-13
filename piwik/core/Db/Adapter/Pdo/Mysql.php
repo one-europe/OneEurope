@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Mysql.php 7433 2012-11-11 10:52:45Z matt $
  * 
  * @category Piwik
  * @package Piwik

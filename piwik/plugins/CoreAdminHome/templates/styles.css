@@ -6,9 +6,9 @@
 }
 
 #content.admin {
-	margin:0 15px;
-	padding:0 0 0 0;
-	font:13px Arial, Helvetica, sans-serif
+	margin:0 15px 0 270px;
+    padding: 0 0 40px;
+	font:13px Arial, Helvetica, sans-serif;
 }
 
 .admin #header_message{

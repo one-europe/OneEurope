@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: DataTableSummary.php 7160 2012-10-12 00:36:14Z matt $
  * 
  * @category Piwik
  * @package Piwik

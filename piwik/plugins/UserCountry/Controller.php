@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7629 2012-12-15 02:45:36Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -27,7 +26,7 @@ class Piwik_UserCountry_Controller extends Piwik_Controller_Admin
 		$view->dataTableContinent = $this->getContinent(true);
 		$view->dataTableRegion = $this->getRegion(true);
 		$view->dataTableCity = $this->getCity(true);
-		
+
 		echo $view->render();
 	}
 	
@@ -162,6 +161,12 @@ class Piwik_UserCountry_Controller extends Piwik_Controller_Admin
 		$view->geoIPUpdatePeriod = Piwik_UserCountry_GeoIPAutoUpdater::getSchedulePeriod();
 		
 		$view->geoLiteUrl = Piwik_UserCountry_LocationProvider_GeoIp::GEO_LITE_URL;
+		
+		$lastRunTime = Piwik_UserCountry_GeoIPAutoUpdater::getLastRunTime();
+		if ($lastRunTime !== false)
+		{
+			$view->lastTimeUpdaterRun = '<strong><em>'.$lastRunTime->toString().'</em></strong>';
+		}
 	}
 	
 	/**
@@ -295,9 +300,6 @@ class Piwik_UserCountry_Controller extends Piwik_Controller_Admin
 			{
 				throw new Exception("Invalid provider ID: '$providerId'.");
 			}
-			
-			// make sure the tracker will use the new location provider
-			Piwik_Common::regenerateCacheGeneral();
 		}
 	}
 	
@@ -339,7 +341,7 @@ class Piwik_UserCountry_Controller extends Piwik_Controller_Admin
 
 	function getContinent( $fetch = false)
 	{
-		$view = $this->getStandardDataTableUserCountry(__FUNCTION__, "UserCountry.getContinent", 'graphVerticalBar');
+		$view = $this->getStandardDataTableUserCountry(__FUNCTION__, "UserCountry.getContinent", 'table');
 		$view->disableSearchBox();
 		$view->disableOffsetInformationAndPaginationControls();
 		$view->setColumnTranslation('label', Piwik_Translate('UserCountry_Continent'));

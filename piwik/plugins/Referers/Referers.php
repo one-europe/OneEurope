@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Referers.php 7533 2012-11-22 22:36:18Z SteveG $
  *
  * @category Piwik_Plugins
  * @package Piwik_Referers
@@ -75,7 +74,15 @@ class Piwik_Referers extends Piwik_Plugin
         							array('<br />', '&quot;'.Piwik_Translate('Referers_SubmenuCampaigns').'&quot;')),
         			'order' => 1,
         		),
-        		
+				array(
+					'category'  => Piwik_Translate('Referers_Referers'),
+					'name'   => Piwik_Translate('Referers_WidgetGetAll'),
+					'module' => 'Referers',
+					'action' => 'getAll',
+					'dimension' => Piwik_Translate('Referers_Referrer'),
+					'documentation' => Piwik_Translate('Referers_AllReferersReportDocumentation', '<br />'),
+					'order' => 2,
+				),
         		array(
         			'category' => Piwik_Translate('Referers_Referers'),
         			'name'   => Piwik_Translate('Referers_Keywords'),
@@ -226,9 +233,10 @@ class Piwik_Referers extends Piwik_Plugin
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetSearchEngines', 'Referers', 'getSearchEngines');
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetCampaigns', 'Referers', 'getCampaigns');
 		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetOverview', 'Referers', 'getRefererType');
+		Piwik_AddWidget( 'Referers_Referers', 'Referers_WidgetGetAll', 'Referers', 'getAll');
 		if(Piwik_Archive::isSegmentationEnabled())
 		{
-    		Piwik_AddWidget( 'SEO', 'Top Keywords for Page URL', 'Referers', 'getKeywordsForPage');
+    		Piwik_AddWidget( 'SEO', 'Referers_WidgetTopKeywordsForPages', 'Referers', 'getKeywordsForPage');
 		}
 	}
 	

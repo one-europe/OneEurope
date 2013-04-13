@@ -12,6 +12,35 @@ var piwikHelper = {
         return $('<div/>').html(value).text();
     },
 
+    /*
+     * a nice cross-browser logging function
+     */
+    log: function() {
+        try {
+            console.log.apply(console, arguments); // Firefox, Chrome
+        } catch (e) {
+            try {
+                opera.postError.apply(opera, arguments);  // Opera
+            } catch (f) {
+                // don't alert as log is not considered to be important enough
+                // (as opposed to piwikHelper.error)
+                //alert(Array.prototype.join.call(arguments, ' ')); // MSIE
+            }
+        }
+    },
+
+    error: function() {
+        try {
+            console.error.apply(console, arguments); // Firefox, Chrome
+        } catch (e) {
+            try {
+                opera.postError.apply(opera, arguments);  // Opera
+            } catch (f) {
+                alert(Array.prototype.join.call(arguments, ' ')); // MSIE
+            }
+        }
+    },
+
     htmlEntities: function(value)
     {
         var findReplace = [[/&/g, "&amp;"], [/</g, "&lt;"], [/>/g, "&gt;"], [/"/g, "&quot;"]];
@@ -108,6 +137,26 @@ var piwikHelper = {
             }
         }
         return String(window.location.pathname) + parameters;
+    },
+
+  /**
+   * Given param1=v1&param2=k2
+   * returns: { "param1": "v1", "param2": "v2" }
+   *
+   * @param query string
+   * @return {Object}
+   */
+    getArrayFromQueryString: function (query) {
+      var params = {};
+      var vars = query.split("&");
+      for (var i=0;i<vars.length;i++) {
+        var keyValue = vars[i].split("=");
+        // Jquery will urlencode these, but we wish to keep the current raw value
+        // use case: &segment=visitorId%3D%3Dabc...
+        var rawValue = decodeURIComponent(keyValue[1]);
+        params[keyValue[0]] = rawValue;
+      }
+      return params;
     },
 
     /**

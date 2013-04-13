@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: LocationProvider.php 7469 2012-11-14 07:43:58Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry
@@ -301,6 +300,7 @@ abstract class Piwik_UserCountry_LocationProvider
 				"Invalid provider ID '$providerId'. The provider either does not exist or is not available");
 		}
 		Piwik_SetOption(self::CURRENT_PROVIDER_OPTION_NAME, $providerId);
+		Piwik_Tracker_Cache::clearCacheGeneral();
 		return $provider;
 	}
 	
@@ -376,8 +376,7 @@ abstract class Piwik_UserCountry_LocationProvider
 		{
 			if (is_numeric($location[self::LONGITUDE_KEY]))
 			{
-				$location[self::LONGITUDE_KEY] = round(
-					$location[self::LONGITUDE_KEY], self::GEOGRAPHIC_COORD_PRECISION);
+				$location[self::LONGITUDE_KEY] = round($location[self::LONGITUDE_KEY], self::GEOGRAPHIC_COORD_PRECISION);
 			}
 			else
 			{

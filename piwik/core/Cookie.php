@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Cookie.php 7594 2012-12-11 01:08:40Z matt $
  *
  * @category Piwik
  * @package Piwik

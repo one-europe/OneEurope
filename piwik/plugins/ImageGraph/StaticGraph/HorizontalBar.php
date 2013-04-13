@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: HorizontalBar.php 7077 2012-09-29 13:05:28Z JulienM $
  *
  * @category Piwik_Plugins
  * @package Piwik_ImageGraph_StaticGraph

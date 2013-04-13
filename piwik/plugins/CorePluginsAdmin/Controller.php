@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7296 2012-10-24 05:12:01Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_CorePluginsAdmin
@@ -29,7 +28,7 @@ class Piwik_CorePluginsAdmin_Controller extends Piwik_Controller_Admin
 		$listPlugins = array_unique($listPlugins);
 		foreach($listPlugins as $pluginName)
 		{
-			$oPlugin = Piwik_PluginsManager::getInstance()->loadPlugin($pluginName);
+			Piwik_PluginsManager::getInstance()->loadPlugin($pluginName);
 			$plugins[$pluginName] = array(
 			 	'activated' => Piwik_PluginsManager::getInstance()->isPluginActivated($pluginName),
 				'alwaysActivated' => Piwik_PluginsManager::getInstance()->isPluginAlwaysActivated($pluginName),

@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7559 2012-11-30 00:01:44Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_SitesManager
@@ -68,6 +67,8 @@ class Piwik_SitesManager_Controller extends Piwik_Controller_Admin
 		$view->allowSiteSpecificUserAgentExclude =
 			Piwik_SitesManager_API::getInstance()->isSiteSpecificUserAgentExcludeEnabled();
 
+		$view->globalKeepURLFragments = Piwik_SitesManager_API::getInstance()->getKeepURLFragmentsGlobal();
+		
 		$view->currentIpAddress = Piwik_IP::getIpFromHeader();
 
 		$view->showAddSite = (boolean) Piwik_Common::getRequestVar('showaddsite', false);
@@ -94,14 +95,18 @@ class Piwik_SitesManager_Controller extends Piwik_Controller_Admin
 			$searchKeywordParameters = Piwik_Common::getRequestVar('searchKeywordParameters', $default = "");
 			$searchCategoryParameters = Piwik_Common::getRequestVar('searchCategoryParameters', $default = "");
 			$enableSiteUserAgentExclude = Piwik_Common::getRequestVar('enableSiteUserAgentExclude', $default = 0);
-			Piwik_SitesManager_API::getInstance()->setDefaultTimezone($timezone);
-			Piwik_SitesManager_API::getInstance()->setDefaultCurrency($currency);
-			Piwik_SitesManager_API::getInstance()->setGlobalExcludedQueryParameters($excludedQueryParameters);
-			Piwik_SitesManager_API::getInstance()->setGlobalExcludedIps($excludedIps);
-			Piwik_SitesManager_API::getInstance()->setGlobalExcludedUserAgents($excludedUserAgents);
-			Piwik_SitesManager_API::getInstance()->setGlobalSearchParameters($searchKeywordParameters, $searchCategoryParameters);
-			Piwik_SitesManager_API::getInstance()->setSiteSpecificUserAgentExcludeEnabled(
-				$enableSiteUserAgentExclude == 1);
+			$keepURLFragments = Piwik_Common::getRequestVar('keepURLFragments', $default = 0);
+			
+			$api = Piwik_SitesManager_API::getInstance();
+			$api->setDefaultTimezone($timezone);
+			$api->setDefaultCurrency($currency);
+			$api->setGlobalExcludedQueryParameters($excludedQueryParameters);
+			$api->setGlobalExcludedIps($excludedIps);
+			$api->setGlobalExcludedUserAgents($excludedUserAgents);
+			$api->setGlobalSearchParameters($searchKeywordParameters, $searchCategoryParameters);
+			$api->setSiteSpecificUserAgentExcludeEnabled($enableSiteUserAgentExclude == 1);
+			$api->setKeepURLFragmentsGlobal($keepURLFragments);
+			
 			$toReturn = $response->getResponse();
 		} catch(Exception $e ) {
 			$toReturn = $response->getResponseException( $e );

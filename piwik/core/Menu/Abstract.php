@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Abstract.php 7761 2013-01-15 21:39:22Z matt $
  *
  * @category Piwik
  * @package Piwik_Menu
@@ -20,6 +19,7 @@ abstract class Piwik_Menu_Abstract
 	protected $menuEntries = array();
 	protected $edits = array();
 	protected $renames = array();
+	protected $orderingApplied = false;
 
 	/*
 	 * Can't enforce static function in 5.2.
@@ -86,7 +86,9 @@ abstract class Piwik_Menu_Abstract
 		if (!isset($this->menu[$menuName]) || empty($subMenuName))
 		{
 			$this->menu[$menuName]['_url'] = $url;
-			$this->menu[$menuName]['_order'] = $order;
+			if(empty($subMenuName)) {
+				$this->menu[$menuName]['_order'] = $order;
+			}
 			$this->menu[$menuName]['_name'] = $menuName;
 			$this->menu[$menuName]['_hasSubmenu'] = false;
 			$this->menu[$menuName]['_tooltip'] = $tooltip;
@@ -197,10 +199,12 @@ abstract class Piwik_Menu_Abstract
 	 */
 	private function applyOrdering()
 	{
-		if(empty($this->menu))
+		if (empty($this->menu)
+			|| $this->orderingApplied)
 		{
 			return;
 		}
+		
 		uasort($this->menu, array($this, 'menuCompare'));
 		foreach ($this->menu as $key => &$element)
 		{
@@ -213,6 +217,8 @@ abstract class Piwik_Menu_Abstract
 				uasort($element, array($this, 'menuCompare'));
 			}
 		}
+		
+		$this->orderingApplied = true;
 	}
 
 	/**

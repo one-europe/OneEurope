@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Mysqli.php 7056 2012-09-25 07:14:03Z EZdesign $
  *
  * @category Piwik
  * @package Piwik

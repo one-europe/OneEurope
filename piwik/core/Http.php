@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Http.php 7561 2012-11-30 05:33:47Z matt $
  *
  * @category Piwik
  * @package Piwik
@@ -26,19 +25,29 @@ class Piwik_Http
 	static public function getTransportMethod()
 	{
 		$method = 'curl';
-		if(!function_exists('curl_init'))
+		if(!self::isCurlEnabled())
 		{
 			$method = 'fopen';
 			if(@ini_get('allow_url_fopen') != '1')
 			{
 				$method = 'socket';
-				if(!function_exists('fsockopen'))
+				if(!self::isSocketEnabled())
 				{
 					return null;
 				}
 			}
 		}
 		return $method;
+	}
+
+	protected static function isSocketEnabled()
+	{
+		return function_exists('fsockopen');
+	}
+
+	protected static function isCurlEnabled()
+	{
+		return function_exists('curl_init');
 	}
 
 	/**
@@ -155,6 +164,10 @@ class Piwik_Http
 
 		if($method == 'socket')
 		{
+			if(!self::isSocketEnabled()) {
+				// can be triggered in tests
+				throw new Exception("HTTP socket support is not enabled (php function fsockopen is not available) ");
+			}
 			// initialization
 			$url = @parse_url($aUrl);
 			if($url === false || !isset($url['scheme']))
@@ -426,6 +439,10 @@ class Piwik_Http
 		}
 		else if($method == 'curl')
 		{
+			if(!self::isCurlEnabled()) {
+				// can be triggered in tests
+				throw new Exception("CURL is not enabled in php.ini, but is being used.");
+			}
 			$ch = @curl_init();
 
 			if(!empty($proxyHost) && !empty($proxyPort))
@@ -517,6 +534,7 @@ class Piwik_Http
 			}
 			else
 			{
+				$header = '';
 				// redirects are included in the output html, so we look for the last line that starts w/ HTTP/...
 				// to split the response
 				while (substr($response, 0, 5) == "HTTP/")
@@ -548,20 +566,14 @@ class Piwik_Http
 			@fclose($file);
 
 			$fileSize = filesize($destinationPath);
-			if((($contentLength > 0) && ($fileLength != $contentLength)) || ($fileSize != $fileLength))
+			if((($contentLength > 0) && ($fileLength != $contentLength))
+				|| ($fileSize != $fileLength))
 			{
 				throw new Exception('File size error: '.$destinationPath.'; expected '.$contentLength.' bytes; received '.$fileLength.' bytes; saved '.$fileSize.' bytes to file');
 			}
 			return true;
 		}
 
-		if ($contentLength > 0
-			&& $fileLength != $contentLength
-			&& $httpMethod != 'HEAD')
-		{
-			throw new Exception('Content length error: expected '.$contentLength.' bytes; received '.$fileLength.' bytes');
-		}
-		
 		if (!$getExtendedInfo)
 		{
 			return trim($response);
@@ -624,7 +636,7 @@ class Piwik_Http
 			
 			if ($expectedFileSize == 0)
 			{
-				Piwik::log("HEAD request for '$url' failed, got following: ".print_r($expectedFileSizeResult, true));
+				Piwik::log(sprintf("HEAD request for '%s' failed, got following: %s", $url, print_r($expectedFileSizeResult, true)));
 				throw new Exception(Piwik_Translate('General_DownloadFail_HttpRequestFail'));
 			}
 			
@@ -635,8 +647,7 @@ class Piwik_Http
 			$expectedFileSize = (int)Piwik_GetOption($downloadOption);
 			if ($expectedFileSize === false) // sanity check
 			{
-				throw new Exception(
-					"Trying to continue a download that never started?! That's not supposed to happen...");
+				throw new Exception("Trying to continue a download that never started?! That's not supposed to happen...");
 			}
 		}
 		

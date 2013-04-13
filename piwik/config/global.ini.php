@@ -263,7 +263,6 @@ use_ajax_cdn = 0
 ; required AJAX library versions
 jquery_version = 1.7.2
 jqueryui_version = 1.8.22
-swfobject_version = 2.2
 
 ; Set to 1 if you're using https on your Piwik server and Piwik can't detect it,
 ; e.g., a reverse proxy using https-to-http, or a web server that doesn't
@@ -357,6 +356,12 @@ record_statistics			= 1
 ; after his last page view, it will be recorded as a new visit
 visit_standard_length       = 1800
 
+; The window to look back for a previous visit by this current visitor. Defaults to visit_standard_length.
+; If you are looking for higher accuracy of "returning visitors" metrics, you may set this value to 86400 or more.
+; This is especially useful when you use the Tracking API where tracking Returning Visitors often depends on this setting.
+; The value window_look_back_for_visitor is used only if it is set to greater than visit_standard_length
+window_look_back_for_visitor = 0
+
 ; visitors that stay on the website and view only one page will be considered as time on site of 0 second
 default_time_one_page_visit = 0
 
@@ -365,7 +370,7 @@ default_time_one_page_visit = 0
 ; The mapping is defined in core/DataFiles/LanguageToCountry.php,
 enable_language_to_country_guess = 1
 
-; When the misc/cron/archive.sh cron hasn't been setup, we still need to regularly run some maintenance tasks.
+; When the misc/cron/archive.php cron hasn't been setup, we still need to regularly run some maintenance tasks.
 ; Visits to the Tracker will try to trigger Scheduled Tasks (eg. scheduled PDF/HTML reports by email).
 ; Scheduled tasks will only run if 'Enable Piwik Archiving from Browser' is enabled in the General Settings.
 ; Tasks run once every hour maximum, they might not run every hour if traffic is low.
@@ -398,6 +403,10 @@ action_sitesearch_record_url = 0
 ; This value is the number of octets in IP address to mask; if the AnonymizeIP plugin is deactivated, this value is ignored.
 ; For IPv4 addresses, valid values are 0..4; for IPv6 addresses, valid values are 0..16
 ip_address_mask_length = 1
+
+; Tracker cache files are the simple caching layer for Tracking.
+; TTL: Time to live for cache files, in seconds. Default to 5 minutes.
+tracker_cache_file_ttl = 300
 
 ; DO NOT USE THIS SETTING ON PUBLICLY AVAILABLE PIWIK SERVER
 ; !!! Security risk: if set to 0, it would allow anyone to push data to Piwik with custom dates in the past/future and with fake IPs !!!
@@ -458,7 +467,7 @@ password = 							; Proxy password: optional; if specified, username is mandator
 logger_error[]			= screen
 logger_exception[]		= screen
 
-; if set to 1, only requests done in CLI mode (eg. the archive.sh cron run) will be logged
+; if set to 1, only requests done in CLI mode (eg. the archive.php cron run) will be logged
 ; NOTE: log_only_when_debug_parameter will also be checked for
 log_only_when_cli = 0
 

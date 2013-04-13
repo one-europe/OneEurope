@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7593 2012-12-10 21:26:41Z SteveG $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CustomVariables

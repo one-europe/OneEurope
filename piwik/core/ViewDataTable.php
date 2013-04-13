@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: ViewDataTable.php 7612 2012-12-14 08:56:21Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -15,6 +14,12 @@
  * The main() method will create an object implementing Piwik_View_Interface
  * You can customize the dataTable using the disable* methods.
  *
+ * You can also customize the dataTable rendering using row metadata:
+ * - 'html_label_prefix': If this metadata is present on a row, it's contents will be prepended
+ *                        the label in the HTML output.
+ * - 'html_label_suffix': If this metadata is present on a row, it's contents will be appended
+ *                        after the label in the HTML output.
+ * 
  * Example:
  * In the Controller of the plugin VisitorInterest
  * <pre>

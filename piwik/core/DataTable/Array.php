@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Array.php 7466 2012-11-14 03:18:12Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -220,6 +219,13 @@ class Piwik_DataTable_Array
 		}
 	}
 
+    public function deleteRow($id)
+    {
+        foreach($this->array as $table)
+        {
+            $table->deleteRow($id);
+        }
+    }
 	/**
 	 * Deletes the given column
 	 *
@@ -394,6 +400,7 @@ class Piwik_DataTable_Array
 	public function mergeSubtables()
 	{
 		$result = new Piwik_DataTable_Array();
+		$result->keyName = $this->keyName;
 		foreach ($this->array as $label => $childTable)
 		{
 			$result->addTable($childTable->mergeSubtables(), $label);

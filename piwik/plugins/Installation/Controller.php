@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7690 2012-12-23 03:36:20Z capedfuzz $
  *
  * @category Piwik_Plugins
  * @package Piwik_Installation
@@ -1007,7 +1006,7 @@ class Piwik_Installation_Controller extends Piwik_Controller_Admin
 		}
 		
 		// delete the temporary rows that were created
-		Piwik_Exec("DELETE FROM $optionTable WHERE option_name IN ('".implode("','", $testOptionNames)."')");
+		Piwik_Exec("DELETE FROM `$optionTable` WHERE option_name IN ('".implode("','", $testOptionNames)."')");
 		
 		return $result;
 	}

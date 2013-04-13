@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:41
+<?php /* Smarty version 2.6.26, created on 2013-03-25 18:18:33
          compiled from CoreHome/templates/sites_selection.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', 'CoreHome/templates/sites_selection.tpl', 19, false),)), $this); ?>
@@ -11,8 +11,10 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 	</a>
 </div>
 <?php $this->_smarty_vars['capture']['sitesSelector_allWebsitesLink'] = ob_get_contents();  $this->assign('sitesSelector_allWebsitesLink', ob_get_contents());ob_end_clean(); ?>
-<div class="sites_autocomplete">
-    <div id="sitesSelectionSearch" class="custom_select">
+<div class="sites_autocomplete" <?php if (isset ( $this->_tpl_vars['siteSelectorId'] )): ?>id="<?php echo $this->_tpl_vars['siteSelectorId']; ?>
+"<?php endif; ?>
+	<?php if (! isset ( $this->_tpl_vars['switchSiteOnSelect'] ) || $this->_tpl_vars['switchSiteOnSelect'] == true): ?>data-switch-site-on-select="1"<?php endif; ?>>
+    <div class="custom_select">
     
         <a href="#" onclick="return false" class="custom_select_main_link" siteid="<?php if (isset ( $this->_tpl_vars['idSite'] )): ?><?php echo $this->_tpl_vars['idSite']; ?>
 <?php else: ?><?php echo $this->_tpl_vars['sites'][0]['idsite']; ?>
@@ -25,7 +27,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
             <?php echo $this->_tpl_vars['sitesSelector_allWebsitesLink']; ?>
 
             <?php endif; ?>
-            <div id="custom_select_container">
+            <div class="custom_select_container">
             <ul class="custom_select_ul_list" >
                 <?php $_from = $this->_tpl_vars['sites']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['info']):
@@ -41,10 +43,10 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 
             <?php endif; ?>
             <div class="custom_select_search" <?php if (! $this->_tpl_vars['show_autocompleter']): ?>style="display:none;"<?php endif; ?>>
-                <input type="text" length="15" id="websiteSearch" class="inp"/>
-                <input type="hidden" class="max_sitename_width" id="max_sitename_width" value="130" />
+                <input type="text" length="15" class="websiteSearch inp"/>
+                <input type="hidden" class="max_sitename_width" value="130" />
                 <input type="submit" value="Search" class="but"/>
-				<img title="Clear" id="reset" style="position: relative; top: 4px; left: -44px; cursor: pointer; display: none;" src="plugins/CoreHome/templates/images/reset_search.png"/>
+				<img title="Clear" class="reset" style="position: relative; top: 4px; left: -44px; cursor: pointer; display: none;" src="plugins/CoreHome/templates/images/reset_search.png"/>
             </div>
         </div>
 	</div>
@@ -52,15 +54,8 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 " value="<?php if (isset ( $this->_tpl_vars['idSite'] )): ?><?php echo $this->_tpl_vars['idSite']; ?>
 <?php else: ?><?php echo $this->_tpl_vars['sites'][0]['idsite']; ?>
 <?php endif; ?>"/><?php endif; ?>
-	<?php if (isset ( $this->_tpl_vars['switchSiteOnSelect'] ) && $this->_tpl_vars['switchSiteOnSelect'] == false): ?>
-	<script type="text/javascript">
-	<?php echo '
-		// make sure site is not switched an item is selected
-		window.autocompleteOnNewSiteSelect = function(id) {
-			$(\'.sites_autocomplete input\').val(id);
-		};
-	'; ?>
-
-	</script>
-	<?php endif; ?>
 </div>
+<script type="text/javascript">
+	<?php echo '$(document).ready(function() { piwik.initSiteSelectors(); });'; ?>
+
+</script>

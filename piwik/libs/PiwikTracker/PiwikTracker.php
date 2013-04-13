@@ -1,17 +1,16 @@
 <?php
 /**
  * Piwik - Open source web analytics
- * 
+ *
  * Client to record visits, page views, Goals, Ecommerce activity (product views, add to carts, Ecommerce orders) in a Piwik server.
  * This is a PHP Version of the piwik.js standard Tracking API.
  * For more information, see http://piwik.org/docs/tracking-api/
- * 
- * This class requires: 
- *  - json extension (json_decode, json_encode) 
+ *
+ * This class requires:
+ *  - json extension (json_decode, json_encode)
  *  - CURL or STREAM extensions (to issue the http request to Piwik)
- *  
+ *
  * @license released under BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version $Id: PiwikTracker.php 7569 2012-12-04 00:26:22Z matt $
  * @link http://piwik.org/docs/tracking-api/
  *
  * @category Piwik
@@ -155,7 +154,7 @@ class PiwikTracker
      * piwikTracker.getAttributionInfo() and that you have JSON encoded via JSON2.stringify() 
      * 
      * @param string $jsonEncoded JSON encoded array containing Attribution info
-     * @see function getAttributionInfo() in http://dev.piwik.org/trac/browser/trunk/js/piwik.js 
+     * @see function getAttributionInfo() in https://github.com/piwik/piwik/blob/master/js/piwik.js
      */
     public function setAttributionInfo( $jsonEncoded )
     {
@@ -709,9 +708,15 @@ class PiwikTracker
      */
     public function setVisitorId($visitorId)
     {
-    	if(strlen($visitorId) != self::LENGTH_VISITOR_ID)
+        $hexChars = '01234567890abcdefABCDEF';
+    	if(strlen($visitorId) != self::LENGTH_VISITOR_ID
+            || strspn($visitorId, $hexChars) !== strlen($visitorId))
     	{
-    		throw new Exception("setVisitorId() expects a ".self::LENGTH_VISITOR_ID." characters ID");
+    		throw new Exception("setVisitorId() expects a "
+                                .self::LENGTH_VISITOR_ID
+                                ." characters hexadecimal string (containing only the following: "
+                                .$hexChars
+                                .")");
     	}
     	$this->forcedVisitorId = $visitorId;
     }

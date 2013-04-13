@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: CoreAdminHome.php 7747 2013-01-13 11:12:13Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CoreAdminHome
@@ -32,7 +31,6 @@ class Piwik_CoreAdminHome extends Piwik_Plugin
 			'AssetManager.getCssFiles' => 'getCssFiles',
 			'AssetManager.getJsFiles' => 'getJsFiles',
 			'AdminMenu.add' => 'addMenu',
-			'TopMenu.add' => 'addTopMenu',
 			'TaskScheduler.getScheduledTasks' => 'getScheduledTasks',
 		);
 	}
@@ -45,19 +43,19 @@ class Piwik_CoreAdminHome extends Piwik_Plugin
 		$tasks = &$notification->getNotificationObject();
 		
 		// general data purge on older archive tables, executed daily
-		$priority = Piwik_ScheduledTask::HIGH_PRIORITY;
 		$purgeArchiveTablesTask = new Piwik_ScheduledTask ( $this,
 															'purgeOutdatedArchives',
+															null,
 															new Piwik_ScheduledTime_Daily(),
-															$priority );
+															Piwik_ScheduledTask::HIGH_PRIORITY);
 		$tasks[] = $purgeArchiveTablesTask;
 							
 		// lowest priority since tables should be optimized after they are modified
-		$priority = Piwik_ScheduledTask::LOWEST_PRIORITY;
-		$optimizeArchiveTableTask = new Piwik_ScheduledTask ( $this, 
+		$optimizeArchiveTableTask = new Piwik_ScheduledTask ( $this,
 															'optimizeArchiveTable',
+															null,
 															new Piwik_ScheduledTime_Daily(),
-															$priority );
+															Piwik_ScheduledTask::LOWEST_PRIORITY);
 		$tasks[] = $optimizeArchiveTableTask;
 	}
 
@@ -95,23 +93,21 @@ class Piwik_CoreAdminHome extends Piwik_Plugin
 	
 	function addMenu()
 	{
-		Piwik_AddAdminMenu('CoreAdminHome_MenuGeneralSettings', 
+		Piwik_AddAdminSubMenu('CoreAdminHome_MenuManage', NULL, "", Piwik::isUserHasSomeAdminAccess(), $order = 1);
+		Piwik_AddAdminSubMenu('CoreAdminHome_MenuCommunity', NULL, "", Piwik::isUserHasSomeAdminAccess(), $order = 3);
+		Piwik_AddAdminSubMenu('CoreAdminHome_MenuDiagnostic', NULL, "", Piwik::isUserHasSomeAdminAccess(), $order = 20);
+		Piwik_AddAdminSubMenu('General_Settings', NULL, "", Piwik::isUserHasSomeAdminAccess(), $order = 5);
+		Piwik_AddAdminSubMenu('General_Settings', 'CoreAdminHome_MenuGeneralSettings',
 							array('module' => 'CoreAdminHome', 'action' => 'generalSettings'),
 							Piwik::isUserHasSomeAdminAccess(),
 							$order = 6);
+		Piwik_AddAdminSubMenu('CoreAdminHome_MenuManage', 'CoreAdminHome_TrackingCode',
+							array('module' => 'CoreAdminHome', 'action' => 'trackingCodeGenerator'), 
+							Piwik::isUserHasSomeAdminAccess(),
+							$order = 4);
+							
 	}
 	
-	function addTopMenu()
-	{
-		$donateLinkTitle = Piwik_Translate('CoreHome_OnlyForAdmin');
-		Piwik_AddTopMenu('General_Donate',
-							'<a href="http://piwik.org/donate/" target="_blank" title="'.$donateLinkTitle.'">'
-								.Piwik_Translate('General_Donate').'</a> |',
-							Piwik::isUserIsSuperUser(),
-							$order = 21,
-							$isHTML = true);
-	}
-
 	function purgeOutdatedArchives()
 	{
 		$archiveTables = Piwik::getTablesArchivesInstalled();

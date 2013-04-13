@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Myisam.php 7535 2012-11-24 08:01:10Z capedfuzz $
  *
  * @category Piwik
  * @package Piwik
@@ -91,6 +90,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
   						  excluded_parameters TEXT NOT NULL,
   						  excluded_user_agents TEXT NOT NULL,
   						  `group` VARCHAR(250) NOT NULL, 
+  						  keep_url_fragment TINYINT NOT NULL DEFAULT 0,
 						  PRIMARY KEY(idsite)
 						)  DEFAULT CHARSET=utf8
 			",

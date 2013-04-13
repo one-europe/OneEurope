@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-01-17 14:15:40
+<?php /* Smarty version 2.6.26, created on 2013-03-25 18:18:33
          compiled from LanguagesManager/templates/languages.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate', 'LanguagesManager/templates/languages.tpl', 5, false),)), $this); ?>
@@ -18,6 +18,8 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'translate',
 </option>
 			<?php endforeach; endif; unset($_from); ?>
 		</select>
+				<?php if (! empty ( $this->_tpl_vars['token_auth'] )): ?><input type="hidden" name="token_auth" value="<?php echo $this->_tpl_vars['token_auth']; ?>
+"/><?php endif; ?>
 		<input type="submit" value="go" />
 		</form>
 	</span>

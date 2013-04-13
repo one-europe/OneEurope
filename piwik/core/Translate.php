@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Translate.php 7286 2012-10-23 09:22:19Z matt $
  * 
  * @category Piwik
  * @package Piwik

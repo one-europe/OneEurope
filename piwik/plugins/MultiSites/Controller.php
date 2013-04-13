@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7006 2012-09-17 03:55:27Z matt $
  * 
  * @category Piwik_Plugins
  * @package Piwik_MultiSites
@@ -174,7 +173,7 @@ class Piwik_MultiSites_Controller extends Piwik_Controller
 
 		echo $view->render();
 	}
-	
+
 	/**
 	 * The Multisites reports displays the first calendar date as the earliest day available for all websites.
 	 * Also, today is the later "today" available across all timezones.

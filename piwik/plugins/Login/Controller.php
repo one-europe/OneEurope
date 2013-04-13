@@ -4,7 +4,6 @@
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Controller.php 7762 2013-01-15 21:40:53Z matt $
  *
  * @category Piwik_Plugins
  * @package Piwik_Login
@@ -81,7 +80,7 @@ class Piwik_Login_Controller extends Piwik_Controller
 
 		$view = Piwik_View::factory('login');
 		$view->AccessErrorString = $messageNoAccess;
-		$view->infoMessage = $infoMessage;
+		$view->infoMessage = nl2br($infoMessage);
 		$view->addForm( $form );
 		$this->configureView($view);
 		self::setHostValidationVariablesView($view);

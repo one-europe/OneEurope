@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: Renderer.php 7648 2012-12-18 02:53:55Z capedfuzz $
  * 
  * @category Piwik
  * @package Piwik
@@ -111,7 +110,16 @@ abstract class Piwik_DataTable_Renderer
 	 * 
 	 * @return string
 	 */
-	abstract public function renderException();	
+	abstract public function renderException();
+
+	protected function getExceptionMessage()
+	{
+		$message = self::renderHtmlEntities($this->exception->getMessage());
+
+		// DEBUG
+//		$message .= $this->exception->getTraceAsString();
+		return $message;
+	}
 	
 	/**
 	 * @see render()

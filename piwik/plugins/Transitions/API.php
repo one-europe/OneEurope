@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: API.php 7477 2012-11-15 10:24:31Z EZdesign $
  * 
  * @category Piwik_Plugins
  * @package Piwik_Transitions
@@ -29,12 +28,12 @@ class Piwik_Transitions_API
 	
 	public function getTransitionsForPageTitle($pageTitle, $idSite, $period, $date, $segment = false, $limitBeforeGrouping = false)
 	{
-		return $this->getTransitionsForAction($pageTitle, 'title', $idSite, $period, $date, $segment = false, $limitBeforeGrouping = false);
+		return $this->getTransitionsForAction($pageTitle, 'title', $idSite, $period, $date, $segment, $limitBeforeGrouping);
 	}
 	
 	public function getTransitionsForPageUrl($pageUrl, $idSite, $period, $date, $segment = false, $limitBeforeGrouping = false)
 	{
-		return $this->getTransitionsForAction($pageUrl, 'url', $idSite, $period, $date, $segment = false, $limitBeforeGrouping = false);
+		return $this->getTransitionsForAction($pageUrl, 'url', $idSite, $period, $date, $segment, $limitBeforeGrouping);
 	}
 
 	/**
@@ -306,7 +305,7 @@ class Piwik_Transitions_API
 				return Piwik_Translate('General_Others');
 		}
 	}
-	
+
 	public function getTranslations() {
 		$controller = new Piwik_Transitions_Controller();
 		return $controller->getTranslations();

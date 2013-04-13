@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: functions.php 7237 2012-10-19 16:07:08Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_UserCountry

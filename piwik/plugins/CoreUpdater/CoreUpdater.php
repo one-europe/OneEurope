@@ -4,7 +4,6 @@
  * 
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @version $Id: CoreUpdater.php 7692 2012-12-23 05:41:34Z capedfuzz $
  * 
  * @category Piwik_Plugins
  * @package Piwik_CoreUpdater
