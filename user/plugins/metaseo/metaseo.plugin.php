@@ -643,8 +643,24 @@ class MetaSeo extends Plugin
 					echo "\n<meta property=\"og:title\" content=\"OneEurope\" >\n";
 					echo "<meta property=\"og:type\" content=\"website\" >\n";
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"OneEurope creates a hub to exchange insights and breathe the spirit and the diversity of Europe. It's brought to you by a community of volunteers from all around Europe.\" >\n";
+					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
+					break;
+				case 'display_page':
+					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
+					echo "<meta property=\"og:type\" content=\"article\" >\n";
+					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
+					if( isset( $this->theme->post ) ) {
+						if( strlen( $this->theme->post->info->metaseo_desc ) ) {
+							$desc = $this->theme->post->info->metaseo_desc;
+						}
+						else {
+							$desc = Utils::truncate( $this->theme->post->content, 200, false );
+						}
+					}
+					echo "<meta property=\"og:description\" content=\"\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
 				case 'display_brief':
@@ -658,7 +674,7 @@ class MetaSeo extends Plugin
 				case 'display_briefs':
 					echo "\n<meta property=\"og:title\" content=\"All image posts\" >\n";
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info/nibbles\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Our complete image post database.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
@@ -673,7 +689,7 @@ class MetaSeo extends Plugin
 				case 'display_initiatives':
 					echo "\n<meta property=\"og:title\" content=\"All Initiatives\" >\n";
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info/initiatives\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Our complete initiative database.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
@@ -688,7 +704,7 @@ class MetaSeo extends Plugin
 				case 'display_debates':
 					echo "\n<meta property=\"og:title\" content=\"All Debates\" >\n";
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info/debates\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Our complete debate database.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;	
@@ -710,28 +726,28 @@ class MetaSeo extends Plugin
 				case 'display_profiles':
 					echo "\n<meta property=\"og:title\" content=\"All Profiles\" >\n";
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info/profiles\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Our cromplete profile database.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
 				case 'display_contributors':
 					echo "\n<meta property=\"og:title\" content=\"All Contrbutors\" >\n";
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info/contributors\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Who's contributing to this project?\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
 				case 'display_search':
 					echo "\n<meta property=\"og:title\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
 					echo "<meta property=\"og:url\" content=\"" .$this->get_url() . "\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
 				case 'display_404':
 					echo "\n<meta property=\"og:title\" content=\"Nothing Found!\" >\n";
 					echo "<meta property=\"og:url\" content=\"" .$this->get_url() . "\" >\n";
-					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"The page you are trying to link to is not on our servers.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
@@ -764,10 +780,25 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"OneEurope\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"" . htmlspecialchars( strip_tags( Options::get( 'about' ) ), ENT_COMPAT, 'UTF-8' ) . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n";
-					
+					break;
+				case 'display_page':
+					echo "\n<meta name=\"twitter:title\" content=\"OneEurope\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"{$this->theme->post->permalink}\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
+					if( isset( $this->theme->post ) ) {
+						if( strlen( $this->theme->post->info->metaseo_desc ) ) {
+							$desc = $this->theme->post->info->metaseo_desc;
+						}
+						else {
+							$desc = Utils::truncate( $this->theme->post->content, 200, false );
+						}
+					}
+					echo "<meta name=\"twitter:description\" content=\"\" >\n";
+					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n";
 					break;
 				case 'display_brief':
 					echo "\n<meta name=\"twitter:title\" content=\"" . $this->theme->post->title . "\" >\n";
@@ -781,7 +812,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta property=\"twitter:title\" content=\"All image posts\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/nibbles\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"The best image and info graphic content about European politics on the web.\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -797,7 +828,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"All Initiatives\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/initiatives\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"Our complete initiative database.\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -813,7 +844,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"All Debates\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/debates\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"Our complete debate database.\" >\n";
 					echo "<meta name=\"twitter:site_name\" content=\"OneEurope\" >\n\n";
 					break;	
@@ -836,7 +867,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"All Profiles\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/profiles\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"Our cromplete profile database.\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -844,7 +875,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"All Contrbutors\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/contributors\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"Who's contributing to this project?\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -852,7 +883,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->get_url() . "\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"Search Results for \"" . $_GET['criteria'] . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -860,7 +891,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"Nothing Found!\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->get_url() . "\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/logo.png\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"The page you are trying to link to is not on our servers.\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;

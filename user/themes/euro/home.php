@@ -185,7 +185,8 @@
 								
 								<div class="list"><h1><?php echo $post->title . " is $i. of $articlescount featured.</br>";?></h1></div>
 								
-						<?php*/ } elseif ( $isbrief == true && $h <= 2 ) { $h++; /*?>
+						<?php*/ } elseif ( $isbrief == true && $h <= 1 ) { $h++; // avoid duplicate display of the first two briefs in the sidebar
+							 /*?>
 
 								<div class="list"><h1><?php echo $post->title . " is $h. of 2 briefs.</br>";?></h1></div>
 

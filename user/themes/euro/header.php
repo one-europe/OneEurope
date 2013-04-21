@@ -79,7 +79,8 @@
 			
 			<div id="head">
 			
-	
+				<a id="voteforus" href="<?php Site::out_url( 'habari' ); ?>/initiative/we-need-your-vote-in-this-competition" style="float: left; display: block; margin: 45px 0 0 -120px;"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="We need your vote!" /></a>
+
 				<a id="logo" href="<?php Site::out_url( 'habari' ); ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php Site::out_url( 'theme' ); ?>/img/logo.png" width="326" height="110" alt="OneEurope" style="margin: 15px 0 0 5px;"/></a>
 					
 				<nav>
@@ -211,7 +212,8 @@
 											<a href="<?php Site::out_url( 'habari' ); ?>/about">Learn more ›</a>
 										</p>
 										<p>Whether you're from an organisation, whether you are a blogger, journalist, activist or individual - if you
-											can identify with our goals, find out more about the many ways to <a href="<?php Site::out_url( 'habari' ); ?>/join-us">join our network of partners and contributors ›</a></p>
+											can identify yourself with our goal, try to find out more about the many ways to <a href="<?php Site::out_url( 'habari' ); ?>/join-us">join our network of partners and contributors ›</a></p>
+										<p>Please also consider <a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">supporting us financially ›</a></p>
 									</div>
 								</li>
 								<li class="col3">
@@ -220,6 +222,7 @@
 										<ul class="cats">
 											<li><a href="<?php Site::out_url( 'habari' ); ?>/about">› The Project</a></li>
 											<li><a href="<?php Site::out_url( 'habari' ); ?>/contributors">› The Team</a></li>
+											<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">› Become a patron</a></li>
 											<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">› How to get involved</a></li>
 											<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">› Contact</a></li>
 										</ul>

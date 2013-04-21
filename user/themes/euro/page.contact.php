@@ -5,6 +5,7 @@
 				<ul>
 					<li><a href="/about">About</a></li>
 					<li><a href="/join-us">Join us</a></li>
+					<li><a href="/become-a-patron">Become a Patron</a></li>
 					<li><a href="/contact"><b>Contact</b></a></li>
 					<li class="clear"></li>
 				</ul>
