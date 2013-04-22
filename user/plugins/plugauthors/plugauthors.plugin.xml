@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<pluggable type="plugin">
-	<name>PlugAuthors</name>
-	<author url="http://valentinkotov.de">Valentin Kotov</author>
-	<description>Adds an Author Content Type</description>
-	<license>ASL 2.0</license>
-	<version>0.5</version>
-</pluggable>

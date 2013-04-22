@@ -32,6 +32,7 @@ class Stack
 	private static $stacks = array();
 	private static $stack_sort = array();
 	private static $sorting;
+	private static $depends = array();
 
 	/**
 	 * Private constructor for Stack.
@@ -134,41 +135,21 @@ class Stack
 	public static function add( $stack_name, $value, $value_name = null, $after = null )
 	{
 		$stack = self::get_named_stack( $stack_name );
-		$value_name = $value_name ? $value_name : md5( serialize( $value ) );
-		if ( !is_null( $after ) ) {
-			if ( !is_array( $after ) ) {
-				$after = array( $after );
-			}
-			foreach ( $after as $a ) {
-				self::depend($stack_name, $value_name, $a);
+		if($value_name == null && is_string($value)) {
+			if($test = StackItem::get($value)) {
+				$value = $test;
 			}
 		}
-		$stack[$value_name] = $value;
+		if(!$value instanceof StackItem) {
+			$value_name = $value_name ? $value_name : md5( serialize( $value ) );
+			$value = StackItem::register($value_name, $value);
+			foreach((array)$after as $a) {
+				$value->add_dependency($a);
+			}
+		}
+		$stack[$value->name] = $value;
 		self::$stacks[$stack_name] = $stack;
 		return $stack;
-	}
-
-	/**
-	 * Add a named stack item to the list of things it depends on
-	 * @static
-	 * @param string $stack_name The name of the stack
-	 * @param string $value_name The item name in the stack
-	 * @param string $value_name_on The item name on which this item depends
-	 */
-	public static function depend( $stack_name, $value_name, $value_name_on )
-	{
-		if ( !isset( self::$stack_sort[$stack_name] ) ) {
-			self::$stack_sort[$stack_name] = array();
-		}
-		if ( !isset( self::$stack_sort[$stack_name][$value_name_on] ) ) {
-			self::$stack_sort[$stack_name][$value_name_on] = array();
-		}
-		foreach(self::$stack_sort[$stack_name] as $parent_key => $parent_stack) {
-			if(isset($parent_stack[$value_name_on])) {
-				self::depend($stack_name, $value_name, $parent_key);
-			}
-		}
-		self::$stack_sort[$stack_name][$value_name_on][$value_name] = $value_name;
 	}
 
 	/**
@@ -193,53 +174,52 @@ class Stack
 		return $stack;
 	}
 
+	/**
+	 * Get the full list of StackItems in the correct order and with dependencies for a named stack
+	 * @param $stack_name
+	 * @return array A complete array of StackItems
+	 */
 	public static function get_sorted_stack( $stack_name )
 	{
-		self::$sorting = $stack_name;
-		$stack = self::get_named_stack( $stack_name );
+		$raw_stack = self::get_named_stack( $stack_name );
+		$sorted = array();
 
-		uksort( $stack, array( 'Stack', 'sort_stack_cmp' ) );
-		//$stack = array_reverse( $stack );
-		return $stack;
-	}
-
-	public static function sort_stack_cmp( $a, $b )
-	{
-		// get the array of sorting values for the first key, or an empty array if there aren't any dependencies
-		if ( isset( self::$stack_sort[ self::$sorting ][ $a ] ) ) {
-			$a_dependents = self::$stack_sort[ self::$sorting ][ $a ];
-		}
-		else {
-			$a_dependents = array();
+		$dependency_items = array();
+		if(isset(self::$depends[$stack_name])) {
+			foreach(self::$depends[$stack_name] as $stack) {
+				$items = self::get_named_stack( $stack );
+				foreach($items as $item) {
+					$dependency_items[$item->name] = $item->name;
+				}
+			}
 		}
 
-		// as above, but for the second key
-		if ( isset( self::$stack_sort[ self::$sorting ][ $b ] ) ) {
-			$b_dependents = self::$stack_sort[ self::$sorting ][ $b ];
-		}
-		else {
-			$b_dependents = array();
+		$sort = function(&$stackitem, $sort) use (&$sorted, $dependency_items) {
+			static $sortindex = array();
+			if(isset($sortindex[$stackitem->name])) {
+				return;
+			}
+			$sortindex[$stackitem->name] = true;
+			/** @var StackItem $stackitem */
+			$dependencies = $stackitem->get_dependencies();
+			/** @var StackItem $dependency */
+			foreach($dependencies as &$dependency) {
+				if(!in_array($dependency->name, $dependency_items)) {
+					$sort($dependency, $sort);
+					if(!$dependency->in_stack_index($sorted)) {
+						$sorted[$dependency->name] = $dependency;
+						$have_everything = false;
+					}
+				}
+			}
+			$sorted[$stackitem->name] = $stackitem;
+		};
+
+		foreach($raw_stack as &$stackitem) {
+			$sort($stackitem, $sort);
 		}
 
-		$b_depends_on_a = isset( $a_dependents[ $b ] );
-		$a_depends_on_b = isset( $b_dependents[ $a ] );
-
-		if ( $a_depends_on_b && $b_depends_on_a ) {
-			// They depend on each other?  How'd this happen?
-			return 0;
-		}
-		elseif ( $a_depends_on_b ) {
-			// a depends on b, b must come first, reverse their order
-			return 1;
-		}
-		elseif ( $b_depends_on_a ) {
-			// b depends on a, a must come first, keep their order
-			return -1;
-		}
-		else {
-			// neither depends on the other, force their natural order
-			return 1;
-		}
+		return $sorted;
 	}
 
 	/**
@@ -253,11 +233,12 @@ class Stack
 		$stack = self::get_sorted_stack( $stack_name );
 		$stack = Plugins::filter( 'stack_out', $stack, $stack_name, $format );
 		foreach ( $stack as $element ) {
+			/** @var StackItem $element */
 			if ( is_callable( $format ) ) {
-				$out.= call_user_func_array( $format, (array) $element );
+				$out.= call_user_func_array( $format, (array) $element->resource );
 			}
 			elseif ( is_string( $format ) ) {
-				$out .= vsprintf( $format, (array) $element );
+				$out .= vsprintf( $format, (array) $element->resource );
 			}
 			else {
 				$out.= $element;
@@ -281,17 +262,21 @@ class Stack
 	 *
 	 * @param string $element The script element in the stack
 	 * @param mixed $attrib Additional attributes, like 'defer' or 'async' allowed for <script src=...> tags
+	 * @param string $wrapper An sprintf formatting string in which to output the script tag, for IE conditional comments
 	 * @return string The resulting script tag
 	 */
-	public static function scripts( $element, $attrib = null )
+	public static function scripts( $element, $attrib = null, $wrapper = '%s' )
 	{
+		if(is_array($attrib)) {
+			$attrib = Utils::html_attr($attrib);
+		}
 		if ( self::is_url( $element ) ) {
-			$attrib = ( is_array( $attrib ) ) ? implode( ' ', $attrib ) : $attrib;
-			$output = sprintf( '<script %s src="%s" type="text/javascript"></script>'."\r\n", $attrib, $element );
+			$output = sprintf( "<script %s src=\"%s\"></script>\r\n", $attrib, $element );
 		}
 		else {
-			$output = sprintf( '<script type="text/javascript">%s</script>'."\r\n", $element );
+			$output = sprintf( "<script %s>%s</script>\r\n", $attrib, $element );
 		}
+		$output = sprintf($wrapper, $output);
 		return $output;
 	}
 
@@ -300,22 +285,22 @@ class Stack
 	 *
 	 * @param string $element The style element in the stack
 	 * @param string $typename The media disposition of the content
+	 * @param string $props Additional properties of the style tag output
 	 * @return string The resulting style or link tag
 	 */
-	public static function styles( $element, $typename = null )
+	public static function styles( $element, $typename = null, $props = array() )
 	{
-		if ( empty( $typename ) ) {
-			$media = '';
+		$props = $props + array('type' => 'text/css');
+		if ( !empty( $typename ) ) {
+			$props['media'] = $typename;
 		}
-		else {
-			$media = 'media="' . $typename . '"';
-		}
-		
+
 		if ( self::is_url( $element ) ) {
-			$output = sprintf( '<link rel="stylesheet" type="text/css" href="%1$s" %2$s>'."\r\n", $element, $media );
+			$props = $props + array('rel' => 'stylesheet', 'href' => $element);
+			$output = sprintf( "<link %s>\r\n", Utils::html_attr($props) );
 		}
 		else {
-			$output = sprintf( '<style type="text/css" %2$s>%1$s</style>'."\r\n", $element, $media );
+			$output = sprintf( "<style %2\$s>%1\$s</style>\r\n", $element, Utils::html_attr($props) );
 		}
 		return $output;
 	}
@@ -323,8 +308,7 @@ class Stack
 	/**
 	 * Check if the passed string looks like a URL or an absolute path to a file.
 	 * 
-	 * @todo There's a good chance this can be done in a better or more generic  
-	 * way.
+	 * @todo There's a good chance this can be done in a better or more generic way.
 	 * 
 	 * @param string $url The string to check.
 	 * @return boolean TRUE if the passed string looks like a URL.
@@ -333,6 +317,52 @@ class Stack
 	{
 		return ( ( strpos( $url, 'http://' ) === 0 || strpos( $url, 'https://' ) === 0 || strpos( $url, '//' ) === 0 || strpos( $url, '/' ) === 0 ) && strpos( $url, "\n" ) === false );
 	}
+
+	/**
+	 * Make a stack's dependencies be provided by another stack
+	 * @param string $dependent The name of a stack that should be made to depend on another stack
+	 * @param string $dependson The name of the stack that the dependent stack should depend on
+	 */
+	public static function dependent($dependent, $dependson)
+	{
+		if(!isset(self::$depends[$dependent])) {
+			self::$depends[$dependent] = array();
+		}
+		self::$depends[$dependent][$dependson] = $dependson;
+	}
+
+	/**
+	 * Allow plugins to register StackItems that can be added to Stacks later
+	 * Initialize this class for plugin behavior so it can add system default StackItems
+	 */
+	public static function load_stackitems()
+	{
+		Pluggable::load_hooks(__CLASS__);
+		Plugins::act( 'register_stackitems' );
+	}
+
+	/**
+	 * Register CSS and script that can be added to the Stacks.
+	 */
+	public static function action_register_stackitems()
+	{
+		// Register default StackItems
+		StackItem::register( 'jquery', Site::get_url( 'vendor', '/jquery.js' ), '1.8.2' );
+		StackItem::register( 'jquery.ui', Site::get_url( 'vendor', '/jquery-ui.min.js', '1.9.0' ) )->add_dependency( 'jquery' );
+		StackItem::register( 'jquery.color', Site::get_url( 'vendor', '/jquery.color.js' ) )->add_dependency('jquery.ui' );
+		StackItem::register( 'jquery-nested-sortable', Site::get_url( 'vendor', '/jquery.ui.nestedSortable.js'), '1.2.1' ) ->add_dependency('jquery.ui' );
+		StackItem::register( 'humanmsg', Site::get_url( 'vendor', '/humanmsg/humanmsg.js' ), '2' )->add_dependency( 'jquery' )->add_dependency( 'locale-js' );
+		StackItem::register( 'jquery.hotkeys', Site::get_url( 'vendor', '/jquery.hotkeys.js' ), '2.00.A' )->add_dependency( 'jquery' );
+		StackItem::register( 'locale-js', URL::get( 'ajax', 'context=locale' ) );
+		StackItem::register( 'media', Site::get_url( 'admin_theme', '/js/media.js' ) )->add_dependency( 'jquery' )->add_dependency( 'locale-js' );
+		StackItem::register( 'admin-js', Site::get_url( 'admin_theme', '/js/admin.js' ) )->add_dependency( 'jquery' )->add_dependency( 'locale-js' );
+		StackItem::register( 'crc32', Site::get_url( 'vendor', '/crc32.js' ), '1.2' );
+
+		StackItem::register( 'admin-css', array( Site::get_url( 'admin_theme', '/css/admin.css'), 'screen' ) );
+		StackItem::register( 'jquery.ui-css', array( Site::get_url( 'admin_theme', '/css/jqueryui.css'), 'screen' ), '1.8.14' );
+		StackItem::register( 'humanmsg-css', array( Site::get_url( 'vendor', '/humanmsg/humanmsg.css'), 'screen' ), '1.0.habari' );
+	}
+
 }
 
 

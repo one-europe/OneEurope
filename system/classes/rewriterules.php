@@ -26,8 +26,8 @@ class RewriteRules extends ArrayObject
 			array( 'name' => 'display_entries', 'parse_regex' => '#^(?:page/(?P<page>[2-9]|[1-9][0-9]+))/?$#', 'build_str' => '(page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_entries', 'priority' => 999, 'description' => 'Display multiple entries' ),
 			array( 'name' => 'display_entries_by_date', 'parse_regex' => '#^(?P<year>[1,2]{1}[\d]{3})(?:/(?P<month>[\d]{2}))?(?:/(?P<day>[\d]{2}))?(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => '{$year}(/{$month})(/{$day})(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_date', 'priority' => 2, 'description' => 'Displays posts for a specific date.' ),
 			array( 'name' => 'display_entries_by_tag', 'parse_regex' => '#^tag/(?P<tag>[^/]*)(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => 'tag/{$tag}(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_tag', 'priority' => 5, 'description' => 'Return posts matching specified tag.', 'parameters' => serialize( array( 'require_match' => array('Tag', 'rewrite_tag_exists') ) ) ),
-			array( 'name' => 'display_entry', 'parse_regex' => '#^(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => '{$slug}(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_post', 'priority' => 100, 'description' => 'Return entry matching specified slug', 'parameters' => serialize( array( 'require_match' => array('Posts', 'rewrite_match_type'), 'content_type'=>'entry' ) ) ),
-			array( 'name' => 'display_page', 'parse_regex' => '#^(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => '{$slug}(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_post', 'priority' => 100, 'description' => 'Return page matching specified slug', 'parameters' => serialize( array( 'require_match' => array('Posts', 'rewrite_match_type'), 'content_type'=>'page' ) ) ),
+			array( 'name' => 'display_entry', 'parse_regex' => '#^(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => '{$slug}(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_post', 'priority' => 100, 'description' => 'Return entry matching specified slug', 'parameters' => serialize( array( 'require_match' => array('Posts', 'rewrite_match_type'), 'content_type'=>'entry', 'request_types' => array('display_post') ) ) ),
+			array( 'name' => 'display_page', 'parse_regex' => '#^(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => '{$slug}(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_post', 'priority' => 100, 'description' => 'Return page matching specified slug', 'parameters' => serialize( array( 'require_match' => array('Posts', 'rewrite_match_type'), 'content_type'=>'page', 'request_types' => array('display_post') ) ) ),
 			array( 'name' => 'display_search', 'parse_regex' => '#^search(?:/(?P<criteria>[^/]+))?(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => 'search(/{$criteria})(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'search', 'priority' => 8, 'description' => 'Searches posts' ),
 			array( 'name' => 'display_404', 'parse_regex' => '/^.*$/', 'build_str' => '', 'handler' => 'UserThemeHandler', 'action' => 'display_404', 'priority' => 9999, 'description' => 'Displays an error page when a URL is not matched.' ),
 			array( 'name' => 'display_post', 'parse_regex' => '#^(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$#i', 'build_str' => '{$slug}(/page/{$page})', 'handler' => 'UserThemeHandler', 'action' => 'display_post', 'priority' => 9998, 'description' => 'Fallback to return post matching specified slug if no content_type match' ),
@@ -57,6 +57,7 @@ class RewriteRules extends ArrayObject
 			array( 'name' => 'display_tags', 'parse_regex' => '#^admin/(?P<page>tags)/?$#i', 'build_str' => 'admin/{$page}', 'handler' => 'AdminTagsHandler', 'action' => 'admin', 'priority' => 4, 'description' => 'Manage tags' ),
 			array( 'name' => 'display_logs', 'parse_regex' => '#^admin/(?P<page>logs)/?$#i', 'build_str' => 'admin/{$page}', 'handler' => 'AdminLogsHandler', 'action' => 'admin', 'priority' => 4, 'description' => 'Manage logs' ),
 			array( 'name' => 'display_import', 'parse_regex' => '#^admin/(?P<page>import)/?$#i', 'build_str' => 'admin/{$page}', 'handler' => 'AdminimportHandler', 'action' => 'admin', 'priority' => 4, 'description' => 'Manage importing content' ),
+			array( 'name' => 'get_locale', 'parse_regex' => '#^admin/(?P<page>locale)/?$#i', 'build_str' => 'admin/{$page}', 'handler' => 'AdminLocaleHandler', 'action' => 'admin', 'priority' => 4, 'description' => 'Fetch the locale data as javascript' ),
 
 			array( 'name' => 'admin', 'parse_regex' => '#^admin(?:/?$|/(?P<page>[^/]*))/?$#i', 'build_str' => 'admin/({$page})', 'handler' => 'AdminHandler', 'action' => 'admin', 'priority' => 6, 'description' => 'An admin action' ),
 
@@ -109,7 +110,7 @@ class RewriteRules extends ArrayObject
 		);
 		$default_rules = Plugins::filter( 'default_rewrite_rules', $default_rules );
 		$default_rules_properties = array( 'is_active' => 1, 'rule_class' => RewriteRule::RULE_SYSTEM );
-		$rule_names = array_flip( array_map( create_function( '$a', 'return $a->name;' ), $rules ) );
+		$rule_names = array_flip( Utils::array_map_field($rules, 'name') );
 		foreach ( $default_rules as $default_rule ) {
 			if ( !isset( $rule_names[$default_rule['name']] ) ) {
 				$rule_properties = array_merge( $default_rule, $default_rules_properties );

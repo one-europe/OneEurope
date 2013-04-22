@@ -3,9 +3,16 @@
 	<name>EasyEdit</name>
 	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
 	<author url="http://valentinkotov.de/">Valentin Kotov</author>
-	<version>0.1</version>
-	<description><![CDATA[Makes life of editors a lot easier.]]></description>
-	<copyright>2012</copyright>
+	<version>0.5</version>
+	<description><![CDATA[
+		Makes life of editors a lot easier. Allows posting as a different user.
+	]]></description>
+	<help>
+		<value>
+			<![CDATA[<p>There's basically nothing else to say, it's that easy.</p>]]>
+		</value>
+	</help>
+	<copyright>2012-2013</copyright>
 
 </pluggable>
  

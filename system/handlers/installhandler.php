@@ -4,7 +4,7 @@
  *
  */
 
-define( 'MIN_PHP_VERSION', '5.2.0' );
+define( 'MIN_PHP_VERSION', '5.3.3' );
 
 /**
  * The class which responds to installer actions
@@ -28,14 +28,12 @@ class InstallHandler extends ActionHandler
 		$this->theme->locales = HabariLocale::list_all();
 		if ( isset( $_POST['locale'] ) && $_POST['locale'] != null ) {
 			HabariLocale::set( $_POST['locale'] );
-			$this->theme->locale = $_POST['locale'];
-			$this->handler_vars['locale'] = $_POST['locale'];
 		}
 		else {
-			HabariLocale::set( 'en-us' );
-			$this->theme->locale = 'en-us';
-			$this->handler_vars['locale'] = 'en-us';
+			HabariLocale::set( Config::get('locale', 'en-us' ) );
 		}
+		$this->theme->locale = HabariLocale::get();
+		$this->handler_vars['locale'] = HabariLocale::get();
 
 		/**
 		 * Check .htaccess first because ajax doesn't work without it.
@@ -136,7 +134,7 @@ class InstallHandler extends ActionHandler
 		if ( (!Config::exists('db_connection') || Config::get( 'db_connection' )->connection_string == '') && ($db_type == 'mysql' || $db_type == 'pgsql') ) {
 			$this->handler_vars['db_host'] = $_POST["{$db_type}_db_host"];
 			$this->handler_vars['db_user'] = $_POST["{$db_type}_db_user"];
-			$this->handler_vars['db_pass'] = $_POST["{$db_type}_db_pass"];
+			$this->handler_vars['db_pass'] = $_POST->raw( "{$db_type}_db_pass" );
 			$this->handler_vars['db_schema'] = $_POST["{$db_type}_db_schema"];
 		}
 
@@ -180,6 +178,7 @@ class InstallHandler extends ActionHandler
 
 		// activate plugins on POST
 		if ( count( $_POST ) > 0 ) {
+			$this->activate_theme();
 			$this->activate_plugins();
 		}
 
@@ -228,7 +227,9 @@ class InstallHandler extends ActionHandler
 				$plugin['actions'] = array();
 				$plugin['info'] = Plugins::load_info( $file );
 				$plugin['recommended'] = in_array( basename( $file ), $recommended_list );
-
+				$plugin['requires'] = isset($plugin['info']->requires) ? self::get_feature_list($plugin['info']->requires->children()) : '';
+				$plugin['provides'] = isset($plugin['info']->provides) ? self::get_feature_list($plugin['info']->provides->children()) : '';
+				$plugin['conflicts'] = isset($plugin['info']->conflicts) ? self::get_feature_list($plugin['info']->conflicts->children()) : '';
 			}
 			else {
 				// We can't get the plugin info due to an error
@@ -243,6 +244,16 @@ class InstallHandler extends ActionHandler
 	}
 
 	/**
+	 * Helper function to grab list of themes
+	 */
+	public function get_themes()
+	{
+		$all_themes = Themes::get_all_data();
+
+		return $all_themes;
+	}
+
+	/**
 	 * Helper function to remove code repetition
 	 *
 	 * @param template_name Name of template to use
@@ -252,6 +263,8 @@ class InstallHandler extends ActionHandler
 		foreach ( $this->handler_vars as $key=>$value ) {
 			$this->theme->assign( $key, $value );
 		}
+
+		$this->theme->assign( 'themes', $this->get_themes() );
 
 		$this->theme->assign( 'plugins', $this->get_plugins() );
 
@@ -450,7 +463,7 @@ class InstallHandler extends ActionHandler
 
 		if ( DB::has_errors() ) {
 			$error = DB::get_last_error();
-			$this->theme->assign( 'form_errors', array( 'db_host'=>sprintf( _t( 'Could not create schema tables&hellip; %s' ), $error['message'] ) ) );
+			$this->theme->assign( 'form_errors', array( 'db_host'=>_t( 'Could not create schema tables&hellip; %s', array( $error['message'] ) ) ) );
 			DB::rollback();
 			return false;
 		}
@@ -766,7 +779,6 @@ class InstallHandler extends ActionHandler
 		foreach($defaults as $key => $value) {
 			Options::set($key, $value);
 		}
-		Themes::activate_theme( $defaults['theme_name'], $defaults['theme_dir'] );
 
 		// Add the cronjob to trim the log so that it doesn't get too big
 		CronTab::add_daily_cron( 'trim_log', array( 'EventLog', 'trim' ), _t( 'Trim the log table' ) );
@@ -977,6 +989,27 @@ class InstallHandler extends ActionHandler
 			return false;
 		}
 		return false;  // Only happens when config.php template does not exist.
+	}
+
+
+	public function activate_theme()
+	{
+		$theme_dir = $this->handler_vars['theme'];
+
+		// set the user_id in the session in case theme activation methods need it
+		if ( ! $u = User::get_by_name( $this->handler_vars['admin_username'] ) ) {
+			// @todo die gracefully
+			die( _t( 'No admin user found' ) );
+		}
+		$u->remember();
+
+		$themes = Themes::get_all_data();
+		$theme = $themes[$theme_dir];
+		Themes::activate_theme((string)$theme['info']->name, $theme_dir);
+
+		// unset the user_id session variable
+		Session::clear_userid( $_SESSION['user_id'] );
+		unset( $_SESSION['user_id'] );
 	}
 
 	public function activate_plugins()
@@ -1438,7 +1471,7 @@ class InstallHandler extends ActionHandler
 	{
 
 		// Strip the base path off active plugins
-		$base_path = array_map( create_function( '$s', 'return str_replace(\'\\\\\', \'/\', $s);' ), array( HABARI_PATH ) );
+		$base_path = array_map( function($s) {return str_replace('\\', '/', $s);}, array( HABARI_PATH ) );
 		$activated = Options::get( 'active_plugins' );
 		if ( is_array( $activated ) ) {
 			foreach ( $activated as $plugin ) {
@@ -1964,6 +1997,19 @@ class InstallHandler extends ActionHandler
 		$this->handler_vars['db_user'] = Config::get( 'db_connection' )->username;
 		$this->handler_vars['db_pass'] = Config::get( 'db_connection' )->password;
 		$this->handler_vars['table_prefix'] = Config::get( 'db_connection' )->prefix;
+	}
+
+	/**
+	 * Return a comma-separated list of features, given a SimpleXMLElement
+	 * @param SimpleXMLElement $features An element containing children of <feature>
+	 * @return string A comma-separated list of those features
+	 */
+	public static function get_feature_list($features) {
+		$output = array();
+		foreach($features as $feature) {
+			$output[(string)$feature] = (string)$feature;
+		}
+		return implode(',', $output);
 	}
 
 }

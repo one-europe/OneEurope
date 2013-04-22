@@ -36,72 +36,71 @@
 			
 			<div class="secondary">
 					
-				<?php 
-				$count = $news->count_all();
-				if ( $count > 0 ) { ?>
+				<?php $count = $news->count_all();
+					if ( $count > 0 ) { ?>
 					
-					<aside>
-						
-						<div class="h"><span>News about <?php echo $post->title; ?>:</span></div>					
+						<aside>
+					        
+					        <div class="h"><span>News about <?php echo $post->title; ?>:</span></div>					
 					
-						<div class="affiliated-posts tile-thumbs list-1">
-		
-							<?php foreach ($news as $item ) { ?>
-														
-
-<div class="list">
-
-	<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/></a>
-
-	<header>
-
-		<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
-
-
-	</header>
-
-	<article class="body">
-	<?php if ( $item->info->excerpt ) {
-	        echo $item->info->excerpt; } 
-		else {
-	        echo $item->content_out;
-	        }?>
-	</article>
-
-	<footer>
-
-		<span class="entry-tags">
-	        <?php if ( $show_author && $item->typename == 'article' ) { ?>
-
-				<span class="entry-autor">
-					<?php if ( $item->info->origauthor ) { ?>
-						<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="Portrait"><span><?php echo $item->info->origauthor; ?></span></a>
-					<?php } elseif ($item->info->author) { ?>
-						<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $item->info->author ) ) );?>
-						<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($item->info->author)->displayname; ?></span></a>
-					<?php } else { 
-						$publisher = Post::get(array( 'all:info' => array( 'user' => $item->author->id ) ) );?>
-						<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $item->author->displayname; ?></span></a>
-					<?php } ?>
-				</span>
-
-			<?php } ?>
-
-	        on <time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-		</span>
-	        <a class="alignright entry-comments" href="<?php echo $item->permalink ?>#disqus_thread">Comments</a>
-
-	</footer>
-
-</div>
-									
-							<?php } ?>
-						
-						</div>
-						
-					</aside>
-						
-				<?php } ?>															
+					        <div class="affiliated-posts tile-thumbs list-1">
+		        
+					        	<?php foreach ($news as $item ) { ?>
+					        								
+                
+					        		<div class="list">
+                
+					        			<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/></a>
+                
+					        			<header>
+                
+					        				<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
+                
+                
+					        			</header>
+                
+					        			<article class="body">
+					        			<?php if ( $item->info->excerpt ) {
+					        			        echo $item->info->excerpt; } 
+					        				else {
+					        			        echo $item->content_out;
+					        			        }?>
+					        			</article>
+                
+					        			<footer>
+                
+					        				<span class="entry-tags">
+					        			        <?php if ( $show_author && $item->typename == 'article' ) { ?>
+                
+					        						<span class="entry-autor">
+					        							<?php if ( $item->info->origauthor ) { ?>
+					        								<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="Portrait"><span><?php echo $item->info->origauthor; ?></span></a>
+					        							<?php } elseif ($item->info->author) { ?>
+					        								<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $item->info->author ) ) );?>
+					        								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($item->info->author)->displayname; ?></span></a>
+					        							<?php } else { 
+					        								$publisher = Post::get(array( 'all:info' => array( 'user' => $item->author->id ) ) );?>
+					        								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $item->author->displayname; ?></span></a>
+					        							<?php } ?>
+					        						</span>
+                
+					        					<?php } ?>
+                
+					        			        on <time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+					        				</span>
+					        			        <a class="alignright entry-comments" href="<?php echo $item->permalink ?>#disqus_thread">Comments</a>
+                
+					        			</footer>
+                
+					        		</div>
+					        			
+					        	<?php } ?>
+					        
+					        </div>
+					        
+						</aside>
+					        
+					<?php } // endif count > 0 ?>															
 			
 			</div>
 

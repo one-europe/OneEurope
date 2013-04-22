@@ -88,6 +88,11 @@
 				<footer>
 					
 
+
+
+
+
+
 					<?php /*	Show an info sentence, if there is one (there can be one either as 'originfo', as that of the assigned author or
 								as that of the actual author, each of which should first be looked up from their user table and then from their profile
 								post table. */

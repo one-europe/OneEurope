@@ -2,36 +2,11 @@
 
 class EasyEdit extends Plugin
 {
-	private static $vocabulary = 'Post as';
-
-	protected $_vocabulary;
-
-
-	public function __get( $name )
-	{
-		switch ( $name ) {
-			case 'vocabulary':
-				if ( !isset( $this->_vocabulary ) ) {
-					$this->_vocabulary = Vocabulary::get( self::$vocabulary );
-				}
-				return $this->_vocabulary;
-		}
-	}
-	
 	/**
-	 * Add the category vocabulary and create the admin token
-	 *
+	 * Create admin token for posting as somebody else
 	 **/
 	public function action_plugin_activation( $file )
 	{
-		$params = array(
-		'name' => self::$vocabulary,
-			'description' => 'A vocabulary for featuring entries based on a tag function',
-			'features' => array( 'multiple', 'hierarchical' )
-		);
-
-		Vocabulary::create( $params );
-
 		// create default access token
 		ACL::create_token( 'post_as', _t( 'Post as' ), 'Administration', false );
 		$group = UserGroup::get_by_name( 'admin' );
@@ -40,7 +15,6 @@ class EasyEdit extends Plugin
 
 	/**
 	 * Remove the admin token
-	 *
 	 **/
 	public function action_plugin_deactivation( $file )
 	{
@@ -54,7 +28,6 @@ class EasyEdit extends Plugin
 	public function action_form_publish ( $form, $post )
 	{
 		if ( User::identify()->can('post_as') && $form->content_type->value == Post::type( 'article' ) ) {
-
 
 			// Get author list
 			$author_list = Users::get_all();
@@ -81,32 +54,11 @@ class EasyEdit extends Plugin
 			$form->user->tabindex = 4;
 			$form->user->move_after($form->tags);
 
-
-
-
-
-			// make a dropdown of all users with set display names
-			/*$users = Users::get_all(); 						// create array with all users 
-			$names = array(); 								// create another, empty array
-			$i = 1;
-			foreach ($users as $user) { 					// for every user in the first array.. 
-				if ( $i == 1 ) {							// if current index == 0, show my own name
-					$myname = User::identify()->displayname;
-					$names[] = 'You, resp. the account which created this post (that is: ' . $myname . ')';
-					$i++;
-				}
-				if ( $user->info->displayname ) {			// ...if he has a displayname...
-					$names[] = $user->info->displayname;	// ...add [id] => [displayname] to the array
-				}
-			} 												// use this value in the dropdown*/
-
-
 		}
 	}
 
 	/**
-	 * Process appended author when the publish form is received
-	 *
+	 * Select the right author when publish form is being loaded
 	 **/
 	public function action_publish_post( $post, $form )
 	{

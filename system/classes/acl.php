@@ -145,7 +145,7 @@ class ACL
 			// if it didn't work, don't bother trying to log it
 			return false;
 		}
-		EventLog::log( sprintf( _t( 'Permission token deleted: %s' ), $name ), 'info', 'default', 'habari' );
+		EventLog::log( _t( 'Permission token deleted: %s', array( $name ) ), 'info', 'default', 'habari' );
 		Plugins::act( 'token_destroy_after', $token_id );
 		return $result;
 	}
@@ -332,9 +332,9 @@ class ACL
 	/**
 	 * Return the access bitmask to a specific token for a specific user
 	 *
-	 * @param mixed $user A User object instance or user id
-	 * @param mixed $token_id A permission token name or token ID
-	 * @return integer An access bitmask
+	 * @param User|integer $user A User object instance or user id
+	 * @param string|integer $token A permission token name or token ID
+	 * @return Bitmask An access bitmask
 	 */
 	public static function get_user_token_access( $user, $token )
 	{
@@ -677,7 +677,7 @@ SQL;
 	 */
 	public static function deny_user( $user_id, $token_id )
 	{
-		self::grant_user( $group_id, $token_id, 'deny' );
+		self::grant_user( $user_id, $token_id, 'deny' );
 	}
 
 	/**

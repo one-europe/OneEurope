@@ -47,6 +47,11 @@ class Users extends ArrayObject
 
 		$wheres = array();
 		$join = '';
+		
+		if( isset($paramarray['orderby']) ) {
+			$orderby = $paramarray['orderby'];
+		}
+		
 		if ( isset( $paramarray['where'] ) && is_string( $paramarray['where'] ) ) {
 			$wheres[] = $paramarray['where'];
 		}
@@ -57,15 +62,14 @@ class Users extends ArrayObject
 				$paramset = array_merge( (array) $paramarray, (array) $paramset );
 
 				$default_fields = User::default_fields();
-				foreach ( User::default_fields() as $field => $scrap ) {
+				unset($default_fields['id']);
+				
+				foreach ( $default_fields as $field => $scrap ) {
 					if ( !isset( $paramset[$field] ) ) {
 						continue;
 					}
+					
 					switch ( $field ) {
-						case 'id':
-							if ( !is_numeric( $paramset[$field] ) ) {
-								continue;
-							}
 						default:
 							$where[] = "{$field} = ?";
 							$params[] = $paramset[$field];
@@ -78,6 +82,38 @@ class Users extends ArrayObject
 						$where[] = '{userinfo}.name = ? AND {userinfo}.value = ?';
 						$params[] = $info_name;
 						$params[] = $info_value;
+					}
+				}
+
+				if ( isset( $paramset['group'] ) && is_array( $paramset['group'] ) ) {
+					$join .= ' INNER JOIN {users_groups} ON {users}.id = {users_groups}.user_id';
+					foreach ( $paramset['group'] as $group ) {
+						$group_id = UserGroup::get_by_name( $group )->id;
+						$where[] = '{users_groups}.group_id = ?';
+						$params[] = $group_id;
+					}
+				}
+
+				if( isset( $paramset['id']) ) {
+					if( is_array($paramset['id']) ) {
+						array_walk( $paramset['id'], function(&$a) {$a = intval( $a );} );
+						$where[] = "{users}.id IN (" . implode( ',', array_fill( 0, count( $paramset['id'] ), '?' ) ) . ")";
+						$params = array_merge( $params, $paramset['id'] );
+					} else {
+						$where[] = "{users}.id = ?";
+						$params[] = (int) $paramset['id'];
+					}
+				}
+
+				if ( isset( $paramset['not:id'] ) ) {
+					if ( is_array( $paramset['not:id'] ) ) {
+						array_walk( $paramset['not:id'], function(&$a) {$a = intval( $a );} );
+						$where[] = "{users}.id NOT IN (" . implode( ',', array_fill( 0, count( $paramset['not:id'] ), '?' ) ) . ")";
+						$params = array_merge( $params, $paramset['not:id'] );
+					}
+					else {
+						$where[] = "{users}.id != ?";
+						$params[] = (int) $paramset['not:id'];
 					}
 				}
 
@@ -156,7 +192,7 @@ class Users extends ArrayObject
 			$query .= ' WHERE ' . implode( " \nOR\n ", $wheres );
 		}
 		$query .= ( ( $orderby == '' ) ? '' : ' ORDER BY ' . $orderby ) . $limit;
-		//Utils::debug($paramarray, $fetch_fn, $query, $params);
+		// Utils::debug($paramarray, $fetch_fn, $query, $params);
 
 		DB::set_fetch_mode( PDO::FETCH_CLASS );
 		DB::set_fetch_class( 'User' );

@@ -22,6 +22,7 @@ class AdminPluginsHandler extends AdminHandler
 		$sort_active_plugins = array();
 		$sort_inactive_plugins = array();
 		$providing = array();
+		$available = array();
 
 		foreach ( $all_plugins as $file ) {
 			$plugin = array();
@@ -53,6 +54,7 @@ class AdminPluginsHandler extends AdminHandler
 						$urlparams = array( 'page' => 'plugins', 'configure'=>$plugin_id);
 						$action['url'] = URL::get( 'admin', $urlparams );
 
+						// @locale Displayed as an icon indicating there is help text available for a plugin.
 						if ( $action['caption'] == _t( '?' ) ) {
 							if ( isset( $_GET['configaction'] ) ) {
 								$urlparams['configaction'] = $_GET['configaction'];
@@ -80,7 +82,7 @@ class AdminPluginsHandler extends AdminHandler
 
 					if ( isset( $plugin['info']->provides ) ) {
 						foreach ( $plugin['info']->provides->feature as $feature ) {
-							$providing[(string) $feature] = $feature;
+							$providing[(string) $feature] = (string)$feature;
 						}
 					}
 				}
@@ -103,11 +105,17 @@ class AdminPluginsHandler extends AdminHandler
 						if ( $_GET['help'] != '_help' ) {
 							$urlparams['help'] = '_help';
 						}
+						// @locale Displayed as an icon indicating there is help text available for a plugin.
 						$action['caption'] = _t( '?' );
 						$action['action'] = '_help';
 						$urlparams = array( 'page' => 'plugins', 'configure' => $plugin_id );
 						$action['url'] = URL::get( 'admin', $urlparams );
 						$plugin['help'] = $action;
+					}
+					if ( isset( $plugin['info']->provides ) ) {
+						foreach ( $plugin['info']->provides->feature as $feature ) {
+							$available[(string) $feature][$plugin_id] = $plugin['info']->name;
+						}
 					}
 				}
 			}
@@ -146,16 +154,25 @@ class AdminPluginsHandler extends AdminHandler
 				$providing[(string) $feature] = $feature;
 			}
 		}
+		$providing = Plugins::filter( 'provided', $providing );
 
 		foreach ( $sort_inactive_plugins as $plugin_id => $plugin ) {
 			if ( isset( $plugin['info']->requires ) ) {
 				foreach ( $plugin['info']->requires->feature as $feature ) {
 					if ( !isset( $providing[(string) $feature] ) ) {
-						if ( !isset( $sort_inactive_plugins[$plugin_id]['missing'] ) ) {
-							$sort_inactive_plugins[$plugin_id]['missing'] = array();
+						if( isset( $available[(string) $feature] ) ) {
+							$sort_inactive_plugins[$plugin_id]['available'][(string) $feature] = $available[(string) $feature];
+							if(count($sort_inactive_plugins[$plugin_id]['available'][(string) $feature]) > 1) {
+								unset( $sort_inactive_plugins[$plugin_id]['actions']['activate'] );
+							}
 						}
-						$sort_inactive_plugins[$plugin_id]['missing'][(string) $feature] = isset( $feature['url'] ) ? $feature['url'] : '';
-						unset( $sort_inactive_plugins[$plugin_id]['actions']['activate'] );
+						else {
+							if ( !isset( $sort_inactive_plugins[$plugin_id]['missing'] ) ) {
+								$sort_inactive_plugins[$plugin_id]['missing'] = array();
+							}
+							$sort_inactive_plugins[$plugin_id]['missing'][(string) $feature] = isset( $feature['url'] ) ? $feature['url'] : '';
+							unset( $sort_inactive_plugins[$plugin_id]['actions']['activate'] );
+						}
 					}
 				}
 			}

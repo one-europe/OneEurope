@@ -2,7 +2,7 @@
 <pluggable type="plugin">
 	<name>PlugActions</name>
 	<author url="http://valentinkotov.de">Valentin Kotov</author>
-	<description>Adds an Action Content Type</description>
+	<description><![CDATA[<p>Adds the 'initiative' content type</p>]]></description>
 	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
 	<version>0.5</version>
 </pluggable>

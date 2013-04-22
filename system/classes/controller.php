@@ -70,7 +70,7 @@ class Controller extends Singleton
 	/**
 	 * Returns the action handler
 	 *
-	 * @return  object  handler object
+	 * @return  ActionHandler  handler object
 	 */
 	public static function get_handler()
 	{
@@ -98,6 +98,15 @@ class Controller extends Singleton
 	public static function get_var( $name, $default = null )
 	{
 		return isset( Controller::instance()->handler->handler_vars[ $name ] ) ? Controller::instance()->handler->handler_vars[ $name ] : $default;
+	}
+
+	/**
+	 * A convenience method for returning the rewrite rule that matches the requested URL
+	 * @return RewriteRule|null The rule that matches the requested URL
+	 */
+	public static function get_matched_rule()
+	{
+		return isset( Controller::instance()->handler->handler_vars[ 'matched_rule' ] ) ? Controller::instance()->handler->handler_vars[ 'matched_rule' ] : null;
 	}
 
 	/**
@@ -164,6 +173,7 @@ class Controller extends Singleton
 		$controller->handler = new $matched_rule->handler();
 		/* Insert the regexed submatches as the named parameters */
 		$controller->handler->handler_vars['entire_match'] = $matched_rule->entire_match; // The entire matched string is returned at index 0
+		$controller->handler->handler_vars['matched_rule'] = $matched_rule;
 		foreach ( $matched_rule->named_arg_values as $named_arg_key=>$named_arg_value ) {
 			$controller->handler->handler_vars[$named_arg_key] = $named_arg_value;
 		}
@@ -185,6 +195,28 @@ class Controller extends Singleton
 		if ( method_exists( Controller::instance()->handler, 'act' ) ) {
 			Controller::instance()->handler->act( Controller::instance()->action );
 		}
+	}
+
+	/**
+	 * Get an object that represents the request made
+	 * @return stdClass An object with properties named after rewrite rules, which are true if those rules were used to handle the current request
+	 */
+	public static function get_request_obj()
+	{
+		$request = new StdClass();
+		foreach ( URL::get_active_rules() as $rule ) {
+			$request->{$rule->name} = false;
+		}
+		$matched_rule = URL::get_matched_rule();
+		$request->{$matched_rule->name} = true;
+		// Does the rule have any supplemental request types?
+		if(isset($matched_rule->named_arg_values['request_types'])) {
+			foreach($matched_rule->named_arg_values['request_types'] as $type) {
+				$request->$type = true;
+			}
+		}
+		$request = Plugins::filter('request_object', $request, $matched_rule);
+		return $request;
 	}
 }
 

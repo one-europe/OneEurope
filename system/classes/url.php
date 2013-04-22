@@ -143,7 +143,8 @@ class URL extends Singleton
 	 */
 	public static function get( $rule_names = '', $args = array(), $useall = true, $noamp = false, $prepend_site = true )
 	{
-		$args = self::extract_args( $args );
+		$f_args = self::extract_args( $args );
+		$f_args = Plugins::filter('url_args', $f_args, $args, $rule_names);
 
 		$url = URL::instance();
 		if ( $rule_names == '' ) {
@@ -158,10 +159,10 @@ class URL extends Singleton
 			$rr_args_values = array();
 
 			foreach ( $rr_args as $rr_arg ) {
-				if ( !isset( $args[$rr_arg] ) ) {
+				if ( !isset( $f_args[$rr_arg] ) ) {
 					$rr_arg_value = Controller::get_var( $rr_arg );
 					if ( $rr_arg_value != '' ) {
-						$args[$rr_arg] = $rr_arg_value;
+						$f_args[$rr_arg] = $rr_arg_value;
 					}
 				}
 			}
@@ -178,7 +179,7 @@ class URL extends Singleton
 				if ( $rules = $url->rules->by_name( $rule_name ) ) {
 					$rating = null;
 					foreach ( $rules as $rule ) {
-						$newrating = $rule->arg_match( $args );
+						$newrating = $rule->arg_match( $f_args );
 						// Is the rating perfect?
 						if ( $rating == 0 ) {
 							$selectedrule = $rule;
@@ -197,7 +198,7 @@ class URL extends Singleton
 		}
 
 		if ( $selectedrule instanceOf RewriteRule ) {
-			$return_url = $selectedrule->build( $args, $useall, $noamp );
+			$return_url = $selectedrule->build( $f_args, $useall, $noamp );
 			if ( $prepend_site ) {
 				return Site::get_url( 'habari', true ) . $return_url;
 			}
@@ -216,7 +217,7 @@ class URL extends Singleton
 			else {
 				$error_args = $error_trace[0];
 			}
-			EventLog::log( sprintf( _t( 'Could not find a rule matching the following names: %s. File: %s (line %s)' ), implode( ', ', $rule_names ), $error_args['file'], $error_args['line'] ), 'notice', 'rewriterules', 'habari' );
+			EventLog::log( _t( 'Could not find a rule matching the following names: %s. File: %s (line %s)', array( implode( ', ', $rule_names ), $error_args['file'], $error_args['line'] ) ), 'notice', 'rewriterules', 'habari' );
 		}
 	}
 
@@ -236,8 +237,8 @@ class URL extends Singleton
 	 * Get a fully-qualified URL from a filesystem path
 	 *
 	 * @param string $path The filesystem path
-	 * @param bool whether to include a trailing slash.  Default: No
-	 * @param bool whether to leave a filename on the URL.  Default: No
+	 * @param string|bool If true, include a trailing slash.  If string, append this to the requested url.  Default: Add nothing.
+	 * @param bool If true, leave the filename on the URL.  Default: Remove filename.
 	 * @return string URL
 	 */
 	public static function get_from_filesystem( $path, $trail = false, $preserve_file = false )
@@ -283,6 +284,31 @@ class URL extends Singleton
 			$args = $args_out;
 		}
 		return $args;
+	}
+
+	/**
+	 * Helper method for auth_ajax rule
+	 * @param string $context The context of the ajax rule
+	 * @param array|string|object $args The arguments to pass to the rule's builder
+	 * @return string The resultant URL
+	 */
+	public static function auth_ajax($context, $args = array())
+	{
+		$args['context'] = $context;
+		return URL::get('auth_ajax', $args);
+	}
+
+
+	/**
+	 * Helper method for ajax rule
+	 * @param string $context The context of the ajax rule
+	 * @param array|string|object $args The arguments to pass to the rule's builder
+	 * @return string The resultant URL
+	 */
+	public static function ajax($context, $args = array())
+	{
+		$args['context'] = $context;
+		return URL::get('ajax', $args);
 	}
 
 }

@@ -119,7 +119,7 @@
 
 				</div */ ?>	
 
-				<div class="initstitle"><a href="http://one-europe.info/initiatives/" title="click here to see all initiatives">European Initiatives:</a></div>
+				<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/initiatives/" title="click here to see all initiatives">European Initiatives:</a></div>
 
 				<div class="list-2">
 											

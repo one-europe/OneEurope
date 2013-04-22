@@ -18,7 +18,7 @@ class CronTab extends ActionHandler
 	static function run_cron( $async = false )
 	{
 		// check if it's time to run crons, and if crons are already running.
-		$next_cron = HabariDateTime::date_create( Options::get( 'next_cron' ) );
+		$next_cron = HabariDateTime::date_create( Options::get( 'next_cron', 1 ) );
 		$time = HabariDateTime::date_create();
 		if ( ( $next_cron->int > $time->int )
 			|| ( Options::get( 'cron_running' ) && Options::get( 'cron_running' ) > microtime( true ) )
@@ -48,7 +48,8 @@ class CronTab extends ActionHandler
 				// the request timed out - we knew that would happen
 			}
 			catch ( Exception $e ) {
-				// some other error occurred. we still don't care
+				// some other error occurred. log it.
+				 EventLog::log( $e->getMessage(), 'err', 'crontab', 'habari', $e );
 			}
 		}
 		else {
@@ -60,8 +61,8 @@ class CronTab extends ActionHandler
 
 			$time = HabariDateTime::date_create();
 			$crons = DB::get_results(
-				'SELECT * FROM {crontab} WHERE start_time <= ? AND next_run <= ?',
-				array( $time->sql, $time->sql ),
+				'SELECT * FROM {crontab} WHERE start_time <= ? AND next_run <= ? AND active != ?',
+				array( $time->sql, $time->sql, 0 ),
 				'CronJob'
 				);
 			if ( $crons ) {
@@ -100,8 +101,8 @@ class CronTab extends ActionHandler
 		}
 		$time = HabariDateTime::date_create();
 		$crons = DB::get_results(
-			'SELECT * FROM {crontab} WHERE start_time <= ? AND next_run <= ?',
-			array( $time->sql, $time->sql ),
+			'SELECT * FROM {crontab} WHERE start_time <= ? AND next_run <= ? AND active != ?',
+			array( $time->sql, $time->sql, 0 ),
 			'CronJob'
 			);
 

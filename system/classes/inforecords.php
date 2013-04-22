@@ -120,6 +120,17 @@ abstract class InfoRecords implements URLProperties
 		return $this->__inforecord_array[$name]['value'];
 	}
 
+	public function getArrayCopy ( ) {
+		$this->_load();
+
+		$result = array();
+		foreach ( $this->__inforecord_array as $k => $v ) {
+			$result[ $k ] = $v['value'];
+		}
+
+		return $result;
+	}
+
 	/**
 	 * Update the info record.
 	 * The value will not be stored in the database until calling $this->commit();
@@ -170,7 +181,7 @@ abstract class InfoRecords implements URLProperties
 	{
 		if ( !$this->url_args ) {
 			$this->_load();
-			$this->url_args = array_map( create_function( '$a', 'return $a["value"];' ), $this->__inforecord_array );
+			$this->url_args = array_map( function($element) { return $element['value']; }, $this->__inforecord_array );
 		}
 		return $this->url_args;
 	}
