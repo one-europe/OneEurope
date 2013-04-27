@@ -18,8 +18,13 @@
 		</div>
 	</section */ ?>
 	
+	<section>
+		<div class="h"><span>Newsletter</span></div>
+		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for the newsletter! ›</a></big></p>
+	</section>
+	
 	<section class="inbrief">
-		<div class="h"><span>In Brief:</span></div>
+		<div class="h"><span><a href="/in-brief">In Brief:</a></span></div>
 			
 			<ul>
 			<?php
@@ -198,12 +203,6 @@
 			</script>
 	
 	</section>	
-	
-	
-	<section>
-		<div class="h"><span>Newsletter</span></div>
-		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for the newsletter! ›</a></big></p>
-	</section>
 	
 	<?php echo $theme->display ('sidebar.elem.feedback'); ?>
 

@@ -19,6 +19,11 @@
 		
 			</section> */ ?>
 		
+			<section>
+				<div class="h"><span>OneEurope Newsletter</span></div>
+				<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for our newsletter! ›</a></big></p>
+			</section>
+		
 			<section class="sharing">
 				<div class="h"><span>Share</span></div>
 
@@ -75,7 +80,7 @@
 	
 			<?php if ( $post->info->url || $post->info->twitter ) { ?>
 			<section class="">
-				<div class="h"><span>Info</span></div>
+				<div class="h"><span>More about this</span></div>
 				<span>
 					<?php if ($post->info->url) { ?><a href="<?php echo $post->info->url; ?>" title="visit website" target="_blank">› Official website of <?php echo $post->title; ?></a><br/><?php } ?>
 					<?php if ($post->info->twitter) { ?><a href="http://twitter.com/<?php echo $post->info->twitter; ?>" title="<?php echo $post->title ?> on Twitter" target="_blank">› <?php echo $post->title ?> on Twitter</a><?php } ?>	

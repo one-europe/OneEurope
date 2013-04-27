@@ -79,58 +79,7 @@
 		
 			</div>
 
-			<div id="sidebar" class="article-sidebar">
-
-				<?php Plugins::act( 'theme_sidebar_top' ); ?>
-
-
-				<?php /* implement http://wiki.habariproject.org/en/Dev:Theme_Areas */?>
-
-
-				<?php /* <section class="">
-					<div class="h"><span>Dossier: "Tag1"</span></div>
-
-					... list of entries....
-
-				</section> */ ?>
-
-				<section class="fb">
-					<div class="h"><span>Stay Tuned</span></div>
-
-						<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="295" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
-
-						<a href="https://twitter.com/one1europe" class="twitter-follow-button">Follow @one1europe</a>
-						<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
-
-					</ul>
-				</section>
-
-				<section>
-					<div class="h"><span>Newsletter</span></div>
-					<p><big><a href="http://eepurl.com/pODn9" target="_blank">Subscribe to our email newsletter ›</a></big></p>
-				</section>
-				
-				<section class="disqusthreads">
-					<div class="h"><span>Popular Threads</span></div>
-					<div id="popularthreads" class="dsq-widget"><script type="text/javascript" src="http://oneeurope.disqus.com/popular_threads_widget.js?num_items=5"></script></div><a href="http://disqus.com/">Powered by Disqus</a>
-				</section>
-
-				<section class="recentposts">
-					<div class="h"><span>Recently Published</span></div>
-					<ul>
-						<?php
-							foreach ($theme->recent_posts as $post) {
-								echo '<li><a href="', $post->permalink, '">',
-								$post->title, '</a></li>';
-							}
-						?>
-					</ul>
-				</section>
-
-
-				<?php Plugins::act( 'theme_sidebar_bottom' ); ?>
-
-			</div>
+		<?php echo $theme->display ('sidebar.nibble.right'); ?>
 
 		<?php echo $theme->display ('footer'); ?>
 

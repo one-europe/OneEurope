@@ -64,13 +64,50 @@
 
 		<div class="clear"></div>
 	
+	</section>	
+	
+	<section>
+		<div class="h"><span>Newsletter</span></div>
+		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for our newsletter! ›</a></big></p>
 	</section>
-	
-	
-	<?php echo $theme->display ('sidebar.elem.profilepool'); ?>
-	
 		
-	<section class="recentposts">
+	<section class="viral">
+		<div class="h"><span>Most Viral:</span></div>
+
+
+		<!-- AddThis Trending Content BEGIN -->
+		<div id="addthis_trendingcontent"></div>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
+		<script type="text/javascript">
+		addthis.box("#addthis_trendingcontent", {
+		    feed_title : "",
+		    feed_type : "shared",
+		    feed_period : "month",
+		    num_links : 8,
+		    height : "auto",
+		    width : "auto",
+		    domain : "one-europe.info"});
+		</script>
+		<!-- AddThis Trending Content END -->
+
+
+		<?php /* <ul>
+			<?php
+			$recent = Posts::get( array( 'content_type' => 'initiative', 'limit'=>8, 'status'=>'published', 'orderby'=>'pubdate DESC' ) );
+				foreach ($recent as $rec) {
+					echo '<li><a href="', $rec->permalink, '">',
+					$rec->title, ' ›</a></li>';
+				}
+			?>
+		
+			<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/initiatives">view all ›</a></li>
+		
+		</ul> */ ?>
+	</section>	
+		
+		
+		
+	<?php /*?><section class="recentposts">
 		<div class="h"><span>Other Recent Articles</span></div>
 		<ul>
 			<?php
@@ -80,7 +117,7 @@
 				}
 			?>
 		</ul>
-	</section>
+	</section> */ ?>
 	
 	<section class="fb">
 		<div class="h"><span>Stay Tuned</span></div>
@@ -92,16 +129,58 @@
 		
 	</section>
 	
-	<section>
-		<div class="h"><span>Newsletter</span></div>
-		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for our free newsletter! ›</a></big></p>
-	</section>
-	
 	<section class="disqusthreads">
 		<div class="h"><span>Popular Threads</span></div>
 		<div id="popularthreads" class="dsq-widget"><script type="text/javascript" src="http://oneeurope.disqus.com/popular_threads_widget.js?num_items=5"></script></div><a href="http://disqus.com/">Powered by Disqus</a>
 	</section>
 	
+	
+	<section class="inbrief">
+		<div class="h"><span><a href="/in-brief">In Brief:</a></span></div>
+			
+			<ul>
+			<?php
+			$i = 0; $j = 1;
+			foreach ($briefsteaser as $brief ) { 	
+
+				/* 
+				show only if not currently in the slideshow and if there aren't already two displayed
+				*/	
+				$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $brief->slug ) ));
+				if ( $inslideshow == true ) { 
+					if ( $i < $nibblescount ) {
+						$i++;
+						//echo $brief->title . " is featured</br>";
+					}
+				} elseif ( $j <= 2 ) {
+					$j++;
+				?>
+
+				
+					<li class="brief">						
+						<?php if ( $brief->status == Post::status('scheduled') ) { ?>
+							<div class="content-badge scheduled">
+								<span>scheduled</span>
+							</div>
+						<?php } ?>
+			   	    	<a href="<?php echo $brief->permalink; ?>">
+							<img src="<?php echo $brief->info->photourl; ?>" width="270" />
+			   	    		<h3><?php echo $brief->title; ?></h3>
+							<div class="clear"></div>
+						</a>
+					</li>   	    
+
+				<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span> */ ?>
+			<?php }
+			} ?>
+
+				<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/in-brief">view all ›</a></li>
+
+	</section>
+
+	<?php echo $theme->display ('sidebar.elem.profilepool'); ?>
+
+
 
 	<?php Plugins::act( 'theme_sidebar_bottom' ); ?>
 
