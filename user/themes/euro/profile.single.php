@@ -140,51 +140,51 @@
 										<?php if (!$piece->info->author || $piece->info->author == $post->info->user || $piece->info->author == 0 ) { ?>
 			
 
-							<div class="list">
+										<div class="list">
 
-								<a href="<?php echo $piece->permalink; ?>" title="<?php echo $piece->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $piece->info->photourl; ?>" alt="<?php if ( $piece->info->photoinfo ) { echo $piece->info->photoinfo; } else { echo $piece->title; } ?>" height="100" width="160"/></a>
+											<a href="<?php echo $piece->permalink; ?>" title="<?php echo $piece->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $piece->info->photourl; ?>" alt="<?php if ( $piece->info->photoinfo ) { echo $piece->info->photoinfo; } else { echo $piece->title; } ?>" height="100" width="160"/></a>
 
-								<header>
+											<header>
 							
-									<h2><a href="<?php echo $piece->permalink; ?>" title="<?php echo $piece->title; ?>"><?php echo $piece->title_out; ?></a></h2>
+												<h2><a href="<?php echo $piece->permalink; ?>" title="<?php echo $piece->title; ?>"><?php echo $piece->title_out; ?></a></h2>
 
 
-								</header>
+											</header>
 
-								<article class="body">
-								<?php if ( $piece->info->excerpt ) {
-								        echo $piece->info->excerpt; } 
-									else {
-								        echo $piece->content_out;
-								        }?>
-								</article>
+											<article class="body">
+											<?php if ( $piece->info->excerpt ) {
+											        echo $piece->info->excerpt; } 
+												else {
+											        echo $piece->content_out;
+											        }?>
+											</article>
 
-								<footer>
+											<footer>
 						
-									<span class="entry-tags">
-								        <?php if ( $show_author && $piece->typename == 'article' ) { ?>
+												<span class="entry-tags">
+											        <?php if ( $show_author && $piece->typename == 'article' ) { ?>
 
-											<span class="entry-autor">
-												<?php if ( $piece->info->origauthor ) { ?>
-													<a href="<?php if ( $piece->info->origprofile ) { echo $piece->info->origprofile; } else { echo $piece->info->origsource; } ?>" title="Portrait"><span><?php echo $piece->info->origauthor; ?></span></a>
-												<?php } elseif ($piece->info->author) { ?>
-													<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $piece->info->author ) ) );?>
-													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($piece->info->author)->displayname; ?></span></a>
-												<?php } else { 
-													$publisher = Post::get(array( 'all:info' => array( 'user' => $piece->author->id ) ) );?>
-													<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $piece->author->displayname; ?></span></a>
-												<?php } ?>
-											</span>
+														<span class="entry-autor">
+															<?php if ( $piece->info->origauthor ) { ?>
+																<a href="<?php if ( $piece->info->origprofile ) { echo $piece->info->origprofile; } else { echo $piece->info->origsource; } ?>" title="Portrait"><span><?php echo $piece->info->origauthor; ?></span></a>
+															<?php } elseif ($piece->info->author) { ?>
+																<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $piece->info->author ) ) );?>
+																<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($piece->info->author)->displayname; ?></span></a>
+															<?php } else { 
+																$publisher = Post::get(array( 'all:info' => array( 'user' => $piece->author->id ) ) );?>
+																<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $piece->author->displayname; ?></span></a>
+															<?php } ?>
+														</span>
 
-										<?php } ?>
+													<?php } ?>
 
-								        on <time datetime="<?php echo $piece->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $piece->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-									</span>
-								        <a class="alignright entry-comments" href="<?php echo $piece->permalink ?>#disqus_thread">Comments</a>
+											        on <time datetime="<?php echo $piece->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $piece->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+												</span>
+											        <a class="alignright entry-comments" href="<?php echo $piece->permalink ?>#disqus_thread">Comments</a>
 
-								</footer>
+											</footer>
 
-							</div>
+										</div>
 										
 										<?php } ?>
 													

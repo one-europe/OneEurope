@@ -279,11 +279,8 @@ class PlugProfile extends Plugin
 		$post = Post::get( array( 'slug' => $post_slug ) );
 
 		$pieces = Posts::get(
-			array('where' => 
-				array(
-					array('user_id' => $post->info->user),
-					array('all:info' => array('author' => $post->info->user ) )
-				), 
+			array(
+				'all:info' => array('author' => $post->info->user ),
 			    'content_type' => Post::type('article'),
 			    'status' => Post::status('published'),
 				'offset' => ($pagination)*($page)-$pagination,
@@ -294,11 +291,8 @@ class PlugProfile extends Plugin
 		$theme->pieces = $pieces;
 		
 		$all = Posts::get(
-			array('where' => 
-				array(
-					array('user_id' => $post->info->user),
-					array('all:info' => array('author' => $post->info->user ) )
-				), 
+			array(
+				'all:info' => array('author' => $post->info->user ),
 			    'content_type' => Post::type('article'),
 			    'status' => Post::status('published'),
 				'nolimit' => true
