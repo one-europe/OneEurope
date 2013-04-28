@@ -1579,6 +1579,11 @@ ul.nibble-list {
 /*** End Nibbles ***/
 
 
+.addthis-content-row {
+	margin-bottom: .5em!important;
+	padding-bottom: .5em!important;
+	border-bottom: 1px solid #eee;
+}
 
 #sidebar .meta > span {
 	display: block;

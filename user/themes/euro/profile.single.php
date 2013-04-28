@@ -123,8 +123,10 @@
 								if ( $piece->info->author && $piece->info->author != $post->info->user && $piece->info->author != 0 ) {$i++;}
 							}
 
-							$count = $pieces->count_all() - $i;
-
+							if(is_object($pieces)) {
+								$count = $pieces->count_all() - $i;
+							}
+							
 							if ($count > 0 ) {
 						
 							?>
@@ -206,7 +208,7 @@
 
 							<?php } else { ?>
 						
-								<p class="message"><?php echo $post->title; ?> hasn't published anything yet.</p>
+								<p class="message">There's nothing to show from <?php echo $post->title; ?> at the moment.</p>
 						
 							<?php } ?>
 																	
