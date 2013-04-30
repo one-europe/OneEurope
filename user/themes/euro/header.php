@@ -253,6 +253,24 @@
 				</div>
 										
 				<div class="clear"></div>
+				
+				
+				<div id="subnav">
+					
+					<ul>
+						
+						<li class="static">Debates:</li>
+						
+						<?php foreach($menus as $debate) {?>
+							<li><a href="<?php echo $debate->permalink ?>" title="<?php echo $debate->title; ?>"><?php echo $debate->info->shorttitle; ?></a></li>
+						<?php } ?>
+						
+						<li class="clear"></li>
+						
+					</ul>
+					
+				</div>
+				
 														
 			</div>
 			

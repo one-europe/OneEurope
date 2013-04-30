@@ -58,27 +58,33 @@ class PlugDebate extends Plugin
 		if ( $form->content_type->value == Post::type( self::CONTENT_TYPE ) ) {
 			
 			
+			// add shorttitle input field
+			$form->append('text', 'shorttitle', 'null:null', _t('Short title (for display on frontpage - can be the actual title itself if it\'s short enough)'), 'admincontrol_text');
+			$form->shorttitle->value = $post->info->shorttitle;
+			$form->shorttitle->tabindex = 2;
+		    $form->shorttitle->move_after($form->title);
+		
 			// add excerpt field
 			$form->append('text', 'excerpt', 'null:null', _t('Excerpt'), 'admincontrol_text');
-			$form->excerpt->tabindex = 2;
+			$form->excerpt->tabindex = 3;
 			$form->excerpt->value = $post->info->excerpt;
-			$form->excerpt->move_after($form->title);
+			$form->excerpt->move_after($form->shorttitle);
 			
 			// add photo url input field
 			$form->append('text', 'photourl', 'null:null', _t('Photo URL (upload it to mediasilo and grab its link)'), 'admincontrol_text');
 			$form->photourl->value = $post->info->photourl;
-			$form->photourl->tabindex = 3;
+			$form->photourl->tabindex = 4;
 		    $form->photourl->move_after($form->excerpt);		
 		
-			$form->content->tabindex = 4;
+			$form->content->tabindex = 5;
 			
 			// add photo url input field
 			$form->append('text', 'photolicense', 'null:null', _t('Photo License'), 'admincontrol_text');
 			$form->photolicense->value = $post->info->photolicense;
-			$form->photolicense->tabindex = 5;
+			$form->photolicense->tabindex = 6;
 		    $form->photolicense->move_after($form->content);
 		
-			$form->tags->tabindex = 6;
+			$form->tags->tabindex = 7;
 			
 			// buggy, dunno why
 			$form->save->tabindex = $form->save->tabindex + 10;
@@ -95,6 +101,7 @@ class PlugDebate extends Plugin
 		if ( $post->content_type == Post::type( self::CONTENT_TYPE ) ) {
  
 			// Save settings
+			$post->info->shorttitle = $form->shorttitle->value;
 			$post->info->excerpt = $form->excerpt->value;
 			$post->info->photourl = $form->photourl->value;
 			$post->info->photolicense = $form->photolicense->value;
