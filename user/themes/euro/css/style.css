@@ -489,23 +489,35 @@ body {
 	background: #fff;
 }
 
-#head > nav > ul > li.menu_1_5 {
-	width: 70px;
-	margin: 0 5px 0 0;
+#head > nav > ul > li.menu_1 {
+	width: 80px;
 }
-#head > nav > ul > li.menu_2 {
-	width: 90px;
+#head > nav > ul > li.menu_1 > a {
+	width: 74px; /* menu_1 extra size */
 }
-#head > nav > ul > li.menu_2:hover, #head > nav > ul > li.menu_3:hover, #head > nav > ul > li.menu_4:hover {
+#head > nav > ul > li.menu_1:hover, #head > nav > ul > li.menu_2:hover, #head > nav > ul > li.menu_4:hover {
 	border: 1px solid #ccc;
 	padding: 0;
+}
+#head > nav > ul > li.menu_2 {
+	width: 110px;
+	margin-left: -5px;
+}
+#head > nav > ul > li.menu_2 > a {
+	width: 104px;
 }
 #head > nav > ul > li.menu_3 {
 	width: 85px;
 	margin-left: -5px;
 }
-#head > nav > ul > li.menu_4 {
+#head > nav > ul > li.menu_3 > a {
 	width: 85px;
+}
+#head > nav > ul > li.menu_4 {
+	width: 65px;
+}
+#head > nav > ul > li.menu_4 > a {
+	width: 59px;
 }
 .menu_4 p {
 	margin-bottom: 5px;
@@ -516,8 +528,6 @@ body {
 	padding-top: 10px;
 	float: right;
 }
-
-
 #head > nav > ul > li > a {
 	text-shadow: 0 1px 1px rgba(0,0,0, .3);
 	font-family: Georgia;
@@ -530,13 +540,10 @@ body {
 	position: absolute;
 	z-index: 6;
 }
-#head > nav > ul > li.menu_2 > a {
-	width: 84px; /* menu_2 extra size */
-}
 #head > nav > ul > li > a:hover {
 	background: #fff;
 }
-#head > nav > ul > li.menu_1_5 > a:hover {
+#head > nav > ul > li.menu_3 > a:hover {
 	background: transparent;
 }
 
@@ -561,14 +568,14 @@ body {
 			box-shadow: 0 1px 5px rgba(0,0,0, .15);
 	border-radius: 2px;
 }      
-#head > nav > ul > li.menu_2 > ul {
-	left: -355px;                
+#head > nav > ul > li.menu_1 > ul {
+	left: -300px;                
 }                                
-#head > nav > ul > li.menu_3 > ul {
-	left: -442px;                
+#head > nav > ul > li.menu_2 > ul {
+	left: -377px;                
 }                               
 #head > nav > ul > li.menu_4 > ul {
-	left: -529px;
+	left: -571px;
 }
 #head nav li:hover > ul {
 	display: block;
@@ -587,38 +594,38 @@ body {
 	padding-right: 0;
 }
 
-/** Menu_2 **/
+/** Menu_1 **/
 
-li.menu_2 > p {
+li.menu_1 > p {
 	padding-bottom: 0;
 }
-li.menu_2 > ul > li {
+li.menu_1 > ul > li {
 	float: left;
 	display: inline-block;
 	list-style-type: none outside none;
 	height: auto;	
 	margin-left: 5px;
 }
-li.menu_2 li div {
+li.menu_1 li div {
 	padding: 3px 7px 7px;
 }
-li.menu_2 li div:first-child {
+li.menu_1 li div:first-child {
 	margin: 0;
 }
-li.menu_2 li.col1 {
+li.menu_1 li.col1 {
 	width: 155px;
 	margin: 0;
 }
-li.menu_2 li.col2 {
+li.menu_1 li.col2 {
 	width: 205px;
 	float: left;
 }
-li.menu_2 > ul > li.col3 {
+li.menu_1 > ul > li.col3 {
 	width: 250px;
 	float: left;
 	border-right: 1px solid #ccc;
 }
-li.menu_2 > ul > li.col4 {
+li.menu_1 > ul > li.col4 {
 	width: 123px;
 	float: right;
 	border-left: 1px solid #ccc;
@@ -630,7 +637,7 @@ span.forum {
 	letter-spacing: -2.5px;
 	margin: 55px 0 55px 10px;
 }
-li.menu_2 > ul li div > a {
+li.menu_1 > ul li div > a {
 	font-size: 12px;
 }
 
@@ -654,9 +661,9 @@ ul.cats li a {
 	width: 100%;
 }
 
-/** Menu_3 **/
+/** menu_2 **/
 
-li.menu_3 > ul > li {
+li.menu_2 > ul > li {
 	float: left;
 	display: inline-block;
 	list-style-type: none outside none;
@@ -666,35 +673,35 @@ li.menu_3 > ul > li {
 	margin-left: 10px;
 }
 
-li.menu_3 li div {
+li.menu_2 li div {
 	padding: 3px 7px 7px;
 }
-li.menu_3 > ul > li.col1 {
+li.menu_2 > ul > li.col1 {
 	width: 175px;
 	margin: 0;
 }
-li.menu_3 .col2 {
+li.menu_2 .col2 {
 	width: 280px;
 	padding-left: 5px !important;
 }
-li.menu_3 .col2 .forum {
+li.menu_2 .col2 .forum {
 	font-size: 40px;
 }
-li.menu_3 > ul > li.col3 a {
+li.menu_2 > ul > li.col3 a {
 	display: inline;
 	float: none;
 	margin: 0;
 }
-li.menu_3 .col3 {
+li.menu_2 .col3 {
 	width: 285px;
 	float: right;
 	padding-left: 4px !important;
 }
-li.menu_3 .col3 a {
+li.menu_2 .col3 a {
 	display: inline-block;
 	margin: 5px;
 }
-li.menu_3 .col4 {
+li.menu_2 .col4 {
 	width: 115px;
 	float: right;
 	padding-left: 3px;
@@ -1604,11 +1611,15 @@ ul.nibble-list {
 
 /*** End Nibbles ***/
 
-
+.viral .h {
+	margin-bottom: 5px;
+}
 .addthis-content-row {
-	margin-bottom: .5em!important;
-	padding-bottom: .5em!important;
-	border-bottom: 1px solid #eee;
+	padding: .5em 1em !important;
+	margin: 0!important;
+}
+.addthis-content-row:nth-of-type(2n+0) {
+	background-color: #eee;
 }
 
 #sidebar .meta > span {

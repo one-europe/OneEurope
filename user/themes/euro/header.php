@@ -86,10 +86,7 @@
 				<nav>
 					
 					<ul class="sf-menu">
-						<li class="menu_1_5">
-							<a href="<?php Site::out_url( 'habari' ); ?>/forum">Forum</a>
-						</li>
-						<li class="menu_2">
+						<li class="menu_1">
 							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/debates">Debate</a>
 							<ul class="subnav">
 								<li class="col1">
@@ -109,18 +106,18 @@
 												</li>
 
 											<?php } ?>
-											
+
 											<li class="all"><a href="<?php Site::out_url( 'habari' ); ?>/debates">› all debates</a></li>
-											
+
 										</ul>
 									</div>
 								</li>
 								<li class="col3">
-									
+
 									<div>
 										<p>In the Headlines</p>
 										<ul class="cats">
-											
+
 											<?php $inits = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published', 'limit' => 5 ) );
 											foreach ($inits as $init ) { ?>
 
@@ -129,22 +126,22 @@
 												</li>
 
 											<?php } ?>
-											
+
 											<li class="all"><a href="<?php Site::out_url( 'habari' ); ?>/initiatives">› all initiatives</a></li>
-									
+
 										</ul>
-											
+
 									</div>
-																			
+
 									<?php /* 
 										$posts = Posts::get( array( 'content_type' => 'debate', 'status' => 'published', 'limit' => 1 /* attention: $i / ) );
 										foreach ($posts as $post ) { 
-											
+
 											$id = $post->id;
 											$teasers = Posts::get( array( 'all:info' => array( 'debate' => $id ), 'limit' => 4 ) ); 
 											$i = 1;
 											foreach ( $teasers as $teaser ) { ?>
-												
+
 												<?php if ($i == 1) { ?>
 														<article>
 															<header>
@@ -160,7 +157,7 @@
 											<?php } ?>
 
 										<?php } */ ?>
-										
+
 								</li>
 								<li class="col4">
 									<h3><a href="<?php Site::out_url( 'habari' ); ?>/forum">Forum ›</a></h3>
@@ -168,8 +165,8 @@
 								</li>
 							</ul>
 						</li>
-						<li class="menu_3">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/profiles">Network</a>
+						<li class="menu_2">
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/profiles">Civic Action</a>
 							<ul class="subnav">
 								<li class="col1">
 									<div>
@@ -196,6 +193,9 @@
 									</div>
 								</li>
 							</ul>
+						</li>
+						<li class="menu_3">
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/in-brief">In-Brief</a>
 						</li>
 						<li class="menu_4">
 							<a rel="section" class="sf-with-ul" href="#">About</a>
