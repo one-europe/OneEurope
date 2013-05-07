@@ -79,7 +79,7 @@
 			
 			<div id="head">
 			
-				<a id="voteforus" href="<?php Site::out_url( 'habari' ); ?>/initiative/we-need-your-vote-in-this-competition" style="float: left; display: block; margin: 45px 0 0 -120px;"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="We need your vote!" /></a>
+				<?php /** NOT IN USE, but useful <a id="voteforus" href="<?php Site::out_url( 'habari' ); ?>/initiative/we-need-your-vote-in-this-competition" style="float: left; display: block; margin: 45px 0 0 -120px;"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="We need your vote!" /></a> */ ?>
 
 				<a id="logo" href="<?php Site::out_url( 'habari' ); ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php Site::out_url( 'theme' ); ?>/img/logo.png" width="326" height="110" alt="OneEurope" style="margin: 15px 0 0 5px;"/></a>
 					
@@ -159,40 +159,10 @@
 										<?php } */ ?>
 
 								</li>
-								<li class="col4">
-									<h3><a href="<?php Site::out_url( 'habari' ); ?>/forum">Forum ›</a></h3>
-									<p>Get involved. Join the discussion, see different perspectives and come to new insights!</p>
-								</li>
 							</ul>
 						</li>
 						<li class="menu_2">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/profiles">Civic Action</a>
-							<ul class="subnav">
-								<li class="col1">
-									<div>
-										<h3>The Scene.</h3>
-										<p>Have a look at our database of the who is who of the European public sphere. And help us extend it.</p>
-									</div>
-								</li>
-								<li class="col2">
-									<div>
-										<p>
-											Have a look at our profile database of the who's who in Europe. Ask for your own profile.
-											<span class="all"><a href="<?php Site::out_url( 'habari' ); ?>/profiles">Stay updated ›</a></span>
-										</p>
-										<p>
-											Our content comes from a great range of contributors. Have a look at the individuals and organisations 
-											<span class="all"><a href="<?php Site::out_url( 'habari' ); ?>/contributors">behind us ›</a></span><br/>
-										</p>
-									</div>
-								</li>
-								<li class="col3 partners">
-									<div>
-										<p>Become involved yourself and be OneEurope Ambassador in your area.</p>
-										<p>There are so many ways of <a href="/join-us">getting involved</a>.</p>
-									</div>
-								</li>
-							</ul>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/initiatives">Civic Action</a>
 						</li>
 						<li class="menu_3">
 							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/in-brief">In-Brief</a>

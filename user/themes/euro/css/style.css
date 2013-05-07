@@ -495,7 +495,7 @@ body {
 #head > nav > ul > li.menu_1 > a {
 	width: 74px; /* menu_1 extra size */
 }
-#head > nav > ul > li.menu_1:hover, #head > nav > ul > li.menu_2:hover, #head > nav > ul > li.menu_4:hover {
+#head > nav > ul > li.menu_1:hover, #head > nav > ul > li.menu_4:hover {
 	border: 1px solid #ccc;
 	padding: 0;
 }
@@ -543,7 +543,7 @@ body {
 #head > nav > ul > li > a:hover {
 	background: #fff;
 }
-#head > nav > ul > li.menu_3 > a:hover {
+#head > nav > ul > li.menu_3 > a:hover, #head > nav > ul > li.menu_2 > a:hover {
 	background: transparent;
 }
 
@@ -617,11 +617,11 @@ li.menu_1 li.col1 {
 	margin: 0;
 }
 li.menu_1 li.col2 {
-	width: 205px;
+	width: 300px;
 	float: left;
 }
 li.menu_1 > ul > li.col3 {
-	width: 250px;
+	width: 294px;
 	float: left;
 	border-right: 1px solid #ccc;
 }
