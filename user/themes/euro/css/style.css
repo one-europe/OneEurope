@@ -427,6 +427,12 @@ body {
 	height: 150px;
 	margin-left: -10px;
 }
+#headerbadge {
+	float: left; 
+	display: block; 
+	margin: 45px 0 0 -120px
+}
+
 /*.hbg {
 	background: url("/user/themes/minimalistic/img/wbg.png") no-repeat scroll center top transparent;
 	height: 50px;

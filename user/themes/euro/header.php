@@ -79,7 +79,7 @@
 			
 			<div id="head">
 			
-				<?php /** NOT IN USE, but useful <a id="voteforus" href="<?php Site::out_url( 'habari' ); ?>/initiative/we-need-your-vote-in-this-competition" style="float: left; display: block; margin: 45px 0 0 -120px;"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="We need your vote!" /></a> */ ?>
+				<a id="headerbadge" href="<?php Site::out_url( 'habari' ); ?>/europeday"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="Celebrate Europe Day with a profile banner in your language!" /></a>
 
 				<a id="logo" href="<?php Site::out_url( 'habari' ); ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php Site::out_url( 'theme' ); ?>/img/logo.png" width="326" height="110" alt="OneEurope" style="margin: 15px 0 0 5px;"/></a>
 					
