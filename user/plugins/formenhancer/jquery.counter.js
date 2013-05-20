@@ -259,7 +259,7 @@
 $(document).ready(function(){	
 	$("#excerpt").counter({
 		type: 'char',
-		goal: 170,
+		goal: 150,
 		count: 'down',
 		text: false
 	});
