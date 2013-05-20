@@ -79,7 +79,7 @@
 			
 			<div id="head">
 			
-				<a id="headerbadge" href="<?php Site::out_url( 'habari' ); ?>/europeday"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="Celebrate Europe Day with a profile banner in your language!" /></a>
+				<?php /** useful, but out of use <a id="headerbadge" href="<?php Site::out_url( 'habari' ); ?>/europeday"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="Celebrate Europe Day with a profile banner in your language!" /></a> */ ?>
 
 				<a id="logo" href="<?php Site::out_url( 'habari' ); ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php Site::out_url( 'theme' ); ?>/img/logo.png" width="326" height="110" alt="OneEurope" style="margin: 15px 0 0 5px;"/></a>
 					
