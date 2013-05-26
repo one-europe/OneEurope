@@ -1,0 +1,34 @@
+
+	<section class="viral">
+		<div class="h"><span>Most Shared</span></div>
+
+
+		<!-- AddThis Trending Content BEGIN -->
+		<div id="addthis_trendingcontent"></div>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
+		<script type="text/javascript">
+		addthis.box("#addthis_trendingcontent", {
+		    feed_title : "",
+		    feed_type : "shared",
+		    feed_period : "month",
+		    num_links : 8,
+		    height : "auto",
+		    width : "auto",
+		    domain : "one-europe.info"});
+		</script>
+		<!-- AddThis Trending Content END -->
+
+
+		<?php /* <ul>
+			<?php
+			$recent = Posts::get( array( 'content_type' => 'initiative', 'limit'=>8, 'status'=>'published', 'orderby'=>'pubdate DESC' ) );
+				foreach ($recent as $rec) {
+					echo '<li><a href="', $rec->permalink, '">',
+					$rec->title, ' ›</a></li>';
+				}
+			?>
+		
+			<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/initiatives">view all ›</a></li>
+		
+		</ul> */ ?>
+	</section>

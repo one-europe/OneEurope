@@ -1,6 +1,6 @@
 
 	<section class="pool">
-		<div class="h"><span>Profile Database:</span></div>
+		<div class="h"><span>Profile Database</span></div>
 	
 		<ul>
 		<?php
