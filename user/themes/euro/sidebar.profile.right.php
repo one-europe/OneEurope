@@ -18,7 +18,14 @@
 
 			<?php /* implement http://wiki.habariproject.org/en/Dev:Theme_Areas */?>
 		
-			<?php if ( $source->twitter ) { ?>
+		
+			<?php if ($source->twitter) { 
+				$twname = $source->twitter;
+			} elseif ($post->info->twitter) {
+				$twname = $post->info->twitter;
+			} ?>
+		
+			<?php if ( $twname ) { ?>
 	
 				<section class="twitter">
 					<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
@@ -47,7 +54,7 @@
 					    live: true,
 					    behavior: 'all'
 					  }
-					}).render().setUser('<?php echo $post->info->twitter; ?>').start();
+					}).render().setUser('<?php echo $twname; ?>').start();
 					</script>
 				</section>
 	
