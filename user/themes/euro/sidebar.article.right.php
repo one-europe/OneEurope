@@ -29,7 +29,7 @@
 			<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
 
 			<a href="<?php echo $publisher->permalink; ?>">
-				<img alt="<?php echo User::get($post->info->author)->displayname; ?>" src="<?php if ( User::get($post->info->author)->info->photourl ) { echo User::get($post->info->author)->info->photourl; } else { echo $publisher->info->photurl; } ?>" />
+				<img alt="<?php echo User::get($post->info->author)->displayname; ?>" src="<?php if ( User::get($post->info->author)->info->photourl ) { echo User::get($post->info->author)->info->photourl; } else { echo $publisher->info->photourl; } ?>" />
 				<h3><?php if (  User::get($post->info->author)->info->displayname ) { echo User::get($post->info->author)->info->displayname; } else { echo $publisher->title; } ?></h3>
 				<p><?php if ( User::get($post->info->author)->info->teaser ) { echo User::get($post->info->author)->info->teaser; } else { echo $publisher->info->teaser; } ?></p>
 				<p class="nopbottom">read more › </p>
