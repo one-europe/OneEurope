@@ -1,6 +1,5 @@
 
-<section class="de-vote-2014">
-	<div class="h"><span>Pre Election Polls</span></div>
+<div class="sidebar-dummy">
 
 	<table class="devote2013-widget" width="235" height="312">
 	  <tr>
@@ -24,4 +23,4 @@
 	  </tr>
 	</table>
 				
-</section>
+</div>

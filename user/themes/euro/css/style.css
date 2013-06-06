@@ -1923,11 +1923,16 @@ article > footer nav {
 	margin: 0 0 0 10px;
 }
 .fb-like-box {
-	margin: -11px -11px 10px -11px;
+	margin: 0 -11px 10px -11px;
 }
-.fb-like-box .uiBoxWhite {
-	border-color: none!important;
+.fb-like-box ._4s7c {
+	border-right: none!important;
+	border-left: none!important;
 }
+.g-plus-box {
+	margin: 7px -11px -20px -11px;
+}
+
 
 #footwrap {
 	display: block;
@@ -2636,11 +2641,16 @@ aside.disqus h3, .similar-posts h3 {
 
 /* DEBATING EUROPE MODEL EP VOTE 2014 */
 
+.sidebar-dummy {
+	margin: 0 0 20px;
+}
+
 .devote2013-widget {
 	background-image:url("../img/sidebar_vote2014.png");
 	background-repeat: no-repeat;
 	background-align: center;
 	width: 132px;
+	margin: 0 auto;
 }
 
 a.bluebuttoncss {

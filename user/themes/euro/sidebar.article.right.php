@@ -71,24 +71,9 @@
 		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for our newsletter! ›</a></big></p>
 	</section>
 		
-	<section class="viral">
-		<div class="h"><span>Most Viral:</span></div>
-
-
-		<!-- AddThis Trending Content BEGIN -->
-		<div id="addthis_trendingcontent"></div>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
-		<script type="text/javascript">
-		addthis.box("#addthis_trendingcontent", {
-		    feed_title : "",
-		    feed_type : "shared",
-		    feed_period : "month",
-		    num_links : 8,
-		    height : "auto",
-		    width : "auto",
-		    domain : "one-europe.info"});
-		</script>
-		<!-- AddThis Trending Content END -->
+	<?php echo $theme->display ('sidebar.elem.de-vote'); ?>	
+		
+	<?php echo $theme->display ('sidebar.elem.most-shared'); ?>	
 
 
 		<?php /* <ul>

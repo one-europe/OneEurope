@@ -127,6 +127,9 @@
 						
 						</div>
 					
+						<a href="https://twitter.com/one1europe" class="twitter-follow-button">Follow @one1europe</a>
+						<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+					
 						<div class="clearfix"></div>
 					
 					</section>

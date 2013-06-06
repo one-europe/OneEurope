@@ -1,11 +1,19 @@
 
 	<section class="fb">
 		<div class="h"><span>Connect with us</span></div>
-				
-		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
+		
 		<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://one-europe.info/about"></a>
 		<noscript><a href="http://flattr.com/thing/697920/OneEurope" target="_blank">
 		<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+		
+		<div class="g-plus-box">		
+			<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+			<g:plus href="https://plus.google.com/118353934830681553476" width="297"></g:plus>
+		</div>
+		
+				
+		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
+
 		<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 		
 			<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>

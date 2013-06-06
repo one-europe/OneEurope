@@ -36,39 +36,25 @@
 	<section class="fb">
 		<div class="h"><span>Stay Tuned</span></div>
 
-			<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
-
 			<a href="https://twitter.com/one1europe" class="twitter-follow-button">Follow @one1europe</a>
 			<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+
+			<div class="g-plus-box">		
+				<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+				<g:plus href="https://plus.google.com/118353934830681553476" width="297" height=""></g:plus>
+			</div>
+			<br/>
+			<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
 
 		</ul>
 	</section>
 
-	<section>
-		<div class="h"><span>Newsletter</span></div>
-		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for our free newsletter! ›</a></big></p>
-	</section>
+	<?php echo $theme->display ('sidebar.elem.newsletter'); ?>	
 
+	<?php echo $theme->display ('sidebar.elem.de-vote'); ?>	
 
-	<section class="viral">
-		<div class="h"><span>Most Viral</span></div>
+	<?php echo $theme->display ('sidebar.elem.most-shared'); ?>	
 
-
-		<!-- AddThis Trending Content BEGIN -->
-		<div id="addthis_trendingcontent"></div>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
-		<script type="text/javascript">
-		addthis.box("#addthis_trendingcontent", {
-		    feed_title : "",
-		    feed_type : "shared",
-		    feed_period : "month",
-		    num_links : 8,
-		    height : "auto",
-		    width : "auto",
-		    domain : "one-europe.info"});
-		</script>
-		<!-- AddThis Trending Content END -->
-	</section>
 
 	<section class="disqusthreads">
 		<div class="h"><span>Most Commented</span></div>
