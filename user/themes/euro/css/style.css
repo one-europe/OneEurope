@@ -1207,6 +1207,7 @@ div.list-2 .list:nth-of-type(3n+0) {
 }
 .plugticle .spreadtheword {
 	float: left;
+	width: 80%;
 }
 .plugticle #socialshareprivacy {
 	width: 500px;
@@ -1233,17 +1234,29 @@ div.list-2 .list:nth-of-type(3n+0) {
 
 /* AddThis altering */
 .plugticle .addthis {
-	margin: 25px 10px 0;
+	margin: 15px 10px 0;
+	width: 360px;
+	float: left;
 }
 .plugticle .addthis_button_pinterest_pinit {
 	float: left;
-	margin: 7px 10px 0 5px;
+	margin: 0 8px 0 14px;
 }
 .plugticle .addthis_button_facebook_send {
-	margin: 36px 0 0 -64px;
+	margin: 28px 0 0 -64px;
 }
 .plugticle .addthis_button_facebook_like {
 	margin: 0 8px 0;
+}
+.plugticle .addthis_button_linkedin_counter {
+	margin: 55px 0 0 -69px;
+	display: inline-block;
+}
+.plugticle .addthis_button_stumbleupon {
+	margin: 25px 0 0 -20px;
+}
+.plugticle .addthis_button_vk {
+	margin: 50px 0 0 -20px;
 }
 .plugticle .addthis_button_tweet, .plugticle .addthis_button_google_plusone {
 	margin-right: 10px;
@@ -1272,6 +1285,7 @@ div.list-2 .list:nth-of-type(3n+0) {
 	float: none!important;
 }
 /* end AddThis */
+
 .plugticle .article-autor {
 	text-transform: uppercase;
 }
@@ -1626,6 +1640,9 @@ ul.nibble-list {
 }
 .addthis-content-row:nth-of-type(2n+0) {
 	background-color: #eee;
+}
+.addthis-content-footer {
+	display: none;
 }
 
 #sidebar .meta > span {
@@ -2632,12 +2649,36 @@ aside.disqus h3, .similar-posts h3 {
   h2, h3 { page-break-after: avoid; }
 }
 
-#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-/**/#mc_embed_signup form{display:block;position:relative;text-align:left;padding:10px 0 10px 3%}#mc_embed_signup h2{font-weight:bold;padding:0;margin:15px 0;font-size:1.4em;}#mc_embed_signup input{border:1px solid #999;-webkit-appearance:none;}#mc_embed_signup input[type=checkbox]{-webkit-appearance:checkbox;}#mc_embed_signup input[type=radio]{-webkit-appearance:radio;}#mc_embed_signup input:focus{border-color:#333;}#mc_embed_signup .button{clear:both;background-color:#aaa;border:0 none;border-radius:4px;color:#FFFFFF;cursor:pointer;display:inline-block;font-size:15px;font-weight:bold;height:32px;line-height:32px;margin:0 5px 10px 0;padding:0;text-align:center;text-decoration:none;vertical-align:top;white-space:nowrap;width:auto;}#mc_embed_signup .button:hover{background-color:#777;}#mc_embed_signup .small-meta{font-size:11px;}#mc_embed_signup .nowrap{white-space:nowrap;}#mc_embed_signup .clear{clear:none;display:inline;}#mc_embed_signup label{display:block;font-size:16px;padding-bottom:10px;font-weight:bold;}#mc_embed_signup input.email{display:block;padding:8px 0;margin:0 4% 10px 0;text-indent:5px;width:58%;min-width:130px;}#mc_embed_signup input.button{display:block;width:35%;margin:0 0 10px 0;min-width:90px;}#mc_embed_signup div#mce-responses{float:left;top:-1.4em;padding:0em .5em 0em .5em;overflow:hidden;width:90%;margin:0 5%;clear:both;}#mc_embed_signup div.response{margin:1em 0;padding:1em .5em .5em 0;font-weight:bold;float:left;top:-1.5em;z-index:1;width:80%;}#mc_embed_signup #mce-error-response{display:none;}#mc_embed_signup #mce-success-response{color:#529214;display:none;}#mc_embed_signup label.error{display:block;float:none;width:auto;margin-left:1.05em;text-align:left;padding:.5em 0;}
 
+/* MAILCHIMP SIGNUP FORM STYLES */
 
+#mc_embed_signup {
+	background: #fff; 
+	font: 14px Helvetica, Arial, sans-serif; 
+	width: 245px;
+	float: right;
+}
+/**/#mc_embed_signup form{display:block;position:relative;text-align:left;padding:10px 0 10px 3%}
+#mc_embed_signup h2{font-weight:bold;padding:0;margin:15px 0;font-size:1.4em;}
+#mc_embed_signup input{border:1px solid #999;-webkit-appearance:none;}
+#mc_embed_signup input[type=checkbox]{-webkit-appearance:checkbox;}
+#mc_embed_signup input[type=radio]{-webkit-appearance:radio;}
+#mc_embed_signup input:focus{border-color:#333;}
+#mc_embed_signup .button{clear:both;background-color:#aaa;border:0 none;border-radius:4px;color:#FFFFFF;cursor:pointer;display:inline-block;font-size:15px;font-weight:bold;height:32px;line-height:32px;margin:0 5px 10px 0;padding:0;text-align:center;text-decoration:none;vertical-align:top;white-space:nowrap;width:auto;}
+#mc_embed_signup .button:hover{background-color:#777;}
+#mc_embed_signup .small-meta{font-size:11px;}
+#mc_embed_signup .nowrap{white-space:nowrap;}
+#mc_embed_signup .clear{clear:none;display:inline;}
+#mc_embed_signup label{display:block;font-size:16px;padding-bottom:10px;font-weight:bold;}
+#mc_embed_signup input.email{display:block;padding:8px 0;margin:0 2% 10px 0;text-indent:5px;width:66%;min-width:130px;float:left;}
+#mc_embed_signup input.button{display:inline-block;width:25%;margin:0 0 10px 0;min-width:60px;}
+#mc_embed_signup div#mce-responses{float:left;top:-1.4em;padding:0em .5em 0em .5em;overflow:hidden;width:90%;margin:0 5%;clear:both;}
+#mc_embed_signup div.response{margin:1em 0;padding:1em .5em .5em 0;font-weight:bold;float:left;top:-1.5em;z-index:1;width:80%;}
+#mc_embed_signup #mce-error-response{display:none;}
+#mc_embed_signup #mce-success-response{color:#529214;display:none;}
+#mc_embed_signup label.error{display:block;float:none;width:auto;margin-left:1.05em;text-align:left;padding:.5em 0;}
 
-
+/* END MAILCHIMP */ 
 
 /* DEBATING EUROPE MODEL EP VOTE 2014 */
 

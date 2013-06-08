@@ -10,11 +10,12 @@
 		addthis.box("#addthis_trendingcontent", {
 		    feed_title : "",
 		    feed_type : "shared",
-		    feed_period : "month",
+		    feed_period : "week",
 		    num_links : 8,
 		    height : "auto",
 		    width : "auto",
-		    domain : "one-europe.info"});
+		    domain : "one-europe.info",
+		    remove : "- OneEurope"});
 		</script>
 		<!-- AddThis Trending Content END -->
 

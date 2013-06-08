@@ -88,11 +88,6 @@
 				<footer>
 					
 
-
-
-
-
-
 					<?php /*	Show an info sentence, if there is one (there can be one either as 'originfo', as that of the assigned author or
 								as that of the actual author, each of which should first be looked up from their user table and then from their profile
 								post table. */
@@ -157,19 +152,31 @@
 				
 						<div class="addthis addthis_toolbox addthis_default_style ">
 
-							<a class="addthis_button_pinterest_pinit"></a>
+							<a class="addthis_button_pinterest_pinit" pi:pinit:media="<?php echo $post->info->photourl; ?>"></a>
 							<a class="addthis_button_facebook_send"></a>
-							
+							<a class="addthis_button_linkedin_counter" li:counter="none"></a> 
+						
 							<a class="addthis_button_reddit"></a>
 							<a class="addthis_button_stumbleupon"></a>
+							<a class="addthis_button_vk"></a>
 							
 							<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
-							<a class="addthis_button_tweet" tw:count="vertical"></a>
+							<a class="addthis_button_tweet" tw:count="vertical" tw:via="one1europe"></a>
 							<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>	
+
 							<a class="addthis_counter"></a>
 
-						
 						</div>
+					
+						<!-- Begin MailChimp Signup Form -->
+						<div id="mc_embed_signup">
+						<form action="http://one-europe.us5.list-manage1.com/subscribe/post?u=fad146f9810377d640e431dfd&amp;id=e147a25731" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+							<label for="mce-EMAIL">Subscribe to our newsletter:</label>
+							<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your email address" required>
+							<input type="submit" value="Ok" name="subscribe" id="mc-embedded-subscribe" class="button">
+						</form>
+						</div>
+						<!--End mc_embed_signup-->
 					
 						<div class="clearfix"></div>
 					

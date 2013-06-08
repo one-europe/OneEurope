@@ -3,7 +3,11 @@
 
 			<div id="content" class="tag">
 				
-				<h2>Everything tagged with "<?php echo $tag; ?>":</h2></br>
+				<h2>Everything tagged with "<?php echo $tag; ?>":</h2>
+				
+				<span class="rss-feed-link alignright"><a href="<?php Site::out_url( 'home' )?>/tag/<?php echo $tag ?>/rss" title="subscribe to the RSS feed of this tag">RSS feed</a></span>
+				
+				</br>
 				
 				<div class="tile-depth-1 list-1">					
 			 		             

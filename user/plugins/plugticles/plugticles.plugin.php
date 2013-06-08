@@ -321,48 +321,10 @@ class Plugticles extends Plugin
 	
 	
 	
-	/* keeping a backup of this:
-	
-	public function theme_header($theme)
-	{
-		$this->theme = $theme;
-		return $this->get_og_article();
-	}
-	
-	private function get_og_article()
-	{
-		$matched_rule = URL::get_matched_rule();
-		if ( is_object( $matched_rule ) ) {
-			$rule = $matched_rule->name;
-			switch( $rule) {
-				case 'display_article':
-					echo "<!-- article -->";
-					echo "<meta  prroperty=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
-					echo "<meta property=\"og:type\" content=\"article\" >\n";
-					echo "<meta property=\"og:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
-					echo "<meta property=\"og:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
-					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
-					if ( $post->info->origsource ) { 
-						$author = $post->info->origauthor;
-					} else { 
-						$author = $post->author->displayname;
-					}
-					echo "<meta property=\"og:article:author\" content=\"{$author}\" >\n";
-					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
-					echo "<!-- /article -->";
-					break;
-				default:
-					echo "<meta property=\"og:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
-					break;
-			}
-		}
-	} */
-	
-	
 	/**
 	 * Modify output in the rss feed (include post info metadata)
 	 **/
-    /* public function action_rss_add_post( $feed_entry, $post )
+    public function action_rss_add_post( $feed_entry, $post )
     {
         $info = $post->info->get_url_args();
         foreach( $info as $key => $value ) {
@@ -373,23 +335,24 @@ class Plugticles extends Plugin
                 $enclosure->addAttribute( 'type', 'text' );
             }
         }
-    }*/
+    }
 
 	/**
 	 * Modify output in the atom feed (include post info metadata)
 	 **/
     public function action_atom_add_post( $feed_entry, $post )
     {
-//        $info = $post->info->get_url_args();
-//        foreach( $info as $key => $value ) {
-//            if( is_array( $value ) && isset( $value['enclosure'] ) ) {
-//                $enclosure = $feed_entry->addChild( 'link' );
-//                $enclosure->addAttribute( 'rel', 'enclosure' );
-//                $enclosure->addAttribute( 'href', $value['enclosure'] );
-//                $enclosure->addAttribute( 'length', $value['size'] );
-//                $enclosure->addAttribute( 'type', 'text' );
-//            }
-//        }
+        $info = $post->info->get_url_args();
+        foreach( $info as $key => $value ) {
+            if( is_array( $value ) && isset( $value['enclosure'] ) ) {
+                $enclosure = $feed_entry->addChild( 'link' );
+                $enclosure->addAttribute( 'rel', 'enclosure' );
+                $enclosure->addAttribute( 'title', $post->title );
+                $enclosure->addAttribute( 'href', $value['enclosure'] );
+                $enclosure->addAttribute( 'length', $value['size'] );
+                $enclosure->addAttribute( 'type', 'text' );
+            }
+        }
 		if( Post::type( self::CONTENT_TYPE ) == $post->content_type )
 			$feed_entry->content[0] = '<strong>'.$post->info->excerpt.'</strong> '.$feed_entry->content[0];
     }

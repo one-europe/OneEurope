@@ -16,7 +16,9 @@
 
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
 		
-		<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="/atom/1" />
+		<!-- link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="/atom/1" / -->
+		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss/1" />
+		
 		<!-- link rel="EditURI" type="application/rsd+xml" title="RSD" href="<?php URL::out( 'rsd' ); ?>" / -->
 		
 		<link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/img/favicon.ico" />
@@ -216,7 +218,7 @@
 						<li><a href="http://pinterest.com/oneeurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/pinterest.png" title="Find us on Pinterest" alt=""/></a></li>
 						<li><a href="http://www.stumbleupon.com/stumbler/OneEurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/stumbleupon.png" title="Find us on StumbleUpon" alt=""/></a></li>
 						<li><a href="http://www.linkedin.com/company/oneeurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Find us on LinkedIn" alt=""/></a></li>
-						<!-- debug feed <li><a href="/feed" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/feed.png" title="Subscribe via RSS" alt=""/></a></li> -->
+						<!-- debug feed <li><a href="/rss/1" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/feed.png" title="Subscribe via RSS" alt=""/></a></li> -->
 						<!-- icon missing <li><a href="http://eepurl.com/pODn9" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Subscribe to our newsletter" alt=""/></a></li> -->
 					</ul>
 				

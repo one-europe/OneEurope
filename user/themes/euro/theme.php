@@ -20,6 +20,7 @@ class EuroTheme extends Theme
 
 	Format::apply_with_hook_params( 'more', 'post_content_excerpt', ' <span class="more-exc">more</span>', 17, 1 ); // big excerpt
 	Format::apply_with_hook_params( 'more', 'post_content_out', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
+	Format::apply_with_hook_params( 'more', 'post_content_feed', '<span class="more-out">› more</span>', 1000, 5 ); // short excerpt
 
 	Format::apply_with_hook_params( 'more', 'post_content_30', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
 	Format::apply_with_hook_params( 'more', 'post_content_50', '<span class="more-out">› more</span>', 50, 1 ); // short excerpt
