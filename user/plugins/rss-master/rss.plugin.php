@@ -90,7 +90,7 @@ class RSS extends Plugin {
 				$item = $items->addChild( 'item' );
 				$title = $item->addChild( 'title', htmlspecialchars( $post->title ) );
 				$link = $item->addChild( 'link', $post->permalink );
-				$description = $item->addChild( 'description', htmlspecialchars( '<strong>'.$post->info->excerpt.'</strong> <br/> <img src="'.$post->info->photourl.'" width="300"/><br/> '.$post->content ) );				
+				$description = $item->addChild( 'description', htmlspecialchars( '<strong>'.$post->info->excerpt.'</strong> <br/> <img src="'.$post->info->photourl.'" width="500"/><br/> '.$post->content ) );				
 				$pubdate = $item->addChild ( 'pubDate', $post->pubdate->format( DATE_RSS ) );
 				$guid = $item->addChild( 'guid', $post->guid );
 				$guid->addAttribute( 'isPermaLink', 'false' );
@@ -106,7 +106,7 @@ class RSS extends Plugin {
 	public function action_handler_rss_collection()
 	{
 		$xml = $this->create_rss_wrapper();
-		$posts = Posts::get( array( 'status' => Post::status( 'published' ), 'content_type' => Post::type('article'), 'limit' => Options::get('atom_entries') ) );
+		$posts = Posts::get( array( 'status' => Post::status( 'published' ), 'content_type' => array(Post::type('article'), Post::type('initiative'), Post::type('brief')), 'limit' => Options::get('atom_entries') ) );
 		$xml = $this->add_posts($xml, $posts );
 		Plugins::act( 'rss_collection', $xml, $posts );
 		ob_clean();
@@ -124,6 +124,7 @@ class RSS extends Plugin {
 	{
 		$tag = $vars['tag'];
 		$posts = Posts::get( array(
+			'status' => Post::status( 'published' ),
 			'vocabulary' => array(
 				'tags:term' => array( $tag ),
 			),
@@ -167,6 +168,7 @@ class RSS extends Plugin {
 		$slug = $vars['slug'];
 		$id = Post::get( array( 'slug' => $slug ))->id;
 		$posts = Posts::get( array(
+			'status' => Post::status( 'published' ),
 			'all:info' => array(
 				'debate' => $id
 			),
@@ -191,6 +193,7 @@ class RSS extends Plugin {
 		$slug = $vars['slug'];
 		$uid = Post::get( array( 'slug' => $slug ) )->info->user;
 		$posts = Posts::get( array(
+			'status' => Post::status( 'published' ),
 			'all:info' => array(
 				'author' => $uid
 			),
@@ -204,7 +207,6 @@ class RSS extends Plugin {
 		echo $xml->asXML();
 		exit;
 	}
-	
 	
 
 	/**

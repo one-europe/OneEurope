@@ -82,7 +82,7 @@ class EuroTheme extends Theme
     	foreach ( $sliders as $post ) { 
 			if ($post->content_type == Post::type('brief') && $i < 5) { $nibblescount++; }; 		// increase nibble-counter by 1 if the current slider is a nibble 
 			if ($post->content_type == Post::type('article') && $i < 5) { $articlescount++; };		// same for articles
-			if ($post->content_type == Post::type('initiative') && $i < 5) { $initscount++; };		// same for articles
+			if ($post->content_type == Post::type('initiative') && $i < 5) { $initscount++; };		// same for initiatives
 			$i++; 
 		}
 		$this->assign( 'nibblescount', $nibblescount);
