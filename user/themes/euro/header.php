@@ -218,7 +218,7 @@
 						<li><a href="http://pinterest.com/oneeurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/pinterest.png" title="Find us on Pinterest" alt=""/></a></li>
 						<li><a href="http://www.stumbleupon.com/stumbler/OneEurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/stumbleupon.png" title="Find us on StumbleUpon" alt=""/></a></li>
 						<li><a href="http://www.linkedin.com/company/oneeurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Find us on LinkedIn" alt=""/></a></li>
-						<li><a href="/feed"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/feed.png" title="Subscribe via RSS" alt=""/></a></li>
+						<li><a href="/feeds"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/feed.png" title="Subscribe via RSS" alt=""/></a></li>
 						<!-- icon missing <li><a href="http://eepurl.com/pODn9" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Subscribe to our newsletter" alt=""/></a></li> -->
 					</ul>
 				
