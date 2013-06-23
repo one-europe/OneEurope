@@ -51,7 +51,7 @@
 							    <em>[Email address protected by JavaScript. Enable JavaScript to see it.]<em>
 							</noscript>.
 						<br/>
-						For recruiting and IT, please email Valentin at 
+						For IT, please email Valentin at 
 							<script type="text/javascript">
 								emailE='one-europe.info'
 								emailE=('valentin' + '@' + emailE)

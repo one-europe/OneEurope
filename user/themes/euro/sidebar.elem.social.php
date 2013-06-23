@@ -11,8 +11,9 @@
 			<g:plus href="https://plus.google.com/118353934830681553476" width="297"></g:plus>
 		</div>
 		
+		<br/>
 				
-		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
+		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="true" data-show-border="false" data-header="false"></div>
 
 		<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 		

@@ -65,11 +65,8 @@
 		<div class="clear"></div>
 	
 	</section>	
-	
-	<section>
-		<div class="h"><span>Newsletter</span></div>
-		<p><big><a href="http://eepurl.com/pODn9" target="_blank">Sign up for our newsletter! ›</a></big></p>
-	</section>
+
+	<?php echo $theme->display ('sidebar.elem.newsletter'); ?>	
 		
 	<?php echo $theme->display ('sidebar.elem.de-vote'); ?>	
 		
