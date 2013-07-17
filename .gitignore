@@ -12,14 +12,12 @@ Thumbs.db
 # security/convenience #
 ######################
 .htaccess
-config.php
+/config.php
 bareGitRepo/*
 php_errors.log
 
 # unnecessary for deving #
 ##########################
-piwik/*
-piwik/tmp/cache/*
-forum_backup/*
-forum/cache/*
+piwik/
+forum/
 user/cache/*
