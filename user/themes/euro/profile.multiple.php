@@ -173,13 +173,40 @@
 						<div class="clear"></div>
 				
 					</div>			
-					
 
 					<div class="list">
 
-						<h2>Programming and IT:</h2>
+						<h2>IT Development:</h2>
 
 						<?php foreach ( $itdept as $profile ) { 
+							if ($profile->info->user) {
+								$source = User::get_by_id($profile->info->user)->info;
+								$title = User::get_by_id($profile->info->user)->displayname;
+						 	} else {
+								$source = $profile->info;
+								$title = $profile->title;
+							} ?>						
+
+						<div class="item">
+
+							<a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $profile->info->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title; ?>" width="100" /></a>
+
+							<h3><a href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>"><?php echo $title; ?></a></h1>
+
+						</div>
+
+						<?php } ?>
+
+						<div class="clear"></div>
+
+					</div>
+		
+
+					<div class="list">
+
+						<h2>Fundraising:</h2>
+
+						<?php foreach ( $fundraising as $profile ) { 
 							if ($profile->info->user) {
 								$source = User::get_by_id($profile->info->user)->info;
 								$title = User::get_by_id($profile->info->user)->displayname;

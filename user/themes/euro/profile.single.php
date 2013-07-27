@@ -59,7 +59,7 @@
 					</div>
 					<?php if ( $source->url || $source->more ) { ?>
 						<div class="info">
-							<span><?php if ($source->url) { ?><a href="<?php echo $source->url; ?>" target="_blank" title="visit website">› Website</a></span><?php } ?><br/><?php echo $source->more; ?></span>
+							<span><?php if ($source->url) { ?><a href="<?php echo $source->url; ?>" target="_blank" title="open this website in a new tab">› Website</a></span><?php } ?><br/><?php echo $source->more; ?></span>
 						</div>
 					<?php } elseif ( !($source->url && $source->more) && $post->info->url || $post->info->more ) { ?>
 						<div class="info">

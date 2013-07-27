@@ -392,6 +392,13 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
+	  $fundraising = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'fundraising'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
+	  ));
 	  
 
 	  // Add the profiles to the theme. Access this in your template with $allprofiles.
@@ -403,6 +410,7 @@ class PlugProfile extends Plugin
 	  $theme->partners = $partners;
 	  $theme->editors = $editors;
 	  $theme->itdept = $itdept;
+	  $theme->fundraising = $fundraising;
 
 	  $theme->act_display( $paramarray );
 
