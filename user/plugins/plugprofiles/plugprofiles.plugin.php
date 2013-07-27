@@ -385,6 +385,13 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));	
+	  $itdept = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'it'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
+	  ));
 	  
 
 	  // Add the profiles to the theme. Access this in your template with $allprofiles.
@@ -395,6 +402,7 @@ class PlugProfile extends Plugin
 	  $theme->formerpartners = $formerpartners;
 	  $theme->partners = $partners;
 	  $theme->editors = $editors;
+	  $theme->itdept = $itdept;
 
 	  $theme->act_display( $paramarray );
 
