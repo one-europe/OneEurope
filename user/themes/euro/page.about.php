@@ -48,12 +48,12 @@
 				</ul>
 				<ul class="licensing">		
 					<li class="clear">
-						<h2>Licensing</h2>
+<!--						<h2>Licensing</h2>
 						<p>Our commitment to simplifying the process of getting involved makes us believe in the 
 							value of information being shared, which is why we encourage our publishers to use the site's
 							Creative Commons License. They're free to use other licenses however, and we urge our users
 							to respect the authors' choice for every piece of content.
-						</p>
+						</p> -->
 					</li>
 				</ul>
 				<ul class="donate">	
