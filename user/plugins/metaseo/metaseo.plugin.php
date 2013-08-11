@@ -663,15 +663,17 @@ class MetaSeo extends Plugin
 					}
 					echo "<meta property=\"og:description\" content=\"\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
+					echo "<meta property=\"article:publisher\" content=\"249709208387329\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
 				case 'display_brief':
 					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta property=\"og:type\" content=\"article\" >\n";
 					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
-					echo "<meta property=\"og:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta property=\"og:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta property=\"og:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
+					echo "<meta property=\"article:publisher\" content=\"249709208387329\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
 				case 'display_briefs':
@@ -686,9 +688,10 @@ class MetaSeo extends Plugin
 					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta property=\"og:type\" content=\"article\" >\n";
 					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
-					echo "<meta property=\"og:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta property=\"og:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta property=\"og:description\" content=\"{$this->theme->post->info->teaser}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
+					echo "<meta property=\"article:publisher\" content=\"249709208387329\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
 				case 'display_initiatives':
@@ -703,9 +706,10 @@ class MetaSeo extends Plugin
 					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta property=\"og:type\" content=\"article\" >\n";
 					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
-					echo "<meta property=\"og:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta property=\"og:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta property=\"og:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
+					echo "<meta property=\"article:publisher\" content=\"249709208387329\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
 				case 'display_debates':
@@ -727,9 +731,10 @@ class MetaSeo extends Plugin
 					echo "\n<meta property=\"og:title\" content=\"{$displayname}\" >\n";
 					echo "<meta property=\"og:type\" content=\"profile\" >\n";
 					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
-					echo "<meta property=\"og:image\" content=\"{$source->photourl}\" >\n";
+					echo "<meta property=\"og:image\" content=\"". str_replace(' ', '%20', $source->photourl) . "\" >\n";
 					echo "<meta property=\"og:description\" content=\"{$source->teaser}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
+					echo "<meta property=\"article:publisher\" content=\"249709208387329\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
 				case 'display_profiles':
@@ -764,14 +769,14 @@ class MetaSeo extends Plugin
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
-				default:
+				default: // e.g. normal articles
 					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta property=\"og:type\" content=\"article\" >\n";
-					echo "<meta property=\"og:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta property=\"og:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta property=\"og:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
 					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
-					echo "<meta property=\"og:article:publisher\" content=\"249709208387329\" >\n";
+					echo "<meta property=\"article:publisher\" content=\"249709208387329\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
 				break;
@@ -813,7 +818,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"" . $this->theme->post->title . "\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"photo\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->theme->post->permalink . "\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"" . $this->theme->post->info->photourl . "\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"" . $this->theme->post->info->excerpt . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -829,7 +834,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"" . $this->theme->post->title . "\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->theme->post->permalink . "\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"" . $this->theme->post->info->photourl . "\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"" . $this->theme->post->info->teaser . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -845,7 +850,7 @@ class MetaSeo extends Plugin
 					echo "\n<meta name=\"twitter:title\" content=\"" . $this->theme->post->title . "\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->theme->post->permalink . "\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"" . $this->theme->post->info->photourl . "\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"" . $this->theme->post->info->excerpt . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
@@ -907,7 +912,7 @@ class MetaSeo extends Plugin
 				default:
 					echo "\n<meta name=\"twitter:title\" content=\"" . $this->theme->post->title . "\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
-					echo "<meta name=\"twitter:image\" content=\"" . $this->theme->post->info->photourl . "\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"" . $this->theme->post->info->excerpt . "\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->theme->post->permalink . "\" >\n";
 					if ( $this->theme->post->info->origsource ) { 
