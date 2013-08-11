@@ -64,7 +64,7 @@ class RSS extends Plugin {
 		$xml->addAttribute(  'version', '2.0' );
 		$channel = $xml->addChild( 'channel' );
 		$title = $channel->addChild( 'title', htmlspecialchars( Options::get('title') ) );
-		$link = $channel->addChild( 'link', Site::get_url('home') );
+		$link = $channel->addChild( 'link', Site::get_url('habari') );
 		$tagline = Options::get( 'tagline', '' );		// get the tagline or an empty string if it doesn't exist - the description tag is required
 		$description = $channel->addChild( 'description', htmlspecialchars( $tagline ) );
 		$copyright = $channel->addChild( 'copyright', 'copyright by OneEurope');
@@ -90,6 +90,7 @@ class RSS extends Plugin {
 				$item = $items->addChild( 'item' );
 				$title = $item->addChild( 'title', htmlspecialchars( $post->title ) );
 				$link = $item->addChild( 'link', $post->permalink );
+				$author = $item->addChild( 'author', $post->info->author );
 				$description = $item->addChild( 'description', htmlspecialchars( '<strong>'.$post->info->excerpt.'</strong> <br/> <img src="'.$post->info->photourl.'" width="500"/><br/> '.$post->content ) );				
 				$pubdate = $item->addChild ( 'pubDate', $post->pubdate->format( DATE_RSS ) );
 				$guid = $item->addChild( 'guid', $post->guid );

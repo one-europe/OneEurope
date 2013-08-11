@@ -754,15 +754,9 @@ class MetaSeo extends Plugin
 				default:
 					echo "\n<meta property=\"og:title\" content=\"{$this->theme->post->title}\" >\n";
 					echo "<meta property=\"og:type\" content=\"article\" >\n";
-					echo "<meta property=\"og:image\" content=\"{$this->theme->post->info->photourl}\" >\n";
+					echo "<meta property=\"og:image\" content=\"" . rawurlencode($this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta property=\"og:description\" content=\"{$this->theme->post->info->excerpt}\" >\n";
 					echo "<meta property=\"og:url\" content=\"{$this->theme->post->permalink}\" >\n";
-					if ( $this->theme->post->info->origsource ) { 
-						$author = $this->theme->post->info->origauthor;
-					} else { 
-						$author = $this->theme->post->author->displayname;
-					}
-					echo "<meta property=\"og:article:author\" content=\"{$author}\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n\n";
 					break;
 				break;
