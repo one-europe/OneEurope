@@ -67,13 +67,18 @@ class EuroTheme extends Theme
 			Stack::add( 'template_header_javascript', Site::get_url('scripts') . '/jquery.js', 'jquery' );
 		}
 		
-		// work with systags.plugin
-		$this->assign( 'sides', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'mini' ), 'limit' => 2, 'status' => 'published' ) ) );
+		// work with systags.plugin.php
+		//$this->assign( 'sides', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'mini' ), 'limit' => 2, 'status' => 'published' ) ) );
+		// slideshow
 		$this->assign( 'sliders', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => array('published') ) ) );
-		$this->assign( 'menus', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'menu' ), 'limit' => 5, 'status' => 'published', 'content_type' => Post::type('debate') ) ) );
+		// debate menu
+		$this->assign( 'menus', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'menu' ), 'limit' => 7, 'status' => 'published', 'content_type' => Post::type('debate') ) ) );
+		// initiative block frontpage (up to 4 + 3, see * below)
 		$this->assign( 'inits', Posts::get( array( 'content_type' => 'initiative', 'limit' => 7, 'status' => 'published' ) ) );
+		// brief sidebar box frontpage (up to 4 + 2 see * below)
 		$this->assign( 'briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => '6' ) ) );
 		
+		// * broken function hiding what is currently in the slideshow
 		$nibblescount = 0;
 		$articlescount = 0;
 		$initscount = 0;
