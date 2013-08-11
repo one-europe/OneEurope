@@ -915,12 +915,11 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:image\" content=\"". str_replace(' ', '%20', $this->theme->post->info->photourl) . "\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"" . $this->theme->post->info->excerpt . "\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->theme->post->permalink . "\" >\n";
-					if ( $this->theme->post->info->origsource ) { 
-						$author = $this->theme->post->info->origauthor;
-					} else { 
-						$author = $this->theme->post->author->info->twitter;
+					// don't display post->info->author->info->twitter if the author is actually somebody else
+					if ( !$this->theme->post->info->origsource ) { 
+						$author = User::get_by_id($this->theme->post->info->author)->info->twitter;
+						echo "<meta name=\"twitter:creator\" content=\"" . $author . "\" >\n";
 					}
-					echo "<meta name=\"twitter:creator\" content=\"" . $author . "\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				break;
