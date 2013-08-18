@@ -1140,7 +1140,7 @@ span.entry-autor > a > span:hover {
 	margin-bottom: 15px;
 }
 .list-2 > .list {
-	width: 199px!important;
+	width: 178px!important;
 	float: left;
 	margin: 0 7.5px;
 	padding: 0!important;
@@ -1151,9 +1151,10 @@ span.entry-autor > a > span:hover {
 div.list-2 .list:nth-of-type(3n+0) {
 	margin-right: 0;
 }
-.list-2 h2 {
-	margin: 5px 0 10px!important;
-}
+
+.list-2 img { background: #fff; visibility: hidden; }
+.list-2 a { display: block; }
+.list-2 h2 { margin: 5px 0 10px !important; line-height: 1.1em; }
 
 .pagination {
 	clear: both;
@@ -2353,14 +2354,21 @@ aside.disqus h3, .similar-posts h3 {
 }
 
 .welcome {
-	height: 250px;
-	width: 305px;
+	height: 242px;
+	width: 295px;
+	background: lime;
+	overflow: hidden;
+	margin-bottom: 20px;
 }
 .welcome p {
 	padding-bottom: 0;
 	margin-bottom: 0;
 	line-height: 20px;
 }
+
+.video-block { width: 305px; height: 247px; background: #eee; }
+.video-block p { padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
+.video-block a { display: block; float: right; margin:0 5px; }
 
 /* End Featured Boxes */
 

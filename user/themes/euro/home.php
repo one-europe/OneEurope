@@ -55,9 +55,14 @@
 				
 				</div>
 
-				<div class="featured-content-boxes welcome">
-					
-					<a href="/about" title="Welcome"><img src="<?php echo Site::out_url('theme'); ?>/img/static/welcome.jpg" alt="We incite cross-border debate for the emerging European society." width="305" height="250"/></a>
+				<div class="featured-content-boxes video-block">
+
+					<div style="video-item">
+						<iframe src="http://player.vimeo.com/video/65770138" width="305" height="167" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>			
+						<!-- <iframe src="http://player.vimeo.com/video/57948796" width="305" height="167" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> -->
+						<p>Britain and the EU – Is the UK leading the way or running away?</p>
+						<!-- <a href="#">View more videos ›</a> -->
+					</div>
 					
 					<?php /* div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>
 	
@@ -88,6 +93,50 @@
 
 			</div>
 
+			<div style="width: 100%; overflow: hidden;">
+			
+				<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/in-brief" title="">In Brief</a></div>
+
+				<div class="list-2">
+											
+					<?php
+			$i = 0; $j = 1;
+			foreach ($briefsteaser as $brief ) { 	
+
+				/* 
+				show only if not currently in the slideshow and if there aren't already two displayed
+				*/	
+				$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $brief->slug ) ));
+				if ( $inslideshow == true ) { 
+					if ( $i < $nibblescount ) {
+						$i++;
+						//echo $brief->title . " is featured</br>";
+					}
+				} elseif ( $j <= 5 ) {
+					$j++;
+				?>
+
+				
+					<div class="list">						
+						<?php if ( $brief->status == Post::status('scheduled') ) { ?>
+							<div class="content-badge scheduled">
+								<span>scheduled</span>
+							</div>
+						<?php } ?>
+			   	    	<a href="<?php echo $brief->permalink; ?>">
+							<div style="width: 178px; height: 102px; overflow: hidden;"><img src="<?php echo $brief->info->photourl; ?>" width="178" /></div>
+			   	    		<h2><?php echo $brief->title; ?></h2>
+						</a>
+					</div>   	    
+
+				<?php /* span class="entry-autor">by <span><?php echo $post->author->displayname; ?></span></span> */ ?>
+			<?php }
+			} ?>
+					
+					<div class="clear"></div>
+					
+				</div>
+			</div>
 
 			<div id="content" class="home">
 
@@ -119,47 +168,7 @@
 
 				</div */ ?>	
 
-				<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/initiatives/" title="click here to see all initiatives">European Initiatives:</a></div>
-
-				<div class="list-2">
-											
-					<?php
-					
-							$i = 0;
-							$j = 0;
-
-							/* 
-							in case this post is featured, hide it. 
-							do this by looking up how many articles are in the slideshow.
-							hide as many slideshow-systagged articles in the main loop.
-							*/
-							foreach ($inits as $post ) { 
-
-								$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $post->slug ) ));
-								if ( $inslideshow == true && $i < $initscount ) { 
-										$i++; 
-								} elseif ($j < 3) {
-									$j++; ?>
-							
-							<div class="list">
-
-								<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" height="115" width="200"/></a>
-
-								<header>
-
-									<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->info->shorttitle; ?>"><?php echo $post->info->shorttitle; ?></a></h1>
-
-								</header>
-								
-							</div>
-							
-								<?php } 
-							} ?>
-					
-					<div class="clear"></div>
-					
-				</div>
-					
+			
 				<div class="tile-depth-1 list-1">
 				
 					<?php 

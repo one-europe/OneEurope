@@ -55,9 +55,9 @@ class EuroTheme extends Theme
 
 		$this->assign('recent_posts', Posts::get( array( 'content_type' => array( 'article' ), 'limit'=>8, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); //Display the 8 most recent posts	
 
-		if( !$this->template_engine->assigned( 'any' ) ) {
+		/*if( !$this->template_engine->assigned( 'any' ) ) {
 			$this->assign('any', Posts::get( array( 'content_type' => 'any', 'status' => Post::status('published'), 'nolimit' => 1 ) ) );
-		}
+		}*/
 		if( !$this->template_engine->assigned( 'page' ) ) {
 			$page = Controller::get_var( 'page' );
 			$this->assign('page', isset( $page ) ? $page : 1 );

@@ -1,5 +1,11 @@
 <div id="sidebar">
 
+	<div class="welcome">
+		<a href="/about" title="Welcome">
+			<img src="<?php echo Site::out_url('theme'); ?>/img/static/welcome.jpg" alt="We incite cross-border debate for the emerging European society." width="295" height="242"/>
+		</a>
+	</div>
+
 	<?php Plugins::act( 'theme_sidebar_top' ); ?>
 
 	<?php /* section class="">

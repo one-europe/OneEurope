@@ -46,6 +46,7 @@
 						<a href="http://debatingeurope.eu/" target="_blank" title="debatingeurope.eu"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/debatingeurope.png" title="Debating Europe" alt="Debating Europe" height="137" width="250" /></a>
 						<a href="http://thinkyoung.eu/" target="_blank" title="Think Young"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/thinkyoung.png" title="Think Young" alt="Think Young" height="48" width="250" /></a>
 						<!-- <a href="http://beta-europe.org/" target="_blank" title="BETA - Simulation of European Politics"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/beta.jpg" title="BETA Europe" alt="BETA Europe" height="137" width="250" /></a> -->
+						<a href="http://www.treffpunkteuropa.de/" target="_blank" title="The New Federalist, webzine of the Young European Federalist"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/banner_tpe_oneeurope_1.png" title="The New Federalist, webzine of the Young European Federalist" alt="The New Federalist, webzine of the Young European Federalist" height="48" width="250" /></a>
 					</div>
 					
 					<div class="element">
