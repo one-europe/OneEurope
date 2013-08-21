@@ -95,7 +95,7 @@
 
 			<div style="width: 100%; overflow: hidden;">
 			
-				<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/in-brief" title="">In Brief</a></div>
+				<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/in-brief" title="">The Big Picture</a></div>
 
 				<div class="list-2">
 											

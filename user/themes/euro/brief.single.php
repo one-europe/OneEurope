@@ -9,7 +9,7 @@
 	<div id="content">
 		
 		<div class="breadcrumb">
-			<span class="first"><a href="/in-brief">In Brief ›</a></span> <span class="brief-title"><a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a></span>
+			<span class="first"><a href="/in-brief">The Big Picture ›</a></span> <span class="brief-title"><a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a></span>
 
 			<div class="pager">
 				<?php if ($previous = $post->descend()): ?>

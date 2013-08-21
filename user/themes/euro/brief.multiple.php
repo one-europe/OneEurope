@@ -7,7 +7,7 @@
 <?php echo $theme->display('header'); ?>
 
 			<div class="breadcrumb">
-				<span class="first"><a href="/in-brief">In Brief ›</a></span>
+				<span class="first"><a href="/in-brief">The Big Picture ›</a></span>
 			</div>
 
 			<div id="content" class="home">

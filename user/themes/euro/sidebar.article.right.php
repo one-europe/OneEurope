@@ -118,7 +118,7 @@
 	
 	
 	<section class="inbrief">
-		<div class="h"><span><a href="/in-brief">In Brief:</a></span></div>
+		<div class="h"><span><a href="/in-brief">The Big Picture:</a></span></div>
 			
 			<ul>
 			<?php
