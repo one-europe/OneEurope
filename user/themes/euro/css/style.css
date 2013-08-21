@@ -477,7 +477,7 @@ body {
 	list-style: none outside none;
 	margin: -2px;
 	padding: 0 10px 0 0;
-	width: 551px;
+	width: 586px;
 }
 #head > nav > ul > li {
 	position: relative;
@@ -513,11 +513,11 @@ body {
 	width: 104px;
 }
 #head > nav > ul > li.menu_3 {
-	width: 85px;
+	width: 120px;
 	margin-left: -5px;
 }
 #head > nav > ul > li.menu_3 > a {
-	width: 85px;
+	width: 120px;
 }
 #head > nav > ul > li.menu_4 {
 	width: 65px;

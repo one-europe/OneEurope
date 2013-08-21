@@ -167,7 +167,7 @@
 							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/initiatives">Civic Action</a>
 						</li>
 						<li class="menu_3">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/in-brief">In-Brief</a>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/in-brief">The Big Picture</a>
 						</li>
 						<li class="menu_4">
 							<a rel="section" class="sf-with-ul" href="#">About</a>
