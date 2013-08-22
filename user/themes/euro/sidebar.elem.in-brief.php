@@ -13,21 +13,21 @@
 				do this by looking up how many articles are in the slideshow.
 				hide as many slideshow-systagged articles in the main loop.
 				*/
-				foreach ($inits as $post ) { 
+				foreach ($inits as $initiative ) { 
 
-					$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $post->slug ) ));
+					$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $initiative->slug ) ));
 					if ( $inslideshow == true && $i < $initscount ) {
 							$i++; 
-					} elseif ($j < 5) {
+					} elseif ($j < 3) {
 						$j++;
 				
 				?>
 				
 				<li class="brief">
-					<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>">
-						<!-- <img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="270" /> -->
-						<img src="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="270" />
-						<h3><?php echo $post->info->shorttitle; ?></h3>
+					<a href="<?php echo $initiative->permalink; ?>" title="<?php echo $initiative->title; ?>">
+						<!-- <img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $initiative->info->photourl; ?>" alt="<?php if ( $initiative->info->photoinfo ) { echo $initiative->info->photoinfo; } else { echo $initiative->title; } ?>" width="270" /> -->
+						<img src="<?php echo $initiative->info->photourl; ?>" alt="<?php if ( $initiative->info->photoinfo ) { echo $initiative->info->photoinfo; } else { echo $initiative->title; } ?>" width="270" />
+						<h3><?php echo $initiative->info->shorttitle; ?></h3>
 					</a>
 				</li>
 				
