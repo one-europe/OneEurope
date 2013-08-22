@@ -125,7 +125,7 @@
 							</div>
 						<?php } ?>
 			   	    	<a href="<?php echo $brief->permalink; ?>">
-							<div style="width: 178px; height: 102px; overflow: hidden;"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $brief->info->photourl; ?>" width="178" /></div>
+							<div style="width: 178px; height: 102px; overflow: hidden;"><img src="<?php echo $brief->info->photourl; ?>" width="178" /></div>
 			   	    		<h2><?php echo $brief->title; ?></h2>
 						</a>
 					</div>   	    
