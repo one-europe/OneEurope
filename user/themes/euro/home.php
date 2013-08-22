@@ -116,8 +116,7 @@
 				} elseif ( $j <= 5 ) {
 					$j++;
 				?>
-
-				
+		
 					<div class="list">						
 						<?php if ( $brief->status == Post::status('scheduled') ) { ?>
 							<div class="content-badge scheduled">
