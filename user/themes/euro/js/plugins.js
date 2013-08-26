@@ -11,7 +11,8 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
 // make it safe to use console.log always
 (function(a){function b(){}for(var c="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn".split(","),d;!!(d=c.pop());){a[d]=a[d]||b;}})
-(function(){try{console.log();return window.console;}catch(a){return (window.console={});}}());
+// (function(){try{window.consolereturn window.console;}catch(a){return (window.console={});}}());
+if (!window.console) console = { log: function () { } };
 // ==== DO NOT EDIT THIS SECTION
 
 
@@ -172,8 +173,8 @@ jQuery(document).ready(function($){
 
 // ===== google maps /contact script ===== //
 function initmap() {
-	var myLatlng = new google.maps.LatLng(50.83870, 4.37284);
-		var myOptions = {
+	var myLatlng = new google.maps.LatLng(50.83870, 4.37284),
+		myOptions = {
 			zoom: 17,
 			center: myLatlng,
 			scrollwheel: false,
@@ -183,21 +184,27 @@ function initmap() {
 			streetViewControl: true,
 			overviewMapControl: true,
 			mapTypeId: google.maps.MapTypeId.HYBRID
-		}
-		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		},
+		mapCanvas = document.getElementById("map_canvas"),
+		map, marker;
 
-		var marker = new google.maps.Marker({
-		       position: myLatlng, 
-		       map: map, 
-		       title:"Hello World!"
+	if (mapCanvas) {
+		map = new google.maps.Map(mapCanvas, myOptions),
+		marker = new google.maps.Marker({
+			position: myLatlng, 
+			map: map, 
+			title: 'OneEurope, Place du Luxembourg 6, 1050 Bruxelles, Belgium'
 		});
+	}
 }
+
 function loadScript() {
   var script = document.createElement("script");
   script.type = "text/javascript";
   script.src = "http://maps.google.com/maps/api/js?sensor=false&callback=initmap";
   document.body.appendChild(script);
 }
+
 window.onload = loadScript;
 
 // ===== end google maps /contact script ===== //

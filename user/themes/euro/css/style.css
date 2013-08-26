@@ -1140,7 +1140,7 @@ span.entry-autor > a > span:hover {
 	margin-bottom: 15px;
 }
 .list-2 > .list {
-	width: 178px!important;
+	width: 226px!important;
 	float: left;
 	margin: 0 7.5px;
 	padding: 0!important;
@@ -1148,13 +1148,14 @@ span.entry-autor > a > span:hover {
 .list-2 > .list:first-child {
 	margin-left: 0;
 }
-div.list-2 .list:nth-of-type(3n+0) {
+div.list-2 .list:nth-of-type(4n+0) {
 	margin-right: 0;
 }
 
+.list-2 .img-wrap { width: 224px; height: 130px; overflow: hidden; -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
 .list-2 img { background: #fff; visibility: hidden; }
 .list-2 a { display: block; }
-.list-2 h2 { margin: 5px 0 10px !important; line-height: 1.1em; }
+.list-2 h2 { margin: 5px 0 10px !important; line-height: 1.2em; font-size: 16px; padding: 0 5px; }
 
 .pagination {
 	clear: both;

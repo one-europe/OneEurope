@@ -94,7 +94,7 @@
 
 			</div>
 
-			<div style="width: 100%; overflow: hidden;">
+			<div style="width: 100%;">
 			
 				<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/in-brief" title="">The Big Picture</a></div>
 
@@ -113,7 +113,7 @@
 						$i++;
 						//echo $brief->title . " is featured</br>";
 					}
-				} elseif ( $j <= 5 ) {
+				} elseif ( $j <= 4 ) {
 					$j++;
 				?>
 		
@@ -124,7 +124,7 @@
 							</div>
 						<?php } ?>
 			   	    	<a href="<?php echo $brief->permalink; ?>">
-							<div style="width: 178px; height: 102px; overflow: hidden;"><img src="<?php echo $brief->info->photourl; ?>" width="178" /></div>
+							<div class="img-wrap"><img src="<?php echo $brief->info->photourl; ?>" width="224" /></div>
 			   	    		<h2><?php echo $brief->title; ?></h2>
 						</a>
 					</div>   	    

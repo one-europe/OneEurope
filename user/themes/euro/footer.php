@@ -93,26 +93,33 @@
 	// include 'db_profiling.php';
 	?>
 	
-    <script type="text/javascript">
-    var disqus_shortname = 'oneeurope';
+	<?php if (is_object($post)) { // only show disqus code if there is a post ?>
+	<script>
+		var disqus_shortname = 'oneeurope';
+		var disqus_identifier = '<?php echo $post->id; ?>';
+		var disqus_title = '<?php echo $post->title; ?>';
+		var disqus_url = '<?php echo $post->permalink; ?>';
+		var disqus_developer = 0; // or 1 based on if you're looking to skip URL authentication
+		var disqus_thread = document.getElementById('disqus_thread');
 
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-    </script>	
+		if (disqus_thread) {
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})()
+		}
+	</script>
+	<?php } ?>
 
 
 
 	<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="<?php Site::out_url( 'theme' ); ?>/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+	
 	<!-- Grab Google Maps widget js -->
-	<script type="text/javascript"
-	    src="https://maps.google.com/maps/api/js?sensor=false">
-	</script>
+	<!--<script src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
 
 	<!-- scripts concatenated and minified via build script -->
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js"></script>

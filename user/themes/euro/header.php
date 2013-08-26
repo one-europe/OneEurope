@@ -27,8 +27,8 @@
 		<link href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72" />
 		<link href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114" />
 		<link href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144" />
-
-		<link rel="stylesheet" media="screen" type="text/css" href="<?php Site::out_url( 'theme' ); ?>/css/style.css" />
+		
+		<link rel="stylesheet" media="screen" type="text/css" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?<?php echo date_timestamp_get(date_create()); ?>" />
 				
 		<?php echo $theme->header(); ?>		
 		
@@ -37,32 +37,9 @@
 		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
 
-
-		<?php if (is_object($post)) { // only show disqus code if there is a post ?>
-		<script type="text/javascript">
-		// ===== disqus ===== //
-		
-		    /* * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * */
-		    var disqus_shortname = 'oneeurope';
-		    var disqus_identifier = '<?php echo $post->id; ?>';
-		    var disqus_title = '<?php echo $post->title; ?>';
-		    var disqus_url = '<?php echo $post->permalink; ?>';
-		    var disqus_developer = 0; // or 1 based on if you're looking to skip URL authentication
-		
-		    /* * * DON'T EDIT BELOW THIS LINE * * */
-		    (function() {
-		        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-		        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		    })();
-		
-		</script>
-		<?php } ?>
-
-
 	</head>
 
-	<body id="top" onload="initmap()">
+	<body id="top">
 				
 		<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		
