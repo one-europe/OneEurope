@@ -225,8 +225,7 @@ function clickrecall(thisfield, defaulttext) {
 
 // ===== slideshow plugin
 $(function() {
-	var featured = $('#featured');
-	featured
+	$('#featured')
 		.tabs({ fx: { opacity: 'toggle' }, event: 'mouseover' })
 		.tabs('rotate', 7000, true);
 });
