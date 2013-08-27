@@ -284,7 +284,7 @@ img {
 	border: none;
 }
 textarea {
-	font-family: 'Lucia Grande', Verdana, Arial, Sans-Serif;
+	x-font-family: 'Lucia Grande', Verdana, Arial, Sans-Serif;
 	font-size: 0.9em;
 }
 
@@ -1968,7 +1968,8 @@ article > footer nav {
 	
 	}
 #footer {
-	margin: 50px auto 50px;
+	margin: 0 auto;
+	padding-top: 20px; 
 	width: 960px;
 }
 .footerclear {
@@ -1995,8 +1996,8 @@ article > footer nav {
 }
 #footer > .element {
 	float: left;
-	height: 330px;
-	width: 254px;
+	height: 390px;
+	width: 253px;
 	padding: 15px 20px;
 	border-right: 1px solid #ccc;
 }
@@ -2357,7 +2358,6 @@ aside.disqus h3, .similar-posts h3 {
 .welcome {
 	height: 242px;
 	width: 295px;
-	background: lime;
 	overflow: hidden;
 	margin-bottom: 20px;
 }

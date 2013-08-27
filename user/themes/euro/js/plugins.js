@@ -224,16 +224,11 @@ function clickrecall(thisfield, defaulttext) {
 
 
 // ===== slideshow plugin
-$(document).ready(function(){  
-	$("#featured").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true);  
-	$("#featured").hover(  
-		function() {  
-			$("#featured").tabs("rotate", 0, true);  
-		},  
-		function() {  
-			$("#featured").tabs("rotate", 5000, true);  
-		}  
-	);  
+$(function() {
+	var featured = $('#featured');
+	featured
+		.tabs({ fx: { opacity: 'toggle' }, event: 'mouseover' })
+		.tabs('rotate', 7000, true);
 });
 
 

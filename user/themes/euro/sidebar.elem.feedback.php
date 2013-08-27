@@ -1,10 +1,10 @@
 
 	
-	<section class="contactus">
+	<!-- <section class="contactus">
 		<div class="h"><span>Say Hello!</span></div>
 		
 		<form id="contactForm" action="<?php Site::out_url('theme') ?>/mail.php" method="post">
-
+	
 			<div class="container">
 				<span>Would you like to get in touch? No problem! Please us a line:</span>
 			    <input id="senderName" placeholder="Name" name="senderName" required="required" type="text" />
@@ -13,7 +13,7 @@
 			    <input id="sendMessage" type="submit" name="sendMessage" value="Send message" />
 				<div class="clear"></div>
 			</div>
-
+	
 		</form>
 		
-	</section>
+	</section> -->
