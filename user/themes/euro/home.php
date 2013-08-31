@@ -58,9 +58,7 @@
 				<div class="featured-content-boxes video-block">
 
 					<div style="video-item">
-						<!-- <iframe src="http://player.vimeo.com/video/65770138" width="305" height="167" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> -->
 						<iframe src="//www.youtube.com/embed/ugqGueQ9Ud8" width="305" height="210" frameborder="0" allowfullscreen></iframe>
-						<!-- <iframe src="http://player.vimeo.com/video/57948796" width="305" height="167" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> -->
 						<p>We've come a long way...</p>
 						<!-- <a href="#">View more videos ›</a> -->
 					</div>
@@ -104,6 +102,9 @@
 			$i = 0; $j = 1;
 			foreach ($briefsteaser as $brief ) { 	
 
+
+/*				echo '<pre>'; print_r($brief->info->shorttitle); echo '</pre>';
+				exit;*/
 				/* 
 				show only if not currently in the slideshow and if there aren't already two displayed
 				*/	

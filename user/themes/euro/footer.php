@@ -26,19 +26,19 @@
 					
 					</div>
 			
-					<div class="element">
-				
+					<!-- <div class="element ">
+									
 						<div class="license">
 							<h3>Get Involved!</h3>
 							<p style="display: block; margin: 0 0 -20px">See the different options for how to <a href="/join-us">become a stakeholder ›</a></br></br></p>
 							
-							<!-- <h3>Licensing</h3>
+							<h3>Licensing</h3>
 							<p>If not stated differently, all contents are distributed under a <a rel="nofollow" target="_blank" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons License</a> (click for details)
 							<a rel="nofollow" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url( 'theme' )?>/img/creative-commons-240x134.png" /></a>
-							</p> -->
+							</p>
 						</div>
 					
-					</div>
+					</div> -->
 			
 					<div class="element partners">
 						<h3>Partners</h3>
