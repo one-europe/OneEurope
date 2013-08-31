@@ -121,8 +121,8 @@
 	<!--<script src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
 
 	<!-- scripts concatenated and minified via build script -->
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js"></script>		
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?<?php echo date_timestamp_get(date_create()); ?>"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?<?php echo date_timestamp_get(date_create()); ?>"></script>		
 	<!-- end scripts -->
 	
 	</body>
