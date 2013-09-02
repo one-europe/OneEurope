@@ -58,9 +58,17 @@
 				<div class="featured-content-boxes video-block">
 
 					<div style="video-item">
+						<?php
+							$video = $home_page_video[0];
+							preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($video->content, '<iframe>'), $matches);
+							$iframe = preg_replace(['/width=\"\d+\"/', '/height=\"\d+\"/'], ['width="305"', 'height="210"'], $matches[0]);
+							echo $iframe . '<p>' . $video->title . '</p>';
+						?>
+						<!--
 						<iframe src="//www.youtube.com/embed/ugqGueQ9Ud8" width="305" height="210" frameborder="0" allowfullscreen></iframe>
 						<p>We've come a long way...</p>
-						<!-- <a href="#">View more videos ›</a> -->
+						<a href="#">View more videos ›</a>
+						-->
 					</div>
 					
 					<?php /* div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>

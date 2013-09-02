@@ -77,6 +77,9 @@ class EuroTheme extends Theme
 		$this->assign( 'inits', Posts::get( array( 'content_type' => 'initiative', 'limit' => 7, 'status' => 'published' ) ) );
 		// brief sidebar box frontpage (up to 4 + 2 see * below)
 		$this->assign( 'briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => '6' ) ) );
+
+		// home page video
+		$this->assign('home_page_video', Posts::get( array( 'content_type' => array( 'video' ), 'limit' => 1, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) );
 		
 		// * broken function hiding what is currently in the slideshow
 		$nibblescount = 0;
