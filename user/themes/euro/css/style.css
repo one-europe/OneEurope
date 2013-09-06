@@ -424,8 +424,11 @@ body {
 }
 #logo {
 	float: left;
-	height: 150px;
-	margin-left: -10px;
+	height: 109px;
+	x-margin-left: -10px;
+	width: 326px;
+	margin: 15px 0 26px 5px;
+	background: url('../img/logo-normal.png') -10px 0 no-repeat;
 }
 #headerbadge {
 	float: left; 
@@ -446,19 +449,15 @@ body {
 
 /** ## SOCIAL BUTTONS ## **/
 
-.sm-buttons {
-	float: right;
-	margin: 6px 0 0;
-}
-.sm-buttons ul {
-	list-style: none outside none;
-}
-.sm-buttons ul li {
-	float: left;
-	margin: 0 0 0 5px;
-}
-
-
+.sm-buttons		{ float: right; padding-top: 19px; }
+.sm-buttons a	{ width: 25px; height: 25px; float: left; margin-left: 5px; background: url('../img/social/social-icons-25x25.png') -10px 0 no-repeat; }
+.sm-buttons .icon-fb	{ background-position: 0 0; }
+.sm-buttons .icon-tw	{ background-position: -25px 0; }
+.sm-buttons .icon-gp	{ background-position: -50px 0; }
+.sm-buttons .icon-pi	{ background-position: -75px 0; }
+.sm-buttons .icon-st	{ background-position: -100px 0; }
+.sm-buttons .icon-in	{ background-position: -125px 0; }
+.sm-buttons .icon-rs	{ background-position: -150px 0; }
 
 
 /** ## NAVIGATION ## **/
@@ -2359,21 +2358,14 @@ aside.disqus h3, .similar-posts h3 {
 	border-bottom: 1px solid #999;
 }
 
-.welcome {
-	height: 242px;
-	width: 295px;
-	overflow: hidden;
-	margin-bottom: 20px;
-}
-.welcome p {
-	padding-bottom: 0;
-	margin-bottom: 0;
-	line-height: 20px;
-}
+.welcome	{ width: 295px; height: 229px; overflow: hidden; margin-bottom: 20px; }
+.welcome a	{ width: 100%; height: 100%; display: block; background: url('../img/static/welcome-bg.jpg') no-repeat; }
 
 .video-block { width: 305px; height: 247px; background: #eee; }
 .video-block p { padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
 .video-block a { display: block; float: right; margin:0 5px; }
+
+.vote2014-banner { width: 296px; height: 119px; display: block; background: url('../img/ep-vote-2014-bg.png') no-repeat; }
 
 /* End Featured Boxes */
 

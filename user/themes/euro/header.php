@@ -60,7 +60,7 @@
 			
 				<?php /** useful, but out of use <a id="headerbadge" href="<?php Site::out_url( 'habari' ); ?>/europeday"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="Celebrate Europe Day with a profile banner in your language!" /></a> */ ?>
 
-				<a id="logo" href="<?php Site::out_url( 'habari' ); ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php Site::out_url( 'theme' ); ?>/img/logo.png" width="326" height="110" alt="OneEurope" style="margin: 15px 0 0 5px;"/></a>
+				<a id="logo" href="<?php Site::out_url( 'habari' ); ?>" title="OneEurope - One Society, One Democracy, One Europe"></a>
 					
 				<nav>
 					
@@ -187,18 +187,14 @@
 				</nav>
 
 				<div class="sm-buttons">
-				
-					<ul>
-						<li><a href="https://facebook.com/OneEurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/facebook.png" title="Find us on Facebook" alt=""/></a></li>
-						<li><a href="https://twitter.com/one1europe" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/twitter.png" title="Follow us on Twitter" alt=""/></a></li>
-						<li><a href="https://plus.google.com/118353934830681553476/posts" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/googleplus.png" title="Add us to your circles" alt=""/></a></li>
-						<li><a href="http://pinterest.com/oneeurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/pinterest.png" title="Find us on Pinterest" alt=""/></a></li>
-						<li><a href="http://www.stumbleupon.com/stumbler/OneEurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/stumbleupon.png" title="Find us on StumbleUpon" alt=""/></a></li>
-						<li><a href="http://www.linkedin.com/company/oneeurope" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Find us on LinkedIn" alt=""/></a></li>
-						<li><a href="/feeds"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/feed.png" title="Subscribe via RSS" alt=""/></a></li>
-						<!-- icon missing <li><a href="http://eepurl.com/pODn9" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Subscribe to our newsletter" alt=""/></a></li> -->
-					</ul>
-				
+					<a href="https://facebook.com/OneEurope" class="icon-fb" title="Find us on Facebook" target="_blank"></a>
+					<a href="https://twitter.com/one1europe" class="icon-tw" title="Follow us on Twitter" target="_blank"></a>
+					<a href="https://plus.google.com/118353934830681553476/posts" class="icon-gp" title="Add us to your circles" target="_blank"></a>
+					<a href="http://pinterest.com/oneeurope" class="icon-pi" title="Find us on Pinterest" target="_blank"></a>
+					<a href="http://www.stumbleupon.com/stumbler/OneEurope" class="icon-st" title="Find us on StumbleUpon" target="_blank"></a>
+					<a href="http://www.linkedin.com/company/oneeurope" class="icon-in" title="Find us on LinkedIn" target="_blank"></a>
+					<a href="/feeds" class="icon-rs" title="Subscribe via RSS"></a>
+					<!-- icon missing <a href="http://eepurl.com/pODn9" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Subscribe to our newsletter" alt=""/></a> -->
 				</div>
 										
 				<div class="clear"></div>

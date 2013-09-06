@@ -61,7 +61,11 @@
 						<?php
 							$video = $home_page_video[0];
 							preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($video->content, '<iframe>'), $matches);
-							$iframe = preg_replace(['/width=\"\d+\"/', '/height=\"\d+\"/'], ['width="305"', 'height="210"'], $matches[0]);
+							$iframe = preg_replace(
+								['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
+								['width="305"', 'height="210"', 'src="${1}?modestbranding=1&rel=0&showinfo=0&controls=0"'],
+								$matches[0]
+							);
 							echo $iframe . '<p>' . $video->title . '</p>';
 						?>
 						<!--
