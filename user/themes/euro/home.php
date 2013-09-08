@@ -193,7 +193,8 @@
 					do this by looking up how many articles are in the slideshow.
 					hide as many slideshow-systagged articles in the main loop.
 					*/
-					foreach ($posts as $post ) { 
+					foreach ($posts as $post ) {
+						if ($post->content_type != 17) {
 						
 						$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $post->slug ) ));
 						$isbrief = is_object( Post::get( array( $post->typename => 'brief', 'slug' => $post->slug ) ) );
@@ -265,7 +266,7 @@
 							</div>
 
 					<?php }
-						} 
+						}}
 					?>
 					
 				</div>
