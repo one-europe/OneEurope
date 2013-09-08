@@ -449,8 +449,8 @@ body {
 
 /** ## SOCIAL BUTTONS ## **/
 
-.sm-buttons		{ float: right; padding-top: 19px; }
-.sm-buttons a	{ width: 25px; height: 25px; float: left; margin-left: 5px; background: url('../img/social/social-icons-25x25.png') -10px 0 no-repeat; }
+.sm-buttons				{ float: right; padding-top: 19px; }
+.sm-buttons a			{ width: 25px; height: 25px; float: left; margin-left: 5px; background: url('../img/social/social-icons-25x25.png') -10px 0 no-repeat; }
 .sm-buttons .icon-fb	{ background-position: 0 0; }
 .sm-buttons .icon-tw	{ background-position: -25px 0; }
 .sm-buttons .icon-gp	{ background-position: -50px 0; }
@@ -1590,6 +1590,12 @@ div#profiles .item:nth-of-type(8n+0) {
 /* END DEBATES */
 
 
+/*** VIDEOS ***/
+
+.videos h2 { color: #333; font-size: 26px; line-height: 26px; }
+
+/*** END VIDEOS ***/
+
 /*** Begin Nibbles ***/
 
 ul.nibble-list {
@@ -2361,9 +2367,10 @@ aside.disqus h3, .similar-posts h3 {
 .welcome	{ width: 295px; height: 229px; overflow: hidden; margin-bottom: 20px; }
 .welcome a	{ width: 100%; height: 100%; display: block; background: url('../img/static/welcome-bg.jpg') no-repeat; }
 
-.video-block { width: 305px; height: 247px; background: #eee; }
-.video-block p { padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
-.video-block a { display: block; float: right; margin:0 5px; }
+.video-block		{ width: 305px; height: 247px; background: #eee; }
+.video-block p		{ padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
+.video-block a		{ margin:0 5px; }
+.video-block a.all	{ display: block; float: right; }
 
 .vote2014-banner { width: 296px; height: 119px; display: block; background: url('../img/ep-vote-2014-bg.png') no-repeat; }
 

@@ -309,6 +309,7 @@ class MetaSeo extends Plugin
 			switch( $rule) {				
 				case 'display_home':	
 				case 'display_debates':
+				case 'display_videos':
 				case 'display_briefs':
 				case 'display_profiles':
 				case 'display_contributors':
@@ -400,6 +401,7 @@ class MetaSeo extends Plugin
 					break;
 				case 'display_home':	
 				case 'display_debates':
+				case 'display_videos':
 				case 'display_briefs':
 				case 'display_profiles':
 				case 'display_contributors':
@@ -480,6 +482,7 @@ class MetaSeo extends Plugin
 					}
 					break;
 				case 'display_debates':
+				case 'display_videos':
 				case 'display_briefs':
 				case 'display_profiles':
 				case 'display_contributors':
@@ -578,6 +581,10 @@ class MetaSeo extends Plugin
 					break;
 				case 'display_debates':
 					$out = 'All Debates';
+					$out .= ' - ' . Options::get('title');
+					break;
+				case 'display_videos':
+					$out = 'All Videos';
 					$out .= ' - ' . Options::get('title');
 					break;
 				case 'display_briefs':
@@ -717,6 +724,14 @@ class MetaSeo extends Plugin
 					echo "<meta property=\"og:url\" content=\"http://one-europe.info/debates\" >\n";
 					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Our complete debate database.\" >\n";
+					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
+					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
+					break;
+				case 'display_videos':
+					echo "\n<meta property=\"og:title\" content=\"All Videos\" >\n";
+					echo "<meta property=\"og:url\" content=\"http://one-europe.info/videos\" >\n";
+					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
+					echo "<meta property=\"og:description\" content=\"Our complete video database.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;	
@@ -860,6 +875,14 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/debates\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"Our complete debate database.\" >\n";
+					echo "<meta name=\"twitter:site_name\" content=\"OneEurope\" >\n\n";
+					break;	
+				case 'display_videos':
+					echo "\n<meta name=\"twitter:title\" content=\"All Videos\" >\n";
+					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/videos\" >\n";
+					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"Our complete video database.\" >\n";
 					echo "<meta name=\"twitter:site_name\" content=\"OneEurope\" >\n\n";
 					break;	
 				case 'display_profile':

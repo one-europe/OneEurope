@@ -30,7 +30,7 @@
 		
 		<link rel="stylesheet" media="screen" type="text/css" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?<?php echo date_timestamp_get(date_create()); ?>" />
 				
-		<?php echo $theme->header(); ?>		
+		<?php echo $theme->header(); ?>
 		
 		<script src="<?php Site::out_url( 'theme' ); ?>/js/libs/modernizr-2.5.3.min.js"></script>
 

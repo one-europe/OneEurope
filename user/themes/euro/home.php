@@ -1,6 +1,5 @@
 <?php echo $theme->display('header'); ?>
 
-
 			<div class="featured-content">
 
 				<div class="featured-content-slider">
@@ -59,20 +58,17 @@
 
 					<div style="video-item">
 						<?php
+							// echo '<pre>'; print_r($home_page_video); echo '</pre>'; exit;
 							$video = $home_page_video[0];
 							preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($video->content, '<iframe>'), $matches);
 							$iframe = preg_replace(
 								['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
-								['width="305"', 'height="210"', 'src="${1}?modestbranding=1&rel=0&showinfo=0&controls=0"'],
+								['width="305"', 'height="187"', 'src="${1}?modestbranding=1&rel=0&showinfo=0&controls=0"'],
 								$matches[0]
 							);
-							echo $iframe . '<p>' . $video->title . '</p>';
+							echo $iframe . '<p><a href="' . $video->permalink . '" title="' . $video->title . '">' . $video->title . '</a></p>';
 						?>
-						<!--
-						<iframe src="//www.youtube.com/embed/ugqGueQ9Ud8" width="305" height="210" frameborder="0" allowfullscreen></iframe>
-						<p>We've come a long way...</p>
-						<a href="#">View more videos ›</a>
-						-->
+						<a href="videos" class="all" title="View more videos">View more videos ›</a>
 					</div>
 					
 					<?php /* div class="boxtitle"><span class="inits">Welcome to OneEurope!</span></div>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>PlugVideos (exact copy of briefs)</name>
+	<author>Dimi</author>
+	<description><![CDATA[Adds the 'video' content type which looks for a video.single.php and video.multiple.php.
+		Creates a kind of 9gag-like content section that is reachable via /video. Marvel at its awesomeness.]]></description>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<version>1.0</version>
+</pluggable>
