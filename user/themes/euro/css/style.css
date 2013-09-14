@@ -1592,7 +1592,10 @@ div#profiles .item:nth-of-type(8n+0) {
 
 /*** VIDEOS ***/
 
-.videos h2 { color: #333; font-size: 26px; line-height: 26px; }
+.video-item		{ padding-bottom: 20px; width: 627px; float: left; }
+.video-item img	{ box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); float: left; margin-right: 20px; }
+.video-item h2	{ color: #333; font-size: 26px; line-height: 26px; }
+
 
 /*** END VIDEOS ***/
 
