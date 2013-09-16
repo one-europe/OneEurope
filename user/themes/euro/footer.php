@@ -112,14 +112,6 @@
 	<?php } ?>
 
 
-
-	<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="<?php Site::out_url( 'theme' ); ?>/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-	
-	<!-- Grab Google Maps widget js -->
-	<!--<script src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
-
 	<!-- scripts concatenated and minified via build script -->
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?<?php echo date_timestamp_get(date_create()); ?>"></script>
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?<?php echo date_timestamp_get(date_create()); ?>"></script>		
