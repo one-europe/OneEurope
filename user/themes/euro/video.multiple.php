@@ -3,7 +3,7 @@
 	<?php foreach ( $videos as $post ) { ?>
 	<div class="video-item">
 		<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>">
-			<img class="img" src="<?php Site::out_url( 'theme' ); ?>/img/video-icon.png" height="100" width="160"/>
+			<img class="img" src="<?php echo $post->info->photourl ? $post->info->photourl : Site::out_url( 'theme' ) . '/img/video-icon.png'; ?>" height="100" width="160"/>
 		</a>
 		<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
 	</div>
