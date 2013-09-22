@@ -22,9 +22,13 @@ class EuroTheme extends Theme
 	Format::apply_with_hook_params( 'more', 'post_content_out', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
 	Format::apply_with_hook_params( 'more', 'post_content_feed', '<span class="more-out">› more</span>', 1000, 5 ); // short excerpt
 
-	Format::apply_with_hook_params( 'more', 'post_content_30', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
-	Format::apply_with_hook_params( 'more', 'post_content_50', '<span class="more-out">› more</span>', 50, 1 ); // short excerpt
-	Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-out">› more</span>', 70, 1 ); // short excerpt
+	Format::apply( 'summarize', 'post_content_fulltext', 10000, 100 );
+	Format::apply_with_hook_params( 'more', 'post_content_videotext', '<span class="more-out">› more</span>', 1000, 2 ); // short excerpt
+
+	// Format::apply_with_hook_params( 'more', 'post_content_30', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
+	// Format::apply_with_hook_params( 'more', 'post_content_50', '<span class="more-out">› more</span>', 50, 1 ); // short excerpt
+	// used in briefs.multitple.php - not working
+	// Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-out">› more</span>', 70, 1 ); // short excerpt
 
 
 	}

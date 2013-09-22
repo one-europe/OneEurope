@@ -43,16 +43,7 @@
 					<span class="article-tags"><span class="label"><?php if ($post->tags_out) { ?> | archived in:  <?php } ?>&nbsp;</span><?php echo $post->tags_out; ?> </span>
 					<div class="clearfix"></div>
 				</section>
-				<section class="body">
-					<figure>
-						<a href="<?php echo $post->info->photourl; ?>" title="view image in new tab" target="_blank"><img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photocaption; ?>" /></a>
-						<figcaption>
-							<span class="license"><?php echo $post->info->photolicense; ?></span>
-							<?php echo $post->info->photoinfo; ?>
-						</figcaption>
-					</figure>
-					<?php echo $post->content_out; ?>
-				</section>
+				<section class="body"><?php echo $post->content_out; ?></section>
 				<footer>
 					<?php if ( $post->author->info->userfield_Description || $post->info->origauthor ) { 
 						if ( $post->info->showauthor == 1 ) { ?>

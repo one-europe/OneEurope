@@ -34,127 +34,20 @@ if (!window.console) console = { log: function () { } };
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
 
 
-// ===== ajaxform ===== //
-		
-var messageDelay = 5000;  // How long to display status messages (in milliseconds)
 
-// Init the form once the document is ready
-$( init );
-
-
-// Initialize the form
-
-function init() {
-
-  // Hide the form initially.
-  // Make submitForm() the formâ€™s submit handler.
-  // Position the form so it sits in the centre of the browser window.
-  $('#contactForm').submit( submitForm ).addClass( 'positioned' );
-
-  // When the "Send us an email" link is clicked:
-  // 1. Fade the content out
-  // 2. Display the form
-  // 3. Move focus to the first field
-  // 4. Prevent the link being followed
-
-  $('a[href="#contactForm"]').click( function() {
-    $('#content').fadeTo( 'slow', .2 );
-    $('#contactForm').fadeIn( 'slow', function() {
-      $('#senderName').focus();
-    } )
-
-    return false;
-  } );
-/*	
-  // When the "Cancel" button is clicked, close the form
-  $('#cancel').click( function() { 
-    $('#contactForm').fadeOut();
-    $('#content').fadeTo( 'slow', 1 );
-  } );  
-
-  // When the "Escape" key is pressed, close the form
-  $('#contactForm').keydown( function( event ) {
-    if ( event.which == 27 ) {
-      $('#contactForm').fadeOut();
-      $('#content').fadeTo( 'slow', 1 );
-    }
-  } );*/
-
-}
-
-
-// Submit the form via Ajax
-
-function submitForm() {
-  var contactForm = $(this);
-
-  // Are all the fields filled in?
-
-  if ( !$('#senderName').val() || !$('#senderEmail').val() || !$('#message').val() ) {
-
-    // No; display a warning message and return to the form
-    $('#incompleteMessage').slideDown().delay(messageDelay).slideUp();
-
-  } else {
-
-    // Yes; submit the form to the PHP script via Ajax
-
-    $('#sendingMessage').slideDown();
-
-    $.ajax( {
-      url: contactForm.attr( 'action' ) + "?ajax=true",
-      type: contactForm.attr( 'method' ),
-      data: contactForm.serialize(),
-      success: submitFinished
-    } );
-  }
-
-  // Prevent the default form submission occurring
-  return false;
-}
-
-// Handle the Ajax response
-
-function submitFinished( response ) {
-  response = $.trim( response );
-  $('#sendingMessage').slideUp();
-
-  if ( response == "success" ) {
-
-    // Form submitted successfully:
-    // 1. Display the success message
-    // 2. Clear the form fields
-    // 3. Fade the content back in
-
-    $('#successMessage').slideDown().delay(messageDelay).slideUp();
-    $('#senderName').val( "" );
-    $('#senderEmail').val( "" );
-    $('#message').val( "" );
-
-    $('#content').delay(messageDelay+500).fadeTo( 'slow', 1 );
-
-  } else {
-
-    // Form submission failed: Display the failure message,
-    // then redisplay the form
-    $('#failureMessage').slideDown().delay(messageDelay).slideUp();
-    $('#contactForm').delay(messageDelay+500).fadeIn();
-  }
-}
-// ===== end ajaxform ==== //
 
 
 
 
 // ===== flattr code, not in use atm
 /* <![CDATA[ */ 
-    (function() {
-        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-        t.parentNode.insertBefore(s, t);
-    })();
+(function() {
+	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+	s.type = 'text/javascript';
+	s.async = true;
+	s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+	t.parentNode.insertBefore(s, t);
+})();
 /* ]]> */
 
 
@@ -175,92 +68,6 @@ function submitFinished( response ) {
  */
 (function(a,b){$window=a(b),a.fn.lazyload=function(c){function f(){var b=0;d.each(function(){var c=a(this);if(e.skip_invisible&&!c.is(":visible"))return;if(!a.abovethetop(this,e)&&!a.leftofbegin(this,e))if(!a.belowthefold(this,e)&&!a.rightoffold(this,e))c.trigger("appear");else if(++b>e.failure_limit)return!1})}var d=this,e={threshold:0,failure_limit:0,event:"scroll",effect:"show",container:b,data_attribute:"original",skip_invisible:!0,appear:null,load:null};return c&&(undefined!==c.failurelimit&&(c.failure_limit=c.failurelimit,delete c.failurelimit),undefined!==c.effectspeed&&(c.effect_speed=c.effectspeed,delete c.effectspeed),a.extend(e,c)),$container=e.container===undefined||e.container===b?$window:a(e.container),0===e.event.indexOf("scroll")&&$container.bind(e.event,function(a){return f()}),this.each(function(){var b=this,c=a(b);b.loaded=!1,c.one("appear",function(){if(!this.loaded){if(e.appear){var f=d.length;e.appear.call(b,f,e)}a("<img />").bind("load",function(){c.hide().attr("src",c.data(e.data_attribute))[e.effect](e.effect_speed),b.loaded=!0;var f=a.grep(d,function(a){return!a.loaded});d=a(f);if(e.load){var g=d.length;e.load.call(b,g,e)}}).attr("src",c.data(e.data_attribute))}}),0!==e.event.indexOf("scroll")&&c.bind(e.event,function(a){b.loaded||c.trigger("appear")})}),$window.bind("resize",function(a){f()}),f(),this},a.belowthefold=function(c,d){var e;return d.container===undefined||d.container===b?e=$window.height()+$window.scrollTop():e=$container.offset().top+$container.height(),e<=a(c).offset().top-d.threshold},a.rightoffold=function(c,d){var e;return d.container===undefined||d.container===b?e=$window.width()+$window.scrollLeft():e=$container.offset().left+$container.width(),e<=a(c).offset().left-d.threshold},a.abovethetop=function(c,d){var e;return d.container===undefined||d.container===b?e=$window.scrollTop():e=$container.offset().top,e>=a(c).offset().top+d.threshold+a(c).height()},a.leftofbegin=function(c,d){var e;return d.container===undefined||d.container===b?e=$window.scrollLeft():e=$container.offset().left,e>=a(c).offset().left+d.threshold+a(c).width()},a.inviewport=function(b,c){return!a.rightofscreen(b,c)&&!a.leftofscreen(b,c)&&!a.belowthefold(b,c)&&!a.abovethetop(b,c)},a.extend(a.expr[":"],{"below-the-fold":function(c){return a.belowthefold(c,{threshold:0,container:b})},"above-the-top":function(c){return!a.belowthefold(c,{threshold:0,container:b})},"right-of-screen":function(c){return a.rightoffold(c,{threshold:0,container:b})},"left-of-screen":function(c){return!a.rightoffold(c,{threshold:0,container:b})},"in-viewport":function(c){return!a.inviewport(c,{threshold:0,container:b})},"above-the-fold":function(c){return!a.belowthefold(c,{threshold:0,container:b})},"right-of-fold":function(c){return a.rightoffold(c,{threshold:0,container:b})},"left-of-fold":function(c){return!a.rightoffold(c,{threshold:0,container:b})}})})(jQuery,window)
 // ===== end lazyload plugin ===== //
-
-
-// ===== google maps /contact script ===== //
-function initmap() {
-	var myLatlng = new google.maps.LatLng(50.83870, 4.37284),
-		myOptions = {
-			zoom: 17,
-			center: myLatlng,
-			scrollwheel: false,
-			zoomControl: true,
-			mapTypeControl: true,
-			scaleControl: true,
-			streetViewControl: true,
-			overviewMapControl: true,
-			mapTypeId: google.maps.MapTypeId.HYBRID
-		},
-		mapCanvas = document.getElementById("map_canvas"),
-		map, marker;
-
-	if (mapCanvas) {
-		map = new google.maps.Map(mapCanvas, myOptions),
-		marker = new google.maps.Marker({
-			position: myLatlng, 
-			map: map, 
-			title: 'OneEurope, Place du Luxembourg 6, 1050 Bruxelles, Belgium'
-		});
-	}
-}
-
-function loadScript() {
-  var script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src = "http://maps.google.com/maps/api/js?sensor=false&callback=initmap";
-  document.body.appendChild(script);
-}
-
-window.onload = loadScript;
-
-// ===== end google maps /contact script ===== //
-
-
-
-
-
-
-
-
-
-// ===== socialshareprivacy plugin 
-
-/*
- * jquery.socialshareprivacy.js | 2 Klicks fuer mehr Datenschutz
- *
- * http://www.heise.de/extras/socialshareprivacy/
- * http://www.heise.de/ct/artikel/2-Klicks-fuer-mehr-Datenschutz-1333879.html
- *
- * Copyright (c) 2011 Hilko Holweg, Sebastian Hilbig, Nicolas Heiringhoff, Juergen Schmidt,
- * Heise Zeitschriften Verlag GmbH & Co. KG, http://www.heise.de
- *
- * is released under the MIT License http://www.opensource.org/licenses/mit-license.php
- *
- * Spread the word, link to us if you can.
- */
-(function(b){function z(b,a){var f=decodeURIComponent(b);if(f.length<=a)return b;var j=f.substring(0,a-1).lastIndexOf(" ");return f=encodeURIComponent(f.substring(0,j))+"\u2026"}function r(d){return b('meta[name="'+d+'"]').attr("content")||""}function t(){var d=r("DC.title"),a=r("DC.creator");d.length>0&&a.length>0?d+=" - "+a:d=b("title").text();return encodeURIComponent(d)}function u(){var d=document.location.href,a=b("link[rel=canonical]").attr("href");a&&a.length>0&&(a.indexOf("http")<0&&(a=document.location.protocol+
-"//"+document.location.host+a),d=a);return d}b.fn.socialSharePrivacy=function(d){var a=b.extend(!0,{services:{facebook:{status:"on",app_id:"__FB_APP-ID__",dummy_img:"socialshareprivacy/images/dummy_facebook.png",txt_info:"2 Klicks f&uuml;r mehr Datenschutz: Erst wenn Sie hier klicken, wird der Button aktiv und Sie k&ouml;nnen Ihre Empfehlung an Facebook senden. Schon beim Aktivieren werden Daten an Dritte &uuml;bertragen &ndash; siehe <em>i</em>.",txt_fb_off:"nicht mit Facebook verbunden",txt_fb_on:"mit Facebook verbunden",
-perma_option:"on",display_name:"Facebook",referrer_track:"",language:"de_DE",action:"recommend"},twitter:{status:"on",dummy_img:"socialshareprivacy/images/dummy_twitter.png",txt_info:"2 Klicks f&uuml;r mehr Datenschutz: Erst wenn Sie hier klicken, wird der Button aktiv und Sie k&ouml;nnen Ihre Empfehlung an Twitter senden. Schon beim Aktivieren werden Daten an Dritte &uuml;bertragen &ndash; siehe <em>i</em>.",txt_twitter_off:"nicht mit Twitter verbunden",txt_twitter_on:"mit Twitter verbunden",perma_option:"on",
-display_name:"Twitter",referrer_track:"",tweet_text:t,language:"en"},gplus:{status:"on",dummy_img:"socialshareprivacy/images/dummy_gplus.png",txt_info:"2 Klicks f&uuml;r mehr Datenschutz: Erst wenn Sie hier klicken, wird der Button aktiv und Sie k&ouml;nnen Ihre Empfehlung an Google+ senden. Schon beim Aktivieren werden Daten an Dritte &uuml;bertragen &ndash; siehe <em>i</em>.",txt_gplus_off:"nicht mit Google+ verbunden",txt_gplus_on:"mit Google+ verbunden",perma_option:"on",display_name:"Google+",
-referrer_track:"",language:"de"}},info_link:"http://www.heise.de/ct/artikel/2-Klicks-fuer-mehr-Datenschutz-1333879.html",txt_help:"Wenn Sie diese Felder durch einen Klick aktivieren, werden Informationen an Facebook, Twitter oder Google in die USA &uuml;bertragen und unter Umst&auml;nden auch dort gespeichert. N&auml;heres erfahren Sie durch einen Klick auf das <em>i</em>.",settings_perma:"Dauerhaft aktivieren und Daten&uuml;ber&shy;tragung zustimmen:",cookie_path:"/",cookie_domain:document.location.host,
-cookie_expires:"365",css_path:"socialshareprivacy/socialshareprivacy.css",uri:u},d),f=a.services.facebook.status==="on"&&a.services.facebook.app_id!=="__FB_APP-ID__",j=a.services.twitter.status==="on",o=a.services.gplus.status==="on";if(f||j||o){a.css_path.length>0&&b("head").append('<link rel="stylesheet" type="text/css" href="'+a.css_path+'" />');b(this).prepend('<ul class="social_share_privacy_area"></ul>');var c=b(".social_share_privacy_area",this),k=a.uri;typeof k==="function"&&(k=k());return this.each(function(){if(a.services.facebook.status===
-"on")if(a.services.facebook.app_id==="__FB_APP-ID__")try{console.log("Fehler: Es ist keine Facebook App-ID hinterlegt.")}catch(d){}else{var e=encodeURIComponent(k+a.services.facebook.referrer_track),r='<iframe src="http://www.facebook.com/plugins/like.php?locale='+a.services.facebook.language+"&amp;app_id="+a.services.facebook.app_id+"&amp;href="+e+"&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action="+a.services.facebook.action+'&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:145px; height:21px;" allowTransparency="true"></iframe>',
-v='<img src="'+a.services.facebook.dummy_img+'" alt="Facebook &quot;Like&quot;-Dummy" class="fb_like_privacy_dummy" />';c.append('<li class="facebook help_info"><span class="info">'+a.services.facebook.txt_info+'</span><span class="switch off">'+a.services.facebook.txt_fb_off+'</span><div class="fb_like dummy_btn">'+v+"</div></li>");var l=b("li.facebook",c);b("li.facebook div.fb_like img.fb_like_privacy_dummy,li.facebook span.switch",c).live("click",function(){l.find("span.switch").hasClass("off")?
-(l.addClass("info_off"),l.find("span.switch").addClass("on").removeClass("off").html(a.services.facebook.txt_fb_on),l.find("img.fb_like_privacy_dummy").replaceWith(r)):(l.removeClass("info_off"),l.find("span.switch").addClass("off").removeClass("on").html(a.services.facebook.txt_fb_off),l.find(".fb_like").html(v))})}if(j){e=a.services.twitter.tweet_text;typeof e==="function"&&(e=e());var e=z(e,"120"),p=encodeURIComponent(k+a.services.twitter.referrer_track),q=encodeURIComponent(k),t='<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url='+
-p+"&amp;counturl="+q+"&amp;text="+e+"&amp;count=horizontal&amp;lang="+a.services.twitter.language+'" style="width:130px; height:25px;"></iframe>',w='<img src="'+a.services.twitter.dummy_img+'" alt="&quot;Tweet this&quot;-Dummy" class="tweet_this_dummy" />';c.append('<li class="twitter help_info"><span class="info">'+a.services.twitter.txt_info+'</span><span class="switch off">'+a.services.twitter.txt_twitter_off+'</span><div class="tweet dummy_btn">'+w+"</div></li>");var m=b("li.twitter",c);b("li.twitter div.tweet img,li.twitter span.switch",
-c).live("click",function(){m.find("span.switch").hasClass("off")?(m.addClass("info_off"),m.find("span.switch").addClass("on").removeClass("off").html(a.services.twitter.txt_twitter_on),m.find("img.tweet_this_dummy").replaceWith(t)):(m.removeClass("info_off"),m.find("span.switch").addClass("off").removeClass("on").html(a.services.twitter.txt_twitter_off),m.find(".tweet").html(w))})}if(o){var u='<div class="g-plusone" data-size="medium" data-href="'+(k+a.services.gplus.referrer_track)+'"></div><script type="text/javascript">window.___gcfg = {lang: "'+
-a.services.gplus.language+'"}; (function() { var po = document.createElement("script"); po.type = "text/javascript"; po.async = true; po.src = "https://apis.google.com/js/plusone.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s); })(); <\/script>',x='<img src="'+a.services.gplus.dummy_img+'" alt="&quot;Google+1&quot;-Dummy" class="gplus_one_dummy" />';c.append('<li class="gplus help_info"><span class="info">'+a.services.gplus.txt_info+'</span><span class="switch off">'+
-a.services.gplus.txt_gplus_off+'</span><div class="gplusone dummy_btn">'+x+"</div></li>");var n=b("li.gplus",c);b("li.gplus div.gplusone img,li.gplus span.switch",c).live("click",function(){n.find("span.switch").hasClass("off")?(n.addClass("info_off"),n.find("span.switch").addClass("on").removeClass("off").html(a.services.gplus.txt_gplus_on),n.find("img.gplus_one_dummy").replaceWith(u)):(n.removeClass("info_off"),n.find("span.switch").addClass("off").removeClass("on").html(a.services.gplus.txt_gplus_off),
-n.find(".gplusone").html(x))})}c.append('<li class="settings_info"><div class="settings_info_menu off perma_option_off"><a href="'+a.info_link+'"><span class="help_info icon"><span class="info">'+a.txt_help+"</span></span></a></div></li>");b(".help_info:not(.info_off)",c).live("mouseenter",function(){var a=b(this),c=window.setTimeout(function(){b(a).addClass("display")},500);b(this).data("timeout_id",c)});b(".help_info",c).live("mouseleave",function(){var a=b(this).data("timeout_id");window.clearTimeout(a);
-b(this).hasClass("display")&&b(this).removeClass("display")});e=a.services.facebook.perma_option==="on";p=a.services.twitter.perma_option==="on";q=a.services.gplus.perma_option==="on";if((f&&e||j&&p||o&&q)&&(!b.browser.msie||b.browser.msie&&b.browser.version>7)){for(var i=document.cookie.split(";"),h="{",s=0;s<i.length;s+=1){var y=i[s].split("=");h+='"'+b.trim(y[0])+'":"'+b.trim(y[1])+'"';s<i.length-1&&(h+=",")}h+="}";var h=JSON.parse(h),g=b("li.settings_info",c);g.find(".settings_info_menu").removeClass("perma_option_off");
-g.find(".settings_info_menu").append('<span class="settings">Einstellungen</span><form><fieldset><legend>'+a.settings_perma+"</legend></fieldset></form>");f&&e&&(i=h.socialSharePrivacy_facebook==="perma_on"?' checked="checked"':"",g.find("form fieldset").append('<input type="checkbox" name="perma_status_facebook" id="perma_status_facebook"'+i+' /><label for="perma_status_facebook">'+a.services.facebook.display_name+"</label>"));j&&p&&(i=h.socialSharePrivacy_twitter==="perma_on"?' checked="checked"':
-"",g.find("form fieldset").append('<input type="checkbox" name="perma_status_twitter" id="perma_status_twitter"'+i+' /><label for="perma_status_twitter">'+a.services.twitter.display_name+"</label>"));o&&q&&(i=h.socialSharePrivacy_gplus==="perma_on"?' checked="checked"':"",g.find("form fieldset").append('<input type="checkbox" name="perma_status_gplus" id="perma_status_gplus"'+i+' /><label for="perma_status_gplus">'+a.services.gplus.display_name+"</label>"));g.find("span.settings").css("cursor","pointer");
-b(g.find("span.settings"),c).live("mouseenter",function(){var a=window.setTimeout(function(){g.find(".settings_info_menu").removeClass("off").addClass("on")},500);b(this).data("timeout_id",a)});b(g,c).live("mouseleave",function(){var a=b(this).data("timeout_id");window.clearTimeout(a);g.find(".settings_info_menu").removeClass("on").addClass("off")});b(g.find("fieldset input")).live("click",function(d){var e=d.target.id,h="socialSharePrivacy_"+e.substr(e.lastIndexOf("_")+1,e.length);if(b("#"+d.target.id+
-":checked").length){var d=a.cookie_expires,g=a.cookie_path,f=a.cookie_domain,i=new Date;i.setTime(i.getTime()+d*864E5);document.cookie=h+"=perma_on; expires="+i.toUTCString()+"; path="+g+"; domain="+f;b("form fieldset label[for="+e+"]",c).addClass("checked")}else d=a.cookie_path,g=a.cookie_domain,f=new Date,f.setTime(f.getTime()-100),document.cookie=h+"=perma_on; expires="+f.toUTCString()+"; path="+d+"; domain="+g,b("form fieldset label[for="+e+"]",c).removeClass("checked")});f&&e&&h.socialSharePrivacy_facebook===
-"perma_on"&&b("li.facebook span.switch",c).click();j&&p&&h.socialSharePrivacy_twitter==="perma_on"&&b("li.twitter span.switch",c).click();o&&q&&h.socialSharePrivacy_gplus==="perma_on"&&b("li.gplus span.switch",c).click()}})}}})(jQuery);
-		
-// ===== end socialshareprivacy plugin ===== //
-
 
 
 // ===== begin superfish jquery plugin

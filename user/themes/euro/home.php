@@ -58,9 +58,8 @@
 
 					<div style="video-item">
 						<?php
-							// echo '<pre>'; print_r($home_page_video); echo '</pre>'; exit;
 							$video = $home_page_video[0];
-							preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($video->content, '<iframe>'), $matches);
+							preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($video->content_fulltext, '<iframe>'), $matches);
 							$iframe = preg_replace(
 								['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
 								['width="305"', 'height="187"', 'src="${1}?modestbranding=1&rel=0&showinfo=0&controls=0"'],
