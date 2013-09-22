@@ -764,7 +764,7 @@ li.menu_4 .col3 {
 /** SUBNAV **/
 
 #subnav {
-	height: 20px;
+	overflow: hidden;
 	padding: 5px 0;
 	border-top: 1px solid #ccc;
 }
