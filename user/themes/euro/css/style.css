@@ -2372,8 +2372,7 @@ aside.disqus h3, .similar-posts h3 {
 
 .video-block		{ width: 305px; height: 247px; background: #eee; }
 .video-block p		{ padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
-.video-block a		{ margin:0 5px; }
-.video-block a.all	{ display: block; float: right; }
+.video-block a.all	{ display: block; float: right; margin-right: 5px; }
 
 .vote2014-banner { width: 296px; height: 119px; display: block; background: url('../img/ep-vote-2014-bg.png') no-repeat; }
 

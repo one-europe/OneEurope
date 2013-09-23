@@ -14,19 +14,19 @@
 						<span>scheduled</span>
 					</div>
 				<?php } ?>
-				<article style="padding: 16px 0 11px 10px; width: 390px;">
+				<article style="padding: 16px 0 11px 10px; width: 380px;">
 					<!-- <a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img class="img" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a> -->
 					<?php
 						preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($post->content_fulltext, '<iframe>'), $matches);
 						$iframe = preg_replace(
 							['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
-							['width="390"', 'height="239"', 'src="${1}?modestbranding=1&rel=0&showinfo=0"'],
+							['width="380"', 'height="233"', 'src="${1}?modestbranding=1&rel=0&showinfo=0"'],
 							$matches[0]
 						);
 						echo $iframe;
 					?>
 				</article>
-				<aside>
+				<aside style="width: 210px">
 					<h3><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h3>
 					<?php echo strip_tags($post->content_videotext, '<p><span>'); ?>
 					<a class="entry-comments" href="<?php echo $post->url ?>#disqus_thread" data-disqus-identifier="<?php echo $page ?> <?php echo $post->permalink; ?>">Comments</a>

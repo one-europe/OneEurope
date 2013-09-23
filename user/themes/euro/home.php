@@ -56,13 +56,13 @@
 
 				<div class="featured-content-boxes video-block">
 
-					<div style="video-item">
+					<div>
 						<?php
 							$video = $home_page_video[0];
 							preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($video->content_fulltext, '<iframe>'), $matches);
 							$iframe = preg_replace(
 								['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
-								['width="305"', 'height="187"', 'src="${1}?modestbranding=1&rel=0&showinfo=0&controls=0"'],
+								['width="305"', 'height="172"', 'src="${1}?modestbranding=1&rel=0&showinfo=0&controls=0"'],
 								$matches[0]
 							);
 							echo $iframe . '<p><a href="' . $video->permalink . '" title="' . $video->title . '">' . $video->title . '</a></p>';
