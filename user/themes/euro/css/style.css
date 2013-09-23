@@ -269,6 +269,9 @@ h3 {
 	font-size: 1.4em;
 	margin: 0;
 }
+
+iframe { border: 0; }
+
 .sidenote {
 	font-size: 0.7em;
 	display: inline-block;
@@ -446,6 +449,8 @@ body {
 #main {
 	/*lalala*/
 }
+
+.btn { padding: 3px 10px; }
 
 /** ## SOCIAL BUTTONS ## **/
 

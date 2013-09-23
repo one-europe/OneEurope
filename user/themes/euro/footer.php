@@ -26,7 +26,7 @@
 					
 					</div>
 			
-					<!-- <div class="element ">
+					<?php /* <div class="element ">
 									
 						<div class="license">
 							<h3>Get Involved!</h3>
@@ -38,7 +38,7 @@
 							</p>
 						</div>
 					
-					</div> -->
+					</div> */ ?>
 			
 					<div class="element partners">
 						<h3>Partners</h3>
@@ -58,7 +58,7 @@
 							    <input id="senderName" placeholder="Name" name="senderName" required="required" type="text" />
 							    <input id="senderEmail" placeholder="Email" name="senderEmail" required="required" type="email" />
 							    <textarea id="message" name="message" required="required"></textarea>
-							    <input id="sendMessage" type="submit" name="sendMessage" value="Send message" />
+							    <input id="sendMessage" type="submit" name="sendMessage" value="Send message" class="btn" />
 								<div class="clear"></div>
 							</div>
 
@@ -68,7 +68,6 @@
 					<div class="clear">&nbsp;</div>
 					
 					<div style="margin: 0 auto; text-align: center"><p>Contact: info@one-europe.info | OneEurope, Place du Luxembourg 6, 1050 Bruxelles, Belgium<br/><br/></p></div>
-					
 					
 				</div>
 									

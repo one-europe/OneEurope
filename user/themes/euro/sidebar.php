@@ -34,7 +34,7 @@
 	
 	<?php echo $theme->display ('sidebar.elem.debates'); ?>
 	
-	<?php echo $theme->display ('sidebar.elem.feedback'); ?>
+	<?php /*echo $theme->display ('sidebar.elem.feedback');*/ ?>
 
 	<?php echo $theme->display ('sidebar.elem.profilepool'); ?>
 
