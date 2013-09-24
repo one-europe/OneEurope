@@ -19,23 +19,6 @@ jQuery.migrateMute===void 0&&(jQuery.migrateMute=!0),function(e,t,n){function r(
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
 
 
-
-
-
-
-
-// ===== flattr code, not in use atm
-/* <![CDATA[ */ 
-(function() {
-	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-	s.type = 'text/javascript';
-	s.async = true;
-	s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-	t.parentNode.insertBefore(s, t);
-})();
-/* ]]> */
-
-
 // ===== lazyload plugin
 /*
  * Lazy Load - jQuery plugin for lazy loading images

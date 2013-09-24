@@ -768,25 +768,11 @@ li.menu_4 .col3 {
 
 /** SUBNAV **/
 
-#subnav {
-	overflow: hidden;
-	padding: 5px 0;
-	border-top: 1px solid #ccc;
-}
-#subnav ul {
-	list-style: none outside none;
-	padding: 0;
-	margin: 0;
-}
-#subnav ul li {
-	margin: 0 5px 0 0;
-	padding: 0 5px 0 0;
-	border-right: 1px solid #ccc;
-	float: left;
-}
-#subnav li.static {
-	border: none;
-}
+#subnav { overflow: hidden; padding: 5px 0; border-top: 1px solid #ccc; }
+#subnav .debates { float: left; font-weight: bold; }
+#subnav ul { list-style: none outside none; padding: 0; margin: 0; width: 885px; float: right; }
+#subnav ul li { margin: 0 5px 0 0; padding: 0 5px 0 0; border-right: 1px solid #ccc; float: left; }
+#subnav li:last-child { border: none; }
 
 /** END SUBNAV **/
 
@@ -1612,6 +1598,7 @@ ul.nibble-list {
 	padding: 0;
 }
 .nibble {
+	overflow: hidden;
 	margin-bottom: 15px;
 	-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3);
 	   -moz-box-shadow: 0 0 4px rgba(0,0,0,.3);
