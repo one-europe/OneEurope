@@ -448,12 +448,14 @@ class MetaSeo extends Plugin
 			$rule = $matched_rule->name;
 			switch( $rule) {
   				case 'display_article':	
+  				case 'display_video':
   				case 'display_brief':
   				case 'display_initiative':
   				case 'display_profile':
   				case 'display_debate':
   				case 'display_entry':
   				case 'display_page':
+  				case 'display_post':
 					if( Options::get( 'MetaSEO__posts_index' ) ) {
 						$robots = 'index';
 					}
@@ -604,6 +606,7 @@ class MetaSeo extends Plugin
 					$out .= ' - ' . Options::get( 'title' );
 					break;
 				case 'display_article':	
+				case 'display_video':
 				case 'display_brief':
 				case 'display_initiative':
 				case 'display_profile':

@@ -57,6 +57,8 @@ class EuroTheme extends Theme
 		
 		$this->assign('show_author', true ); //Display author in posts
 
+		$this->assign('home_page', $this->matched_rule->name == 'display_home' );	// home page is displayed
+
 		$this->assign('recent_posts', Posts::get( array( 'content_type' => array( 'article' ), 'limit'=>8, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); //Display the 8 most recent posts	
 
 		/*if( !$this->template_engine->assigned( 'any' ) ) {

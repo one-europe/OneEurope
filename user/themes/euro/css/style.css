@@ -428,10 +428,11 @@ body {
 #logo {
 	float: left;
 	height: 109px;
-	x-margin-left: -10px;
 	width: 326px;
 	margin: 15px 0 26px 5px;
+	text-indent: -1000px;
 	background: url('../img/logo-normal.png') -10px 0 no-repeat;
+	outline: none;
 }
 #headerbadge {
 	float: left; 
@@ -663,14 +664,8 @@ ul.cats li a {
 	display: block;
 	padding: 3px 0;
 }
-.subnav .all {
-	text-align: right;
-	font-size: 12px;
-	margin-bottom: -15px;
-	padding-top: 5px;
-	margin-bottom: -10px;
-	width: 100%;
-}
+.subnav .all { text-align: right; font-size: 12px; padding-top: 5px; margin-bottom: -10px; width: 100%; }
+.subnav-header { display: block; font-size: 1.4em; margin: 0; color: #333; font-family: Georgia; padding: 0; }
 
 /** menu_2 **/
 

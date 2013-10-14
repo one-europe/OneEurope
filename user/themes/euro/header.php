@@ -58,7 +58,7 @@
 			
 				<?php /** useful, but out of use <a id="headerbadge" href="<?php Site::out_url( 'habari' ); ?>/europeday"><img src="<?php Site::out_url( 'theme' ); ?>/img/static/badge.png" width="100" height="100" alt="Celebrate Europe Day with a profile banner in your language!" /></a> */ ?>
 
-				<a id="logo" href="<?php Site::out_url( 'habari' ); ?>" title="OneEurope - One Society, One Democracy, One Europe"></a>
+				<?php if ($home_page) echo '<h1>'; ?><a id="logo" href="<?php Site::out_url( 'habari' ); ?>" title="OneEurope — One Society, One Democracy, One Europe">OneEurope — One Society, One Democracy, One Europe</a><?php if ($home_page) echo '</h1>'; ?>
 					
 				<nav>
 					
@@ -68,7 +68,7 @@
 							<ul class="subnav">
 								<li class="col1">
 									<div>
-										<h3>Information.</h3>
+										<span class="subnav-header">Information</span>
 										<p>Here you can find a great variety of analyses and comments on both general and recent topics.</p>
 									</div>
 								</li>
@@ -77,15 +77,11 @@
 										<p>Trending Debates</p>
 										<ul class="cats">
 											<?php foreach ($menus as $post ) { ?>
-
 												<li>
 													<a class="sf-with-ul" href="<?php echo $post->permalink; ?>"><?php echo $post->title_out; ?></a>
 												</li>
-
 											<?php } ?>
-
 											<li class="all"><a href="<?php Site::out_url( 'habari' ); ?>/debates">› all debates</a></li>
-
 										</ul>
 									</div>
 								</li>
@@ -149,7 +145,7 @@
 							<ul class="subnav">
 								<li class="col1">
 									<div>
-										<h3>The Platform</h3>
+										<span class="subnav-header">The Platform</span>
 										<p>Find out more about this community driven platform, its purpose, the people who make it and what it aims for.</p>
 									</div>
 								</li>
