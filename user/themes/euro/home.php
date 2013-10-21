@@ -178,66 +178,18 @@
 
 			
 				<div class="tile-depth-1 list-1">
-				
 					<?php 
-					
-					
-					
-					$i = 0;
-					$j = 0;
-					$h = 0;
-					
-					/* 
-					in case this post is featured, hide it. 
-					do this by looking up how many articles are in the slideshow.
-					hide as many slideshow-systagged articles in the main loop.
-					*/
 					foreach ($posts as $post ) {
 						if ($post->content_type != 17) {
-						
-						$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $post->slug ) ));
-						$isbrief = is_object( Post::get( array( $post->typename => 'brief', 'slug' => $post->slug ) ) );
-
-						if ( $inslideshow == true && $i < $articlescount ) { 
-								$i++; $j++; /*?>
-								
-								<div class="list"><h1><?php echo $post->title . " is $i. of $articlescount featured.</br>";?></h1></div>
-								
-						<?php*/ } elseif ( $isbrief == true && $h <= 1 ) { $h++; // avoid duplicate display of the first two briefs in the sidebar
-							 /*?>
-
-								<div class="list"><h1><?php echo $post->title . " is $h. of 2 briefs.</br>";?></h1></div>
-
-
-						<?php*/ } else {
-							$j++;
 
 						?>						
-
 							<div class="list">
-
 								<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" height="100" width="160"/></a>
-
-								<header>
-							
-									<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
-
-
-								</header>
-
-								<article class="body">
-								<?php if ( $post->info->excerpt ) {
-								        echo $post->info->excerpt; } 
-									else {
-								        echo $post->content_out;
-								        }?>
-								</article>
-
+								<header><h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2></header>
+								<article class="body"><?php if ( $post->info->excerpt ) { echo $post->info->excerpt; } else { echo $post->content_out; }?></article>
 								<footer>
-						
 									<span class="entry-tags">
 								        <?php if ( $show_author && $post->typename == 'article' ) { ?>
-
 											<span class="entry-autor">
 												<?php if ( $post->info->origauthor ) { ?>
 													<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="Portrait"><span><?php echo $post->info->origauthor; ?></span></a>
@@ -253,33 +205,22 @@
 														<?php } ?>
 												<?php } ?>
 											</span>
-
 										<?php } ?>
-
 								        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
 									</span>
 	        						<a class="alignright entry-comments" href="<?php echo $post->permalink ?>#disqus_thread">Comments</a>
-
 								</footer>
-
 							</div>
-
-					<?php }
-						}}
-					?>
-					
+					<?php }} ?>
 				</div>
 		
 				<div class="pagination">
 					<?php echo $theme->prev_page_link( '&laquo;' . _t('Newer Posts') ); ?>
-					<?php echo $theme->page_selector ( null, array( 'leftSide' => 20, 'rightSide' => 20 ) ); ?>
+					<?php echo $theme->page_selector( null, array( 'leftSide' => 20, 'rightSide' => 20 ) ); ?>
 					<?php echo $theme->next_page_link( _t('&nbsp;Older Posts') . '&raquo;' ); ?>
 				</div>
 		
 			</div>
 
 <?php echo $theme->display ('sidebar'); ?>
-
-
 <?php echo $theme->display ('footer'); ?>
-

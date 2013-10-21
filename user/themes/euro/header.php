@@ -64,81 +64,13 @@
 					
 					<ul class="sf-menu">
 						<li class="menu_1">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/debates">Debate</a>
-							<ul class="subnav">
-								<li class="col1">
-									<div>
-										<span class="subnav-header">Information</span>
-										<p>Here you can find a great variety of analyses and comments on both general and recent topics.</p>
-									</div>
-								</li>
-								<li class="col2">
-									<div>
-										<p>Trending Debates</p>
-										<ul class="cats">
-											<?php foreach ($menus as $post ) { ?>
-												<li>
-													<a class="sf-with-ul" href="<?php echo $post->permalink; ?>"><?php echo $post->title_out; ?></a>
-												</li>
-											<?php } ?>
-											<li class="all"><a href="<?php Site::out_url( 'habari' ); ?>/debates">› all debates</a></li>
-										</ul>
-									</div>
-								</li>
-								<li class="col3">
-
-									<div>
-										<p>In the Headlines</p>
-										<ul class="cats">
-
-											<?php $inits = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published', 'limit' => 5 ) );
-											foreach ($inits as $init ) { ?>
-
-												<li>
-													<a class="sf-with-ul" href="<?php echo $init->permalink; ?>"><?php echo $init->title_out; ?></a>
-												</li>
-
-											<?php } ?>
-
-											<li class="all"><a href="<?php Site::out_url( 'habari' ); ?>/initiatives">› all initiatives</a></li>
-
-										</ul>
-
-									</div>
-
-									<?php /* 
-										$posts = Posts::get( array( 'content_type' => 'debate', 'status' => 'published', 'limit' => 1 /* attention: $i / ) );
-										foreach ($posts as $post ) { 
-
-											$id = $post->id;
-											$teasers = Posts::get( array( 'all:info' => array( 'debate' => $id ), 'limit' => 4 ) ); 
-											$i = 1;
-											foreach ( $teasers as $teaser ) { ?>
-
-												<?php if ($i == 1) { ?>
-														<article>
-															<header>
-																<h4><a href="<?php echo $teaser->permalink; ?>"><?php echo $teaser->title_out ?></a></h4>
-															</header>
-															<span class="excerpt"><?php if ( $teaser->info->excerpt ) { echo $teaser->info->excerpt;} else { echo $teaser->content_excerpt; } ?></span>
-															<span class="clear block"></span>
-														</article>
-												<?php $i++; } else { ?>
-												<a href="<?php echo $teaser->permalink; ?>">› <?php echo $teaser->title; ?></a><br/>
-												<?php $i++; } ?>
-
-											<?php } ?>
-
-										<?php } */ ?>
-
-								</li>
-							</ul>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/in-brief">The Big Picture</a>
 						</li>
 						<li class="menu_2">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/initiatives">Civic Action</a>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/initiatives">Initiatives</a>
 						</li>
 						<li class="menu_3">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/in-brief">The Big Picture</a>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/videos">Videos</a>
 						</li>
 						<li class="menu_4">
 							<a rel="section" class="sf-with-ul" href="#">About</a>
@@ -181,6 +113,7 @@
 				</nav>
 
 				<div class="sm-buttons">
+					<span>Find us on:</span>
 					<a href="https://facebook.com/OneEurope" class="icon-fb" title="Find us on Facebook" target="_blank"></a>
 					<a href="https://twitter.com/one1europe" class="icon-tw" title="Follow us on Twitter" target="_blank"></a>
 					<a href="https://plus.google.com/118353934830681553476/posts" class="icon-gp" title="Add us to your circles" target="_blank"></a>
@@ -189,7 +122,6 @@
 					<a href="http://www.linkedin.com/company/oneeurope" class="icon-in" title="Find us on LinkedIn" target="_blank"></a>
 					<a href="http://vk.com/oneeurope" class="icon-vk" title="Find us on VKontakte" target="_blank"></a>
 					<a href="/feeds" class="icon-rs" title="Subscribe via RSS"></a>
-					<!-- icon missing <a href="http://eepurl.com/pODn9" target="_new"><img height="25" width="25" src="<?php Site::out_url( 'theme' ); ?>/img/social/linkedin.png" title="Subscribe to our newsletter" alt=""/></a> -->
 				</div>
 										
 				<div class="clear"></div>
