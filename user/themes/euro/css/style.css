@@ -514,8 +514,7 @@ body {
 
 #head > nav > ul > li > ul {
 	text-align: left;
-	display: block !important;
-	visibility: visible !important;
+	display: none;
 	margin: 0;
 	padding: 10px;
 	width: 760px;
