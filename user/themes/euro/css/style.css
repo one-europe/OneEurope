@@ -456,14 +456,14 @@ body {
 /** ## SOCIAL BUTTONS ## **/
 
 .sm-buttons				{ float: right; padding-top: 15px; }
-.sm-buttons span		{ float: left; line-height: 32px; padding-right: 10px; font-weight: bold; }
-.sm-buttons a			{ width: 32px; height: 32px; float: left; margin-left: 5px; background: url('../img/social/social-icons-32x32.png') -10px 0 no-repeat; }
+.sm-buttons span		{ float: left; line-height: 32px; color: #000; font-family: Georgia; font-size: 16px; text-shadow: 0 1px 1px rgba(0,0,0, .3); padding-right: 10px; }
+.sm-buttons a			{ width: 32px; height: 32px; float: left; margin-left: 5px; background: url('../img/social/social-icons32x32.png') -10px 0 no-repeat; }
 .sm-buttons .icon-fb	{ background-position: 0 0; }
 .sm-buttons .icon-tw	{ background-position: -32px 0; }
-.sm-buttons .icon-gp	{ background-position: -64px 0; }
-.sm-buttons .icon-pi	{ background-position: -96px 0; }
-.sm-buttons .icon-st	{ background-position: -128px 0; }
-.sm-buttons .icon-in	{ background-position: -160px 0; }
+.sm-buttons .icon-in	{ background-position: -64px 0; }
+.sm-buttons .icon-gp	{ background-position: -96px 0; }
+.sm-buttons .icon-pi	{ background-position: -128px 0; }
+.sm-buttons .icon-st	{ background-position: -160px 0; }
 .sm-buttons .icon-rs	{ background-position: -192px 0; }
 .sm-buttons .icon-vk	{ background-position: -224px 0; }
 
@@ -481,7 +481,7 @@ body {
 }
 #head > nav > ul {
 	list-style: none outside none;
-	width: 576px;
+	width: 597px;
 	margin-top: -1px;
 	margin-bottom: -1px;
 }
@@ -502,15 +502,16 @@ body {
 	z-index: 100;
 }
 
-#head > nav > ul > li.menu_1 { width: 129px; }
-#head > nav > ul > li.menu_2 { width: 92px; }
-#head > nav > ul > li.menu_3 { width: 67px; }
+#head > nav > ul > li.menu_1 { width: 71px; }
+#head > nav > ul > li.menu_2 { width: 67px; }
+#head > nav > ul > li.menu_3 { width: 92px; }
 #head > nav > ul > li.menu_4 { width: 65px; }
 #head > nav > ul > li.menu_4 p { margin-bottom: 5px; }
 #head > nav > ul > li.menu_4:hover { border: 1px solid #ccc; padding: 0; }
 #head > nav > ul > li.menu_4:hover a { background: #fff; border-bottom: 0; }
-#head > nav > ul > li.menu_5 { width: 213px; }
-#head > nav > ul > li.menu_5 form { padding: 8px 10px; text-align: left; }
+#head > nav > ul > li.menu_5 { width: 77px; }
+#head > nav > ul > li.menu_6 { width: 213px; }
+#head > nav > ul > li.menu_6 form { padding: 8px 10px; text-align: left; }
 
 #head > nav > ul > li > ul {
 	text-align: left;
