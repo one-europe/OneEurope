@@ -24,13 +24,11 @@
 		.tabs('rotate', 7000, true);
 
 	// lazyload of pictures
-	if (navigator.platform !== 'iPad') {
-		$('img').lazyload({
-			effect: 'fadeIn',
-			placeholder: '$placeholdergif',
-			threshold : 200
-		});
-	}
+	$('img').lazyload({
+		effect: 'fadeIn',
+		placeholder: '$placeholdergif',
+		threshold : 200
+	});
 
 	// search bar text
 	$('#search-box')
