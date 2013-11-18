@@ -2380,7 +2380,6 @@ aside.disqus h3, .similar-posts h3 {
 
 #about-page .about {
 	min-height: 200px;
-	padding-bottom: 30px;
 	margin-bottom: 30px;
 	border-bottom: 1px solid #ddd;
 }
@@ -2391,7 +2390,6 @@ aside.disqus h3, .similar-posts h3 {
 #about-page .sharing {
 	float: right;
 	margin: 10px 10px;
-	height: 200px;
 }
 #about-page .fb-like-box {
 	display: block;
@@ -2508,13 +2506,15 @@ aside.disqus h3, .similar-posts h3 {
 	display: block;
 	float: left;
 	margin: 0 20px 20px 0;
-	padding: 20px;
+	padding: 0;
 	width: 100%;
 	-webkit-box-shadow: 0 2px 5px rgba(0,0,0, .2);
 	   -moz-box-shadow: 0 2px 5px rgba(0,0,0, .2);
 	      o-box-shadow: 0 2px 5px rgba(0,0,0, .2);
 	        box-shadow: 0 2px 5px rgba(0,0,0, .2);
-}                         
+}
+#contact-email h3 { padding: 20px; padding-bottom: 0; }
+#contact-email p { padding: 10px 20px 20px; }
 #contact-office {         
 	display: block;       
 	float: left;          
