@@ -66,7 +66,7 @@
 					</div>
 					<div class="clear">&nbsp;</div>
 					
-					<div style="margin: 0 auto; text-align: center"><p>Contact: info@one-europe.info | OneEurope, Place du Luxembourg 6, 1050 Bruxelles, Belgium<br/><br/></p></div>
+					<div style="margin: 0 auto; text-align: center"><p>Contact: info@one-europe.info | OneEurope<br/><br/></p></div>
 					
 				</div>
 									
