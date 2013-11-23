@@ -89,6 +89,8 @@
 	***/
 	// include 'db_profiling.php';
 	?>
+
+	<script src="http://www.scoop.it/button/scit.js" />
 	
 	<?php if (is_object($post)) { // only show disqus code if there is a post ?>
 	<script>
@@ -116,7 +118,6 @@
 	</script>
 
 	<!-- scripts concatenated and minified via build script -->
-	<script src="http://www.scoop.it/button/scit.js" />
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?<?php echo date_timestamp_get(date_create()); ?>"></script>
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?<?php echo date_timestamp_get(date_create()); ?>"></script>		
 	<!-- end scripts -->
