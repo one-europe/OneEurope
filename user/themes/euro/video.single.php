@@ -67,7 +67,7 @@
 						<span class="spreadtheword">Spread the word:</span>
 						<div class="addthis addthis_toolbox addthis_default_style ">
 							<a class="addthis_button_pinterest_pinit" pi:pinit:media="<?php echo $post->info->photourl; ?>"></a>
-							<a class="addthis_button_facebook_send"></a>
+							<div class="scoopit-wrap"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" >Scoop.it</a></div>
 							<a class="addthis_button_linkedin_counter" li:counter="none"></a> 
 							<a class="addthis_button_reddit"></a>
 							<a class="addthis_button_stumbleupon"></a>
