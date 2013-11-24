@@ -9,6 +9,5 @@
 		</div>
 		<br/>
 		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="true" data-show-border="false" data-header="false"></div>
-		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/One1Europe"  data-widget-id="372098233318662144">Tweets by @One1Europe</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/One1Europe" data-widget-id="372098233318662144">Tweets by @One1Europe</a>
 	</section>

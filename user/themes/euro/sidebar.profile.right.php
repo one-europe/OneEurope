@@ -25,40 +25,19 @@
 				$twname = $post->info->twitter;
 			} ?>
 		
-			<?php if ( $twname ) { ?>
-	
-				<section class="twitter">
-					<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-					<script>
-					new TWTR.Widget({
-					  version: 2,
-					  type: 'profile',
-					  rpp: 4,
-					  interval: 30000,
-					  width: 230,
-					  height: 232,
-					  theme: {
-					    shell: {
-					      background: '#EEF1F5',
-					      color: '#333333'
-					    },
-					    tweets: {
-					      background: '#FAFBFC',
-					      color: '#52525252',
-					      links: '#000000'
-					    }
-					  },
-					  features: {
-					    scrollbar: true,
-					    loop: true,
-					    live: true,
-					    behavior: 'all'
-					  }
-					}).render().setUser('<?php echo $twname; ?>').start();
-					</script>
-				</section>
-	
-			<?php } ?>
+			<?php if ( $twname ) {
+				$tw_data = explode('-', $twname);
+				$tw_id = $tw_data[1];
+				$tw_name = $tw_data[0];
+				if ($tw_id && $tw_name) {
+				?>
+					<section class="twitter">
+						<a class="twitter-timeline" href="https://twitter.com/<?php echo $tw_name; ?>"
+							data-dnt="true"
+							data-widget-id="<?php echo $tw_id; ?>">Tweets by @<?php echo $tw_name; ?></a>
+					</section>
+				<?php }
+				} ?>
 			
 			<?php if ( $post->info->user == '0' ) { ?>
 				

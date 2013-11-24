@@ -90,6 +90,7 @@
 	// include 'db_profiling.php';
 	?>
 
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 	<script src="http://www.scoop.it/button/scit.js" />
 	
 	<?php if (is_object($post)) { // only show disqus code if there is a post ?>
