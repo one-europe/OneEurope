@@ -42,18 +42,14 @@
 							<div class="addthis">
 								<!-- AddThis Button BEGIN -->
 								<div class="addthis_toolbox addthis_default_style ">
-								<a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-								<a class="addthis_button_tweet" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-								<a class="addthis_button_facebook_send" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-								<a class="addthis_button_pinterest_pinit" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-								<a class="addthis_counter addthis_pill_style" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-						
+									<a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+									<a class="addthis_button_tweet" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+									<div class="scoopit-wrap"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" scit-url="<?php echo $post->permalink; ?>" >Scoop.it</a></div>
+									<a class="addthis_button_pinterest_pinit" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+									<a class="addthis_counter addthis_pill_style" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
 								</div>
-								<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-								<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
 								<!-- AddThis Button END -->
 							</div>
-						
 						</aside>
 						<div class="clear"></div>
 					</li>
