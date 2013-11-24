@@ -28,7 +28,7 @@
 			
 			<section class="share">
 				<div class="h"><span>Share this debate</span></div>
-				<div class="addthis addthis_toolbox addthis_default_style ">
+				<div class="addthis addthis_toolbox addthis_default_style add_this_multiple">
 					<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
 					<a class="addthis_button_tweet" tw:count="vertical"></a>
 					<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>	

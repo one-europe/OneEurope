@@ -27,19 +27,16 @@
 			<section class="sharing">
 				<div class="h"><span>Share</span></div>
 
-				<div class="addthis addthis_toolbox addthis_default_style ">
-					
+				<div class="addthis addthis_toolbox addthis_default_style add_this_multiple">
 					<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
 					<a class="addthis_button_tweet" tw:count="vertical"></a>
 					<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>	
 					<a class="addthis_counter"></a>
-				
-					<a class="addthis_button_facebook_send clear"></a>
+					<div class="scoopit-wrap"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" scit-url="<?php echo $post->permalink; ?>" >Scoop.it</a></div>
 					<a class="addthis_button_pinterest_pinit"></a>
 					<a class="addthis_button_print"></a>
 					<a class="addthis_button_reddit"></a>
 					<a class="addthis_button_stumbleupon"></a>
-
 				</div>
 			</section>
 		
