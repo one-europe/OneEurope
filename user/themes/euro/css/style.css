@@ -1183,7 +1183,7 @@ div.list-2 .list:nth-of-type(4n+0) {
 }
 
 .plugticle .scoopit-wrap { float: left; height: 20px; margin: 28px 0 0 -64px; }
-.addthis_default_style .scoopit-wrap { clear: left; float: left; height: 20px; padding: 0 2px; }
+.add_this_multiple .scoopit-wrap { clear: left; float: left; height: 20px; padding: 0 2px; }
 
 .plugticle .addthis_button_facebook_send {
 	margin: 28px 0 0 -64px;

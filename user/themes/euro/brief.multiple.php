@@ -41,7 +41,7 @@
 						
 							<div class="addthis">
 								<!-- AddThis Button BEGIN -->
-								<div class="addthis_toolbox addthis_default_style ">
+								<div class="addthis_toolbox addthis_default_style add_this_multiple">
 									<a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
 									<a class="addthis_button_tweet" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
 									<div class="scoopit-wrap"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" scit-url="<?php echo $post->permalink; ?>" >Scoop.it</a></div>
