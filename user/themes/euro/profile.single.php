@@ -37,12 +37,11 @@
 					<img class="pic photo" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
 						
 					<div class="social">
-					
 						<?php if ($source->twitter) { ?>
-							<a href="https://twitter.com/<?php echo $source->twitter; ?>" class="twitter-follow-button" data-show-screen-name="false" data-lang="en">Follow</a>
+							<a href="https://twitter.com/<?php echo explode('-', $source->twitter)[0]; ?>" class="twitter-follow-button" data-show-screen-name="false" data-lang="en">Follow</a>
 							<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 						<?php } elseif ($post->info->twitter) { ?>
-							<a href="https://twitter.com/<?php echo $post->info->twitter; ?>" class="twitter-follow-button" data-show-screen-name="false" data-lang="en">Follow</a>
+							<a href="https://twitter.com/<?php echo explode('-', $post->info->twitter)[0]; ?>" class="twitter-follow-button" data-show-screen-name="false" data-lang="en">Follow</a>
 							<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 						<?php } ?>
 						
@@ -59,11 +58,11 @@
 					</div>
 					<?php if ( $source->url || $source->more ) { ?>
 						<div class="info">
-							<span><?php if ($source->url) { ?><a href="<?php echo $source->url; ?>" target="_blank" title="open this website in a new tab">› Website</a></span><?php } ?><br/><?php echo $source->more; ?></span>
+							<span><?php if ($source->url) { ?><a href="<?php echo $source->url; ?>" target="_blank" title="open this website in a new tab">Website</a></span><?php } ?><br/><?php echo $source->more; ?></span>
 						</div>
 					<?php } elseif ( !($source->url && $source->more) && $post->info->url || $post->info->more ) { ?>
 						<div class="info">
-							<span><?php if ($post->info->url) { ?><a class="url" href="<?php echo $post->info->url; ?>" target="_blank" title="visit website">› Website</a></span><?php } ?><br/><?php echo $post->info->more; ?></span>
+							<span><?php if ($post->info->url) { ?><a class="url" href="<?php echo $post->info->url; ?>" target="_blank" title="visit website">Website</a></span><?php } ?><br/><?php echo $post->info->more; ?></span>
 						</div>
 					<?php } ?>
 
