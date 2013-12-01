@@ -11,17 +11,13 @@
 						<a href="#top" id="up">top<img src="<?php Site::out_url( 'theme' ); ?>/img/up.png" alt="" height="20" width="20" /></a>
 					
 						<nav>
-							<div><a href="/about">About ›</a></div>													<div><a href="/contributors">Team ›</a></div>
-							<div><a href="/contact">Contact ›</a></div>
-							<div><a href="/join-us">Join us ›</a></div>
-							<div><a href="/imprint">Legal ›</a></div>
-							<div><a href="/forum">Forums ›</a></div>
-							<?php if ( User::identify()->loggedin ) { ?>
-								<div><a href="/admin">Admin ›</a></div>
-								<div><a href="/auth/logout">Logout ›</a></div>
-							<?php } else { ?>
-								<div><a href="/auth/login">Login ›</a></div>
-							<?php } ?>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/about">About ›</a></div>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team ›</a></div>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact ›</a></div>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us ›</a></div>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate ›</a></div>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/imprint">Legal ›</a></div>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/auth/login">Login ›</a></div>
 						</nav>
 					
 					</div>

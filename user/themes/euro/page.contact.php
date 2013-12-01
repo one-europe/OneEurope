@@ -1,10 +1,11 @@
 <?php echo $theme->display('header'); ?>
 <div class="submenu">
 	<ul>
-		<li><a href="/about">About</a></li>
-		<li><a href="/join-us">Join us</a></li>
-		<li><a href="/become-a-patron">Become a Patron</a></li>
-		<li><a href="/contact"><b>Contact</b></a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/about">About</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact"><b>Contact</b></a></li>
 		<li class="clear"></li>
 	</ul>
 </div>

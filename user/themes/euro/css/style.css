@@ -481,7 +481,7 @@ body {
 }
 #head > nav > ul {
 	list-style: none outside none;
-	width: 597px;
+	width: 600px;
 	margin-top: -1px;
 	margin-bottom: -1px;
 }
@@ -510,8 +510,9 @@ body {
 #head > nav > ul > li.menu_4:hover { border: 1px solid #ccc; padding: 0; }
 #head > nav > ul > li.menu_4:hover a { background: #fff; border-bottom: 0; }
 #head > nav > ul > li.menu_5 { width: 77px; }
-#head > nav > ul > li.menu_6 { width: 213px; }
-#head > nav > ul > li.menu_6 form { padding: 8px 10px; text-align: left; }
+#head > nav > ul > li.menu_6 { width: 71px; }
+#head > nav > ul > li.menu_7 { width: 143px; }
+#head > nav > ul > li.menu_7 form { padding: 8px 10px; text-align: left; }
 
 #head > nav > ul > li > ul {
 	text-align: left;
@@ -816,24 +817,11 @@ div#searchresults .tile:nth-of-type(3n+1) {
 }
 
 
-/* Searchform */
-
-#searchform {
-	height: auto;
-}
-input {
-	margin: 0;
-	padding: 0;
-}
-#searchform input[type="text"] {
-	text-align: right;
-	color: #666;
-	width: 160px;
-}
-#submitsearch {
-	width: 22px;
-	height: 23px;
-}
+/*** Searchform ***/
+#searchform { height: auto; }
+input { margin: 0; padding: 0; }
+#searchform input[type="text"] { text-align: right; color: #666; width: 90px; }
+#submitsearch { width: 22px; height: 23px; }
 
 #search-box {
 	border: 1px solid #eee;
@@ -842,7 +830,7 @@ input {
 	float: left;
 	margin: 0 5px 0 0;
 	padding: 2px;
-	width: 220px;
+	width: 150px;
 	outline: none;
 	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.1);
 	   -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
