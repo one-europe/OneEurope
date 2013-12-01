@@ -22,10 +22,10 @@
 			&nbsp;&nbsp;<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://one-europe.info/about"></a>
 			<noscript><a href="http://flattr.com/thing/697920/OneEurope" target="_blank">
 			<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-			<?php /*<div style="overflow: hidden; margin-left: -6px;">
+			<div style="overflow: hidden; text-align: center;">
 				<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
 				<script type="IN/CompanyProfile" data-id="2916037" data-format="inline"></script>
-			</div> */?>
+			</div>
 		</div>
 		<div class="clear"></div>
 	</div>

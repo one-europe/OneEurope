@@ -12,6 +12,11 @@
 <div class="page">
 	<h1><?php echo $post->title_out; ?></h1>
 	<article class="body"><?php echo $post->content_out; ?></article>
+	<?php if (User::identify()->loggedin) { ?>
+		<span class="article-edit right" style="width: 100%;">
+			<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
+		</span>
+	<?php } ?>
 	<section id="contact-email">
 		<h3>E-Mail</h3>
 		<p>For general information, questions, or ideas please contact 
