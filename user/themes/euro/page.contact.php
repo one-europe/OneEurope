@@ -10,10 +10,8 @@
 	</ul>
 </div>
 <div class="page">
-	<h1>Contact</h1><br/>
-	<p>OneEurope has been created and is still managed entirely by volunteers from all over Europe, for citizens all over Europe.<br/>
-	OneEurope is for YOU, and so we would love to hear from you.<br/>
-	YOUR ideas, questions, suggestions and queries guide our direction!</p>
+	<h1><?php echo $post->title_out; ?></h1>
+	<article class="body"><?php echo $post->content_out; ?></article>
 	<section id="contact-email">
 		<h3>E-Mail</h3>
 		<p>For general information, questions, or ideas please contact 
@@ -60,7 +58,5 @@
 				</noscript>.
 		</p>
 	</section>
-	<p>...or to join the debate on the future of Europe follow us on our social media platforms (which you can see on the top right of this page), and join in the discussions.</p>
-	<p>The future of Europe is in YOUR hands!</p>
 </div>
 <?php echo $theme->display ('footer'); ?>
