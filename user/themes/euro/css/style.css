@@ -717,7 +717,11 @@ li.menu_4 .col3 {
 /** SUBNAV **/
 
 #subnav { overflow: hidden; padding: 5px 0; border-top: 1px solid #ccc; }
-#subnav .debates { float: left; font-weight: bold; }
+#subnav .debates-head { float: left; /* font-weight: bold; */ text-transform: italic; font-size: 14px; }
+#subnav .debates-list { overflow: hidden; text-align: center; }
+#subnav .debates-list span { display: inline-block; margin: 0 5px 0 0; padding: 0 5px 0 0; border-right: 1px solid #ccc; }
+#subnav .debates-list span { font-family: georgia; font-size: 14px; text-shadow: 0 1px 1px rgba(0,0,0, .3); }
+#subnav .debates-list span:last-child { border: none; }
 #subnav ul { list-style: none outside none; padding: 0; margin: 0; width: 885px; float: right; }
 #subnav ul li { margin: 0 5px 0 0; padding: 0 5px 0 0; border-right: 1px solid #ccc; float: left; }
 #subnav li:last-child { border: none; }
@@ -2699,6 +2703,25 @@ a.bluebuttoncss:visited {
 
 /* END DEBATING EUROPE MODEL EP VOTE 2014 */
 
+
+#aToolTip { position: absolute; display: none; z-index: 50000; }
+#aToolTip .aToolTipContent { position:relative; margin:0; padding:0; }
+.defaultTheme {
+	border: 1px solid #444;
+	background: #fff;
+	color: #444;
+	margin: 0;
+	padding: 3px 10px;	
+	
+	-moz-border-radius: 12px 12px 12px 0;
+	-webkit-border-radius: 12px 12px 12px 0;
+	-khtml-border-radius: 12px 12px 12px 0;
+	border-radius: 12px 12px 12px 0;
+	
+	-moz-box-shadow: 2px 2px 5px #444; /* for Firefox 3.5+ */
+	-webkit-box-shadow: 2px 2px 5px #444; /* for Safari and Chrome */
+	box-shadow: 2px 2px 5px #444; /* for Safari and Chrome */
+}
 
 
 

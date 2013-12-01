@@ -39,6 +39,8 @@
 			if (this.value === '') this.value = $(this).data('placeholder');
 		});
 
+	$('.debates-list').find('a').aToolTip();
+
 })(jQuery);
 
 // ===== ajaxform ===== //

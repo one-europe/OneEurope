@@ -99,11 +99,10 @@
 				</div>
 				<div class="clear"></div>
 				<div id="subnav">
-					<div class="debates">Debates:</div>
-					<ul>
+					<div class="debates-list">
 						<?php foreach($menus as $debate) {?>
-							<li><a href="<?php echo $debate->permalink ?>" title="<?php echo $debate->title; ?>"><?php echo $debate->info->shorttitle; ?></a></li>
+							<span><a href="<?php echo $debate->permalink ?>" title="Debate – <?php echo $debate->title; ?>"><?php echo $debate->info->shorttitle; ?></a></span>
 						<?php } ?>
-					</ul>
+					</div>
 				</div>
 			</div>	
