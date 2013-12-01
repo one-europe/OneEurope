@@ -718,7 +718,7 @@ li.menu_4 .col3 {
 
 #subnav { overflow: hidden; padding: 5px 0; border-top: 1px solid #ccc; }
 #subnav .debates-head { float: left; /* font-weight: bold; */ text-transform: italic; font-size: 14px; }
-#subnav .debates-list { overflow: hidden; text-align: center; padding: 0 100px; }
+#subnav .debates-list { overflow: hidden; text-align: center; padding: 0 50px; }
 #subnav .debates-list span { display: inline-block; margin: 0 5px 0 0; padding: 0 5px 0 0; border-right: 1px solid #ccc; }
 #subnav .debates-list span { font-family: georgia; font-size: 14px; text-shadow: 0 1px 1px rgba(0,0,0, .3); }
 #subnav .debates-list span:last-child { border: none; }
