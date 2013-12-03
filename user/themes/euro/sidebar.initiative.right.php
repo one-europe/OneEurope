@@ -7,8 +7,8 @@
 				<a class="addthis_button_tweet" tw:count="vertical"></a>
 				<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>	
 				<a class="addthis_counter"></a>
-				<a class="addthis_button_linkedin_counter" li:counter="none"></a> 
-				<div class="scoopit-wrap"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" scit-url="<?php echo $post->permalink; ?>" >Scoop.it</a></div>
+				<a style="clear: left; height: 20px; margin-top: 1px;" class="addthis_button_linkedin_counter" li:counter="none"></a> 
+				<div style="clear: none;" class="scoopit-wrap"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" scit-url="<?php echo $post->permalink; ?>" >Scoop.it</a></div>
 				<a class="addthis_button_pinterest_pinit"></a>
 				<a class="addthis_button_print"></a>
 				<a class="addthis_button_reddit"></a>
