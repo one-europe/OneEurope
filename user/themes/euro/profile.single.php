@@ -39,12 +39,9 @@
 					<div class="social">
 						<?php if ($source->twitter) { ?>
 							<a href="https://twitter.com/<?php echo explode('-', $source->twitter)[0]; ?>" class="twitter-follow-button" data-show-screen-name="false" data-lang="en">Follow</a>
-							<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 						<?php } elseif ($post->info->twitter) { ?>
 							<a href="https://twitter.com/<?php echo explode('-', $post->info->twitter)[0]; ?>" class="twitter-follow-button" data-show-screen-name="false" data-lang="en">Follow</a>
-							<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 						<?php } ?>
-						
 						<?php if ($source->fbsubscribe) { ?>
 							<iframe src="//www.facebook.com/plugins/subscribe.php?href=<?php echo $source->fbprofile; ?>&amp;layout=button_count&amp;show_faces=true&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=119694238052762" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:140px; height: 21px;" allowTransparency="true"></iframe>
 						<?php } elseif ($source->fbpage) { ?>
