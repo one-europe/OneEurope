@@ -1358,7 +1358,7 @@ div.list-2 .list:nth-of-type(4n+0) {
 #profile-sidebar {
 	width: 250px;
 	float: right;
-	margin: 45px 0 0 -1px;
+	margin: /* 45px */ 0 0 0 -1px;
 	padding-bottom: 10px;
 }
 #profile-sidebar section {
@@ -1931,6 +1931,9 @@ article > footer nav {
 }
 .backtotop a {
 	padding: 3px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333;
 }
 .backtotop img {
 	margin: 0 3px -2px;
