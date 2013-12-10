@@ -63,6 +63,15 @@
 				</noscript>.
 		</p>
 	</section>
+	<div style="overflow: hidden;">
+		<div style="width: 335px; float: left; padding-right: 20px;">
+			<a class="twitter-timeline" height="303" data-dnt="true" href="https://twitter.com/One1Europe" data-widget-id="372098233318662144">Tweets by @One1Europe</a>
+		</div>
+		<div style="width: 300px; float: left;">
+			<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+			<script type="IN/CompanyProfile" data-id="2916037" data-format="inline" data-width="300"></script>
+		</div>
+	</div>
 </div>
 <div style="width: 256px; float: left; margin: 20px 0 0 -1px; padding-bottom: 10px;">
 	<section class="fb">
@@ -76,11 +85,6 @@
 		</div>
 		<br/>
 		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="277" data-show-faces="true" data-stream="true" data-show-border="false" data-header="false"></div>
-		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/One1Europe" data-widget-id="372098233318662144">Tweets by @One1Europe</a>
-		<div style="margin-left: -25px;">
-			<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-			<script type="IN/CompanyProfile" data-id="2916037" data-format="inline" data-width="300"></script>
-		</div>
 	</section>
 </div>
-<?php echo $theme->display ('footer'); ?>
+<?php echo $theme->display('footer'); ?>
