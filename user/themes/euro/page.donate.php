@@ -28,7 +28,7 @@
 	</div>
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
 </div>
-<div class="box">
+<div class="box donate-buttons">
 	<div class="part">
 		<form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<input type="hidden" name="cmd" value="_s-xclick">
@@ -37,10 +37,10 @@
 			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 		</form>
 	</div>
-	<div class="part">
+	<div class="part" style="height: 43px; padding: 15px 15px 5px;">
 		<form action="./donate" method="post">
-			<input type="number" id="amount-stripe" />
-			<button id="pay-stripe">Donate</button>
+			<input type="text" id="amount-stripe" placeholder="Sum" />
+			<button id="pay-stripe">Donate with card</button>
 			<script src="https://checkout.stripe.com/checkout.js"></script>
 			<script>
 				var handler = StripeCheckout.configure({
@@ -53,7 +53,7 @@
 							url: '<?php Site::out_url('theme')?>/charge.php',
 							type: 'post',
 							data: token
-						}).done(function (data) { $('.box').html(data); });
+						}).done(function (data) { $('.donate-buttons').html(data); });
 					}
 				});
 				document.getElementById('pay-stripe').addEventListener('click', function(e) {
@@ -61,7 +61,7 @@
 						name: 'OneEurope',
 						description: 'One Society, One Democracy',
 						currency: 'eur',
-						amount: document.getElementById('amount-stripe').value * 100,
+						amount: document.getElementById('amount-stripe').value * 100 || 10000,
 						panelLabel: 'Donate {{amount}}'
 					});
 					e.preventDefault();
@@ -69,7 +69,7 @@
 			</script>
 		</form>
 	</div>
-	<div class="part">
+	<div class="part" style="height: 37px; padding: 21px 15px 5px; border: 0;">
 		<p class="flattr">Make a donation through flattr:
 			<a href="https://flattr.com/donation/give/to/OneEurope"
 			  title="Donate (via Flattr)"><img

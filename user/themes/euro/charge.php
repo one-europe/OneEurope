@@ -24,7 +24,7 @@ $customer = Stripe_Customer::create(array(
 		'currency'		=> 'eur'
 	));
 
-	echo '<p class="successful-payment">Your donation has been successfully approved. We will send you an email with additional information regarding your reward.<br>Thank you!<br>OneEurope Team</p>';
+	echo '<p class="successful-payment">Your donation has been successfully accepted. We will send you an email with additional information regarding your reward.<br>Thank you!<br>OneEurope Team</p>';
 }
 
 ?>
