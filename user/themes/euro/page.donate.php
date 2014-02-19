@@ -14,24 +14,72 @@
 	<article class="body"><?php echo $post->content_out; ?></article>
 </div>
 <?php if (User::identify()->loggedin) { ?>
-	<span class="article-edit right" style="width: 100%;">
-		<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
-	</span>
+	<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
 <?php } ?>
-<form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="ZS8QKKQD3C7TG">
-	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-<p class="flattr">Make a donation through flattr:
-	<a href="https://flattr.com/donation/give/to/OneEurope"
-	  title="Donate (via Flattr)"><img
-	    src="<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png"
-	    title="Support my Debian work (Flattr)"
-	    onmouseover="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_hover.png'"
-	    onmouseout="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png'"
-	    alt="Flattr donation button" />
-	</a>
-</p>
+<?php require_once(HABARI_PATH . '/user/themes/euro/config.php'); ?>
+<div class="box">
+	<div class="addthis_toolbox addthis_default_style">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_button_pinterest_pinit"></a>
+		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+		<a class="addthis_button_linkedin_counter"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
+</div>
+<div class="box">
+	<div class="part">
+		<form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="ZS8QKKQD3C7TG">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+	</div>
+	<div class="part">
+		<form action="./donate" method="post">
+			<input type="number" id="amount-stripe" />
+			<button id="pay-stripe">Donate</button>
+			<script src="https://checkout.stripe.com/checkout.js"></script>
+			<script>
+				var handler = StripeCheckout.configure({
+					key: '<?php echo $stripe['publishable_key']; ?>',
+					image: '<?php Site::out_url('theme')?>/img/logo128x128.png',
+					token: function(token, args) {
+						token.amount = document.getElementById('amount-stripe').value * 100;
+						$('.box').html('<p class="in-progress-payment">Please wait, donation is in progress...</p>');
+						$.ajax({
+							url: '<?php Site::out_url('theme')?>/charge.php',
+							type: 'post',
+							data: token
+						}).done(function (data) { $('.box').html(data); });
+					}
+				});
+				document.getElementById('pay-stripe').addEventListener('click', function(e) {
+					handler.open({
+						name: 'OneEurope',
+						description: 'One Society, One Democracy',
+						currency: 'eur',
+						amount: document.getElementById('amount-stripe').value * 100,
+						panelLabel: 'Donate {{amount}}'
+					});
+					e.preventDefault();
+				});
+			</script>
+		</form>
+	</div>
+	<div class="part">
+		<p class="flattr">Make a donation through flattr:
+			<a href="https://flattr.com/donation/give/to/OneEurope"
+			  title="Donate (via Flattr)"><img
+			    src="<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png"
+			    title="Support my Debian work (Flattr)"
+			    onmouseover="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_hover.png'"
+			    onmouseout="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png'"
+			    alt="Flattr donation button" />
+			</a>
+		</p>
+	</div>
+</div>
 <?php echo $theme->display('footer'); ?>

@@ -2481,6 +2481,40 @@ aside.disqus h3, .similar-posts h3 {
 	display: inline-block;
 	margin-bottom: -5px;
 }
+
+.box {
+	overflow: auto;
+	margin: 10px 0;
+	padding: 5px;
+	-webkit-box-shadow: 0 0 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0 5p0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.box .part { float: left; padding: 5px; }
+.box p { padding: 0; }
+.box p.successful-payment { padding: 10px; font-weight: bold; }
+.box p.in-progress-payment { padding: 10px; font-weight: bold; }
+.box #amount-stripe { width: 50px; padding: 5px; font-size: 14px; text-align: center; }
+.box #pay-stripe {
+    -moz-user-select: none;
+    background-image: linear-gradient(#28A0E5, #015E94);
+    border: 0 none;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0 12px;
+    text-decoration: none;
+    visibility: visible !important;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    height: 30px;
+    color: #fff;
+}
+.box .addthis_toolbox { padding-top: 5px; }
+
 /* END ABOUT */
 
 /* PATRON */
