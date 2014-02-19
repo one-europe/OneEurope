@@ -25,6 +25,7 @@
 		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
 		<a class="addthis_button_linkedin_counter"></a>
 		<a class="addthis_counter addthis_pill_style"></a>
+		<div style="display: inline-block; padding-left: 5px;"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" >Scoop.it</a></div>
 	</div>
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
 </div>
