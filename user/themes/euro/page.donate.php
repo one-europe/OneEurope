@@ -53,7 +53,7 @@
 							image: '<?php Site::out_url('theme')?>/img/logo128x128.png',
 							token: function(token, args) {
 								token.amount = document.getElementById('amount-stripe').value * 100;
-								$('.donate-buttons').html('<p class="in-progress-payment">Please wait, donation is in progress...</p>');
+								$('.donate-buttons').html('<p class="in-progress-payment">Please wait, donation is in progress...<br>Do not refresh the page until donation is successful.</p>');
 								$.ajax({
 									url: '<?php Site::out_url('theme')?>/charge.php',
 									type: 'post',
