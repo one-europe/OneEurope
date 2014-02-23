@@ -2534,11 +2534,11 @@ aside.disqus h3, .similar-posts h3 {
 	-moz-box-shadow: 0 0 5p0 rgba(0, 0, 0, 0.2);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
-#table15221 { border-spacing: collapse; background: url('../img/test-donate-widget.png') no-repeat; float: right; }
-#table15221 td { padding: 15px 15px 0 0; box-shadow: none; width: 135px; height: 60px;
-					font-size: 24px; color: #fff; font-family: georgia; text-align: right;
+#table15221 { border-spacing: collapse; background: url('../img/50meter.jpg') no-repeat; float: right; }
+#table15221 td { padding: 15px 15px 0 0; box-shadow: none; width: 185px; height: 65px;
+					font-size: 24px; color: #000; font-family: georgia; text-align: right;
 					 }
-#table15221.p10 { background-position: -150px 0; }
+/* #table15221.p10 { background-position: -150px 0; }
 #table15221.p20 { background-position: -300px 0; }
 #table15221.p30 { background-position: -450px 0; }
 #table15221.p40 { background-position: -600px 0; }
@@ -2546,7 +2546,7 @@ aside.disqus h3, .similar-posts h3 {
 #table15221.p60 { background-position: -900px 0; }
 #table15221.p70 { background-position: -1050px 0; }
 #table15221.p80 { background-position: -1200px 0; }
-#table15221.p90 { background-position: -1350px 0; }
+#table15221.p90 { background-position: -1350px 0; } */
 
 /* END ABOUT */
 
