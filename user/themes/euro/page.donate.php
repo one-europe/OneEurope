@@ -102,7 +102,7 @@
 	<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
 <?php } ?>
 <div class="box">
-	<div class="addthis_toolbox addthis_default_style">
+	<div class="addthis_toolbox addthis_default_style" style="height: 20px;">
 		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 		<a class="addthis_button_tweet"></a>
 		<a class="addthis_button_pinterest_pinit"></a>
