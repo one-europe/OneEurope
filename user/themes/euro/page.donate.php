@@ -34,15 +34,6 @@
 	<div class="box donate-side">
 		<div class="donate-buttons">
 			<div class="part">
-				<form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="ZS8QKKQD3C7TG">
-					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online." style="vertical-align: middle;">
-					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-					with PayPal
-				</form>
-			</div>
-			<div class="part">
 				<form action="./donate" method="post">
 					<input type="text" id="amount-stripe" placeholder="Sum" />
 					<button id="pay-stripe">Donate with card</button>
@@ -72,6 +63,15 @@
 							e.preventDefault();
 						});
 					</script>
+				</form>
+			</div>
+			<div class="part">
+				<form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="ZS8QKKQD3C7TG">
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online." style="vertical-align: middle;">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					with PayPal
 				</form>
 			</div>
 			<div class="part">
