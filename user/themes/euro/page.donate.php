@@ -13,8 +13,8 @@
 <div class="content donate">
 	<h1>
 		<?php echo $post->title_out; ?>
-		<div class="addthis_toolbox addthis_default_style" style="float: right;">
-			<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<div class="addthis_toolbox addthis_default_style" style="float: right; height: 20px;">
+			<a class="addthis_button_facebook_like" fb:like:layout="button_count" style="height: 20px;"></a>
 			<a class="addthis_button_tweet"></a>
 			<a class="addthis_button_pinterest_pinit"></a>
 			<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
@@ -37,7 +37,7 @@
 				<form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 					<input type="hidden" name="cmd" value="_s-xclick">
 					<input type="hidden" name="hosted_button_id" value="ZS8QKKQD3C7TG">
-					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online." style="vertical-align: middle;">
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online." style="vertical-align: middle;">
 					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 					with PayPal
 				</form>
