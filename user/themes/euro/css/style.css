@@ -1184,7 +1184,7 @@ div.list-2 .list:nth-of-type(4n+0) {
 .plugticle .addthis_button_facebook_like {
 	margin: 0 8px 0;
 }
-.addthis_button_facebook_like span { vertical-align: top; }
+.addthis_button_facebook_like span { vertical-align: top !important; }
 .plugticle .addthis_button_linkedin_counter {
 	margin: 55px 0 0 -69px;
 	display: inline-block;
