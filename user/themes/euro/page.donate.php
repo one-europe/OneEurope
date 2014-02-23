@@ -103,7 +103,7 @@
 <?php } ?>
 <div class="box">
 	<div class="addthis_toolbox addthis_default_style" style="height: 20px;">
-		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count" style="height: 20px;"></a>
 		<a class="addthis_button_tweet"></a>
 		<a class="addthis_button_pinterest_pinit"></a>
 		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
