@@ -10,27 +10,28 @@
 		<li class="clear"></li>
 	</ul>
 </div>
+<a name="top">
 <div class="content donate">
 	<h1>
 		<?php echo $post->title_out; ?>
 	</h1>
 	<div class="box">
-		<div class="addthis_toolbox addthis_default_style">
-			<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-			<a class="addthis_button_tweet"></a>
-			<a class="addthis_button_pinterest_pinit"></a>
-			<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-			<a class="addthis_button_linkedin_counter"></a>
-			<div style="display: inline-block; padding-left: 5px;">
-				<a href="http://www.scoop.it" class="scoopit-button" scit-position="none" >Scoop.it</a>
-			</div>
-			<div style="display: inline-block; padding-left: 5px;">
-				<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false">
-					<img src="http://www.reddit.com/static/spreddit7.gif" alt="submit to reddit" border="0" style="vertical-align: baseline;" />
-				</a>
-			</div>
-			<div style="display: inline-block; padding-left: 5px;"><su:badge layout="1"></su:badge></div>
+		<!-- AddThis Button BEGIN -->
+		<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+			<a class="addthis_button_facebook"></a>
+			<a class="addthis_button_twitter"></a>
+			<a class="addthis_button_pinterest_share"></a>
+			<a class="addthis_button_google_plusone_share"></a>
+			<a class="addthis_button_linkedin"></a>
+			<a class="addthis_button_scoopit"></a>
+			<a class="addthis_button_reddit"></a>
+			<a class="addthis_button_stumbleupon"></a>
+			<a class="addthis_button_vk"></a>
+			<a class="addthis_button_email"></a>
+			<a class="addthis_button_compact"></a>
+			<a class="addthis_counter addthis_bubble_style"></a>
 		</div>
+		<!-- AddThis Button END -->
 	</div>
 	<article class="body" style="float: left; margin-right: 400px;"><?php echo $post->content_out; ?></article>
 	<div class="box donate-side">
