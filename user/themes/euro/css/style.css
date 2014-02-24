@@ -2522,12 +2522,20 @@ aside.disqus h3, .similar-posts h3 {
     height: 30px;
     color: #fff;
 }
-.box .addthis_toolbox { padding: 3px 0; }
+
+
+.box.with-addthis { text-align: right; clear: both; margin-bottom: 0; }
+.box .please-share { font-family: Georgia; font-size: 14px; padding: 0 5px; margin-bottom: 0;
+						text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);  display: inline-block; }
+.box .addthis_toolbox { padding: 3px 5px; display: inline-block; vertical-align: middle;
+						width: 460px; font-size: 0; height: 32px; }
+
 .amount-funded { width: 200px; border: 1px solid red; }
 .amount-funded td { padding: 20px 0; font-size: 26px; font-family: georgia; text-align: center; }
 
-.donate-side { width: 385px; float: right; clear: none; margin-top: 15px;
-					margin-left: -100%; padding: 15px; }
+.donate-side { width: 385px; float: right; clear: none; margin-top: 15px; margin-bottom: 15px;
+					margin-left: -100%; padding: 15px 15px 5px; }
+.donate-side p { margin-bottom: 10px; }
 
 #table46058 { border-spacing: 0 15px; border-collapse: separate; }
 #table46058 td { width: 50%; padding: 15px; -webkit-box-shadow: 0 0 0px rgba(0, 0, 0, 0.2);

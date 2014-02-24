@@ -10,18 +10,17 @@
 		<li class="clear"></li>
 	</ul>
 </div>
-<a name="top">
+<a name="top"></a>
 <div class="content donate">
-	<h1>
-		<?php echo $post->title_out; ?>
-	</h1>
-	<div class="box">
+	<h1><?php echo $post->title_out; ?></h1>
+	<div class="box with-addthis">
+		<span class="please-share">Please help us share this campaign:</span>
 		<!-- AddThis Button BEGIN -->
 		<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 			<a class="addthis_button_facebook"></a>
+			<a class="addthis_button_google_plusone_share"></a>
 			<a class="addthis_button_twitter"></a>
 			<a class="addthis_button_pinterest_share"></a>
-			<a class="addthis_button_google_plusone_share"></a>
 			<a class="addthis_button_linkedin"></a>
 			<a class="addthis_button_scoopit"></a>
 			<a class="addthis_button_reddit"></a>
@@ -90,37 +89,89 @@
 				</p>
 			</div>
 		</div>
-		<b>Please consider donating an amount of your choice. Even a few euros can make a big difference!</b>
-			<br>
-			<br>
-		For example:<br>
-			&gt; 5 Euros will allow us to reach 100 more Europeans on Facebook, or Twitter<br>
-			&gt; 10 Euros will allow us to print hundreds of flyers and posters for our events<br>
-			&gt; 50 Euros will pay for our website for two months!<br>
-			&gt; 100 Euros will allow us to spread our content and the dream of a more united and democratic Europe to thousands more people via enhanced Search Engine Optimization</p>
-		
+
+		<p><b>Please consider donating an amount of your choice. Even a few euros can make a big difference!</b></p>
+
+		<p><b>Donate &euro;5 or more</b><br>
+		Thank You! We will list your name on our website and you'll
+		receive a Thank You message via email which will come with a download of an
+		exclusive OneEurope Screensaver for your PC.</p>
+
+		<p><b>Donate &euro;10 or more</b><br>
+		Postcard from OneEurope! You will receive an exclusive OneEurope
+		psotcard with personal message from a team member. We will also list your name on our website
+		and you'll receive a Thank You message via email which will come with a
+		download of an exclusive OneEurope Screensaver for your PC.</p>
+
+		<p><b>Donate &euro; 20 or more</b><br>
+		Flying with stickers! We will send you OneEurope stickers to
+		decorate your stuff with and some promotional flyers so you can represent us
+		in your community. In addition you will receive an exclusive OneEurope
+		postcard with personal message from a team member. We will also list your name on our website
+		and you'll receive a Thank You message via email which will come with a
+		download of an exclusive OneEurope Screensaver for your PC.</p>
+
+		<p><b>Donate &euro;50 or more</b><br>
+		Digital Yearbook, Best of OneEurope. 2013 was a great year for us
+		and to celebrate that we have put together a Yearbook of our best articles,
+		infographics and more. Donate 50 Euros or more and receive a digital version
+		of the Yearbook before anyone else. In
+		addition you will receive an exclusive OneEurope postcard with personal
+		message from a team member, your name isted on our website an email Thank You
+		message and an exclusive OneEurope Screensaver for your PC. Not only that, you'll also get a great
+		package of OneEurope stickers, flyers, a reusable car window sticker AND a
+		OneEurope pin badge to prove you are now a OneEuropean!</p>
+
+		<p><b>Donate &euro;100 or more</b><br>
+		OneEurope Yearbook 2013 - Collector's Print Edition. Get your
+		hands on the most exclusive item in our collection of rewards, the first
+		print edition magazine from OneEurope featuring 2013's best articles,
+		infographics and other content. Support us with more than 100 euro and be one
+		of the first to own it from the original print run, Hot off the Press! Plus
+		all the goodies mentioned above: Thank You's, stickers, postcards, window
+		sticker, flyers and OneEuropeans pin badge.</p>
+
+		<p><b>Donate &euro;250 or more</b><br>
+		All that and more! Donate more than 250 Euros and receive the
+		Collectors print editon of the Yearbook 2013 and all of the other Rewards
+		previously mentioned. Furthermore, in recognition of your wonderful support
+		we would like to invite you to an invitation only Google Air Hangout with our
+		Directors to hear and ask about our story to date, our plans for 2014 and
+		beyond, and of course our Thanks!</p>
+
+		<p><b>Donate &euro;500 or more</b><br>
+		Hello Patron!! A donation of more than 500 Euros deserves special
+		recognition. We appreciate that your donation represents just how much you
+		want to see OneEurope suceed. We value all the support we receive and are
+		always glad of feedback which is why we would invite you to join our Board of
+		Patrons with a special advisory role, with direct contact to our Directors.
+		We'll keep you regularly updated on our latest developments as we transform
+		into a professional non-profit organisation. Naturally please enjoy your own
+		bumper pack of rewards goodies too!</p>
+
 	</div>
 </div>
 <?php if (User::identify()->loggedin) { ?>
 	<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
 <?php } ?>
-<div class="box">
-	<div class="addthis_toolbox addthis_default_style">
-		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-		<a class="addthis_button_tweet"></a>
-		<a class="addthis_button_pinterest_pinit"></a>
-		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-		<a class="addthis_button_linkedin_counter"></a>
-		<div style="display: inline-block; padding-left: 5px;">
-			<a href="http://www.scoop.it" class="scoopit-button" scit-position="none" >Scoop.it</a>
-		</div>
-		<div style="display: inline-block; padding-left: 5px;">
-			<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false">
-				<img src="http://www.reddit.com/static/spreddit7.gif" alt="submit to reddit" border="0" style="vertical-align: baseline;" />
-			</a>
-		</div>
-		<div style="display: inline-block; padding-left: 5px;"><su:badge layout="1"></su:badge></div>
+<div class="box with-addthis">
+	<span class="please-share">Please help us share this campaign:</span>
+	<!-- AddThis Button BEGIN -->
+	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+		<a class="addthis_button_facebook"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_twitter"></a>
+		<a class="addthis_button_pinterest_share"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_scoopit"></a>
+		<a class="addthis_button_reddit"></a>
+		<a class="addthis_button_stumbleupon"></a>
+		<a class="addthis_button_vk"></a>
+		<a class="addthis_button_email"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
 	</div>
+	<!-- AddThis Button END -->
 </div>
 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
