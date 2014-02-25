@@ -92,18 +92,18 @@
 
 		<p><b>Please consider donating an amount of your choice. Even a few euros can make a big difference!</b></p>
 
-		<p><b>Donate &euro;5 or more</b><br>
+		<p class="pledge"><b>Donate &euro;5 or more</b>
 		Thank You! We will list your name on our website and you'll
 		receive a Thank You message via email which will come with a download of an
 		exclusive OneEurope Screensaver for your PC.</p>
 
-		<p><b>Donate &euro;10 or more</b><br>
+		<p class="pledge"><b>Donate &euro;10 or more</b>
 		Postcard from OneEurope! You will receive an exclusive OneEurope
 		psotcard with personal message from a team member. We will also list your name on our website
 		and you'll receive a Thank You message via email which will come with a
 		download of an exclusive OneEurope Screensaver for your PC.</p>
 
-		<p><b>Donate &euro; 20 or more</b><br>
+		<p class="pledge"><b>Donate &euro; 20 or more</b>
 		Flying with stickers! We will send you OneEurope stickers to
 		decorate your stuff with and some promotional flyers so you can represent us
 		in your community. In addition you will receive an exclusive OneEurope
@@ -111,7 +111,7 @@
 		and you'll receive a Thank You message via email which will come with a
 		download of an exclusive OneEurope Screensaver for your PC.</p>
 
-		<p><b>Donate &euro;50 or more</b><br>
+		<p class="pledge"><b>Donate &euro;50 or more</b>
 		Digital Yearbook, Best of OneEurope. 2013 was a great year for us
 		and to celebrate that we have put together a Yearbook of our best articles,
 		infographics and more. Donate 50 Euros or more and receive a digital version
@@ -122,7 +122,7 @@
 		package of OneEurope stickers, flyers, a reusable car window sticker AND a
 		OneEurope pin badge to prove you are now a OneEuropean!</p>
 
-		<p><b>Donate &euro;100 or more</b><br>
+		<p class="pledge"><b>Donate &euro;100 or more</b>
 		OneEurope Yearbook 2013 - Collector's Print Edition. Get your
 		hands on the most exclusive item in our collection of rewards, the first
 		print edition magazine from OneEurope featuring 2013's best articles,
@@ -131,7 +131,7 @@
 		all the goodies mentioned above: Thank You's, stickers, postcards, window
 		sticker, flyers and OneEuropeans pin badge.</p>
 
-		<p><b>Donate &euro;250 or more</b><br>
+		<p class="pledge"><b>Donate &euro;250 or more</b>
 		All that and more! Donate more than 250 Euros and receive the
 		Collectors print editon of the Yearbook 2013 and all of the other Rewards
 		previously mentioned. Furthermore, in recognition of your wonderful support
@@ -139,7 +139,7 @@
 		Directors to hear and ask about our story to date, our plans for 2014 and
 		beyond, and of course our Thanks!</p>
 
-		<p><b>Donate &euro;500 or more</b><br>
+		<p class="pledge"><b>Donate &euro;500 or more</b>
 		Hello Patron!! A donation of more than 500 Euros deserves special
 		recognition. We appreciate that your donation represents just how much you
 		want to see OneEurope suceed. We value all the support we receive and are
