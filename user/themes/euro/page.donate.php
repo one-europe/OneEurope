@@ -34,6 +34,7 @@
 	</div>
 	<article class="body" style="float: left; margin-right: 400px;"><?php echo $post->content_out; ?></article>
 	<div class="box donate-side">
+		<p style="margin-bottom: 10px;"><b>Support OneEurope!<br>Donate securely with Credit Card, Paypal and Flattr</b></p>
 		<div class="donate-buttons">
 			<div class="part">
 				<form action="./donate" method="post">
@@ -90,6 +91,8 @@
 			</div>
 		</div>
 
+		<p class="donate-faq"><a href="#" title="FAQ">Frequently Asked Questions</a></p>
+
 		<p><b>Please consider donating an amount of your choice. Even a few euros can make a big difference!</b></p>
 
 		<p class="pledge"><b>Donate &euro;5 or more</b>
@@ -99,7 +102,7 @@
 
 		<p class="pledge"><b>Donate &euro;10 or more</b>
 		Postcard from OneEurope! You will receive an exclusive OneEurope
-		psotcard with personal message from a team member. We will also list your name on our website
+		postcard with personal message from a team member. We will also list your name on our website
 		and you'll receive a Thank You message via email which will come with a
 		download of an exclusive OneEurope Screensaver for your PC.</p>
 
