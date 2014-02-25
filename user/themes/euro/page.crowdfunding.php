@@ -13,6 +13,7 @@
 <a name="top"></a>
 <div class="content donate">
 	<h1><?php echo $post->title_out; ?></h1>
+	<img style="margin: 15px 0 5px;" src="http://one-europe.info/user/files/Crowdfunding/banner2.jpg" width="950" height="142" />
 	<div class="box with-addthis">
 		<span class="please-share">Please help us share this campaign:</span>
 		<!-- AddThis Button BEGIN -->
@@ -40,6 +41,7 @@
 				<form action="./donate" method="post">
 					<input type="text" id="amount-stripe" placeholder="Sum" />
 					<button id="pay-stripe">Donate with card</button>
+					<img style="float: right; margin-top: 5px;" src="<?php Site::out_url( 'theme' )?>/img/outline.png" width="100" height="22" />
 					<script src="https://checkout.stripe.com/checkout.js"></script>
 					<script>
 						var handler = StripeCheckout.configure({
