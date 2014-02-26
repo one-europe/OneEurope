@@ -618,12 +618,15 @@ class MetaSeo extends Plugin
 					if (isset($this->theme->post)) {
 						if( strlen( $this->theme->post->info->html_title ) ) {
 							$out = $this->theme->post->info->html_title;
+							echo 1 . $out;
 						}
 						else {
 							$out = $this->theme->post->title . ' - ';
+							echo 2 . $out;
 						}
 					}
 					$out .= Options::get( 'title' );
+					echo 3 . $out;
 					break;
 			}
 
