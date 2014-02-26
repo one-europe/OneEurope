@@ -4,8 +4,8 @@ if ($_POST) {
 	require_once('./lib/Stripe.php');
 	
 	$stripe = array(
-		"secret_key"      => "sk_test_C0J7bbsVhtfCzWkQ9r4uQFtD",
-		"publishable_key" => "pk_test_XaplsFD7NLA1u19mjKVM1r6Q"
+		"secret_key"      => "sk_live_CTroOsJmZJJPGEfdQtuf45kh",
+		"publishable_key" => "pk_live_d7uVopGCxMtSVQS60zuJtIAF"
 	);
 	
 	try {
