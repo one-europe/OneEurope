@@ -4,7 +4,7 @@
 	<ul>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/about">About</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/donate"><b>Donate</b></a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding"><b>Crowdfunding</b></a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a></li>
 		<li class="clear"></li>
@@ -12,8 +12,7 @@
 </div>
 <a name="top"></a>
 <div class="content donate">
-	<h1><?php echo $post->title_out; ?></h1>
-	<img style="margin: 15px 0 5px;" src="http://one-europe.info/user/files/Crowdfunding/banner2.jpg" width="950" height="142" />
+	<img style="margin: 5px 0 5px;" src="http://one-europe.info/user/files/Crowdfunding/banner2.jpg" width="950" />
 	<div class="box with-addthis">
 		<span class="please-share">Please help us share this campaign:</span>
 		<!-- AddThis Button BEGIN -->
