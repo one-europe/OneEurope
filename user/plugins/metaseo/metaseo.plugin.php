@@ -614,8 +614,8 @@ class MetaSeo extends Plugin
 				case 'display_entry':
 				case 'display_page':
 				default:
-					echo 0 . $this->theme->post;
 					if (isset($this->theme->post)) {
+						echo 0 . $this->theme->post->info->html_title;
 						if( strlen( $this->theme->post->info->html_title ) ) {
 							$out = $this->theme->post->info->html_title;
 							echo 1 . $out;
