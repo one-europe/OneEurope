@@ -103,7 +103,7 @@
 
 		<p class="pledge"><b>Donate &euro;10 or more</b>
 		Postcard from OneEurope! You will receive an exclusive OneEurope
-		postcard with personal message from a team member. We will also list your name on our website
+		postcard with a personal message from a team member. We will also list your name on our website
 		and you'll receive a Thank You message via email which will come with a
 		download of an exclusive OneEurope Screensaver for your PC.</p>
 
@@ -111,7 +111,7 @@
 		Flying with stickers! We will send you OneEurope stickers to
 		decorate your stuff with and some promotional flyers so you can represent us
 		in your community. In addition you will receive an exclusive OneEurope
-		postcard with personal message from a team member. We will also list your name on our website
+		postcard with a personal message from a team member. We will also list your name on our website
 		and you'll receive a Thank You message via email which will come with a
 		download of an exclusive OneEurope Screensaver for your PC.</p>
 
@@ -120,9 +120,9 @@
 		and to celebrate that we have put together a Yearbook of our best articles,
 		infographics and more. Donate 50 Euros or more and receive a digital version
 		of the Yearbook before anyone else. In
-		addition you will receive an exclusive OneEurope postcard with personal
-		message from a team member, your name isted on our website an email Thank You
-		message and an exclusive OneEurope Screensaver for your PC. Not only that, you'll also get a great
+		addition you will receive an exclusive OneEurope postcard with a personal
+		message from a team member, your name listed on our website, a Thank You message via 
+		email and an exclusive OneEurope Screensaver for your PC. Not only that, you'll also get a great
 		package of OneEurope stickers, flyers, a reusable car window sticker AND a
 		OneEurope pin badge to prove you are now a OneEuropean!</p>
 
@@ -130,8 +130,8 @@
 		OneEurope Yearbook 2013 - Collector's Print Edition. Get your
 		hands on the most exclusive item in our collection of rewards, the first
 		print edition magazine from OneEurope featuring 2013's best articles,
-		infographics and other content. Support us with more than 100 euro and be one
-		of the first to own it from the original print run, Hot off the Press! Plus
+		infographics and other content. Support us with €100 and be one of the first
+		to own it from the original print run, Hot off the Press! Plus
 		all the goodies mentioned above: Thank You's, stickers, postcards, window
 		sticker, flyers and OneEuropeans pin badge.</p>
 
@@ -146,7 +146,7 @@
 		<p class="pledge"><b>Donate &euro;500 or more</b>
 		Hello Patron!! A donation of more than 500 Euros deserves special
 		recognition. We appreciate that your donation represents just how much you
-		want to see OneEurope suceed. We value all the support we receive and are
+		want to see OneEurope succeed. We value all the support we receive and are
 		always glad of feedback which is why we would invite you to join our Board of
 		Patrons with a special advisory role, with direct contact to our Directors.
 		We'll keep you regularly updated on our latest developments as we transform
