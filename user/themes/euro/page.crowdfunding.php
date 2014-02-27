@@ -92,7 +92,7 @@
 			</div>
 		</div>
 
-		<p class="donate-faq"><a href="#" title="FAQ">Frequently Asked Questions</a></p>
+		<p class="donate-faq"><a href="#faq" title="FAQ">Frequently Asked Questions</a></p>
 
 		<p><b>Please consider donating an amount of your choice. Even a few euros can make a big difference!</b></p>
 
