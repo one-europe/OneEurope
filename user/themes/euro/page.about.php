@@ -3,12 +3,13 @@
 	<ul>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/about"><b>About</b></a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a></li>
-		<!-- <li><a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a></li> -->
+		<div><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding">Crowdfunding ›</a></div>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a></li>
 		<li class="clear"></li>
 	</ul>
 </div>
+<img style="margin: 5px 0 15px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner.png" width="950" height="124" />
 <div id="about-page">
 	<div class="about">
 		<div class="content">					

@@ -12,7 +12,7 @@
 </div>
 <a name="top"></a>
 <div class="content donate">
-	<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner.jpg" width="950" height="124" />
+	<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner.png" width="950" height="124" />
 	<div class="box with-addthis">
 		<span class="please-share">Please help us share this campaign:</span>
 		<!-- AddThis Button BEGIN -->
