@@ -98,6 +98,7 @@
 					<a href="/feeds" class="icon-rs" title="Subscribe via RSS"></a>
 				</div>
 				<div class="clear"></div>
+				<?php if ($post->slug != 'crowdfunding') { ?>
 				<div id="subnav">
 					<div class="debates-list">
 						<?php foreach($menus as $debate) {?>
@@ -105,4 +106,5 @@
 						<?php } ?>
 					</div>
 				</div>
+				<?php } ?>
 			</div>	
