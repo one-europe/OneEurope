@@ -44,6 +44,7 @@
 					<div class="clearfix"></div>
 				</section>
 				<section class="body"><?php echo $post->content_out; ?></section>
+				<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/banner.short.jpg" width="627" height="124" />
 				<footer>
 					<?php if ( $post->author->info->userfield_Description || $post->info->origauthor ) { 
 						if ( $post->info->showauthor == 1 ) { ?>

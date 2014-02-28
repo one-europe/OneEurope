@@ -14,7 +14,8 @@
 				<?php } ?>
 			</div>
 			<div class="clear"></div>
-		</div>			
+		</div>
+		<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/banner.short.jpg" width="627" height="124" />
 		<div class="secondary">
 			<?php if (is_object($news)) {
 				$count = $news->count_all();

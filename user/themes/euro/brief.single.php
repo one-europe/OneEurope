@@ -78,6 +78,8 @@
 					<?php echo $post->content_out; ?>
 				
 				</section>
+
+				<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/banner.short.jpg" width="627" height="124" />
 				
 				<footer>
 					
