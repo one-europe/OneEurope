@@ -9,7 +9,6 @@
 		<li class="clear"></li>
 	</ul>
 </div>
-<img style="margin: 5px 0 15px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner.png" width="950" height="124" />
 <div class="page">
 	<h1>Get involved!</h1>
 	<h3>There are many ways of taking part:</h3>

@@ -107,4 +107,5 @@
 					</div>
 				</div>
 				<?php } ?>
-			</div>	
+			</div>
+			<img style="margin: 0 0 20px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner.png" width="950" height="124" />

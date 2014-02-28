@@ -9,7 +9,6 @@
 		<li class="clear"></li>
 	</ul>
 </div>
-<img style="margin: 5px 0 15px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner.png" width="950" height="124" />
 <div id="about-page">
 	<div class="about">
 		<div class="content">					
