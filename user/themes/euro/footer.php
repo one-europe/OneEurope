@@ -15,7 +15,7 @@
 							<div><a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team ›</a></div>
 							<div><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact ›</a></div>
 							<div><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us ›</a></div>
-							<div><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding">Crowdfunding ›</a></div>
+							<div><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding">Donate ›</a></div>
 							<div><a href="<?php Site::out_url( 'habari' ); ?>/imprint">Legal ›</a></div>
 							<div><a href="<?php Site::out_url( 'habari' ); ?>/auth/login">Login ›</a></div>
 						</nav>

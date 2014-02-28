@@ -3,7 +3,7 @@
 	<ul>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/about"><b>About</b></a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding">Crowdfunding ›</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding">Crowdfunding</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a></li>
 		<li class="clear"></li>
