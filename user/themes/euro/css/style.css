@@ -2547,9 +2547,10 @@ aside.disqus h3, .similar-posts h3 {
 	-moz-box-shadow: 0 0 5p0 rgba(0, 0, 0, 0.2);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
-#table15221 { border-spacing: collapse; background: url('../img/meter-goal.png') 40px 0 no-repeat; float: right; }
-#table15221 td { padding: 15px 0 0 0; box-shadow: none; width: 260px; height: 60px;
-					font-size: 0; /* 24px */ color: #000; font-family: georgia; text-align: right; }
+#table15221 { border-spacing: collapse; background: url('../img/meter-goal.png') no-repeat; width: 100%; }
+#table15221 td { padding: 0; box-shadow: none; width: 260px; height: 150px;
+					font-size: 0; /* 24px */ color: #000; font-family: georgia; text-align: right;
+					background: url('../img/meter-therm.png') 100% 0 no-repeat; }
 /* #table15221.p10 { background-position: -150px 0; }
 #table15221.p20 { background-position: -300px 0; }
 #table15221.p30 { background-position: -450px 0; }
