@@ -16,7 +16,7 @@
 			<div class="clear"></div>
 		</div>
 		<a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding" title="Together we build the Future of Europe!">
-			<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/banner.short.jpg" width="627" height="124" />
+			<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/static/bottom-banner.png" width="627" height="124" />
 		</a>
 		<div class="secondary">
 			<?php if (is_object($news)) {
