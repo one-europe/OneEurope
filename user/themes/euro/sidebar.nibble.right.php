@@ -50,7 +50,7 @@
 	</section>
 
 	<a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding" title="Together we build the Future of Europe!">
-		<img style="margin-bottom: 20px;" src="<?php Site::out_url( 'theme' )?>/img/static/right-banner.png" width="295" height="295" />
+		<img style="margin-bottom: 20px;" src="<?php Site::out_url( 'theme' )?>/img/static/right-banner-01.png" width="295" height="295" />
 	</a>
 
 	<?php echo $theme->display ('sidebar.elem.newsletter'); ?>	
