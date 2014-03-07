@@ -2551,15 +2551,15 @@ aside.disqus h3, .similar-posts h3 {
 #table15221 td { padding: 0; box-shadow: none; width: 260px; height: 150px;
 					font-size: 0; /* 24px */ color: #000; font-family: georgia; text-align: right;
 					background: url('../img/meter-therm.png') 100% 0 no-repeat; }
-/* #table15221.p10 { background-position: -150px 0; }
-#table15221.p20 { background-position: -300px 0; }
-#table15221.p30 { background-position: -450px 0; }
-#table15221.p40 { background-position: -600px 0; }
-#table15221.p50 { background-position: -750px 0; }
-#table15221.p60 { background-position: -900px 0; }
-#table15221.p70 { background-position: -1050px 0; }
-#table15221.p80 { background-position: -1200px 0; }
-#table15221.p90 { background-position: -1350px 0; } */
+#table15221.p10 td { background-position: 100% -300px; }
+#table15221.p20 td { background-position: 100% -450px; }
+#table15221.p30 td { background-position: 100% -600px; }
+#table15221.p40 td { background-position: 100% -750px; }
+#table15221.p50 td { background-position: 100% -900px; }
+#table15221.p60 td { background-position: 100% -1050px; }
+#table15221.p70 td { background-position: 100% -1200px; }
+#table15221.p80 td { background-position: 100% -1350px; }
+#table15221.p90 td { background-position: 100% -1500px; }
 
 /* END ABOUT */
 

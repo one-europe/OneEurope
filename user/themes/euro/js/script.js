@@ -43,19 +43,19 @@
 
 	// donate widget
 	var donateTable = $('#table15221'),
-		donateGoal = donateTable.find('tr:first').find('td').text(),
+		donateGoal = 5000,
 		donateActual = donateTable.find('tr:last').find('td').text(),
 		donateClass = '';
 
-	donateClass = donateActual > donateGoal * 0.1 ? 'p90' : donateClass;
-	donateClass = donateActual > donateGoal * 0.2 ? 'p80' : donateClass;
-	donateClass = donateActual > donateGoal * 0.3 ? 'p70' : donateClass;
-	donateClass = donateActual > donateGoal * 0.4 ? 'p60' : donateClass;
+	donateClass = donateActual > donateGoal * 0.1 ? 'p10' : donateClass;
+	donateClass = donateActual > donateGoal * 0.2 ? 'p20' : donateClass;
+	donateClass = donateActual > donateGoal * 0.3 ? 'p30' : donateClass;
+	donateClass = donateActual > donateGoal * 0.4 ? 'p40' : donateClass;
 	donateClass = donateActual > donateGoal * 0.5 ? 'p50' : donateClass;
-	donateClass = donateActual > donateGoal * 0.6 ? 'p40' : donateClass;
-	donateClass = donateActual > donateGoal * 0.7 ? 'p30' : donateClass;
-	donateClass = donateActual > donateGoal * 0.8 ? 'p20' : donateClass;
-	donateClass = donateActual > donateGoal * 0.9 ? 'p10' : donateClass;
+	donateClass = donateActual > donateGoal * 0.6 ? 'p60' : donateClass;
+	donateClass = donateActual > donateGoal * 0.7 ? 'p70' : donateClass;
+	donateClass = donateActual > donateGoal * 0.8 ? 'p80' : donateClass;
+	donateClass = donateActual > donateGoal * 0.9 ? 'p90' : donateClass;
 	
 	donateTable.addClass(donateClass);
 
