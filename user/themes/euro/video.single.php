@@ -45,7 +45,7 @@
 				</section>
 				<section class="body"><?php echo $post->content_out; ?></section>
 				<a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding" title="Together we build the Future of Europe!">
-					<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/static/bottom-banner-01.png" width="627" height="124" />
+					<img style="margin: 5px 0 5px;" src="<?php Site::out_url( 'theme' )?>/img/static/bottom-banner-02.png" width="627" height="124" />
 				</a>
 				<footer>
 					<?php if ( $post->author->info->userfield_Description || $post->info->origauthor ) { 

@@ -109,5 +109,5 @@
 				<?php } ?>
 			</div>
 			<a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding" title="Together we build the Future of Europe!">
-				<img style="margin: 0 0 20px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner-01.png" width="950" height="124" />
+				<img style="margin: 0 0 20px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner-02.png" width="950" height="124" />
 			</a>
