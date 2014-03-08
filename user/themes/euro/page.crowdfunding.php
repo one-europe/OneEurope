@@ -152,6 +152,11 @@
 		into a professional non-profit organisation. Naturally please enjoy your own
 		bumper pack of rewards goodies too!</p>
 
+		<div style="overflow: hidden; padding: 20px 0 0;">
+			<a data-pin-do="embedUser" href="http://www.pinterest.com/oneeurope/" data-pin-scale-width="111" data-pin-scale-height="1500" data-pin-board-width="355">Visit One Europe's profile on Pinterest.</a>
+			<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
+		</div>
+
 	</div>
 </div>
 <?php if (User::identify()->loggedin) { ?>
