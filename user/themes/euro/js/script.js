@@ -43,21 +43,23 @@
 
 	// donate widget
 	var donateTable = $('#table15221'),
-		donateGoal = 5000,
-		donateActual = donateTable.find('tr:last').find('td').text(),
-		donateClass = '';
+		goal = 5000,
+		text = donateTable.find('tr').find('td').text(),
+		re = /\d+$/,
+		value =  parseInt(text.match(re), 10),
+		cls = '';
 
-	donateClass = donateActual > donateGoal * 0.1 ? 'p10' : donateClass;
-	donateClass = donateActual > donateGoal * 0.2 ? 'p20' : donateClass;
-	donateClass = donateActual > donateGoal * 0.3 ? 'p30' : donateClass;
-	donateClass = donateActual > donateGoal * 0.4 ? 'p40' : donateClass;
-	donateClass = donateActual > donateGoal * 0.5 ? 'p50' : donateClass;
-	donateClass = donateActual > donateGoal * 0.6 ? 'p60' : donateClass;
-	donateClass = donateActual > donateGoal * 0.7 ? 'p70' : donateClass;
-	donateClass = donateActual > donateGoal * 0.8 ? 'p80' : donateClass;
-	donateClass = donateActual > donateGoal * 0.9 ? 'p90' : donateClass;
+	cls = value > goal * 0.1 ? 'p10' : cls;
+	cls = value > goal * 0.2 ? 'p20' : cls;
+	cls = value > goal * 0.3 ? 'p30' : cls;
+	cls = value > goal * 0.4 ? 'p40' : cls;
+	cls = value > goal * 0.5 ? 'p50' : cls;
+	cls = value > goal * 0.6 ? 'p60' : cls;
+	cls = value > goal * 0.7 ? 'p70' : cls;
+	cls = value > goal * 0.8 ? 'p80' : cls;
+	cls = value > goal * 0.9 ? 'p90' : cls;
 	
-	donateTable.addClass(donateClass);
+	donateTable.addClass(cls);
 
 
 })(jQuery);

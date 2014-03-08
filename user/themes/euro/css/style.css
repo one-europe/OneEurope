@@ -2547,9 +2547,9 @@ aside.disqus h3, .similar-posts h3 {
 	-moz-box-shadow: 0 0 5p0 rgba(0, 0, 0, 0.2);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
-#table15221 { border-spacing: collapse; background: url('../img/meter-goal.png') no-repeat; width: 100%; }
-#table15221 td { padding: 65px 140px 0 0; box-shadow: none; width: 120px; height: 85px;
-					font-size: 24px; color: #000; font-family: georgia; text-align: right;
+#table15221 { border-spacing: collapse; background: url('../img/meter-goal-01.png') no-repeat; width: 100%; }
+#table15221 td { padding: 75px 125px 0 0; box-shadow: none; width: 135px; height: 75px;
+					font-size: 19px; color: #000; font-family: georgia; text-align: right;
 					background: url('../img/meter-therm.png') 100% 0 no-repeat; }
 #table15221.p10 td { background-position: 100% -300px; }
 #table15221.p20 td { background-position: 100% -450px; }
