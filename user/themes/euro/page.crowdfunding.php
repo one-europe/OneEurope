@@ -33,7 +33,7 @@
 	</div>
 	<article class="body" style="float: left; margin-right: 400px;"><?php echo $post->content_out; ?></article>
 	<div class="box donate-side">
-		<p style="margin-bottom: 10px;"><b>Support OneEurope!<br>Donate securely with Credit Card, Paypal and Flattr</b></p>
+		<p style="margin-bottom: 10px;"><b>Support OneEurope!<br>Donate securely with a Debit Card, Credit Card, Paypal, or Flattr</b></p>
 		<div class="donate-buttons">
 			<div class="part">
 				<form action="./donate" method="post">
