@@ -98,7 +98,6 @@
 					<a href="/feeds" class="icon-rs" title="Subscribe via RSS"></a>
 				</div>
 				<div class="clear"></div>
-				<?php if ($post->slug != 'crowdfunding') { ?>
 				<div id="subnav">
 					<div class="debates-list">
 						<?php foreach($menus as $debate) {?>
@@ -106,8 +105,4 @@
 						<?php } ?>
 					</div>
 				</div>
-				<?php } ?>
 			</div>
-			<a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding" title="Together we build the Future of Europe!">
-				<img style="margin: 0 0 20px;" src="<?php Site::out_url( 'theme' )?>/img/static/top-banner-02.png" width="950" height="124" />
-			</a>
