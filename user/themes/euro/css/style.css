@@ -722,7 +722,7 @@ li.menu_4 .col3 {
 #subnav .debates-list span { display: inline-block; margin: 0 5px 0 0; padding: 0 5px 0 0; border-right: 1px solid #ccc; }
 #subnav .debates-list span { font-family: georgia; font-size: 15px; text-shadow: 0 1px 1px rgba(0,0,0, .3); }
 #subnav .debates-list span:last-child,
-#subnav .debates-list span:nth-child(5) { border: none; }
+#subnav .debates-list span:nth-child(4) { border: none; }
 #subnav ul { list-style: none outside none; padding: 0; margin: 0; width: 885px; float: right; }
 #subnav ul li { margin: 0 5px 0 0; padding: 0 5px 0 0; border-right: 1px solid #ccc; float: left; }
 #subnav li:last-child { border: none; }
