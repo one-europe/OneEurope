@@ -467,6 +467,8 @@ body {
 .sm-buttons .icon-rs	{ background-position: -192px 0; }
 .sm-buttons .icon-vk	{ background-position: -224px 0; }
 
+.sm-buttons.at-the-bottom{ overflow: hidden; float: none; padding-left: 10px; padding-top: 0; }
+
 
 /** ## NAVIGATION ## **/
 
@@ -2685,12 +2687,12 @@ aside.disqus h3, .similar-posts h3 {
 
 /* MAILCHIMP SIGNUP FORM STYLES */
 
-#sidebar .newsletter-sidebar {
+#profile-sidebar .newsletter-sidebar, #sidebar .newsletter-sidebar {
 	background: #e5f0fa;
 	border: 1px solid #bebebe;
 }
 
-#sidebar .newsletter-sidebar .h {
+#profile-sidebar .newsletter-sidebar .h, #sidebar .newsletter-sidebar .h {
 	border-bottom: 1px solid #bebebe;
 }
 
