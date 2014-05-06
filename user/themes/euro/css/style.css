@@ -468,6 +468,7 @@ body {
 .sm-buttons .icon-vk	{ background-position: -224px 0; }
 
 .sm-buttons.at-the-bottom{ overflow: hidden; float: none; padding-left: 10px; padding-top: 0; }
+.sm-buttons.on-home-page{ padding-top: 15px; padding-bottom: 15px; }
 
 
 /** ## NAVIGATION ## **/
