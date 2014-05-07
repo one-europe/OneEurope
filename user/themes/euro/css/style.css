@@ -1123,6 +1123,7 @@ div.list-2 .list:nth-of-type(4n+0) {
 	margin-bottom: 10px;
 	font-family: Georgia, serif;
 	font-size: 25px;
+	line-height: 30px;
 	font-weight: bold;
 }
 .plugticle h2.excerpt {
@@ -2697,7 +2698,11 @@ aside.disqus h3, .similar-posts h3 {
 	border-bottom: 1px solid #bebebe;
 }
 
-#mc_embed_signup { font: 14px Helvetica, Arial, sans-serif; width: 245px; float: right; width: 100% !important; }
+#profile-sidebar .newsletter-sidebar #mc_embed_signup, #sidebar .newsletter-sidebar #mc_embed_signup {
+	width: 100%;
+}
+
+#mc_embed_signup { font: 14px Helvetica, Arial, sans-serif; width: 245px; float: right; /*width: 100% !important;*/ }
 #mc_embed_signup form{display:block;position:relative;text-align:left;padding:10px 0 10px 3%}
 #mc_embed_signup h2{font-weight:bold;padding:0;margin:15px 0;font-size:1.4em;}
 #mc_embed_signup input{border:1px solid #999;-webkit-appearance:none;}
