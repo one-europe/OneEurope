@@ -2,13 +2,13 @@
 	'use strict';
 
 	// big picture on home page
-	$('.list-2').find('img').each(function () {
-		var image = $(this),
-			height = image.height(),
-			marginTopVal = -(Math.ceil(height / 2) - 80);
-		if (height > 160) image.css({ marginTop: marginTopVal, visibility: 'visible'});
-		else image.css({ height: 160, visibility: 'visible'});
-	});
+	// $('.list-2').find('img').each(function () {
+	// 	var image = $(this),
+	// 		height = image.height(),
+	// 		marginTopVal = -(Math.ceil(height / 2) - 80);
+	// 	if (height > 160) image.css({ marginTop: marginTopVal, visibility: 'visible'});
+	// 	else image.css({ height: 160, visibility: 'visible'});
+	// });
 
 	$('ul.sf-menu').superfish({
 		animation:		{opacity: 'show'},		// fade-in and slide-down animation 
@@ -60,6 +60,12 @@
 	cls = value > goal * 0.9 ? 'p90' : cls;
 	
 	donateTable.addClass(cls);
+
+	$('.img-wrap').nailthumb({
+		replaceAnimation: null,
+		preload: false,
+		onFinish: function (el) { el.find('img').addClass('v'); }
+	});
 
 
 })(jQuery);

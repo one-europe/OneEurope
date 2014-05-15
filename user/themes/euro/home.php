@@ -73,7 +73,7 @@
 					} elseif ( $j <= 4 ) {
 						$j++;
 			?>
-				<div class="list">
+				<div class="list<?php echo $j == 4 ? ' list-last' : ''; ?>">
 				<?php if ( $brief->status == Post::status('scheduled') ) { ?>
 					<div class="content-badge scheduled">
 						<span>scheduled</span>
@@ -94,7 +94,9 @@
 			foreach ($posts as $post ) {
 				if ($post->content_type != 17) { ?>
 					<div class="list">
-						<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" height="100" width="160"/></a>
+						<div class="img-wrap">
+							<img src="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="160" />
+						</div>
 						<header><h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2></header>
 						<article class="body"><?php if ( $post->info->excerpt ) { echo $post->info->excerpt; } else { echo $post->content_out; }?></article>
 						<footer>
