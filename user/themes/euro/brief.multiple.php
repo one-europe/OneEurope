@@ -10,7 +10,7 @@
 				<span class="first"><a href="/in-brief">The Big Picture ›</a></span>
 			</div>
 
-			<div id="content" class="home">
+			<div id="content">
 					
 				<ul class="nibble-list">
 				

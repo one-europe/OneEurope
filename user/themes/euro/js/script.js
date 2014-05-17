@@ -1,6 +1,11 @@
 (function ($) {
 	'use strict';
 
+	$.ajaxSetup({ cache: true });
+	$.getScript('//connect.facebook.net/en_UK/sdk.js', function () {
+		FB.init({ appId: '121944181248560', xfbml: true, version: 'v2.0' });
+	});
+
 	// big picture on home page
 	// $('.list-2').find('img').each(function () {
 	// 	var image = $(this),
@@ -67,6 +72,16 @@
 		onFinish: function (el) { el.find('img').addClass('v'); }
 	});
 
+	addthis.box('#addthis_trendingcontent', {
+		feed_title: '',
+		feed_type: 'shared',
+		feed_period: 'week',
+		num_links: 8,
+		height: 'auto',
+		width: 'auto',
+		domain: 'one-europe.info',
+		remove: '- OneEurope'
+	});
 
 })(jQuery);
 
@@ -216,14 +231,11 @@
 
 
 // ===== flattr code, not in use atm
-(function ($) {
-	var FlattrButton = $('.FlattrButton'),
-		flloadFlattrScript = function () {
-			var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-			t.parentNode.insertBefore(s, t);
-		};
-	if (FlattrButton) flloadFlattrScript();
-})(jQuery);
+var flattrButton = $('.FlattrButton');
+if (flattrButton && flattrButton.length) {
+	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+	s.type = 'text/javascript';
+	s.async = true;
+	s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+	t.parentNode.insertBefore(s, t);
+}

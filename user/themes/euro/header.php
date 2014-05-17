@@ -7,7 +7,7 @@
 		<title><?php echo Options::get( 'title' ); ?></title>
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
 		<link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/img/favicon.ico" />
-		<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?<?php echo date_timestamp_get(date_create()); ?>" />
+		<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?20140517" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon.png" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-72x72.png" sizes="72x72" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" sizes="114x114" />
@@ -19,15 +19,6 @@
 	<body id="top">
 		<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		<div id="fb-root"></div>
-		<script>
-			(function(d, s, id) {
-			  var js, fjs = d.getElementsByTagName(s)[0];
-			  if (d.getElementById(id)) {return;}
-			  js = d.createElement(s); js.id = id;
-			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=121944181248560";
-			  fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));
-		</script>
 		<div id="wrapper">
 			<div id="head">
 				<?php if ($home_page) echo '<h1>'; ?><a id="logo" href="<?php Site::out_url( 'habari' ); ?>" title="OneEurope — One Society, One Democracy, One Europe">OneEurope — One Society, One Democracy, One Europe</a><?php if ($home_page) echo '</h1>'; ?>

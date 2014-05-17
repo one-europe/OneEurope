@@ -91,8 +91,8 @@
 		ga('send', 'pageview');
 	</script>
 
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?<?php echo date_timestamp_get(date_create()); ?>"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?<?php echo date_timestamp_get(date_create()); ?>"></script>		
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?20140517"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?20140517"></script>		
 	
 	</body>
 </html>
