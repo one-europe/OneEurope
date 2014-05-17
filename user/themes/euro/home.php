@@ -9,7 +9,7 @@
 		        	foreach ( $sliders as $post ) { 
 						if ($post->info->shorttitle) {$title = $post->info->shorttitle; } else { $title = $post->title; };
 			 			?>
-					<li class="ui-tabs-nav-item <?php if ( $i == 1 ) { ?>ui-tabs-selected<?php } ?>" id="nav-fragment-<?php echo $i; ?>">
+					<li class="ui-tabs-nav-item <?php if ( $i == 1 ) { ?>ui-state-active<?php } ?>" id="nav-fragment-<?php echo $i; ?>">
 						<a href="#fragment-<?php echo $i; ?>">
 							<img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" />
 							<p><?php echo $title; ?></p>

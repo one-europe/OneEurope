@@ -2240,10 +2240,10 @@ aside.disqus h3, .similar-posts h3 {
 /* #featured li.ui-tabs-selected{
     background:url('images/selected-item.gif') top left no-repeat;  
 }  */
-#featured ul.ui-tabs-nav li.ui-tabs-selected a {  
+#featured ul.ui-tabs-nav li.ui-state-active a {  
     background: #5d666d;  
 }
-#featured ul.ui-tabs-nav li.ui-tabs-selected a p {
+#featured ul.ui-tabs-nav li.ui-state-active a p {
 	color: white;
 	text-shadow: 0 0 5px rgba(255,255,255,.3);
 }
