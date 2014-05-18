@@ -230,7 +230,7 @@
 
 
 
-// flattr code, not in use atm
+// ===== flattr code, not in use atm
 var flattrButton = $('.FlattrButton');
 if (flattrButton && flattrButton.length) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
@@ -240,12 +240,13 @@ if (flattrButton && flattrButton.length) {
 	t.parentNode.insertBefore(s, t);
 }
 
-// g-plus-box: google plus badge
-(function () {
-	var po = document.createElement('script');
-	po.type = 'text/javascript';
-	po.async = true;
-	po.src = 'https://apis.google.com/js/plusone.js?onload=onLoadCallback';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(po, s);
-})();
+/* orientation and scale */
+if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+	var viewportmeta = document.querySelector('meta[name="viewport"]');
+	if (viewportmeta) {
+		viewportmeta.content = 'width=device-width, minimum-scale=1.0, maximum-scale=1.0';
+		document.body.addEventListener('gesturestart', function () {
+			viewportmeta.content = 'width=device-width, minimum-scale=0.25, maximum-scale=1.6';
+		}, false);
+	}
+}
