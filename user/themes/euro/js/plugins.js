@@ -82,3 +82,12 @@ if(!settings.fixed&&!settings.clickIt){obj.mousemove(function(el){$('#'+settings
 https://github.com/cmcculloh/jQuery-UI-Tabs-Rotate
 */
 (function(e){e.extend(e.ui.tabs.prototype,{rotation:null,rotationDelay:null,continuing:null,rotate:function(e,n){var r=this,i=this.options;if((e>1||r.rotationDelay===null)&&e!==undefined){r.rotationDelay=e}if(n!==undefined){r.continuing=n}var s=r._rotate||(r._rotate=function(t){clearTimeout(r.rotation);r.rotation=setTimeout(function(){var e=i.active;r.option("active",++e<r.anchors.length?e:0)},e);if(t){t.stopPropagation()}});var o=r._unrotate||(r._unrotate=!n?function(e){if(e.clientX){r.rotate(null)}}:function(e){t=i.active;s()});if(e){this.element.bind("tabsactivate",s);this.anchors.bind(i.event+".tabs",r.pause);s()}else{clearTimeout(r.rotation);this.element.unbind("tabsactivate",s);this.anchors.unbind(i.event+".tabs",r.pause);delete this._rotate;delete this._unrotate}if(e===1){e=r.rotationDelay}return this},pause:function(){},unpause:function(){var e=this,t=this.options;e.rotate(1,e.continuing)}})})(jQuery)
+
+
+
+
+/*! A fix for the iOS orientationchange zoom bug.
+ Script by @scottjehl, rebound by @wilto.
+ MIT / GPLv2 License.
+*/
+(function(e){function h(){r.setAttribute("content",o);u=true}function p(){r.setAttribute("content",s);u=false}function d(t){c=t.accelerationIncludingGravity;a=Math.abs(c.x);f=Math.abs(c.y);l=Math.abs(c.z);if((!e.orientation||e.orientation===180)&&(a>7||(l>6&&f<8||l<8&&f>6)&&a>5)){if(u){p()}}else if(!u){h()}}var t=navigator.userAgent;if(!(/iPhone|iPad|iPod/.test(navigator.platform)&&/OS [1-5]_[0-9_]* like Mac OS X/i.test(t)&&t.indexOf("AppleWebKit")>-1)){return}var n=e.document;if(!n.querySelector){return}var r=n.querySelector("meta[name=viewport]"),i=r&&r.getAttribute("content"),s=i+",maximum-scale=1",o=i+",maximum-scale=10",u=true,a,f,l,c;if(!r){return}e.addEventListener("orientationchange",h,false);e.addEventListener("devicemotion",d,false)})(this)
