@@ -1,5 +1,4 @@
 <div id="sidebar" class="brief-sidebar">
-
 	<?php if ( $post->info->showauthor == 1 ) { ?>
 		<section class="authorbox">
 			<div class="h"><span>Author</span></div>
@@ -14,40 +13,11 @@
 			<div class="clear"></div>
 		</section>
 	<?php } ?>
-
-	<section class="fb">
-		<div class="h"><span>Stay Tuned</span></div>
-		<a href="https://twitter.com/one1europe" class="twitter-follow-button">Follow @one1europe</a>
-		<div class="g-plus-box"><g:plus href="https://plus.google.com/118353934830681553476" width="297" height=""></g:plus></div>
-		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="297" data-show-faces="true" data-stream="false" data-border-color="#eee" data-header="false"></div>
-	</section>
-
+	<?php echo $theme->display ('sidebar.elem.stay-tuned'); ?>	
 	<?php echo $theme->display ('sidebar.elem.newsletter'); ?>	
 	<?php echo $theme->display ('sidebar.elem.de-vote'); ?>	
 	<?php echo $theme->display ('sidebar.elem.most-shared'); ?>	
-
-	<div style="clear: both; margin-left: -3px; margin-bottom: 15px;">
-		<a data-pin-do="embedUser" href="http://www.pinterest.com/oneeurope/" data-pin-scale-width="91" data-pin-scale-height="200" data-pin-board-width="600">Visit One Europe's profile on Pinterest.</a>
-		<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
-	</div>
-
-	<section class="disqusthreads">
-		<div class="h"><span>Most Commented</span></div>
-		<div id="popularthreads" class="dsq-widget">
-			<script type="text/javascript" src="http://oneeurope.disqus.com/popular_threads_widget.js?num_items=5"></script>
-		</div>
-	</section>
-
-	<section class="recentposts">
-		<div class="h"><span>Recently Published</span></div>
-		<ul>
-			<?php
-				foreach ($theme->recent_posts as $post) {
-					echo '<li><a href="', $post->permalink, '">',
-					$post->title, '</a></li>';
-				}
-			?>
-		</ul>
-	</section>
-
+	<?php echo $theme->display ('sidebar.elem.pinterest-board'); ?>	
+	<?php echo $theme->display ('sidebar.elem.most-commented'); ?>	
+	<?php echo $theme->display ('sidebar.elem.recent-posts'); ?>	
 </div>

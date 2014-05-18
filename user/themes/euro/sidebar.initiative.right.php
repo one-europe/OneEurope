@@ -1,4 +1,4 @@
-	<div id="profile-sidebar" class="toggle">
+	<div id="profile-sidebar">
 		<?php echo $theme->display('sidebar.elem.newsletter'); ?>
 		<section class="sharing">
 			<div class="h"><span>Share</span></div>
@@ -15,17 +15,6 @@
 				<a class="addthis_button_stumbleupon"></a>
 			</div>
 		</section>
-		<?php /*if ( $post->info->twitter ) {
-			$tw_data = explode('-', $post->info->twitter);
-			$tw_id = $tw_data[1];
-			$tw_name = $tw_data[0];
-			if ($tw_id && $tw_name) { ?>
-			<section class="twitter">
-				<a class="twitter-timeline" href="https://twitter.com/<?php echo $tw_name; ?>"
-					data-dnt="true"
-					data-widget-id="<?php echo $tw_id; ?>">Tweets by @<?php echo $tw_name; ?></a>
-			</section>
-		<?php } }*/ ?>
 		<?php if ( $post->info->url || $post->info->twitter ) { ?>
 		<section>
 			<div class="h"><span>More about this</span></div>
@@ -36,18 +25,14 @@
 		</section>
 		<?php } ?>
 		<?php if ( $post->info->more ) { ?>
-		<section class="">
+		<section>
 			<div class="h"><span>More</span></div>
 			<span><?php echo $post->info->more; ?></span>
 		</section>
 		<?php } ?>
 		<section class="fb">
 			<div class="h"><span>Connect with us</span></div>
-			<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://one-europe.info/about"></a>
-			<noscript><a href="http://flattr.com/thing/697920/OneEurope" target="_blank">
-			<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
 			<div class="g-plus-box" style="overflow: hidden; border-right: 1px solid #c8c9ca; height: 106px;">
-				<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 				<g:plus href="https://plus.google.com/118353934830681553476" width="297"></g:plus>
 			</div>
 			<div class="fb-like-box" style="margin-top: 20px;" data-href="http://www.facebook.com/OneEurope" data-width="252" data-show-faces="true" data-stream="true" data-show-border="false" data-header="false"></div>

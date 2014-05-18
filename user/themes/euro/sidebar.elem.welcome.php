@@ -1,0 +1,1 @@
+<a class="welcome" href="/about" title="We incite cross-border debate for the emerging European society"></a>

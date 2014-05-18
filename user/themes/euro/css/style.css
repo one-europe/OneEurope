@@ -1809,7 +1809,8 @@ article > footer nav {
 .inbrief ul li {
 	border-top: 1px solid #EEF1F5;
 	margin: -13px -10px 0;
-	padding: 10px 10px 16px;}
+	padding: 10px 10px 16px;
+}
 
 /* pool of contributors, sidebar front */
 .pool img {
@@ -2328,14 +2329,19 @@ aside.disqus h3, .similar-posts h3 {
 	border-bottom: 1px solid #999;
 }
 
-.welcome	{ width: 295px; height: 229px; overflow: hidden; margin-bottom: 20px; }
-.welcome a	{ width: 100%; height: 100%; display: block; background: url('../img/static/welcome-bg.jpg') no-repeat; }
+.welcome { width: 295px; height: 229px; overflow: hidden; margin-bottom: 20px; display: block; background: url('../img/static/welcome-bg.jpg') no-repeat; }
 
 .video-block		{ width: 305px; height: 247px; background: #eee; }
 .video-block p		{ padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
 .video-block a.all	{ display: block; float: right; margin-right: 5px; }
 
-.vote2014-banner { width: 296px; height: 119px; display: block; background: url('../img/ep-vote-2014-bg.png') no-repeat; }
+.vote2014-banner {
+	width: 296px;
+	height: 119px;
+	display: block;
+	margin: 0 0 20px;
+	background: url('../img/ep-vote-2014-bg.png') no-repeat;
+}
 
 /* End Featured Boxes */
 
@@ -2745,10 +2751,6 @@ aside.disqus h3, .similar-posts h3 {
 
 /* DEBATING EUROPE MODEL EP VOTE 2014 */
 
-
-.sidebar-dummy {
-	margin: 0 0 20px;
-}
 
 .devote2013-widget {
 	background-image:url("../img/sidebar_vote2014.png");
