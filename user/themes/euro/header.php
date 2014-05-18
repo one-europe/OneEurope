@@ -7,17 +7,15 @@
 		<title><?php echo Options::get( 'title' ); ?></title>
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
 		<link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/img/favicon.ico" />
-		<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?20140517" />
+		<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?20140518" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon.png" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-72x72.png" sizes="72x72" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" sizes="114x114" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-144x144.png" sizes="144x144" />
 		<?php echo $theme->header(); ?>
 		<script src="<?php Site::out_url( 'theme' ); ?>/js/libs/modernizr-2.5.3.min.js"></script>
-		<script src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
 	</head>
 	<body id="top">
-		<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		<div id="fb-root"></div>
 		<div id="wrapper">
 			<div id="head">

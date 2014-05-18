@@ -230,7 +230,7 @@
 
 
 
-// ===== flattr code, not in use atm
+// flattr code, not in use atm
 var flattrButton = $('.FlattrButton');
 if (flattrButton && flattrButton.length) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
@@ -240,13 +240,23 @@ if (flattrButton && flattrButton.length) {
 	t.parentNode.insertBefore(s, t);
 }
 
-/* orientation and scale */
-if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-	var viewportmeta = document.querySelector('meta[name="viewport"]');
-	if (viewportmeta) {
-		viewportmeta.content = 'width=device-width, minimum-scale=1.0, maximum-scale=1.0';
-		document.body.addEventListener('gesturestart', function () {
-			viewportmeta.content = 'width=device-width, minimum-scale=0.25, maximum-scale=1.6';
-		}, false);
-	}
-}
+// g-plus-box: google plus badge
+(function () {
+	var po = document.createElement('script');
+	po.type = 'text/javascript';
+	po.async = true;
+	po.src = 'https://apis.google.com/js/plusone.js?onload=onLoadCallback';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(po, s);
+})();
+
+// This service is an opportunity to inform your visitors unobtrusively to switch to a newer browse
+var $buoop = {vs: {i: 8, f: 15, o: 12.1, s: 5.1}};
+$buoop.ol = window.onload;
+window.onload = function () {
+	try { if ($buoop.ol) $buoop.ol(); } catch (e) {}
+	var e = document.createElement('script');
+	e.setAttribute('type', 'text/javascript');
+	e.setAttribute('src', '//browser-update.org/update.js');
+	document.body.appendChild(e);
+};
