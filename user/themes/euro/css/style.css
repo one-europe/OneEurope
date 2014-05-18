@@ -1916,9 +1916,7 @@ article > footer nav {
 	border-right: none!important;
 	border-left: none!important;
 }
-.g-plus-box {
-	margin: 7px -11px -20px -11px;
-}
+.g-plus-box { margin: 7px -11px 0; }
 
 
 #footwrap {
