@@ -2022,10 +2022,12 @@ article > footer nav {
 	display: block;
 	margin-bottom: 5px;
 } 
+
+
+
 /*** Dimensions and position of the status messages ***/
 
-.statusMessage {
-	position: absolute;
+.statusMsg {
 	display: none;
 	margin: auto;
 	width: 100%;
@@ -2037,31 +2039,16 @@ article > footer nav {
 	z-index: 6;
 	box-shadow: 0 0 5px rgba(0,0,0,0.3);
 	text-shadow: 0 0 5px rgba(0,0,0,.7);
-}
-.statusMessage p {
 	text-align: center;
 	font-weight: 600;
-	margin: 0;
-	padding: 0;
 	color: #fff;
 }
-#sendingMessage {
-	background: #FFF23A;
-	color: #ccc;
-}	
-#successMessage {
-	background: #34CC1F;
-}	
-#successMessage p {
-	color: #fff;
-	text-shadow: 0 0 4px rgba(0,0,0,1);
-}
-#failureMessage {
-	background: #B12121;
-}	
-#incompleteMessage {
-	background: #B12121;
-}
+
+.incompleteMsg { background: #B12121; }
+.sendingMsg { background: #FFF23A; }
+.successMsg { background: #34CC1F; }	
+.failureMsg { background: #B12121; }	
+
 
 /* END FOOTER */
 

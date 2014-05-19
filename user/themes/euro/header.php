@@ -7,16 +7,15 @@
 		<title><?php echo Options::get( 'title' ); ?></title>
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
 		<link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/img/favicon.ico" />
-		<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?20140518" />
+		<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/style.css?20140519" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon.png" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-72x72.png" sizes="72x72" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" sizes="114x114" />
 		<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-144x144.png" sizes="144x144" />
 		<?php echo $theme->header(); ?>
-		<script src="<?php Site::out_url( 'theme' ); ?>/js/libs/modernizr-2.5.3.min.js"></script>
+		<!--[if lt IE 9]><script src="<?php Site::out_url( 'theme' ); ?>/js/libs/html5shiv.min.js"></script><![endif]-->
 	</head>
 	<body id="top">
-		<div id="fb-root"></div>
 		<div id="wrapper">
 			<div id="head">
 				<?php if ($home_page) echo '<h1>'; ?><a id="logo" href="<?php Site::out_url( 'habari' ); ?>" title="OneEurope — One Society, One Democracy, One Europe">OneEurope — One Society, One Democracy, One Europe</a><?php if ($home_page) echo '</h1>'; ?>

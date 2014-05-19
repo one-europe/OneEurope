@@ -35,7 +35,7 @@
 								<span>Want to get involved, give some feedback or found an error? No Problem! Drop us a line:</span>
 							    <input id="senderName" placeholder="Name" name="senderName" required="required" type="text" />
 							    <input id="senderEmail" placeholder="Email" name="senderEmail" required="required" type="email" />
-							    <textarea id="message" name="message" required="required"></textarea>
+							    <textarea id="senderMessage" placeholder="Message" name="message" required="required"></textarea>
 							    <input id="sendMessage" type="submit" name="sendMessage" value="Send message" class="btn" />
 								<div class="clear"></div>
 							</div>
@@ -47,10 +47,8 @@
 				</div>
 			</div>
 
-			<div id="sendingMessage" class="statusMessage"><p>Sending your message.</p></div>
-			<div id="successMessage" class="statusMessage"><p>Thanks for sending your message! We'll get back to you shortly.</p></div>
-			<div id="failureMessage" class="statusMessage"><p>There was a problem sending your message. Please remove all contained "http://"s and try again.</p></div>
-			<div id="incompleteMessage" class="statusMessage"><p>Please complete all the fields before sending.</p></div>
+			<div id="fb-root"></div>
+
 	<?php /* echo $theme->footer(); */ ?>
 	<?php
 	/*** 
@@ -93,8 +91,8 @@
 		ga('send', 'pageview');
 	</script>
 
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?20140518"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?20140518"></script>		
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?20140519"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?20140519"></script>		
 	
 	</body>
 </html>
