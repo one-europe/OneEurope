@@ -16,10 +16,8 @@
 		</a>
 		<?php if (User::get($post->info->author)->info->twitter) { ?>
 			<a href="https://twitter.com/<?php echo User::get($post->info->author)->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		<?php } elseif ($publisher->info->twitter) { ?>
 			<a href="https://twitter.com/<?php echo $publisher->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		<?php } ?>
 	<?php } else { 
 		$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
@@ -32,7 +30,6 @@
 		</a>
 		<?php if ($publisher->info->twitter) { ?>
 			<a href="https://twitter.com/<?php echo $publisher->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		<?php } ?>
 	<?php } ?>
 	<div class="clear"></div>

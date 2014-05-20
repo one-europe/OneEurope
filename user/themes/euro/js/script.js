@@ -63,17 +63,6 @@
 		onFinish: function (el) { el.find('img').addClass('v'); }
 	});
 
-	addthis.box('#addthis_trendingcontent', {
-		feed_title: '',
-		feed_type: 'shared',
-		feed_period: 'week',
-		num_links: 8,
-		height: 'auto',
-		width: 'auto',
-		domain: 'one-europe.info',
-		remove: '- OneEurope'
-	});
-
 })(jQuery);
 
 
@@ -102,7 +91,7 @@
 		$('#contactForm').submit(submitForm);
 	},
 
-	removeMessage = function () { console.log(this); this.remove(); },
+	removeMessage = function () { this.remove(); },
 
 	submitForm = function () {
 		var contactForm = $(this),
@@ -198,29 +187,83 @@
 var flattrButton = $('.FlattrButton');
 if (flattrButton && flattrButton.length) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-	s.type = 'text/javascript';
 	s.async = true;
 	s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
 	t.parentNode.insertBefore(s, t);
 }
 
 // g-plus-box: google plus badge
-(function () {
-	var po = document.createElement('script');
-	po.type = 'text/javascript';
-	po.async = true;
-	po.src = 'https://apis.google.com/js/plusone.js?onload=onLoadCallback';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(po, s);
-})();
+var gPlusBox = $('.g-plus-box');
+if (gPlusBox && gPlusBox.length) {
+	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+	s.type = 'text/javascript';
+	s.async = true;
+	s.src = 'https://apis.google.com/js/plusone.js';
+	t.parentNode.insertBefore(s, t);
+}
+
+// scoopit-button
+var scoopitButton = $('.scoopit-button');
+if (scoopitButton && scoopitButton.length) {
+	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+	s.async = true;
+	s.src = 'http://www.scoop.it/button/scit.js';
+	t.parentNode.insertBefore(s, t);
+}
+
+// pinterest-board
+var pinterestBoard = $('.pinterest-board');
+if (pinterestBoard && pinterestBoard.length) {
+	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+	s.async = true;
+	s.src = '//assets.pinterest.com/js/pinit.js';
+	t.parentNode.insertBefore(s, t);
+}
+
+// twitter-timeline
+var twitterTimeline = $('.twitter-timeline');
+if (twitterTimeline && twitterTimeline.length) {
+	var s, t = document.getElementsByTagName('script')[0],
+		path = /^http:/.test(document.location) ? 'http' : 'https';
+	if (!document.getElementById('twitter-wjs')) {
+		s = document.createElement('script');
+		s.id = 'twitter-wjs';
+		s.src = path + '://platform.twitter.com/widgets.js';
+		t.parentNode.insertBefore(s, t);
+	}
+}
+
+// addthis_toolbox
+var addthisToolbox = $('.addthis_toolbox'), trending = $('#addthis_trendingcontent');
+if ((addthisToolbox && addthisToolbox.length) || (trending && trending.length)) {
+	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+	s.src = 'http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fe91cf356685c8e';
+	t.parentNode.insertBefore(s, t);
+
+	if (trending.length) {
+		setTimeout(function () {
+			addthis.box('#addthis_trendingcontent', {
+				feed_title: '',
+				feed_type: 'shared',
+				feed_period: 'week',
+				num_links: 8,
+				height: 'auto',
+				width: 'auto',
+				domain: 'one-europe.info',
+				remove: '- OneEurope'
+			});
+		}, 1000);
+	}
+}
+
 
 // This service is an opportunity to inform your visitors unobtrusively to switch to a newer browse
-var $buoop = {vs: {i: 8, f: 15, o: 12.1, s: 5.1}};
-$buoop.ol = window.onload;
-window.onload = function () {
-	try { if ($buoop.ol) $buoop.ol(); } catch (e) {}
-	var e = document.createElement('script');
-	e.setAttribute('type', 'text/javascript');
-	e.setAttribute('src', '//browser-update.org/update.js');
-	document.body.appendChild(e);
-};
+// var $buoop = {vs: {i: 8, f: 15, o: 12.1, s: 5.1}};
+// $buoop.ol = window.onload;
+// window.onload = function () {
+// 	try { if ($buoop.ol) $buoop.ol(); } catch (e) {}
+// 	var e = document.createElement('script');
+// 	e.setAttribute('type', 'text/javascript');
+// 	e.setAttribute('src', '//browser-update.org/update.js');
+// 	document.body.appendChild(e);
+// };

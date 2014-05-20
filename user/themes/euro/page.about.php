@@ -18,7 +18,6 @@
 		<div class="sharing">
 			<div class="fb-like-box" data-href="http://www.facebook.com/oneeurope" data-width="460" data-height="185" data-border-color="#ddd" data-show-faces="true" data-stream="false" data-header="false"></div>
 			<a href="https://twitter.com/one1europe" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @one1europe</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 			&nbsp;&nbsp;<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://one-europe.info/about"></a>
 			<noscript><a href="http://flattr.com/thing/697920/OneEurope" target="_blank">
 			<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>

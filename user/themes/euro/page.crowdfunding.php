@@ -157,9 +157,8 @@
 			<iframe style="float: left;" width="176" height="315" src="//www.youtube.com/embed/Yq7hN9lBTSs?modestbranding=1&amp;rel=0&amp;showinfo=0&amp;controls=0&amp;wmode=transparent" frameborder="0" allowfullscreen=""></iframe>
 		</div>
 
-		<div style="overflow: hidden; padding: 15px 0 0;">
+		<div class="pinterest-board" style="overflow: hidden; padding: 15px 0 0;">
 			<a data-pin-do="embedUser" href="http://www.pinterest.com/oneeurope/" data-pin-scale-width="111" data-pin-scale-height="1600" data-pin-board-width="355">Visit One Europe's profile on Pinterest</a>
-			<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
 		</div>
 
 	</div>
@@ -187,7 +186,6 @@
 	<!-- AddThis Button END -->
 </div>
 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e"></script>
 <script>
 	(function() {
 		var li = document.createElement('script'); li.type = 'text/javascript'; li.async = true;

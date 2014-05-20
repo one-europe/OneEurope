@@ -23,7 +23,6 @@
 		<a class="addthis_button_linkedin_counter"></a>
 		<a class="addthis_counter addthis_pill_style"></a>
 		</div>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
 		<!-- AddThis Button END -->	
 	</div>
 	<div class="clear"></div>
@@ -39,7 +38,6 @@
 		<a class="addthis_button_linkedin_counter"></a>
 		<a class="addthis_counter addthis_pill_style"></a>
 		</div>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
 		<!-- AddThis Button END -->
 	</div>
 </div>
