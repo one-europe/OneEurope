@@ -256,6 +256,15 @@ if ((addthisToolbox && addthisToolbox.length) || (trending && trending.length)) 
 	}
 }
 
+// var disqusThread = $('#disqus_thread');
+// if (disqusThread && disqusThread.length) {
+// 	var dsq = document.createElement('script');
+// 	dsq.type = 'text/javascript';
+// 	dsq.async = true;
+// 	dsq.src = 'http://oneeurope.disqus.com/embed.js';
+// 	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+// }
+
 
 // This service is an opportunity to inform your visitors unobtrusively to switch to a newer browse
 // var $buoop = {vs: {i: 8, f: 15, o: 12.1, s: 5.1}};
