@@ -2803,9 +2803,9 @@ a.bluebuttoncss:visited {
 /* END DEBATING EUROPE MODEL EP VOTE 2014 */
 
 
-#aToolTip { position: absolute; display: none; z-index: 50000; }
-#aToolTip .aToolTipContent { position:relative; margin:0; padding:0; }
-.defaultTheme {
+.ui-tooltip {
+	position: absolute;
+	z-index: 9999;
 	border: 1px solid #444;
 	background: #fff;
 	color: #444;

@@ -35,7 +35,8 @@
 			if (this.value === '') this.value = $(this).data('placeholder');
 		});
 
-	$('.debates-list').find('a').aToolTip();
+	// jqueryui tooltip
+	$('.debates-list').find('a').tooltip({ track: true, position: { my: 'left+8 bottom-8' } });
 
 	// donate widget
 	var donateTable = $('#table15221'),
@@ -143,41 +144,41 @@
 
 // ===== google maps /contact script ===== //
 
-(function (window) {
-	'use strict';
+// (function (window) {
+// 	'use strict';
 
-	window.initmap = function () {
-		var myLatlng = new google.maps.LatLng(50.83870, 4.37284),
-			myOptions = {
-				zoom: 17,
-				center: myLatlng,
-				scrollwheel: false,
-				zoomControl: true,
-				mapTypeControl: true,
-				scaleControl: true,
-				streetViewControl: true,
-				overviewMapControl: true,
-				mapTypeId: google.maps.MapTypeId.HYBRID
-			},
-			map = new google.maps.Map(mapCanvas, myOptions),
-			marker = new google.maps.Marker({
-				title: 'OneEurope, Place du Luxembourg 6, 1050 Bruxelles, Belgium',
-				position: myLatlng,
-				map: map
-			});
-	};
+// 	window.initmap = function () {
+// 		var myLatlng = new google.maps.LatLng(50.83870, 4.37284),
+// 			myOptions = {
+// 				zoom: 17,
+// 				center: myLatlng,
+// 				scrollwheel: false,
+// 				zoomControl: true,
+// 				mapTypeControl: true,
+// 				scaleControl: true,
+// 				streetViewControl: true,
+// 				overviewMapControl: true,
+// 				mapTypeId: google.maps.MapTypeId.HYBRID
+// 			},
+// 			map = new google.maps.Map(mapCanvas, myOptions),
+// 			marker = new google.maps.Marker({
+// 				title: 'OneEurope, Place du Luxembourg 6, 1050 Bruxelles, Belgium',
+// 				position: myLatlng,
+// 				map: map
+// 			});
+// 	};
 
-	var mapCanvas = document.getElementById('map_canvas'),
-		loadScript = function () {
-			var script = document.createElement('script');
-			script.type = 'text/javascript';
-			script.src = 'http://maps.google.com/maps/api/js?sensor=false&callback=initmap';
-			document.body.appendChild(script);
-		};
+// 	var mapCanvas = document.getElementById('map_canvas'),
+// 		loadScript = function () {
+// 			var script = document.createElement('script');
+// 			script.type = 'text/javascript';
+// 			script.src = 'http://maps.google.com/maps/api/js?sensor=false&callback=initmap';
+// 			document.body.appendChild(script);
+// 		};
 
-	if (mapCanvas) loadScript();
+// 	if (mapCanvas) loadScript();
 
-})(this);
+// })(this);
 
 // ===== end google maps /contact script ===== //
 
