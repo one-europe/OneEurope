@@ -63,7 +63,7 @@
 				</noscript>.
 		</p>
 	</section>
-	<div style="overflow: hidden;">
+	<div style="clear: both;">
 		<div style="width: 335px; float: left; padding-right: 20px;">
 			<a class="twitter-timeline" height="303" data-dnt="true" href="https://twitter.com/One1Europe" data-widget-id="372098233318662144">Tweets by @One1Europe</a>
 		</div>

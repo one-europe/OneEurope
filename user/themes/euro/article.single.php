@@ -185,7 +185,7 @@
 				
 				<h3>Further Reading:</h3>
 			
-			 	<div class="meta similar-posts list-1">
+			 	<div class="meta similar-posts list-1 thumbs-list">
 				
 					<?php $list = Posts::get( array( 'content_type' => Post::type( 'article' ),
 							'status' => Post::status( 'published' ),
