@@ -8,6 +8,7 @@
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a></li>
 		<li class="clear"></li>
 	</ul>
+</div>
 <div class="content become-a-patron">
 	<h1><?php echo $post->title_out; ?></h1>
 	<article class="body"><?php echo $post->content_out; ?></article>
