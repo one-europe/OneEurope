@@ -18,6 +18,6 @@
 	<?php echo $theme->display ('sidebar.elem.de-vote'); ?>	
 	<?php echo $theme->display ('sidebar.elem.most-shared'); ?>	
 	<?php echo $theme->display ('sidebar.elem.pinterest-board'); ?>	
-	<?php echo $theme->display ('sidebar.elem.most-commented'); ?>	
+	<?php echo $theme->display ('sidebar.elem.popular-threads'); ?>	
 	<?php echo $theme->display ('sidebar.elem.recent-posts'); ?>	
 </div>

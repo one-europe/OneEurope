@@ -1,12 +1,12 @@
 <?php echo $theme->display('header'); ?>
-<div id="content" class="profiles">
-	<div class="tile-depth-1 list-1">
+<div id="content">
+	<div class="tile-depth-1 list-1 thumbs-list">
 		<?php
 		foreach ( $initiatives as $post ) { ?>
 		<div class="list">
-			<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>">
-				<img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/>
-			</a>
+			<div class="img-wrap">
+				<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" />
+			</div>
 			<header>
 				<h1>
 					<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a>

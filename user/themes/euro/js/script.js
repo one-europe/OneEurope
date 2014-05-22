@@ -59,8 +59,16 @@
 	donateTable.addClass(cls);
 
 	$('.img-wrap').nailthumb({
+		width: 160,
+		height: 100,
 		replaceAnimation: null,
-		preload: false,
+		onFinish: function (el) { el.find('img').addClass('v'); }
+	});
+
+	$('.img-wrap-large').nailthumb({
+		width: 224,
+		height: 160,
+		replaceAnimation: null,
 		onFinish: function (el) { el.find('img').addClass('v'); }
 	});
 
@@ -75,6 +83,7 @@
 
 	var
 	_body = $('body'),
+	_contactForm = $('#contactForm'),
 	_senderName = $('#senderName'),
 	_senderEmail = $('#senderEmail'),
 	_senderMessage = $('#senderMessage'),
@@ -89,14 +98,13 @@
 	_delay = 5000,
 
 	init = function () {
-		$('#contactForm').submit(submitForm);
+		_contactForm.submit(submitForm);
 	},
 
 	removeMessage = function () { this.remove(); },
 
 	submitForm = function () {
-		var contactForm = $(this),
-			name = _senderName.val().length,
+		var name = _senderName.val().length,
 			email = _senderEmail.val().length,
 			message = _senderMessage.val().length;
 
@@ -108,9 +116,9 @@
 			_body.append(_sendingMsg.slideDown());
 
 			$.ajax({
-				url: contactForm.attr('action') + '?ajax=true',
-				type: contactForm.attr('method'),
-				data: contactForm.serialize(),
+				url: _contactForm.attr('action') + '?ajax=true',
+				type: _contactForm.attr('method'),
+				data: _contactForm.serialize(),
 				success: submitFinished
 			});
 		}
@@ -186,7 +194,7 @@
 
 // flattr code, not in use atm
 var flattrButton = $('.FlattrButton');
-if (flattrButton && flattrButton.length) {
+if (flattrButton.length) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
 	s.async = true;
 	s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
@@ -195,7 +203,7 @@ if (flattrButton && flattrButton.length) {
 
 // g-plus-box: google plus badge
 var gPlusBox = $('.g-plus-box');
-if (gPlusBox && gPlusBox.length) {
+if (gPlusBox.length) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
 	s.type = 'text/javascript';
 	s.async = true;
@@ -205,7 +213,7 @@ if (gPlusBox && gPlusBox.length) {
 
 // scoopit-button
 var scoopitButton = $('.scoopit-button');
-if (scoopitButton && scoopitButton.length) {
+if (scoopitButton.length) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
 	s.async = true;
 	s.src = 'http://www.scoop.it/button/scit.js';
@@ -214,7 +222,7 @@ if (scoopitButton && scoopitButton.length) {
 
 // pinterest-board
 var pinterestBoard = $('.pinterest-board');
-if (pinterestBoard && pinterestBoard.length) {
+if (pinterestBoard.length) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
 	s.async = true;
 	s.src = '//assets.pinterest.com/js/pinit.js';
@@ -223,7 +231,7 @@ if (pinterestBoard && pinterestBoard.length) {
 
 // twitter-timeline
 var twitterTimeline = $('.twitter-timeline');
-if (twitterTimeline && twitterTimeline.length) {
+if (twitterTimeline.length) {
 	var s, t = document.getElementsByTagName('script')[0],
 		path = /^http:/.test(document.location) ? 'http' : 'https';
 	if (!document.getElementById('twitter-wjs')) {
@@ -236,9 +244,9 @@ if (twitterTimeline && twitterTimeline.length) {
 
 // addthis_toolbox
 var addthisToolbox = $('.addthis_toolbox'), trending = $('#addthis_trendingcontent');
-if ((addthisToolbox && addthisToolbox.length) || (trending && trending.length)) {
+if ((addthisToolbox.length) || (trending.length)) {
 	var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-	s.src = 'http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fe91cf356685c8e';
+	s.src = 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fe91cf356685c8e';
 	t.parentNode.insertBefore(s, t);
 
 	if (trending.length) {
@@ -253,19 +261,9 @@ if ((addthisToolbox && addthisToolbox.length) || (trending && trending.length)) 
 				domain: 'one-europe.info',
 				remove: '- OneEurope'
 			});
-		}, 1000);
+		}, 2000);
 	}
 }
-
-// var disqusThread = $('#disqus_thread');
-// if (disqusThread && disqusThread.length) {
-// 	var dsq = document.createElement('script');
-// 	dsq.type = 'text/javascript';
-// 	dsq.async = true;
-// 	dsq.src = 'http://oneeurope.disqus.com/embed.js';
-// 	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-// }
-
 
 // This service is an opportunity to inform your visitors unobtrusively to switch to a newer browse
 // var $buoop = {vs: {i: 8, f: 15, o: 12.1, s: 5.1}};

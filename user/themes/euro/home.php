@@ -62,7 +62,7 @@
 	</div>
 	<div style="width: 100%;">
 		<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/in-brief" title="">The Big Picture</a></div>
-		<div class="list-2">
+		<div class="list-2 thumbs-list">
 			<?php
 				$i = 0; $j = 1;
 				foreach ($briefsteaser as $brief ) {	
@@ -80,7 +80,7 @@
 					</div>
 				<?php } ?>
 					<a href="<?php echo $brief->permalink; ?>">
-					<div class="img-wrap"><img src="<?php echo $brief->info->photourl; ?>" width="224" alt="" /></div>
+					<div class="img-wrap-large"><img src="<?php echo $brief->info->photourl; ?>" width="224" alt="" /></div>
 						<h2><?php echo $brief->title; ?></h2>
 					</a>
 				</div>
@@ -89,7 +89,7 @@
 		</div>
 	</div>
 	<div id="content" class="home">
-		<div class="tile-depth-1 list-1">
+		<div class="tile-depth-1 list-1 thumbs-list">
 			<?php 
 			foreach ($posts as $post ) {
 				if ($post->content_type != 17) { ?>

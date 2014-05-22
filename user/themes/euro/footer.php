@@ -67,8 +67,8 @@
 		ga('send', 'pageview');
 	</script>
 
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?2014052101"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?2014052101"></script>		
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?20140522"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?20140522"></script>		
 	
 	</body>
 </html>

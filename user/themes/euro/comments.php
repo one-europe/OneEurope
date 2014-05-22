@@ -1,3 +1,5 @@
+<?php  echo 'comments.php'; exit; ?>
+
 <?php if ( !defined( 'HABARI_PATH' ) ) { die('No direct access'); } ?>
 
 <?php if ( $post->comments->moderated->count > 0 ) { ?>
@@ -52,23 +54,3 @@
 			$post->comment_form()->out();
 		} ?>
 	</div>
-
-
-<?php /* <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'valentinkotov';
-    var disqus_url = '<?php echo $post->permalink; ?>';
-	var disqus_identifier = '<?php echo $page ?> <?php echo $post->permalink; ?>';
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Bitte aktiviere Javascript, um kommentieren zu können. <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> */ ?>
-
-
-<?php /* <div class="metalinks">
-	<span class="commentsrsslink"><a href="<?php echo $post->comment_feed_link; ?>"><?php _e('Feed for this Entry'); ?></a></span>
-</div> */ ?>
