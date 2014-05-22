@@ -230,8 +230,8 @@ if (pinterestBoard.length) {
 }
 
 // twitter-timeline
-var twitterTimeline = $('.twitter-timeline');
-if (twitterTimeline.length) {
+var twitterTimeline = $('.twitter-timeline'), twitterFollowButton = $('.twitter-follow-button');
+if (twitterTimeline.length || twitterFollowButton) {
 	var s, t = document.getElementsByTagName('script')[0],
 		path = /^http:/.test(document.location) ? 'http' : 'https';
 	if (!document.getElementById('twitter-wjs')) {

@@ -13,7 +13,7 @@
 	<h1>Get involved!</h1>
 	<h3>There are many ways of taking part:</h3>
 	<br/>				
-	<div class="alignright" style="margin-top: -50px; width: 500px">
+	<div class="alignright" style="margin-top: -50px; width: 537px">
 		<!-- AddThis Button BEGIN -->
 		<div class="addthis_toolbox addthis_default_style">
 		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -28,7 +28,7 @@
 	<div class="clear"></div>
 	<?php echo $post->content; ?>
 	<div class="clear"></div>
-	<div class="alignright" style="margin-top: -50px; width: 500px">
+	<div class="alignright" style="margin-top: -50px; width: 537px">
 		<!-- AddThis Button BEGIN -->
 		<div class="addthis_toolbox addthis_default_style">
 		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>

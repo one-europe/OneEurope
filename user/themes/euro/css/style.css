@@ -2317,7 +2317,14 @@ aside.disqus h3, .similar-posts h3 {
 	border-bottom: 1px solid #999;
 }
 
-.welcome { width: 295px; height: 229px; overflow: hidden; margin-bottom: 20px; display: block; background: url('../img/static/welcome-bg.jpg') no-repeat; }
+.welcome {
+	width: 295px;
+	height: 229px;
+	overflow: hidden;
+	margin-bottom: 20px;
+	display: block;
+	background: url('../img/static/welcome-bg.jpg') no-repeat;
+}
 
 .video-block		{ width: 305px; height: 247px; background: #eee; }
 .video-block p		{ padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
@@ -2400,7 +2407,7 @@ aside.disqus h3, .similar-posts h3 {
 	border-bottom: 1px solid #ddd;
 }
 #about-page .about div.content {
-	width: 450px;
+	width: 565px;
 	float: left;
 }
 #about-page .sharing {
@@ -2409,6 +2416,7 @@ aside.disqus h3, .similar-posts h3 {
 }
 #about-page .fb-like-box {
 	display: block;
+	margin: 0;
 }
 #about-page .fb-like-box .fbConnectWidgetTopmost {
 	border: 1px solid #ccc;
