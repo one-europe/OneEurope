@@ -11,7 +11,7 @@ body {
 	background: #fff;
 }
 #page {
-	margin: 10px 0;	
+	margin: 0 10px;	
 	background: #fff;
 }
 #page:focus {
