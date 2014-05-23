@@ -83,7 +83,7 @@
 					<a href="http://pinterest.com/oneeurope" class="icon-pi" title="Find us on Pinterest" target="_blank"></a>
 					<a href="http://www.stumbleupon.com/stumbler/OneEurope" class="icon-st" title="Find us on StumbleUpon" target="_blank"></a>
 					<a href="http://vk.com/oneeurope" class="icon-vk" title="Find us on VKontakte" target="_blank"></a>
-					<a href="/feeds" class="icon-rs" title="Subscribe via RSS"></a>
+					<a href="<?php Site::out_url( 'habari' ); ?>/feeds" class="icon-rs" title="Subscribe via RSS"></a>
 				</div>
 				<div class="clear"></div>
 				<div id="subnav">

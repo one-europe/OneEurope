@@ -439,11 +439,8 @@ body {
 }
 
 #page .container {
-/*	width: 70%;
-	min-width: 750px;
-	max-width: 900px;*/
 	width: 750px;
-	margin: 10px auto;
+	margin: 10px auto 23px;
 	padding: 15px 40px;
 	background: #fafafa;
 	border-radius: 5px;
@@ -706,9 +703,12 @@ body.page-comments .button{
 }
 
 .create input.text, .create textarea, .create label.overcontent {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
 	padding: 3px 5px;
-	margin: 0 0 0 -6px;
+	x-margin: 0 0 0 -6px;
+	margin: 0;
 	width: 100%;
 	border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -721,7 +721,8 @@ body.page-comments .button{
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border: 1px solid #BBB;
-	margin: 0 0 0 -6px;
+	x-margin: 0 0 0 -6px;
+	margin: 0;
 	width: 100%;
 }
 
