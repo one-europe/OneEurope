@@ -2,7 +2,7 @@
 	<div class="featured-content">
 		<div class="featured-content-slider">
 			<div id="featured" >
-				<ul class="ui-tabs-nav">
+				<ul class="ui-tabs-nav thumbs-home">
 		        	<?php 
 					// get all posts sys-tagged with 'featured-slideshow' to built the rotating menu
 					$i = 1;
@@ -11,7 +11,7 @@
 			 			?>
 					<li class="ui-tabs-nav-item <?php if ( $i == 1 ) { ?>ui-state-active<?php } ?>" id="nav-fragment-<?php echo $i; ?>">
 						<a href="#fragment-<?php echo $i; ?>">
-							<img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" />
+							<div class="img-wrap-f-small"><img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" /></div>
 							<p><?php echo $title; ?></p>
 						</a>
 					</li>  

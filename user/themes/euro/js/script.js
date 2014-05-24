@@ -58,6 +58,7 @@
 	
 	donateTable.addClass(cls);
 
+	// do something with this
 	$('.img-wrap').nailthumb({
 		width: 160,
 		height: 100,
@@ -75,6 +76,13 @@
 	$('.img-wrap-f-large').nailthumb({
 		width: 430,
 		height: 200,
+		replaceAnimation: null,
+		onFinish: function (el) { el.find('img').addClass('v'); }
+	});
+
+	$('.img-wrap-f-small').nailthumb({
+		width: 82,
+		height: 50,
 		replaceAnimation: null,
 		onFinish: function (el) { el.find('img').addClass('v'); }
 	});
