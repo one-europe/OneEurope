@@ -19,12 +19,12 @@
 				</ul>  
 				<?php // same as above
 				$i = 1;	foreach ( $sliders as $post ) {	?>
-			    <div id="fragment-<?php echo $i; ?>" class="ui-tabs-panel <?php if ( $i != 1 ) { ?>ui-tabs-hide<?php } ?>" style="">
+			    <div id="fragment-<?php echo $i; ?>" class="ui-tabs-panel <?php if ( $i != 1 ) { ?>ui-tabs-hide<?php } ?> thumbs-home">
 					<a href="<?php echo $post->permalink; ?>">
 						<?php if ( $i == 1 ) { ?>
-							<img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" />  
+							<div class="img-wrap-f-large"><img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" /></div>
 						<?php } else { ?>
-							<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" />  
+							<div class="img-wrap-f-large"><img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" /></div>
 						<?php } ?>
 	        			<div class="info">  
 			    	    	<?php // show caption or excerpt in 155 characters length or 152 + '...'
@@ -60,7 +60,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div style="width: 100%;">
+	<div class="big-picture-home">
 		<div class="initstitle"><a href="<?php echo Site::out_url( 'habari' ); ?>/in-brief" title="">The Big Picture</a></div>
 		<div class="list-2 thumbs-list">
 			<?php

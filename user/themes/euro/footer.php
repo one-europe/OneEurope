@@ -43,7 +43,7 @@
 					</div>
 
 					<div class="clear">&nbsp;</div>
-					<div style="margin: 0 auto; text-align: center"><p>Contact: info@one-europe.info | OneEurope<br/><br/></p></div>
+					<div class="footer"><p>Contact: info@one-europe.info | OneEurope<br/><br/></p></div>
 				</div>
 			</div>
 
@@ -68,7 +68,7 @@
 	</script>
 
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?20140523"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?20140523"></script>		
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?20140524"></script>		
 	
 	</body>
 </html>

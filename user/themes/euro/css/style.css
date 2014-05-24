@@ -1009,8 +1009,8 @@ span.entry-autor > a > span:hover {
 	color: #839B05;
 }
 
-.thumbs-list img { visibility: hidden; }
-.thumbs-list img.v { visibility: visible; }
+.thumbs-list img, .thumbs-home img { visibility: hidden; }
+.thumbs-list img.v, .thumbs-home img.v { visibility: visible; }
 .thumbs-list .img-wrap {
 	width: 160px;
 	height: 100px;
@@ -1021,6 +1021,14 @@ span.entry-autor > a > span:hover {
 	background: #e9e9e9;
 }
 .thumbs-list .img-wrap-large { height: 160px; margin-bottom: 10px; }
+.thumbs-home .img-wrap-f-large {
+	width: 430px;
+	height: 200px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: #e9e9e9;
+}
 
 .list-1 {
 	padding-top: 0;
@@ -1055,6 +1063,8 @@ span.entry-autor > a > span:hover {
 	float: left;
 	width: 160px;
 }
+
+.big-picture-home { width: 100%; }
 
 .home .list p {
 	padding: 0;
@@ -1632,7 +1642,6 @@ aside {
 	border-bottom: 1px solid #bbb;
 }
 aside > div.meta {
-	background: #FAFBFC;
 	border-top: 1px solid #EEF1F5;
 	padding: 5px 0;
 	margin: 10px 10px 0;
@@ -1941,6 +1950,7 @@ article > footer nav {
 	padding-top: 20px; 
 	width: 960px;
 }
+.footer { margin: 0 auto; text-align: center; }
 .footerclear {
 	margin: 100px;
 }
@@ -2243,7 +2253,6 @@ aside.disqus h3, .similar-posts h3 {
 }
 #featured .ui-tabs-panel img {
 	width: 450px;
-	margin-left: -10px;
 }
 #featured .ui-tabs-panel .info { 
 	background: #000;

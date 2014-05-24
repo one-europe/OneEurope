@@ -72,6 +72,13 @@
 		onFinish: function (el) { el.find('img').addClass('v'); }
 	});
 
+	$('.img-wrap-f-large').nailthumb({
+		width: 430,
+		height: 200,
+		replaceAnimation: null,
+		onFinish: function (el) { el.find('img').addClass('v'); }
+	});
+
 })(jQuery);
 
 
