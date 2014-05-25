@@ -5,7 +5,7 @@
 		<div class="primary">
 			<h1><?php echo $post->title; ?></h1>
 			<div class="right-col">
-				<img class="pic" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
+				<img class="pic" src="<?php if ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
 			</div>
  			<div id="post-<?php echo $post->id; ?>" class="card <?php echo $post->statusname; ?>">
 				<?php echo $post->content_out; ?>
@@ -24,7 +24,7 @@
 					        <div class="affiliated-posts tile-thumbs list-1">
 					        	<?php foreach ($news as $item ) { ?>
 					        		<div class="list">
-					        			<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/></a>
+					        			<a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><img src="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/></a>
 					        			<header>
 					        				<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
 					        			</header>

@@ -25,7 +25,7 @@
 						<?php } ?>
 						
 						<article>
-						<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img class="img" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a>
+						<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img class="img" src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a>
 						</article>
 						
 						<aside>

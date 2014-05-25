@@ -15,7 +15,6 @@
 					</div>
 				<?php } ?>
 				<article style="padding: 16px 0 11px 10px; width: 380px;">
-					<!-- <a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img class="img" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a> -->
 					<?php
 						preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($post->content_fulltext, '<iframe>'), $matches);
 						$iframe = preg_replace(

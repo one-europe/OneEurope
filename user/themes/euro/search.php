@@ -39,7 +39,7 @@
 					<?php } ?>
 
 					<div class="imgbox">
-						<img src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>"/>
+						<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>"/>
 					</div>
 
 					<header>

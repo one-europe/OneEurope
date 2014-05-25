@@ -44,7 +44,9 @@
 				</section>
 				<section class="body">
 					<figure>
-						<a href="<?php echo $post->info->photourl; ?>" title="view image in new tab" target="_blank"><img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photocaption; ?>" /></a>
+						<a href="<?php echo $post->info->photourl; ?>" title="View Image in a New Tab" target="_blank">
+							<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photocaption; ?>" />
+						</a>
 						<figcaption>
 							<span class="license"><?php echo $post->info->photolicense; ?></span>
 							<?php echo $post->info->photoinfo; ?>

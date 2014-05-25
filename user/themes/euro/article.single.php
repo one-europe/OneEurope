@@ -66,7 +66,7 @@
 
 						<figure>					
 							<span class="license"><?php echo $post->info->photolicense; ?></span>
-							<a href="<?php echo $post->info->photourl; ?>"><img alt="<?php echo $post->title; ?>" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php echo $post->info->photourl; ?>" /></a>
+							<a href="<?php echo $post->info->photourl; ?>"><img alt="<?php echo $post->title; ?>" src="<?php echo $post->info->photourl; ?>" /></a>
 							<figcaption>
 								<span class="caption"><?php echo $post->info->photoinfo; ?></span>
 							</figcaption>

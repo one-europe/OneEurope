@@ -19,13 +19,6 @@
 		.tabs({ fx: { opacity: 'toggle' }, event: 'mouseover' })
 		.tabs('rotate', 7000, true);
 
-	// lazyload of pictures
-	$('img').lazyload({
-		effect: 'fadeIn',
-		placeholder: '$placeholdergif',
-		threshold : 200
-	});
-
 	// search bar text
 	$('#search-box')
 		.on('click', function () {
@@ -83,6 +76,13 @@
 	$('.img-wrap-f-small').nailthumb({
 		width: 82,
 		height: 50,
+		replaceAnimation: null,
+		onFinish: function (el) { el.find('img').addClass('v'); }
+	});
+
+	$('.img-wrap-profile').nailthumb({
+		width: 100,
+		height: 125,
 		replaceAnimation: null,
 		onFinish: function (el) { el.find('img').addClass('v'); }
 	});

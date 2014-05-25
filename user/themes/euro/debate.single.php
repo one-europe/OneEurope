@@ -3,7 +3,7 @@
 		<div id="post-<?php echo $post->id; ?>" class="primary <?php echo $post->statusname; ?>">
 			<h1><?php echo $post->title; ?></h1>
 			<figure>
-				<img class="pic" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
+				<img class="pic" src="<?php if ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
 				<figcaption>
 						<span class="license"><?php echo $post->info->photolicense; ?></span>
 						<?php echo $post->info->photoinfo; ?>
@@ -49,7 +49,7 @@
 							<header>
 								<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
 							</header>
-							<article class="body"><?php if ( $post->info->excerpt ) { echo $post->info->excerpt; } else { echo $post->content_out; } ?></article>
+							<article class="body"><?php if ( $post->info->excerpt ) { echo strip_tags($post->info->excerpt, '<p>'); } else { echo strip_tags($post->content_out, '<p>'); } ?></article>
 							<footer>
 								<span class="entry-tags">
 							        <?php if ( $show_author && $post->typename == 'article' ) { ?>

@@ -7,7 +7,6 @@
 				<div id="footer">
 
 					<div class="backtotop">
-						<?php /* <a href="<?php echo Options::out('habari') ?>/atom/1" rel="nofollow">feed<img src="<?php Site::out_url( 'theme' ); ?>/img/feed.png" alt="Atom" height="14" widht="14"/></a> */?>
 						<a href="#top" id="up">top<img src="<?php Site::out_url( 'theme' ); ?>/img/up.png" alt="" height="20" width="20" /></a>
 						<nav>
 							<div><a href="<?php Site::out_url( 'habari' ); ?>/about">About ›</a></div>
@@ -22,10 +21,10 @@
 		
 					<div class="element partners">
 						<h3>Partners</h3>
-						<a href="http://debatingeurope.eu/" target="_blank" title="Debating Europe – Discuss YOUR ideas with Europe’s leaders"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/debatingeurope.png" title="Debating Europe – Discuss YOUR ideas with Europe’s leaders" alt="Debating Europe – Discuss YOUR ideas with Europe’s leaders" height="136" width="250" /></a>
-						<a href="http://www.democraticunion.eu/" target="_blank" title="Project for Democratic Union - One Future. One Europe"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/project-for-democratic-union.png" title="Project for Democratic Union - One Future. One Europe" alt="Project for Democratic Union - One Future. One Europe" height="83" width="250" /></a>
-						<a href="http://www.treffpunkteuropa.de/" target="_blank" title="The New Federalist, webzine of the Young European Federalist"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/banner_tpe_oneeurope_1.png" title="The New Federalist, webzine of the Young European Federalist" alt="The New Federalist, webzine of the Young European Federalist" height="47" width="250" /></a>
-						<a href="http://www.mladiinfo.eu/" target="_blank" title="Mladiinfo International promotes and mediates the communication between young people, students, professors, researchers, university officials, youth NGOs and all those involved in the educational process in Europe and worldwide"><img src="<?php Site::out_url( 'theme' )?>/img/grey.gif" data-original="<?php Site::out_url('theme') ?>/img/supporters/mladiinfo-international.png" title="Mladiinfo International promotes and mediates the communication between young people, students, professors, researchers, university officials, youth NGOs and all those involved in the educational process in Europe and worldwide" alt="Mladiinfo International promotes and mediates the communication between young people, students, professors, researchers, university officials, youth NGOs and all those involved in the educational process in Europe and worldwide" height="59" width="250" /></a>
+						<a href="http://debatingeurope.eu/" target="_blank" title="Debating Europe – Discuss YOUR ideas with Europe’s leaders"><img src="<?php Site::out_url('theme') ?>/img/supporters/debatingeurope.png" title="Debating Europe – Discuss YOUR ideas with Europe’s leaders" alt="Debating Europe – Discuss YOUR ideas with Europe’s leaders" height="136" width="250" /></a>
+						<a href="http://www.democraticunion.eu/" target="_blank" title="Project for Democratic Union - One Future. One Europe"><img src="<?php Site::out_url('theme') ?>/img/supporters/project-for-democratic-union.png" title="Project for Democratic Union - One Future. One Europe" alt="Project for Democratic Union - One Future. One Europe" height="83" width="250" /></a>
+						<a href="http://www.treffpunkteuropa.de/" target="_blank" title="The New Federalist, webzine of the Young European Federalist"><img src="<?php Site::out_url('theme') ?>/img/supporters/banner_tpe_oneeurope_1.png" title="The New Federalist, webzine of the Young European Federalist" alt="The New Federalist, webzine of the Young European Federalist" height="47" width="250" /></a>
+						<a href="http://www.mladiinfo.eu/" target="_blank" title="Mladiinfo International promotes and mediates the communication between young people, students, professors, researchers, university officials, youth NGOs and all those involved in the educational process in Europe and worldwide"><img src="<?php Site::out_url('theme') ?>/img/supporters/mladiinfo-international.png" title="Mladiinfo International promotes and mediates the communication between young people, students, professors, researchers, university officials, youth NGOs and all those involved in the educational process in Europe and worldwide" alt="Mladiinfo International promotes and mediates the communication between young people, students, professors, researchers, university officials, youth NGOs and all those involved in the educational process in Europe and worldwide" height="59" width="250" /></a>
 					</div>
 
 					<div class="element">
@@ -67,8 +66,8 @@
 		ga('send', 'pageview');
 	</script>
 
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?20140523"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?2014052401"></script>		
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?2014052501"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?2014052501"></script>		
 	
 	</body>
 </html>

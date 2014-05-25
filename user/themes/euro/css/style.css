@@ -1009,8 +1009,8 @@ span.entry-autor > a > span:hover {
 	color: #839B05;
 }
 
-.thumbs-list img, .thumbs-home img { visibility: hidden; }
-.thumbs-list img.v, .thumbs-home img.v { visibility: visible; }
+.thumbs-list img, .thumbs-home img, .thumbs-profile img { visibility: hidden; }
+.thumbs-list img.v, .thumbs-home img.v, .thumbs-profile img.v { visibility: visible; }
 .thumbs-list .img-wrap {
 	width: 160px;
 	height: 100px;
@@ -1034,6 +1034,14 @@ span.entry-autor > a > span:hover {
 	width: 82px;
 	height: 50px;
 	margin: 0 5px 0 0;
+	padding: 0;
+	overflow: hidden;
+	background: #e9e9e9;
+}
+.thumbs-profile .img-wrap-profile {
+	width: 100px;
+	height: 125px;
+	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	background: #e9e9e9;

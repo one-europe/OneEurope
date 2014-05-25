@@ -15,7 +15,7 @@
 			<div class="primary vcard">
 				<h1 class="fn"><?php echo $displayname; ?></h1>
 				<section class="right-col">
-					<img class="pic photo" src="<?php Site::out_url( 'theme' ); ?>/img/grey.gif" data-original="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
+					<img class="pic photo" src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" />
 					<div class="social">
 						<?php if ($source->twitter) { ?>
 							<a href="https://twitter.com/<?php echo explode('-', $source->twitter)[0]; ?>" class="twitter-follow-button" data-show-screen-name="false" data-lang="en">Follow</a>
