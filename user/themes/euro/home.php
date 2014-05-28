@@ -142,5 +142,5 @@
 			<a href="/feeds" class="icon-rs" title="Subscribe via RSS"></a>
 		</div>
 	</div>
-<?php echo $theme->display ('sidebar'); ?>
-<?php echo $theme->display ('footer'); ?>
+<?php echo $theme->display('sidebar'); ?>
+<?php echo $theme->display('footer'); ?>

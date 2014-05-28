@@ -1,6 +1,6 @@
 <?php echo $theme->display( 'header'); ?>
 <?php if ($post) { ?>
-<div id="main" class="profile-single">
+<div id="main">
 	<div id="profile">
 		<div class="primary">
 			<h1><?php echo $post->title; ?></h1>

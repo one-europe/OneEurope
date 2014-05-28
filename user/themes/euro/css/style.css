@@ -1372,6 +1372,9 @@ div.list-2 .list:nth-of-type(4n+0), div.list-2 .list.list-last {
 	margin: 0;
 	border: 1px solid #EEF1F5;
 }
+#profile aside.disqus {
+	padding: 10px;
+}
 #profile .info {
 	background: #FAFBFC;
 	width: 118px;
