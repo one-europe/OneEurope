@@ -34,7 +34,7 @@
 								$string = $post->info->teaser;
 							} elseif ($post->info->photoinfo) {
 								$string = $post->info->photoinfo;
-							} else { $string = ""; }
+							} else { $string = $post->info->shorttitle; }
 							$string = trim($string);
 							$text = (strlen($string) > 145) ? substr($string, 0, 145) . '...' : $string;
 							echo $text; ?>
