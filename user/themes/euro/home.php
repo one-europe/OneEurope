@@ -36,7 +36,7 @@
 								$string = $post->info->photoinfo;
 							} else { $string = ""; }
 							$string = trim($string);
-							$text = (strlen($string) > 145) ? mb_strcut($string, 0, 145) . '...' : $string;
+							$text = (strlen($string) > 145) ? $string . '...' : $string;
 							echo $text; ?>
 			    	    </div>  
 					</a>
