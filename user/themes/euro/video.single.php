@@ -2,7 +2,8 @@
 <?php if ( $post ) { ?>
 	<div id="content">
 		<div class="breadcrumb">
-			<span class="first"><a href="/videos">Videos ›</a></span> <span class="brief-title"><a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a></span>
+			<span class="b-first"><a href="/videos">Videos ›</a></span>
+			<span class="b-title"><a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a></span>
 			<div class="pager">
 				<?php if ($previous = $post->descend()): ?>
 				<a class="prev" href="<?php echo $previous->permalink ?>" title="<?php echo $previous->title; ?>">« Previous</a>

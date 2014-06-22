@@ -884,7 +884,7 @@ input { margin: 0; padding: 0; }
 
 #content h2 {
 	margin: 0;
-	line-height: 1.1em;
+	line-height: 1.3em;
 }
 
 .tile-depth-1 {
@@ -1468,35 +1468,14 @@ div#profiles .item:nth-of-type(8n+0) {
 	line-height: 15px;
 	margin-top: 3px;
 }
-.breadcrumb {
-	display: block;
-	width: 927px;
-	width: 100%;
-	margin: -15px 0 5px;
-	padding: 0;
-}
-.breadcrumb .first {
-	font-size: 16px;
-	padding-left: 10px;
-}
-.breadcrumb .first a {
-	color: #333!important;
-}
-.breadcrumb > a {
-	color: #555!important;
-	margin-left: 5px;
-}
-.breadcrumb .selected {
-	font-weight: bold;
-}
-.breadcrumb .brief-title {
-	max-width: 450px;
-}
-.breadcrumb .pager {
-	float: right;
-	padding-right: 10px;
-	margin-top: 3px;
-}
+
+.breadcrumb { display: block; width: 927px; width: 100%; margin: -15px 0 5px; padding: 0; }
+.breadcrumb .b-first { font-size: 16px; padding-left: 10px; display: inline-block; }
+.breadcrumb .b-first a { color: #333; }
+.breadcrumb > a { color: #555; margin-left: 5px; }
+.breadcrumb .selected { font-weight: bold; }
+.breadcrumb .b-title { width: 370px; display: inline-block; vertical-align: middle; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.breadcrumb .pager { float: right; padding-right: 10px; margin-top: 3px; }
 
 /* end /profiles */
 
