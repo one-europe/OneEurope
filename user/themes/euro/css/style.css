@@ -2339,14 +2339,6 @@ aside.disqus h3, .similar-posts h3 {
 .video-block p		{ padding: 3px 5px; line-height: 1.4; font-family: Georgia; font-size: 14px; }
 .video-block a.all	{ display: block; float: right; margin-right: 5px; }
 
-.vote2014-banner {
-	width: 296px;
-	height: 119px;
-	display: block;
-	margin: 0 0 20px;
-	background: url('../img/ep-vote-2014-bg.png') no-repeat;
-}
-
 /* End Featured Boxes */
 
 /* 404 */
@@ -2755,15 +2747,6 @@ aside.disqus h3, .similar-posts h3 {
 /* END MAILCHIMP */ 
 
 /* DEBATING EUROPE MODEL EP VOTE 2014 */
-
-
-.devote2013-widget {
-	background-image:url("../img/sidebar_vote2014.png");
-	background-repeat: no-repeat;
-	background-align: center;
-	width: 132px;
-	margin: 0 auto;
-}
 
 a.bluebuttoncss {
 	text-decoration: none;

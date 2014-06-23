@@ -2,7 +2,6 @@
 	<?php echo $theme->display ('sidebar.elem.welcome'); ?>
 	<?php Plugins::act( 'theme_sidebar_top' ); ?>
 	<?php echo $theme->display ('sidebar.elem.recent-comments'); ?>
-	<?php echo $theme->display ('sidebar.elem.de-vote'); ?>
 	<?php echo $theme->display ('sidebar.elem.social'); ?>
 	<div style="clear: both; margin-left: -4px; margin-bottom: 15px;">
 		<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
