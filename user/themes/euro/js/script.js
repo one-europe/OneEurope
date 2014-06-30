@@ -6,6 +6,8 @@
 		FB.init({ appId: '121944181248560', xfbml: true, version: 'v2.0' });
 	});
 
+	$('section.body').find('a').attr('target', '_blank');
+
 	$('ul.sf-menu').superfish({
 		animation:		{opacity: 'show'},		// fade-in and slide-down animation 
 		speed:			'fast',					// faster animation speed 
