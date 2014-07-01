@@ -67,7 +67,7 @@
 	</script>
 
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.js?2014052501"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?2014052501"></script>		
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/script.js?20140601"></script>		
 	
 	</body>
 </html>

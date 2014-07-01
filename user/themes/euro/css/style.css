@@ -484,7 +484,7 @@ body {
 }
 #head > nav > ul {
 	list-style: none outside none;
-	width: 617px;
+	width: 566px;
 	margin-top: -1px;
 	margin-bottom: -1px;
 }
@@ -513,7 +513,7 @@ body {
 #head > nav > ul > li.menu_4:hover { border: 1px solid #ccc; padding: 0; }
 #head > nav > ul > li.menu_4:hover a { background: #fff; border-bottom: 0; }
 #head > nav > ul > li.menu_5 { width: 77px; }
-#head > nav > ul > li.menu_6 { width: 122px; }
+#head > nav > ul > li.menu_6 { width: 71px; }
 #head > nav > ul > li.menu_7 { width: 109px; }
 #head > nav > ul > li.menu_7 form { padding: 8px 10px; text-align: left; }
 
