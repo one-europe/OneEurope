@@ -67,7 +67,7 @@
 							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a>
 						</li>
 						<li class="menu_6">
-							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/crowdfunding">Donate</a>
+							<a rel="section" class="sf-with-ul" href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a>
 						</li>
 						<li class="menu_7">
 							<?php echo $theme->display ('searchform' ); ?>
