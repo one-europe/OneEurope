@@ -1306,6 +1306,9 @@ div.list-2 .list:nth-of-type(4n+0), div.list-2 .list.list-last {
 .article-sidebar .authorbox {
 	/* min-height: 100px; */
 }
+.article-sidebar .authorbox iframe {
+	display: block; margin-top: 10px;
+}
 .article-sidebar .authorbox img {
 	width: 100px;
 	float: right;

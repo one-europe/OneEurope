@@ -15,9 +15,9 @@
 			<div class="clear"></div>
 		</a>
 		<?php if (User::get($post->info->author)->info->twitter) { ?>
-			<a href="https://twitter.com/<?php echo User::get($post->info->author)->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
+			<a href="https://twitter.com/<?php echo explode('-', User::get($post->info->author)->info->twitter)[0]; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo explode('-', User::get($post->info->author)->info->twitter)[0]; ?></a>
 		<?php } elseif ($publisher->info->twitter) { ?>
-			<a href="https://twitter.com/<?php echo $publisher->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
+			<a href="https://twitter.com/<?php echo explode('-', $publisher->info->twitter)[0]; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo explode('-', $publisher->info->twitter)[0]; ?></a>
 		<?php } ?>
 	<?php } else { 
 		$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
@@ -29,7 +29,7 @@
 			<div class="clear"></div>
 		</a>
 		<?php if ($publisher->info->twitter) { ?>
-			<a href="https://twitter.com/<?php echo $publisher->info->twitter; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo $publisher->info->twitter; ?></a>
+			<a href="https://twitter.com/<?php echo explode('-', $publisher->info->twitter)[0]; ?>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<?php echo explode('-', $publisher->info->twitter)[0]; ?></a>
 		<?php } ?>
 	<?php } ?>
 	<div class="clear"></div>
