@@ -1,1 +1,1 @@
-<a class="vote2014-banner" href="http://www.debatingeurope.eu/vote2014" target="_blank" title="DebatingEurope.eu Vote 2014"></a>
+<a class="vote2014" href="http://www.debatingeurope.eu/vote2014" target="_blank" title="DebatingEurope.eu Vote 2014"></a>

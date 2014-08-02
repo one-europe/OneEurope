@@ -1,10 +1,9 @@
-<section class="recentposts">
-	<div class="h"><span>Recently Published</span></div>
-	<ul>
-		<?php
-			foreach ($theme->recent_posts as $post) {
-				echo '<li><a href="', $post->permalink, '">', $post->title, '</a></li>';
-			}
-		?>
-	</ul>
+<section class="side-block">
+	<a class="top-link" href="#">Recently Published</a>
+	<div class="recent">
+	<?php
+		foreach ($theme->recent_posts as $post) {
+			echo '<a href="', $post->permalink, '">', $post->title, '</a>';
+		}
+	?>
 </section>

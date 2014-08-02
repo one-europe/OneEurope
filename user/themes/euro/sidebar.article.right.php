@@ -1,4 +1,4 @@
-<div id="sidebar" class="article-sidebar">
+<aside>
 	<?php echo $theme->display('sidebar.elem.authorbox'); ?>
 	<?php echo $theme->display('sidebar.elem.newsletter'); ?>
 	<?php echo $theme->display('sidebar.elem.most-shared'); ?>
@@ -6,4 +6,4 @@
 	<?php echo $theme->display('sidebar.elem.popular-threads'); ?>
 	<?php echo $theme->display('sidebar.elem.in-brief'); ?>
 	<?php echo $theme->display ('sidebar.elem.profilepool'); ?>
-</div>
+</aside>

@@ -1,24 +1,21 @@
 <?php echo $theme->display('header'); ?>
-<div class="submenu">
-	<ul>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/about">About</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact"><b>Contact</b></a></li>
-		<li class="clear"></li>
-	</ul>
+<div class="breadcrumbs">
+	<a href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
+	<a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a>
+	<a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a>
+	<a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a>
+	<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a>
+	<b>Contact</b>
+	<a href="<?php Site::out_url( 'habari' ); ?>/imprint">Terms</a>
 </div>
-<div class="page" style="width: 655px; float: left; margin-right: 30px;">
-	<h1><?php echo $post->title_out; ?></h1>
-	<article class="body"><?php echo $post->content_out; ?></article>
+<article>
+	<h1 class="on-page"><?php echo $post->title_out; ?></h1>
+	<div class="post-content"><?php echo $post->content_out; ?></div>
 	<?php if (User::identify()->loggedin) { ?>
-		<span class="article-edit right" style="width: 100%;">
-			<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
-		</span>
+		<p><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></p>
 	<?php } ?>
-	<section id="contact-email">
-		<h3>E-Mail</h3>
+	<div class="box" id="contact-email">
+		<h2>E-Mail</h2>
 		<p>For general information, questions, or ideas please contact 
 			<script type="text/javascript">
 				emailE='one-europe.info'
@@ -42,8 +39,7 @@
 	 				document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
 	 			</script><noscript>
 	 			    <em>[Email address protected by JavaScript. Enable JavaScript to see it.]<em>
-	 			</noscript>.
-			<br/>
+	 			</noscript>.<br/>
 			For fundraising and IT matters, please send an email to Cherian at
 				<script type="text/javascript">
 					emailE='one-europe.info'
@@ -51,8 +47,7 @@
 					document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
 				</script><noscript>
 				    <em>[Email address protected by JavaScript. Enable JavaScript to see it.]<em>
-				</noscript>.
-			<br/>
+				</noscript>.<br/>
 			For anything related to editing, please e-mail Ana at
 				<script type="text/javascript">
 					emailE='one-europe.info'
@@ -62,22 +57,13 @@
 				    <em>[Email address protected by JavaScript. Enable JavaScript to see it.]<em>
 				</noscript>.
 		</p>
-	</section>
-	<div style="clear: both;">
-		<div style="width: 335px; float: left; padding-right: 20px;">
-			<a class="twitter-timeline" height="303" data-dnt="true" href="https://twitter.com/One1Europe" data-widget-id="372098233318662144">Tweets by @One1Europe</a>
-		</div>
-		<div style="width: 300px; float: left;">
+	</div>
+	<div style="clear: both; padding-top: 20px;">
+		<div style="width: 100%;">
 			<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-			<script type="IN/CompanyProfile" data-id="2916037" data-format="inline" data-width="300"></script>
+			<script type="IN/CompanyProfile" data-id="2916037" data-format="inline"></script>
 		</div>
 	</div>
-</div>
-<div style="width: 256px; float: left; margin: 20px 0 0 -1px; padding-bottom: 10px;">
-	<section class="fb">
-		<div class="h"><span>Connect with us</span></div>
-		<div class="g-plus-box"><g:plus href="https://plus.google.com/118353934830681553476" width="277"></g:plus></div>
-		<div class="fb-like-box" data-href="http://www.facebook.com/OneEurope" data-width="277" data-show-faces="true" data-stream="true" data-show-border="false" data-header="false"></div>
-	</section>
-</div>
+</article>
+<aside><?php echo $theme->display('sidebar.elem.social'); ?></aside>
 <?php echo $theme->display('footer'); ?>

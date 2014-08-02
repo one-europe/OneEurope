@@ -1,18 +1,22 @@
 <?php echo $theme->display('header'); ?>
 <?php require_once(HABARI_PATH . '/user/themes/euro/config.php'); ?>
-<div class="breadcrumbs">
-	<a href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a>
-	<b>Donate</b>
-	<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/imprint">Terms</a>
+<div class="submenu">
+	<ul>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/about">About</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding"><b>Crowdfunding</b></a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/imprint">Terms</a></li>
+		<li class="clear"></li>
+	</ul>
 </div>
 <a name="top"></a>
-<article class="full crowd">
-	<div class="box with-addthis">
+<div class="content donate">
+	<div class="box with-addthis" style="margin-top: 0;">
 		<span class="please-share">Please help us share this campaign:</span>
+		<!-- AddThis Button BEGIN -->
 		<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 			<a class="addthis_button_facebook"></a>
 			<a class="addthis_button_google_plusone_share"></a>
@@ -27,10 +31,11 @@
 			<a class="addthis_button_compact"></a>
 			<a class="addthis_counter addthis_bubble_style"></a>
 		</div>
+		<!-- AddThis Button END -->
 	</div>
-	<div style="float: left; margin-right: 400px;"><?php echo $post->content_out; ?></div>
+	<article class="body" style="float: left; margin-right: 400px;"><?php echo $post->content_out; ?></article>
 	<div class="box donate-side">
-		<p style="margin-top: 0;"><b>Support OneEurope!<br>Donate securely with a Debit Card, Credit Card, Paypal, or Flattr</b></p>
+		<p style="margin-bottom: 10px;"><b>Support OneEurope!<br>Donate securely with a Debit Card, Credit Card, Paypal, or Flattr</b></p>
 		<div class="donate-buttons">
 			<div class="part">
 				<form action="./donate" method="post">
@@ -75,14 +80,16 @@
 				</form>
 			</div>
 			<div class="part">
-				<a href="https://flattr.com/donation/give/to/OneEurope"
-				  title="Donate (via Flattr)"><img
-				    src="<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png"
-				    title="Support my Debian work (Flattr)"
-				    onmouseover="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_hover.png'"
-				    onmouseout="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png'"
-				    alt="Flattr donation button" />
-				</a> with Flattr
+				<p class="flattr">
+					<a href="https://flattr.com/donation/give/to/OneEurope"
+					  title="Donate (via Flattr)"><img
+					    src="<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png"
+					    title="Support my Debian work (Flattr)"
+					    onmouseover="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_hover.png'"
+					    onmouseout="this.src='<?php Site::out_url( 'theme' )?>/img/flattr_donate_normal.png'"
+					    alt="Flattr donation button" />
+					</a> with Flattr
+				</p>
 			</div>
 		</div>
 
@@ -157,30 +164,29 @@
 		</div>
 
 	</div>
-	<?php if (User::identify()->loggedin) { ?>
-		<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
-	<?php } ?>
-	<div class="box with-addthis">
-		<span class="please-share">Please help us share this campaign:</span>
-		<!-- AddThis Button BEGIN -->
-		<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-			<a class="addthis_button_facebook"></a>
-			<a class="addthis_button_google_plusone_share"></a>
-			<a class="addthis_button_twitter"></a>
-			<a class="addthis_button_pinterest_share"></a>
-			<a class="addthis_button_linkedin"></a>
-			<a class="addthis_button_scoopit"></a>
-			<a class="addthis_button_reddit"></a>
-			<a class="addthis_button_stumbleupon"></a>
-			<a class="addthis_button_vk"></a>
-			<a class="addthis_button_email"></a>
-			<a class="addthis_button_compact"></a>
-			<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<!-- AddThis Button END -->
+</div>
+<?php if (User::identify()->loggedin) { ?>
+	<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
+<?php } ?>
+<div class="box with-addthis">
+	<span class="please-share">Please help us share this campaign:</span>
+	<!-- AddThis Button BEGIN -->
+	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+		<a class="addthis_button_facebook"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_twitter"></a>
+		<a class="addthis_button_pinterest_share"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_scoopit"></a>
+		<a class="addthis_button_reddit"></a>
+		<a class="addthis_button_stumbleupon"></a>
+		<a class="addthis_button_vk"></a>
+		<a class="addthis_button_email"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
 	</div>
-</article>
-
+	<!-- AddThis Button END -->
+</div>
 
 <script>
 	(function() {

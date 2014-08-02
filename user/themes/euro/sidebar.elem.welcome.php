@@ -1,1 +1,1 @@
-<a class="welcome" href="/about" title="We incite cross-border debate for the emerging European society"></a>
+<a class="welcome" href="<?php Site::out_url( 'habari' ); ?>/about" title="We incite cross-border debate for the emerging European society"></a>

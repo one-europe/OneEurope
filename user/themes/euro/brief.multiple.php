@@ -1,82 +1,47 @@
 <?php if ($matched_rule->name != 'display_briefs') {
-
 	echo $theme->display('home');
-
 } else { ?>
-
 <?php echo $theme->display('header'); ?>
-
-			<div class="breadcrumb">
-				<span class="first"><a href="/in-brief">The Big Picture ›</a></span>
-			</div>
-
-			<div id="content">
-					
-				<ul class="nibble-list">
-				
-					<?php foreach ($briefs as $post ) { ?>						
-
-					<li class="nibble">
-
-						<?php if ( $post->status == Post::status('scheduled') ) { ?>
-							<div class="content-badge scheduled">
-								<span>scheduled</span>
-							</div>
-						<?php } ?>
-						
-						<article>
-						<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><img class="img" src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" height="100" width="160"/></a>
-						</article>
-						
-						<aside>
-							<h3><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h3>
-							<p class="body">
-								<?php echo $post->content_out; ?>
-							</p>
-							<a class="entry-comments" href="<?php echo $post->url ?>#disqus_thread" data-disqus-identifier="<?php echo $page ?> <?php echo $post->permalink; ?>">Comments</a>
-							<span class="timestamp">posted on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time></span>
-							<?php if ( User::identify()->loggedin ) { ?>
-									<span class="alignright article-edit"> <a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span>
-							<?php } ?>
-						
-							<div class="addthis">
-								<!-- AddThis Button BEGIN -->
-								<div class="addthis_toolbox addthis_default_style add_this_multiple">
-									<a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-									<a class="addthis_button_tweet" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-									<div class="scoopit-wrap"><a href="http://www.scoop.it" class="scoopit-button" scit-position="none" scit-url="<?php echo $post->permalink; ?>" >Scoop.it</a></div>
-									<a class="addthis_button_pinterest_pinit" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-									<a class="addthis_counter addthis_pill_style" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-								</div>
-								<!-- AddThis Button END -->
-							</div>
-						</aside>
-						<div class="clear"></div>
-					</li>
-
+	<div class="list-large">
+		<h1>Images</h1>
+		<?php foreach ($briefs as $post ) { ?>						
+		<div class="item">
+			<?php if ( $post->status == Post::status('scheduled') ) { ?>
+				<!-- <div class="content-badge scheduled">
+					<span>scheduled</span>
+				</div> -->
+			<?php } ?>
+			<a class="item-image" href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>">
+				<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" />
+			</a>
+			<div class="item-content">
+				<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
+				<p><?php echo strip_tags($post->content_out, '<span><a>'); ?></p>
+				<p>Posted on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+					<?php if ( User::identify()->loggedin ) { ?>
+						<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
 					<?php } ?>
-					
-				</ul>
-
-
-
-				<?php if ( $current_page >= 2 || $all > $pagination ) { ?>
-
-					<div class="pagination">
-						<?php if ( $current_page >= 2 ) { ?>
-							<a href="<?php Site::out_url( 'home' ); ?>/in-brief/page/<?php echo $current_page - 1; ?>" title="Previous Page" class="alignleft">&laquo; Newer Posts</a>
-						<?php } if ( $all > $pagination ) { ?>
-							<a href="<?php Site::out_url( 'home' ); ?>/in-brief/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="alignright">Older Posts &raquo;</a>
-						<?php } ?>
-					</div>
-
-				<?php } ?>
-
-		
+				</p>
+				<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+					<a class="addthis_button_facebook" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_button_twitter" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_button_google_plusone_share" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_button_scoopit" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_button_pinterest_share" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_button_reddit" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_button_stumbleupon" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_button_vk" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
+					<a class="addthis_counter addthis_bubble_style"></a>
+				</div>
 			</div>
-
-		<?php echo $theme->display ('sidebar.nibble.right'); ?>
-
-		<?php echo $theme->display ('footer'); ?>
-
+		</div>
+		<?php } ?>
+		<div class="pagination">
+			<?php echo $theme->prev_page_link(_t('Previous'), array('class' => 'previous')); ?>
+			<?php echo $theme->page_selector(null, array('leftSide' => 6, 'rightSide' => 6, 'hideIfSinglePage' => true)); ?>
+			<?php echo $theme->next_page_link(_t('Next'), array('class' => 'next')); ?>
+		</div>
+	</div>
+<?php echo $theme->display('sidebar.nibble.right'); ?>
+<?php echo $theme->display('footer'); ?>
 <?php } ?>

@@ -1,11 +1,6 @@
-
-	<section class="pool">
-		<div class="h"><span>Profile Database</span></div>
-	
-		<ul>
+	<section class="side-block">
+		<a class="top-link" href="<?php Site::out_url( 'home' ); ?>/profiles">Profile Database</a>
 		<?php
-		
-		
 		/*
 		normally, show 2.
 		in case of article, retrieve 3 and show whichever 2 don't match the article's author's id.
@@ -37,21 +32,12 @@
 					$j++;
 				?>
 				
-				<li class="profileteaser">
-		   	    	<a href="<?php echo $profile->permalink; ?>">
-						<img src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( !$source->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title ?>" />
-		   	    		<h3><?php echo $title; ?></h3>
-		   	    		<p class="teaser">
-							<?php echo $source->teaser; ?>
-		   	    		</p>
-						<div class="clear"></div>
-					</a>
-				</li>   
+	   	    	<a class="profile" href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>">
+					<img src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( !$source->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title ?>" width="95" />
+	   	    		<p class="teaser"><b><?php echo $title; ?></b><?php echo $source->teaser; ?></p>
+				</a>
 				<?php } ?>	    
 
 		<?php } ?>
-				
-			<li class="all"><a href="<?php Site::out_url( 'home' ); ?>/profiles">view all ›</a></li>
-				
-		</ul>	
+		<a class="link-view-all" href="<?php Site::out_url( 'home' ); ?>/profiles" title="View all profiles">view all</a>
 	</section>

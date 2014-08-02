@@ -1,33 +1,19 @@
 <?php echo $theme->display('header'); ?>
-<div id="content">
-	<div class="tile-depth-1 list-1 thumbs-list">
-		<?php
-		foreach ( $initiatives as $post ) { ?>
-		<div class="list">
-			<div class="img-wrap">
-				<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" />
-			</div>
-			<header>
-				<h1>
-					<a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a>
-				</h1>
-			</header>
-			<article class="body">
-			<?php if ( $post->info->excerpt ) { echo $post->info->excerpt; } else { echo $post->content_out; } ?>
-			</article>
+<div class="post-list">
+	<h1>Initiatives</h1>
+	<?php foreach ( $initiatives as $post ) { ?>
+	<section>
+		<div class="img-wrap">
+			<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" />
 		</div>
-		<?php } ?>
-		<?php if ( $current_page >= 2 || $there_are_more ) { ?>
-		<div class="pagination">
-			<?php if ( $current_page >= 2 ) { ?>
-				<a href="<?php Site::out_url( 'home' ); ?>/initiatives/page/<?php echo $current_page - 1; ?>" title="Previous Page" class="alignleft">&laquo; Newer Initiatives</a>
-			<?php }
-			if ( $there_are_more ) { ?>
-			<a href="<?php Site::out_url( 'home' ); ?>/initiatives/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="alignright">Older Initiatives &raquo;</a>
-			<?php } ?>
-			<div class="clear"></div>
-		</div>
-		<?php } ?>
+		<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
+		<p><?php if ( $post->info->excerpt ) { echo $post->info->excerpt; } else { echo strip_tags($post->content_out, '<span><a>'); } ?></p>
+	</section>
+	<?php } ?>
+	<div class="pagination">
+		<?php echo $theme->prev_page_link(_t('Previous'), array('class' => 'previous')); ?>
+		<?php echo $theme->page_selector(null, array('leftSide' => 6, 'rightSide' => 6, 'hideIfSinglePage' => true)); ?>
+		<?php echo $theme->next_page_link(_t('Next'), array('class' => 'next')); ?>
 	</div>
 </div>
 <?php echo $theme->display('sidebar.initiatives'); ?>

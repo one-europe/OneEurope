@@ -1,4 +1,4 @@
-<section class="viral">
-	<div class="h"><span>Most Shared</span></div>
+<section class="side-block">
+	<a class="top-link" href="#">Most shared</a>
 	<div id="addthis_trendingcontent"></div>
 </section>
