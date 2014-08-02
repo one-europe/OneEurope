@@ -31,7 +31,6 @@
 					<a class="addthis_button_reddit" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
 					<a class="addthis_button_stumbleupon" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
 					<a class="addthis_button_vk" addthis:url="<?php echo $post->permalink; ?>" addthis:title="<?php echo $post->title; ?>"></a>
-					<a class="addthis_counter addthis_bubble_style"></a>
 				</div>
 			</div>
 		</div>

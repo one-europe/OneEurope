@@ -20,7 +20,7 @@
 								$string = $post->info->photoinfo;
 							} else { $string = $post->info->shorttitle; }
 							$string = trim($string);
-							$text = (strlen($string) > 140) ? substr($string, 0, 140) . '...' : $string;
+							$text = (strlen($string) > 139) ? substr($string, 0, 138) . '..' : $string;
 							echo $text; ?>
 			    	    </div>  
 					</a>
@@ -36,7 +36,7 @@
 							<div class="img-wrap-f-small">
 								<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->title; ?>" width="82" height="50" />
 							</div>
-							<p><?php echo $title; ?></p>
+							<p><?php echo $text = (strlen($title) > 55) ? substr($title, 0, 54) . '..' : $title; ?></p>
 						</a>
 					</li>  
 					<?php $i++; } ?>

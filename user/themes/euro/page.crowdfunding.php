@@ -23,13 +23,15 @@
 			<a class="addthis_button_twitter"></a>
 			<a class="addthis_button_pinterest_share"></a>
 			<a class="addthis_button_linkedin"></a>
-			<a class="addthis_button_scoopit"></a>
-			<a class="addthis_button_reddit"></a>
 			<a class="addthis_button_stumbleupon"></a>
 			<a class="addthis_button_vk"></a>
+			<a class="addthis_button_reddit"></a>
+			<a class="addthis_button_scoopit"></a>
+			<a class="addthis_button_tumblr"></a>
+			<a class="addthis_button_digg"></a>
+			<a class="addthis_button_wordpress"></a>
 			<a class="addthis_button_email"></a>
 			<a class="addthis_button_compact"></a>
-			<a class="addthis_counter addthis_bubble_style"></a>
 		</div>
 		<!-- AddThis Button END -->
 	</div>
@@ -177,13 +179,15 @@
 		<a class="addthis_button_twitter"></a>
 		<a class="addthis_button_pinterest_share"></a>
 		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_scoopit"></a>
-		<a class="addthis_button_reddit"></a>
 		<a class="addthis_button_stumbleupon"></a>
 		<a class="addthis_button_vk"></a>
+		<a class="addthis_button_reddit"></a>
+		<a class="addthis_button_scoopit"></a>
+		<a class="addthis_button_tumblr"></a>
+		<a class="addthis_button_digg"></a>
+		<a class="addthis_button_wordpress"></a>
 		<a class="addthis_button_email"></a>
 		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
 	</div>
 	<!-- AddThis Button END -->
 </div>

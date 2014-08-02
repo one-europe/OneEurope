@@ -53,7 +53,8 @@
 			<a href="<?php Site::out_url( 'habari' ); ?>/feeds" class="icon-rs" title="Subscribe via RSS"></a>
 		</div>
 		<div class="debates-list">
-			<?php foreach($menus as $debate) {?>
+			<?php /*echo '<pre'; print_r($recent_debates); echo '</pre>';*/ ?>
+			<?php foreach($recent_debates as $debate) {?>
 				<span><a href="<?php echo $debate->permalink ?>" title="Debate – <?php echo $debate->title; ?>"><?php echo $debate->info->shorttitle; ?></a></span>
 			<?php } ?>
 		</div>

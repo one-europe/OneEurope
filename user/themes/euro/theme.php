@@ -61,6 +61,8 @@ class EuroTheme extends Theme
 
 		$this->assign('recent_posts', Posts::get( array( 'content_type' => array( 'article' ), 'limit' => 8, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); //Display the 8 most recent posts	
 
+		$this->assign('recent_debates', Posts::get( array( 'content_type' => array( 'debate' ), 'limit' => 9, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); //Display the 8 most debates
+
 		/*if( !$this->template_engine->assigned( 'any' ) ) {
 			$this->assign('any', Posts::get( array( 'content_type' => 'any', 'status' => Post::status('published'), 'nolimit' => 1 ) ) );
 		}*/
