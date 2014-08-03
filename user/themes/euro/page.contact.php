@@ -11,9 +11,6 @@
 <article>
 	<h1 class="on-page"><?php echo $post->title_out; ?></h1>
 	<div class="post-content"><?php echo $post->content_out; ?></div>
-	<?php if (User::identify()->loggedin) { ?>
-		<p><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></p>
-	<?php } ?>
 	<div class="box" id="contact-email">
 		<h2>E-Mail</h2>
 		<p>For general information, questions, or ideas please contact 
@@ -58,6 +55,9 @@
 				</noscript>.
 		</p>
 	</div>
+	<?php if (User::identify()->loggedin) { ?>
+		<p style="padding-top: 10px;"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></p>
+	<?php } ?>
 	<div style="clear: both; padding-top: 20px;">
 		<div style="width: 100%;">
 			<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
