@@ -13,6 +13,7 @@ body {
 #page {
 	margin: 0 10px;	
 	background: #fff;
+	padding-top: 10px;
 }
 #page:focus {
 	outline: none;
