@@ -108,8 +108,6 @@
 					'vocabulary' => array('any' => $post->tags ),
 					'not:id' => $post->id ) );
 					foreach ($list as $item ) { ?>
-					
-
 					<section>
 						<div class="img-wrap">
 							<img src="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/>
