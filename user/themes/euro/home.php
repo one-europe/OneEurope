@@ -99,7 +99,7 @@
 						<img src="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="160" />
 					</div>
 					<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
-					<p><?php if ( $post->info->excerpt ) { echo strip_tags($post->info->excerpt, '<span><a>'); } else { echo strip_tags($post->content_out, '<span><a>'); }?></p>
+					<p><?php echo $post->info->excerpt ? strip_tags($post->info->excerpt) : strip_tags($post->content_out); ?></p>
 					<p class="meta">
 						<?php if ( $show_author && $post->typename == 'article' ) { ?>
 							<?php if ( $post->info->origauthor ) { ?>
@@ -118,7 +118,6 @@
 						<?php } ?>
 				        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
 					</p>
-					<div style="color: #fff;" class="fb-comments-count" data-href="<?php echo $post->permalink; ?>">0</div>
 				</section>
 			<?php }} ?>
 
