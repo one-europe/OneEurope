@@ -117,9 +117,8 @@
 							<?php } ?>
 						<?php } ?>
 				        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-				        <span style="color: #fff;" class="fb-comments-count" data-href="<?php echo $post->permalink; ?>">0</span>
-				        <span style="color: #fff;"><fb:comments-count href=<?php echo $post->permalink; ?>></fb:comments-count></span>
 					</p>
+					<div style="color: #fff;" class="fb-comments-count" data-href="<?php echo $post->permalink; ?>">0</div>
 				</section>
 			<?php }} ?>
 
