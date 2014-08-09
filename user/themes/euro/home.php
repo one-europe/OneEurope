@@ -102,6 +102,7 @@
 					<p><?php echo $post->info->excerpt ? strip_tags($post->info->excerpt) : strip_tags($post->content_out); ?></p>
 					<p class="meta">
 						<?php if ( $show_author && $post->typename == 'article' ) { ?>
+							by 
 							<?php if ( $post->info->origauthor ) { ?>
 								<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title=""><?php echo $post->info->origauthor; ?></a>
 							<?php } elseif ($post->info->author) { ?>
