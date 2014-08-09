@@ -104,14 +104,14 @@
 						<?php if ( $show_author && $post->typename == 'article' ) { ?>
 							by 
 							<?php if ( $post->info->origauthor ) { ?>
-								<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title=""><?php echo $post->info->origauthor; ?></a>
+								<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="<?php echo $post->info->origauthor; ?>"><?php echo $post->info->origauthor; ?></a>
 							<?php } elseif ($post->info->author) { ?>
 								<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
-								<a href="<?php echo $publisher->permalink; ?>" title=""><?php echo User::get($post->info->author)->displayname; ?></a>
+								<a href="<?php echo $publisher->permalink; ?>" title="<?php echo User::get($post->info->author)->displayname; ?>"><?php echo User::get($post->info->author)->displayname; ?></a>
 							<?php } else { 
 									if (is_object(Post::get(array( 'all:info' => array( 'user' => $post->author->id ) )))) { 
 										$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
-								<a href="<?php echo $publisher->permalink; ?>" title=""><?php echo $post->author->displayname; ?></a>
+								<a href="<?php echo $publisher->permalink; ?>" title="<?php echo $post->author->displayname; ?>"><?php echo $post->author->displayname; ?></a>
 									<?php } else { ?>
 								<span><?php echo $post->author->displayname; ?></span>
 									<?php } ?>

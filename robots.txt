@@ -1,0 +1,9 @@
+User Agent: *
+
+Disallow: /forum/member/*
+Disallow: /harming/humans
+Disallow: /ignoring/human/orders
+Disallow: /harm/to/self
+Disallow: /profiles/ivan
+
+Allow: /
