@@ -1,5 +1,5 @@
 	<section class="side-block">
-		<a class="top-link" href="<?php Site::out_url( 'home' ); ?>/profiles">Profile Database</a>
+		<a class="top-link" href="<?php Site::out_url( 'home' ); ?>/contributors">Profile Database</a>
 		<?php
 		/*
 		normally, show 2.
@@ -39,5 +39,5 @@
 				<?php } ?>	    
 
 		<?php } ?>
-		<a class="link-view-all" href="<?php Site::out_url( 'home' ); ?>/profiles" title="View all profiles">view all</a>
+		<a class="link-view-all" href="<?php Site::out_url( 'home' ); ?>/contributors" title="View all profiles">view all</a>
 	</section>
