@@ -10,7 +10,7 @@
 </div>
 <article class="full">
 	<h1><?php echo $post->title_out; ?></h1>
-	<div class="post-content"><?php echo $post->content_out; ?></p>
+	<div class="post-content"><?php echo $post->content_out; ?></div>
 	<?php if (User::identify()->loggedin) { ?>
 		<p><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></p>
 	<?php } ?>

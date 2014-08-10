@@ -30,8 +30,8 @@ ol ul { border: none; margin: 2px !important; padding: 0; padding-left: 2em; }
 dl dt { font-weight: bold; }
 dd { margin-left: 1em;}
 
-table { border-collapse: collapse; font-size: 14px; }
-table td { border: 1px solid #ddd; padding: 5px; }
+table { border-collapse: collapse; font-size: 14px; margin-bottom: 10px; margin-top: 6px; }
+table td { border: 1px solid #ddd; padding: 5px; vertical-align: top; }
 table thead td { border-bottom: 2px solid #000 !important; font-weight: bold; }
 
 code, pre { font-family: monospace sans-serif;  }
