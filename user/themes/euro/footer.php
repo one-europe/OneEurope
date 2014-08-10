@@ -49,7 +49,7 @@
 	</script>
 
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.min.js?20140802"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20140805"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20140810"></script>
 
 </body>
 </html>
