@@ -37,7 +37,7 @@ var RTOOLBAR = {};
 		this.opts = $.extend({
 	
 			lang: 'en',
-			toolbar: 'default',
+			toolbar: 'one',
 
 			load: true,
 		
@@ -52,7 +52,7 @@ var RTOOLBAR = {};
 			cleanUp: true,
 			convertDivs: true,
 			removeClasses: true,
-			removeStyles: false,
+			removeStyles: true,
 			convertLinks: true,
 			
 			handler: false, // false or url
@@ -173,7 +173,10 @@ var RTOOLBAR = {};
 			html = this.preformater(html);
 			
 			// conver newlines to p
-			if (this.opts.autoformat) html = this.paragraphy(html);
+			if (this.opts.autoformat) {
+				// html = html.replace(/<\s*(p|span|a|h1|h2|b|i|em|strong).*?>/g, '<$1>');	// temp
+				html = this.paragraphy(html);
+			}
 
 			// enable
 			this.$editor = this.enable(html);

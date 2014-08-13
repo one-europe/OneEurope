@@ -9,14 +9,14 @@ class Redactor extends Plugin {
 	public function action_admin_header( $theme )
 	{
 		if ( $theme->page == 'publish' ) {
-			Stack::add( 'admin_header_javascript', $this->get_url() . '/redactor/redactor.min.js', 'redactor', 'jquery' );
+			Stack::add( 'admin_header_javascript', $this->get_url() . '/redactor/redactor.js', 'redactor', 'jquery' );
 			Stack::add( 'admin_stylesheet', array( $this->get_url() . '/redactor/css/redactor.css', 'screen' ), 'redactor', 'admin-css' );
 
 			$js = "$(document).ready( function(){ $('#content').redactor(); });";
 			Stack::add( 'admin_header_javascript', $js, 'redactor_init', 'redactor' );
 		}
 		if ( $theme->page == 'user' ) {
-			Stack::add( 'admin_header_javascript', $this->get_url() . '/redactor/redactor.min.js', 'redactor', 'jquery' );
+			Stack::add( 'admin_header_javascript', $this->get_url() . '/redactor/redactor.js', 'redactor', 'jquery' );
 			Stack::add( 'admin_stylesheet', array( $this->get_url() . '/redactor/css/redactor.css', 'screen' ), 'redactor', 'admin-css' );
 
 			$js = "$(document).ready( function(){ $('#profile-content').redactor(); });";
