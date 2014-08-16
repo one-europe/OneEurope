@@ -13,7 +13,7 @@
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" sizes="114x114" />
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-144x144.png" sizes="144x144" />
 	<?php echo $theme->header(); ?>
-	<!--[if lt IE 9]><script src="<?php Site::out_url( 'theme' ); ?>/js/libs/html5shiv.min.js"></script><![endif]-->
+	<!--[if lt IE 9]><script src="<?php Site::out_url( 'theme' ); ?>/js/html5shiv.min.js"></script><![endif]-->
 </head>
 <body>
 	<header>
