@@ -72,7 +72,8 @@
 				<a class="addthis_button_tumblr"></a>
 				<a class="addthis_button_digg"></a>
 				<a class="addthis_button_wordpress"></a>
-				<a class="addthis_button_email"></a>
+				<a class="addthis_button_blogger"></a>
+				<a class="addthis_button_delicious"></a>
 				<a class="addthis_button_compact"></a>
 			</div>
 			<!-- Begin MailChimp Signup Form -->
