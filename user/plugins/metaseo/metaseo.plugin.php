@@ -174,22 +174,22 @@ class MetaSeo extends Plugin
 	*/
 	public function action_form_publish($form, $post)
 	{
-		if( $form->content_type->value == Post::type( 'entry' ) || $form->content_type->value == Post::type( 'page' ) || $form->content_type->value == Post::type( 'initiative' ) || $form->content_type->value == Post::type( 'debate' ) || $form->content_type->value == Post::type( 'article' ) || $form->content_type->value == Post::type( 'nibble' ) ) {
+		// if( $form->content_type->value == Post::type( 'entry' ) || $form->content_type->value == Post::type( 'page' ) || $form->content_type->value == Post::type( 'initiative' ) || $form->content_type->value == Post::type( 'debate' ) || $form->content_type->value == Post::type( 'article' ) || $form->content_type->value == Post::type( 'nibble' ) ) {
 
-			$metaseo = $form->publish_controls->append( 'fieldset', 'metaseo', 'Search Engines' );
+		// 	$metaseo = $form->publish_controls->append( 'fieldset', 'metaseo', 'Search Engines' );
 
-			$html_title = $metaseo->append( 'text', 'html_title', 'null:null', 'Page Title' );
-			$html_title->value = strlen( $post->info->html_title ) ? $post->info->html_title : '' ;
-			$html_title->template = 'tabcontrol_text';
+		// 	$html_title = $metaseo->append( 'text', 'html_title', 'null:null', 'Page Title' );
+		// 	$html_title->value = strlen( $post->info->html_title ) ? $post->info->html_title : '' ;
+		// 	$html_title->template = 'tabcontrol_text';
 			
-			$keywords = $metaseo->append( 'text', 'keywords', 'null:null', 'Keywords' );
-			$keywords->value = strlen( $post->info->metaseo_keywords ) ? $post->info->metaseo_keywords : '' ;
-			$keywords->template = 'tabcontrol_text';
+		// 	$keywords = $metaseo->append( 'text', 'keywords', 'null:null', 'Keywords' );
+		// 	$keywords->value = strlen( $post->info->metaseo_keywords ) ? $post->info->metaseo_keywords : '' ;
+		// 	$keywords->template = 'tabcontrol_text';
 
-			$description = $metaseo->append( 'textarea', 'description', 'null:null', 'Description' );
-			$description->value = ( isset( $post->info->metaseo_desc ) ? $post->info->metaseo_desc : '' );
-			$description->template = 'tabcontrol_textarea';
-		}
+		// 	$description = $metaseo->append( 'textarea', 'description', 'null:null', 'Description' );
+		// 	$description->value = ( isset( $post->info->metaseo_desc ) ? $post->info->metaseo_desc : '' );
+		// 	$description->template = 'tabcontrol_textarea';
+		// }
 	}
 
 
@@ -206,26 +206,26 @@ class MetaSeo extends Plugin
 	*/
 	public function action_publish_post($post, $form)
 	{
-		if( $post->content_type == Post::type( 'entry' ) || $post->content_type == Post::type( 'page' ) || $post->content_type == Post::type( 'initiative' ) || $post->content_type == Post::type( 'debate' ) || $post->content_type == Post::type( 'article' ) || $post->content_type == Post::type( 'nibble' ) ) {
-			if( strlen( $form->metaseo->html_title->value ) ) {
-				$post->info->html_title= htmlspecialchars( strip_tags( $form->metaseo->html_title->value ), ENT_COMPAT, 'UTF-8' );
-			}
-			else {
-				$post->info->__unset( 'html_title' );
-			}
-			if( strlen( $form->metaseo->description->value ) ) {
-				$post->info->metaseo_desc= htmlspecialchars( Utils::truncate( strip_tags( $form->metaseo->description->value ), 200, false ), ENT_COMPAT, 'UTF-8' );
-			}
-			else {
-				$post->info->__unset( 'metaseo_desc' );
-			}
-			if( strlen( $form->metaseo->keywords->value ) ) {
-				$post->info->metaseo_keywords = htmlspecialchars( strip_tags( $form->metaseo->keywords->value ), ENT_COMPAT, 'UTF-8' );
-			}
-			else {
-				$post->info->__unset( 'metaseo_keywords' );
-			}
-		}
+		// if( $post->content_type == Post::type( 'entry' ) || $post->content_type == Post::type( 'page' ) || $post->content_type == Post::type( 'initiative' ) || $post->content_type == Post::type( 'debate' ) || $post->content_type == Post::type( 'article' ) || $post->content_type == Post::type( 'nibble' ) ) {
+		// 	if( strlen( $form->metaseo->html_title->value ) ) {
+		// 		$post->info->html_title= htmlspecialchars( strip_tags( $form->metaseo->html_title->value ), ENT_COMPAT, 'UTF-8' );
+		// 	}
+		// 	else {
+		// 		$post->info->__unset( 'html_title' );
+		// 	}
+		// 	if( strlen( $form->metaseo->description->value ) ) {
+		// 		$post->info->metaseo_desc= htmlspecialchars( Utils::truncate( strip_tags( $form->metaseo->description->value ), 200, false ), ENT_COMPAT, 'UTF-8' );
+		// 	}
+		// 	else {
+		// 		$post->info->__unset( 'metaseo_desc' );
+		// 	}
+		// 	if( strlen( $form->metaseo->keywords->value ) ) {
+		// 		$post->info->metaseo_keywords = htmlspecialchars( strip_tags( $form->metaseo->keywords->value ), ENT_COMPAT, 'UTF-8' );
+		// 	}
+		// 	else {
+		// 		$post->info->__unset( 'metaseo_keywords' );
+		// 	}
+		// }
 
 	}
 

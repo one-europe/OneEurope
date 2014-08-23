@@ -961,12 +961,13 @@ class Post extends QueryRecord implements IsContent, FormStorage
 		$form->tags->class = 'check-change';
 		$form->tags->tabindex = 3;
 
-		$tags = (array)$this->get_tags();
-		array_walk($tags, function(&$element, $key) {
-			$element->term_display = MultiByte::strpos( $element->term_display, ',' ) === false ? $element->term_display : $element->tag_text_searchable;
-		});
+		// NO TAGS BY DEFAULT
+		// $tags = (array)$this->get_tags();
+		// array_walk($tags, function(&$element, $key) {
+		// 	$element->term_display = MultiByte::strpos( $element->term_display, ',' ) === false ? $element->term_display : $element->tag_text_searchable;
+		// });
 
-		$form->tags->value = implode( ', ', $tags );
+		// $form->tags->value = implode( ', ', $tags );
 
 		// Create the splitter
 		$publish_controls = $form->append( 'tabs', 'publish_controls' );
@@ -993,8 +994,9 @@ class Post extends QueryRecord implements IsContent, FormStorage
 			$form->append( 'hidden', 'modified', 'null:null' )->value = $this->modified;
 		}
 
-		$settings->append( 'checkbox', 'comments_enabled', 'null:null', _t( 'Comments Allowed' ), 'tabcontrol_checkbox' );
-		$settings->comments_enabled->value = $this->info->comments_disabled ? false : true;
+		// TEMP: find how to disable in settings
+		// $settings->append( 'checkbox', 'comments_enabled', 'null:null', _t( 'Comments Allowed' ), 'tabcontrol_checkbox' );
+		// $settings->comments_enabled->value = $this->info->comments_disabled ? false : true;
 
 		$settings->append( 'text', 'pubdate', 'null:null', _t( 'Publication Time' ), 'tabcontrol_text' );
 		$settings->pubdate->value = $this->pubdate->format( 'Y-m-d H:i:s' );

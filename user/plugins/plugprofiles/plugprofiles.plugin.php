@@ -69,39 +69,43 @@ class PlugProfile extends Plugin
 			$form->teaser->value = $post->info->teaser;
 			$form->teaser->tabindex = 3;
 		    $form->teaser->move_after($form->photourl);
+
+		    $form->append('text', 'tags', 'null:null', _t('Tags, separated by, commas'), 'admincontrol_text');
+			$form->tags->tabindex = 4;
+			$form->tags->move_after($form->teaser);
 		
-			$form->content->tabindex = 4;
+			$form->content->tabindex = 5;
 			
 			// add external url input field
 			$form->append('text', 'url', 'null:null', _t('URL'), 'admincontrol_text');
 			$form->url->value = $post->info->url;
-			$form->url->tabindex = 5;
+			$form->url->tabindex = 6;
 			$form->url->move_after($form->content);
 			
 			// add twitter channel input field
 			$form->append('text', 'twitter', 'null:null', _t('Twitter channel (without @)'), 'admincontrol_text');
 			$form->twitter->value = $post->info->twitter;
-			$form->twitter->tabindex = 6;
+			$form->twitter->tabindex = 7;
 			$form->twitter->move_after($form->url);
 			
 			
 			// add facebook page input field
 			$form->append('text', 'fbpage', 'null:null', _t('In case the entity has a facebook page, enter the full link (http://facebook.com/[name]) right here'), 'admincontrol_text');
 			$form->fbpage->value = $post->info->fbpage;
-			$form->fbpage->tabindex = 7;
+			$form->fbpage->tabindex = 8;
 			$form->fbpage->move_after($form->twitter);
 			
 			// add facebook profile channel input field
 			$form->append('text', 'fbprofile', 'null:null', _t('In case it is an individual and if it has allowed subscribing to its facebook profile, put the link here'), 'admincontrol_text');
 			$form->fbprofile->value = $post->info->fbprofile;
-			$form->fbprofile->tabindex = 8;
+			$form->fbprofile->tabindex = 9;
 			$form->fbprofile->move_after($form->fbpage);
 			
 			// insert "additional links" input field
 			$form->insert('tags', 'text', 'more', 'null:null', _t('Additional Links (please enter valid html, so for a list of links, enter: "&lt;a href="URL"&gt;one&lt;/a&gt;,&lt/br&gt;&lt;a href="URL"&gt;two&lt;/a&gt;")'), 'admincontrol_textArea');
 			$form->more->value = $post->info->more;
 			$form->more->template = 'admincontrol_text';
-			$form->more->tabindex = 9;
+			$form->more->tabindex = 10;
 			$form->more->move_after($form->fbprofile);
 			
 			
@@ -144,15 +148,12 @@ class PlugProfile extends Plugin
 			}
 			$key = array_search( $post->info->user, $ids ); 
 			$form->user->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
-			$form->user->tabindex = 10;
+			$form->user->tabindex = 11;
 			$form->user->move_after($form->more);
 			
-			$form->tags->tabindex = 12;
-
 			// buggy, dunno why
 			$form->save->tabindex = $form->save->tabindex + 20;
 			
-
 			$profoptions = $form->publish_controls->append( 'fieldset', 'profoptions', 'Profile Options' );
 
 			//$ccontributor = $profoptions->append( 'checkbox', 'ccontributor', 'null:null', _t('Content Contributor') );

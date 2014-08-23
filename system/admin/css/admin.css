@@ -2656,6 +2656,8 @@ ul.tabs li.ui-tabs-selected.last-child {
 	margin-top: -3px;
 }
 
+#newslug { width: 100%; }
+
 .splitter .media_controls label {
 	margin-left: 10px;
 }

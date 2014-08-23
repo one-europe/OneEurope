@@ -48,19 +48,20 @@ class Plugaction extends Plugin
 		if ( $form->content_type->value == Post::type( self::CONTENT_TYPE ) ) {
  
 			// add shorttitle input field
-			$form->append('text', 'shorttitle', 'null:null', _t('Short title (for display on frontpage - can be the actual title itself if it\'s short enough)'), 'admincontrol_text');
+			$form->append('text', 'shorttitle', 'null:null', _t('Short Title (for display on frontpage - can be the actual title itself if it\'s short enough)'), 'admincontrol_text');
 			$form->shorttitle->value = $post->info->shorttitle;
 			$form->shorttitle->tabindex = 2;
 		    $form->shorttitle->move_after($form->title);
 
 			// add teaser input field
-			$form->append('text', 'teaser', 'null:null', _t('Teaser'), 'admincontrol_text');
+			$form->append('text', 'teaser', 'null:null', _t('Subtitle'), 'admincontrol_text');
 			$form->teaser->value = $post->info->teaser;
 			$form->teaser->tabindex = 3;
 		    $form->teaser->move_after($form->shorttitle);
 			
-			$form->tags->move_after($form->silos);
+			$form->append('text', 'tags', 'null:null', _t('Tags, separated by, commas'), 'admincontrol_text');
 			$form->tags->tabindex = 3; // same for correct tabbing
+			$form->tags->move_after($form->teaser);
 
 			$form->content->tabindex = 4;
 

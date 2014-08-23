@@ -71,19 +71,20 @@ class PlugBriefs extends Plugin
 		if ( $form->content_type->value == Post::type( self::CONTENT_TYPE ) ) {
 			
 			// add shorttitle input field
-			$form->append('text', 'shorttitle', 'null:null', _t('Short title (for display on frontpage - can be the actual title itself if it\'s short enough)'), 'admincontrol_text');
+			$form->append('text', 'shorttitle', 'null:null', _t('Short Title (for display on frontpage - can be the actual title itself if it\'s short enough)'), 'admincontrol_text');
 			$form->shorttitle->value = $post->info->shorttitle;
 			$form->shorttitle->tabindex = 2;
 		    $form->shorttitle->move_after($form->title);
 			
 			// add excerpt field
-			$form->append('text', 'excerpt', 'null:null', _t('Excerpt'), 'admincontrol_text');
+			$form->append('text', 'excerpt', 'null:null', _t('Subtitle'), 'admincontrol_text');
 			$form->excerpt->tabindex = 3;
 			$form->excerpt->value = $post->info->excerpt;
 			$form->excerpt->move_after($form->shorttitle);
 			
-			$form->tags->move_after($form->silos);
+			$form->append('text', 'tags', 'null:null', _t('Tags, separated by, commas'), 'admincontrol_text');
 			$form->tags->tabindex = 3; // same for correct tabbing
+			$form->tags->move_after($form->excerpt);
 
 			$form->content->tabindex = 4;
 			
@@ -138,48 +139,48 @@ class PlugBriefs extends Plugin
 			
 			
 			// make a dropdown of all initiatives with set slugs
-			$initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
-			$slugs = array(); 								// create second, empty array
-			$i = 1;
-			foreach ($initiatives as $initiative) { 					// for every initiative of the first one... 
-				if ( $i == 1 ) {
-					$slugs[] = 'None';
-					$i++;
-				}
-				if ( $initiative->title ) {			// ...if it has a displayname...
-					$slugs[] = $initiative->title;	// ...fill an object in the new array aka [nr] => [displayname]
-				}
-			} 												// use this value in the dropdown
-			$form->append( 'select', 'initiative', 'null:null', _t( 'This is a report about this initiative:' ), $slugs, 'tabcontrol_select' ); 
-			$ids = array();
-			$i = 1;
-			foreach ($initiatives as $initiative) { 					// ..
-				if ( $i == 1 ) {
-					$ids[] = '0';
-					$i++;
-				}
-				if ( $initiative->title ) {
-					$ids[] = $initiative->id;						// overwrite the slugs with ids, cause this is what we receive from the db
-					$i++;
-				}
-			}
-			$key = array_search( $post->info->initiative, $ids ); 
-			$form->initiative->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
-			$form->initiative->tabindex = 9;
-			$form->initiative->move_after($form->debate);
+			// $initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
+			// $slugs = array(); 								// create second, empty array
+			// $i = 1;
+			// foreach ($initiatives as $initiative) { 					// for every initiative of the first one... 
+			// 	if ( $i == 1 ) {
+			// 		$slugs[] = 'None';
+			// 		$i++;
+			// 	}
+			// 	if ( $initiative->title ) {			// ...if it has a displayname...
+			// 		$slugs[] = $initiative->title;	// ...fill an object in the new array aka [nr] => [displayname]
+			// 	}
+			// } 												// use this value in the dropdown
+			// $form->append( 'select', 'initiative', 'null:null', _t( 'This is a report about this initiative:' ), $slugs, 'tabcontrol_select' ); 
+			// $ids = array();
+			// $i = 1;
+			// foreach ($initiatives as $initiative) { 					// ..
+			// 	if ( $i == 1 ) {
+			// 		$ids[] = '0';
+			// 		$i++;
+			// 	}
+			// 	if ( $initiative->title ) {
+			// 		$ids[] = $initiative->id;						// overwrite the slugs with ids, cause this is what we receive from the db
+			// 		$i++;
+			// 	}
+			// }
+			// $key = array_search( $post->info->initiative, $ids ); 
+			// $form->initiative->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
+			// $form->initiative->tabindex = 9;
+			// $form->initiative->move_after($form->debate);
 			
 			
 			
 			// add original source of the nibble
-			$form->append('text', 'origsource', 'null:null', _t('Is this content re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
-			$form->origsource->tabindex = 9;
-			$form->origsource->value = $post->info->origsource;
-			$form->origsource->move_after($form->initiative);		
+			// $form->append('text', 'origsource', 'null:null', _t('Is this content re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
+			// $form->origsource->tabindex = 9;
+			// $form->origsource->value = $post->info->origsource;
+			// $form->origsource->move_after($form->initiative);		
 			// add field for the name of the source
-			$form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
-			$form->origauthor->tabindex = 10;
-			$form->origauthor->value = $post->info->origauthor;
-			$form->origauthor->move_after($form->origsource);
+			// $form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
+			// $form->origauthor->tabindex = 10;
+			// $form->origauthor->value = $post->info->origauthor;
+			// $form->origauthor->move_after($form->origsource);
 			
 			
 			/* * * * * * * * * *
@@ -259,26 +260,26 @@ class PlugBriefs extends Plugin
 			}
 			$post->info->debate = $slugs[$form->debate->value];
 		    
-			$initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
-			$slugs = array();
-			$i = 1;
-			foreach ($initiatives as $initiative) { 
-				if ( $i == 1 ) {
-					$slugs[] = '0';
-					$i++;
-				}
-				if ( $initiative->title ) {
-					$slugs[] = $initiative->id;
-					$i++;
-				}
-			}
-			foreach ($initiatives as $initiative) {
-				echo $initiative->title;
-			}
-			$post->info->initiative = $slugs[$form->initiative->value];
+			// $initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
+			// $slugs = array();
+			// $i = 1;
+			// foreach ($initiatives as $initiative) { 
+			// 	if ( $i == 1 ) {
+			// 		$slugs[] = '0';
+			// 		$i++;
+			// 	}
+			// 	if ( $initiative->title ) {
+			// 		$slugs[] = $initiative->id;
+			// 		$i++;
+			// 	}
+			// }
+			// foreach ($initiatives as $initiative) {
+			// 	echo $initiative->title;
+			// }
+			// $post->info->initiative = $slugs[$form->initiative->value];
 			
-	    	$post->info->origsource = $form->origsource->value;
-	    	$post->info->origauthor = $form->origauthor->value;			
+	  //   	$post->info->origsource = $form->origsource->value;
+	  //   	$post->info->origauthor = $form->origauthor->value;			
            
 			// No, it really is that easy to save data
 		}
