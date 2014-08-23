@@ -82,7 +82,6 @@ class PlugBriefs extends Plugin
 			$form->excerpt->value = $post->info->excerpt;
 			$form->excerpt->move_after($form->shorttitle);
 			
-			$form->append('text', 'tags', 'null:null', _t('Tags, separated by, commas'), 'admincontrol_text');
 			$form->tags->tabindex = 3; // same for correct tabbing
 			$form->tags->move_after($form->excerpt);
 

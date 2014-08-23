@@ -961,13 +961,13 @@ class Post extends QueryRecord implements IsContent, FormStorage
 		$form->tags->class = 'check-change';
 		$form->tags->tabindex = 3;
 
-		// NO TAGS BY DEFAULT
-		// $tags = (array)$this->get_tags();
-		// array_walk($tags, function(&$element, $key) {
-		// 	$element->term_display = MultiByte::strpos( $element->term_display, ',' ) === false ? $element->term_display : $element->tag_text_searchable;
-		// });
-
-		// $form->tags->value = implode( ', ', $tags );
+		if ( !$newpost ) {
+			$tags = (array)$this->get_tags();
+			array_walk($tags, function(&$element, $key) {
+				$element->term_display = MultiByte::strpos( $element->term_display, ',' ) === false ? $element->term_display : $element->tag_text_searchable;
+			});
+			$form->tags->value = implode( ', ', $tags );
+		}
 
 		// Create the splitter
 		$publish_controls = $form->append( 'tabs', 'publish_controls' );

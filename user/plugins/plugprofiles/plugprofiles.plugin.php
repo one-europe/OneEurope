@@ -70,7 +70,6 @@ class PlugProfile extends Plugin
 			$form->teaser->tabindex = 3;
 		    $form->teaser->move_after($form->photourl);
 
-		    $form->append('text', 'tags', 'null:null', _t('Tags, separated by, commas'), 'admincontrol_text');
 			$form->tags->tabindex = 4;
 			$form->tags->move_after($form->teaser);
 		
