@@ -1,0 +1,1 @@
+<a class="yearbook" href="<?php Site::out_url( 'habari' ); ?>/ebooks" title="OneEurope Magazines - Yearbook 2013"></a>

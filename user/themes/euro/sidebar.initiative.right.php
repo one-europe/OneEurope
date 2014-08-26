@@ -1,5 +1,6 @@
 <aside>
 	<?php echo $theme->display('sidebar.elem.newsletter'); ?>
+	<?php echo $theme->display('sidebar.elem.yearbook'); ?>
 	<section class="side-block">
 		<span class="top-link">Share</span>
 		<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
