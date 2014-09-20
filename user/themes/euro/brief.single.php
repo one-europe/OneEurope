@@ -2,8 +2,7 @@
 <?php if ( $post ) { ?>
 	<article>
 		<div class="breadcrumb">
-			<a class="to-root" href="<?php Site::out_url( 'habari' ); ?>/in-brief">Images</a>
-			<a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a>
+			<a class="to-root" href="<?php Site::out_url( 'habari' ); ?>/in-brief">Back to Images</a>
 			<div class="pager">
 				<?php if ($previous = $post->descend()): ?>
 				<a class="prev" href="<?php echo $previous->permalink ?>" title="<?php echo $previous->title; ?>">Previous</a>
@@ -16,6 +15,7 @@
 		</div>
 		<!-- <div class="metacat"><span><?php echo $post->info->metacat; ?></span></div> -->
 		<h1><?php echo $post->title_out; ?></h1>
+		<p class="descr"><?php echo $post->info->excerpt; ?></p>
 		<?php if ( $post->info->showauthor == 1 ) { ?>
 		<p class="author">
 			<?php if ( $post->info->origsource ) { ?>
@@ -85,6 +85,41 @@
 			</form>
 			</div>
 			<!--End mc_embed_signup-->
+		</div>
+
+		<div class="further-reading post-list">
+			<p class="header">Further Reading:</p>
+		 	<div class="similar-posts">
+				<?php $list = Posts::get( array( 'content_type' => Post::type( 'brief' ),
+						'status' => Post::status( 'published' ),
+						'order' => 'DESC',
+						'limit' => 3,
+						'vocabulary' => array('any' => $post->tags ),
+						'not:id' => $post->id ) );
+						foreach ($list as $item ) { ?>
+						<section>
+							<div class="img-wrap">
+								<img src="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/>
+							</div>
+							<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
+							<p><?php if ( $item->info->excerpt ) { echo $item->info->excerpt; } else { echo $item->content_out; } ?></p>
+							<p class="meta">
+						        <?php if ( $show_author && $item->typename == 'article' ) { ?>
+									<?php if ( $item->info->origauthor ) { ?>
+										<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="<?php echo $item->info->origauthor; ?>"><?php echo $item->info->origauthor; ?></a>
+									<?php } elseif ($item->info->author) { ?>
+										<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $item->info->author ) ) );?>
+										<a href="<?php echo $publisher->permalink; ?>" title="<?php echo User::get($item->info->author)->displayname; ?>"><?php echo User::get($item->info->author)->displayname; ?></a>
+									<?php } else { 
+										$publisher = Post::get(array( 'all:info' => array( 'user' => $item->author->id ) ) );?>
+										<a href="<?php echo $publisher->permalink; ?>" title="<?php echo $item->author->displayname; ?>"><?php echo $item->author->displayname; ?></a>
+									<?php } ?>
+								<?php } ?>
+						        on <time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+							</p>
+						</section>
+				<?php } ?>
+			</div>
 		</div>
 
 		<!-- <div class="disqus"><?php $theme->comments( $post ); ?></div> -->

@@ -28,40 +28,19 @@
 				document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
 			</script><noscript>
 			    <em>[Email address protected by JavaScript. Enable JavaScript to see it]<em>
-			</noscript>.<br/>
-			For public relations, please contact Ivan at
-	 			<script type="text/javascript">
-	 				emailE='one-europe.info'
-	 				emailE=('ivan' + '@' + emailE)
-	 				document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
-	 			</script><noscript>
-	 			    <em>[Email address protected by JavaScript. Enable JavaScript to see it.]<em>
-	 			</noscript>.<br/>
-			For fundraising and IT matters, please send an email to Cherian at
-				<script type="text/javascript">
-					emailE='one-europe.info'
-					emailE=('cherian' + '@' + emailE)
-					document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
-				</script><noscript>
-				    <em>[Email address protected by JavaScript. Enable JavaScript to see it.]<em>
-				</noscript>.<br/>
-			For anything related to editing, please e-mail Ana at
-				<script type="text/javascript">
-					emailE='one-europe.info'
-					emailE=('ana' + '@' + emailE)
-					document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
-				</script><noscript>
-				    <em>[Email address protected by JavaScript. Enable JavaScript to see it.]<em>
-				</noscript>.
+			</noscript>.
 		</p>
 	</div>
 	<?php if (User::identify()->loggedin) { ?>
 		<p style="padding-top: 10px;"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></p>
 	<?php } ?>
 	<div style="clear: both; padding-top: 20px;">
-		<div style="width: 100%;">
+		<div style="float: left; width: 380px;">
 			<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
 			<script type="IN/CompanyProfile" data-id="2916037" data-format="inline"></script>
+		</div>
+		<div class="pinterest-board" style="float: left; padding-top: 5px;">
+			<a data-pin-do="embedUser" href="http://www.pinterest.com/oneeurope/" data-pin-scale-width="77" data-pin-scale-height="260" data-pin-board-width="265">Visit One Europe's profile on Pinterest</a>
 		</div>
 	</div>
 </article>

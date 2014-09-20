@@ -36,6 +36,7 @@
 			<a href="<?php Site::out_url( 'habari' ); ?>/imprint">Terms</a>
 		</div>
 		<article class="full">
+		<p class="pic-here"><b>Want to see your pic here? Find out how you can <a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join Us</a>!</b></p>
 		<h2>Directors:</h2>
 		<?php foreach ( $directors as $profile ) { 
 			if ($profile->info->user) {

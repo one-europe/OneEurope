@@ -2,8 +2,7 @@
 <?php if ( $post ) { ?>
 	<article>
 		<div class="breadcrumb">
-			<a class="to-root" href="<?php Site::out_url( 'habari' ); ?>/videos">Videos</a>
-			<a href="<?php echo $post->permalink; ?>"><?php echo $post->title; ?></a>
+			<a class="to-root" href="<?php Site::out_url( 'habari' ); ?>/videos">Back to Videos</a>
 			<div class="pager">
 				<?php if ($previous = $post->descend()): ?>
 				<a class="prev" href="<?php echo $previous->permalink ?>" title="<?php echo $previous->title; ?>">Previous</a>
@@ -16,6 +15,7 @@
 		</div>
 		<!-- <div class="metacat"><span><?php echo $post->info->metacat; ?></span></div> -->
 		<h1><?php echo $post->title_out; ?></h1>
+		<p class="descr"><?php echo $post->info->excerpt; ?></p>
 		<?php if ( $post->info->showauthor == 1 ) { ?>
 			<span class="article-autor">
 				<?php if ( $post->info->origsource ) { ?>
