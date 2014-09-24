@@ -52,21 +52,49 @@
 		<?php } ?>														
 	</div>
 
-	<!-- <div class="disqus"><?php $theme->comments( $post ); ?></div> -->
+	<div class="spread-the-word">
+		Spread the word:
+		<?php echo $theme->display('social.spread-the-word'); ?>
+	</div>
 
 	<div class="fb-comments" style="padding-top: 20px; display: block; overflow: hidden;" data-width="100%" data-href="<?php echo $post->permalink; ?>" data-numposts="5" data-colorscheme="light"></div>
 
-	<div class="social-buttons at-the-bottom">
-		<span>Find us on:</span>
-		<a href="https://facebook.com/OneEurope" class="icon-fb" title="Find us on Facebook" target="_blank"></a>
-		<a href="https://twitter.com/one1europe" class="icon-tw" title="Follow us on Twitter" target="_blank"></a>
-		<a href="http://www.linkedin.com/company/oneeurope" class="icon-in" title="Find us on LinkedIn" target="_blank"></a>
-		<a href="https://plus.google.com/118353934830681553476/posts" class="icon-gp" title="Add us to your circles" target="_blank"></a>
-		<a href="http://pinterest.com/oneeurope" class="icon-pi" title="Find us on Pinterest" target="_blank"></a>
-		<a href="http://www.stumbleupon.com/stumbler/OneEurope" class="icon-st" title="Find us on StumbleUpon" target="_blank"></a>
-		<a href="http://vk.com/oneeurope" class="icon-vk" title="Find us on VKontakte" target="_blank"></a>
-		<a href="/feeds" class="icon-rs" title="Subscribe via RSS"></a>
+	<div class="further-reading post-list">
+		<p class="header">Further Reading:</p>
+	 	<div class="similar-posts">
+			<?php $list = Posts::get( array( 'content_type' => Post::type( 'article' ),
+					'status' => Post::status( 'published' ),
+					'order' => 'DESC',
+					'limit' => 3,
+					'vocabulary' => array('any' => $post->tags ),
+					'not:id' => $post->id ) );
+					foreach ($list as $item ) { ?>
+					<section>
+						<div class="img-wrap">
+							<img src="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/>
+						</div>
+						<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
+						<p><?php if ( $item->info->excerpt ) { echo $item->info->excerpt; } else { echo $item->content_out; } ?></p>
+						<p class="meta">
+					        <?php if ( $show_author && $item->typename == 'article' ) { ?>
+								<?php if ( $item->info->origauthor ) { ?>
+									<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="<?php echo $item->info->origauthor; ?>"><?php echo $item->info->origauthor; ?></a>
+								<?php } elseif ($item->info->author) { ?>
+									<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $item->info->author ) ) );?>
+									<a href="<?php echo $publisher->permalink; ?>" title="<?php echo User::get($item->info->author)->displayname; ?>"><?php echo User::get($item->info->author)->displayname; ?></a>
+								<?php } else { 
+									$publisher = Post::get(array( 'all:info' => array( 'user' => $item->author->id ) ) );?>
+									<a href="<?php echo $publisher->permalink; ?>" title="<?php echo $item->author->displayname; ?>"><?php echo $item->author->displayname; ?></a>
+								<?php } ?>
+							<?php } ?>
+					        on <time datetime="<?php echo $item->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $item->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
+						</p>
+					</section>
+			<?php } ?>
+		</div>
 	</div>
+
+	<?php echo $theme->display('social.buttons-bottom'); ?>
 
 </article>
 <?php echo $theme->display('sidebar.initiative.right'); ?>

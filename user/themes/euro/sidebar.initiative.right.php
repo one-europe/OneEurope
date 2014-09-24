@@ -1,25 +1,6 @@
 <aside>
 	<?php echo $theme->display('sidebar.elem.newsletter'); ?>
 	<?php echo $theme->display('sidebar.elem.yearbook'); ?>
-	<section class="side-block">
-		<span class="top-link">Share</span>
-		<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-			<a class="addthis_button_facebook"></a>
-			<a class="addthis_button_google_plusone_share"></a>
-			<a class="addthis_button_twitter"></a>
-			<a class="addthis_button_pinterest_share"></a>
-			<a class="addthis_button_linkedin"></a>
-			<a class="addthis_button_stumbleupon"></a>
-			<a class="addthis_button_vk"></a>
-			<a class="addthis_button_reddit"></a>
-			<a class="addthis_button_scoopit"></a>
-			<a class="addthis_button_tumblr"></a>
-			<a class="addthis_button_digg"></a>
-			<a class="addthis_button_wordpress"></a>
-			<a class="addthis_button_email"></a>
-			<a class="addthis_button_compact"></a>
-		</div>
-	</section>
 	<?php if ( $post->info->url || $post->info->twitter ) { ?>
 	<section class="side-block">
 		<span class="top-link">More about this</span>

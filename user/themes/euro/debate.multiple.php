@@ -10,11 +10,6 @@
 		<p><?php if ( $post->info->excerpt ) { echo $post->info->excerpt; } else { echo $post->content_out; } ?></p>
 	</section>
 	<?php } ?>
-	<div class="pagination">
-		<?php echo $theme->prev_page_link(_t('Previous'), array('class' => 'previous')); ?>
-		<?php echo $theme->page_selector(null, array('leftSide' => 6, 'rightSide' => 6, 'hideIfSinglePage' => true)); ?>
-		<?php echo $theme->next_page_link(_t('Next'), array('class' => 'next')); ?>
-	</div>
 </div>
 <?php echo $theme->display('sidebar'); ?>
 <?php echo $theme->display('footer'); ?>
