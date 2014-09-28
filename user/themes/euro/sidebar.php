@@ -6,5 +6,5 @@
 	<?php echo $theme->display('sidebar.elem.social'); ?>
 	<?php echo $theme->display('sidebar.elem.most-shared'); ?>
 	<?php echo $theme->display('sidebar.elem.debates'); ?>
-	<?php echo $theme->display('sidebar.elem.profilepool'); ?>
+	<?php echo $theme->display('sidebar.elem.profiles-pool'); ?>
 </aside>

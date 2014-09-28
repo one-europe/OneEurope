@@ -1,5 +1,5 @@
 	<section class="side-block">
-		<a class="top-link" href="<?php Site::out_url( 'home' ); ?>/contributors">Profile Database</a>
+		<a class="top-link" href="<?php Site::out_url( 'habari' ); ?>/contributors">Profile Database</a>
 		<?php
 		/*
 		normally, show 2.
@@ -10,7 +10,9 @@
 		$j = 0;
 		$hide = false;
 		
-		$profiles = Posts::get( array( 'content_type' => 'profile', 'status' => 'published', 'limit' => $i, 'all:info' => array('ccontributor' => 1), 'orderby' => 'RAND()' ) );
+		$profiles = Posts::get( array( 'content_type' => 'profile', 'status' => 'published', 'limit' => $i/*, 'all:info' => array('ccontributor' => 1)*/, 'orderby' => 'RAND()' ) );
+		// Utils::debug($profiles->get_query());
+		
 		foreach ($profiles as $profile ) { 
 			
 				if ( isset($post) ) { 
@@ -34,10 +36,13 @@
 				
 	   	    	<a class="profile" href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>">
 					<img src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( !$source->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title ?>" width="95" />
-	   	    		<p class="teaser"><b><?php echo $title; ?></b><?php echo $source->teaser; ?></p>
+	   	    		<p class="teaser">
+	   	    			<b><?php echo $title; ?></b>
+	   	    			<?php echo $source->teaser ? $source->teaser :  strip_tags(explode('</p>', $profile->content)[0]); ?>
+	   	    		</p>
 				</a>
 				<?php } ?>	    
 
 		<?php } ?>
-		<a class="link-view-all" href="<?php Site::out_url( 'home' ); ?>/contributors" title="View all profiles">view all</a>
+		<a class="link-view-all" href="<?php Site::out_url( 'habari' ); ?>/contributors" title="View all profiles">view all</a>
 	</section>

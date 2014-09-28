@@ -5,6 +5,6 @@
 	<?php echo $theme->display('sidebar.elem.pinterest-board'); ?>
 	<?php echo $theme->display('sidebar.elem.most-shared'); ?>
 	<?php echo $theme->display('sidebar.elem.debates'); ?>
-	<?php echo $theme->display('sidebar.elem.profilepool'); ?>
+	<?php echo $theme->display('sidebar.elem.profiles-pool'); ?>
 	<?php echo $theme->display('sidebar.elem.newsletter'); ?>
 </aside>
