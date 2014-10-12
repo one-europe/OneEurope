@@ -11,17 +11,6 @@
 			</div>
 			
 			<div class="part-right">
-				<div class="part contact-form">
-					<h2>Say Hello</h2>
-					<p>Want to get involved, give some feedback or found an error? No Problem! Drop us a line:</p>
-					<form id="contactForm" action="<?php Site::out_url('theme') ?>/mail.php" method="post">
-						<input id="senderName" placeholder="Name" name="senderName" required="required" type="text" />
-						<input id="senderEmail" placeholder="Email" name="senderEmail" required="required" type="email" />
-						<textarea id="senderMessage" placeholder="Message" name="message" required="required"></textarea>
-						<button id="sendMessage" name="sendMessage">Send message</button>
-					</form>
-				</div>
-
 				<div class="part bottom-nav">
 					<a class="jump" href="#top">TOP</a>
 					<nav>
@@ -49,7 +38,7 @@
 	</script>
 
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.min.js?20140802"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20140823"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20141012"></script>
 
 </body>
 </html>
