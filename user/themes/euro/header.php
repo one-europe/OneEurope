@@ -7,7 +7,7 @@
 	<title><?php echo Options::get( 'title' ); ?></title>
 	<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
 	<link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/img/favicon.ico" />
-	<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/main.css?20141012" />
+	<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/main.css?20141014" />
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon.png" />
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-72x72.png" sizes="72x72" />
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" sizes="114x114" />
@@ -31,10 +31,12 @@
 		<?php } ?>
 		<nav>
 			<a href="<?php Site::out_url( 'habari' ); ?>/in-brief">Infographics</a>
+			<!-- <a href="<?php Site::out_url( 'habari' ); ?>/articles">Articles</a> -->
 			<a href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join Us</a>
+			<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Patrons</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a>
 			<form method="GET" id="searchform" action="<?php Site::out_url( 'habari' ); ?>/search">
 				<input class="search-box" type="text" name="criteria" placeholder="Search" />
