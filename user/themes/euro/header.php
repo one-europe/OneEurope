@@ -20,12 +20,12 @@
 		<?php if ($home_page) { ?>
 		<h1>
 			<span>OneEurope - One Society, One Democracy, One Europe</span>
-			<img src="<?php Site::out_url( 'theme' ); ?>/img/logo-normal.png" alt="OneEurope - One Society, One Democracy, One Europe" />
+			<img src="<?php Site::out_url( 'theme' ); ?>/img/logo-shorter.png" alt="OneEurope - One Society, One Democracy, One Europe" />
 		</h1>
 		<?php } else { ?>
 		<div class="logo">
 			<a href="<?php Site::out_url( 'habari' ); ?>" title="OneEurope - One Society, One Democracy, One Europe">
-				<img src="<?php Site::out_url( 'theme' ); ?>/img/logo-normal.png" alt="OneEurope - One Society, One Democracy, One Europe" />
+				<img src="<?php Site::out_url( 'theme' ); ?>/img/logo-shorter.png" alt="OneEurope - One Society, One Democracy, One Europe" />
 			</a>
 		</div>
 		<?php } ?>
