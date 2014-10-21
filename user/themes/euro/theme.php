@@ -1,38 +1,27 @@
 <?php
 
-/**
- * 
- */
-class EuroTheme extends Theme
-{
+class EuroTheme extends Theme {
+
 	/**
 	 * Execute on theme init to apply these filters to output
 	 */
-	public function action_init_theme()
-	{
-	
-	// What's this?		
-	// Apply Format::tag_and_list() to post tags...
-	Format::apply( 'tag_and_list', 'post_tags_out' );
-	// Apply Format::autop() to post content excerpt...
-	//Format::apply( 'autop', 'post_content_excerpt' );
+	public function action_init_theme() {
+		Format::apply('tag_and_list', 'post_tags_out');
+		Format::apply('summarize', 'post_content_fulltext', 10000, 100);
+		
+		Format::apply_with_hook_params('more', 'post_content_excerpt', ' <span class="more-exc">more</span>', 17, 1); // big excerpt
+		Format::apply_with_hook_params('more', 'post_content_out', '', 30, 1); // short excerpt
+		Format::apply_with_hook_params('more', 'post_content_videotext', '<span class="more-out">› more</span>', 1000, 2); // short excerpt
 
 
-	Format::apply_with_hook_params( 'more', 'post_content_excerpt', ' <span class="more-exc">more</span>', 17, 1 ); // big excerpt
-	Format::apply_with_hook_params( 'more', 'post_content_out', '', 30, 1 ); // short excerpt
-
-	Format::apply( 'summarize', 'post_content_fulltext', 10000, 100 );
-	Format::apply_with_hook_params( 'more', 'post_content_videotext', '<span class="more-out">› more</span>', 1000, 2 ); // short excerpt
-
-	// Format::apply_with_hook_params( 'more', 'post_content_30', '<span class="more-out">› more</span>', 30, 1 ); // short excerpt
-	// Format::apply_with_hook_params( 'more', 'post_content_50', '<span class="more-out">› more</span>', 50, 1 ); // short excerpt
-	// used in briefs.multitple.php - not working
-	// Format::apply_with_hook_params( 'more', 'post_content_70', '<span class="more-out">› more</span>', 70, 1 ); // short excerpt
-
-
+		/** block from add_template_vars() function  **/
+		$this->assign('show_author', true ); // Display author in posts
+		$this->assign('home_page', $this->matched_rule->name == 'display_home' ); // home page is displayed
+		$this->assign('recent_debates', Posts::get( array( 'content_type' => array( 'debate' ), 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); // Display all debates
+		$this->assign('briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => 6 ) ) ); // brief sidebar box frontpage (up to 4 + 2 see * below)
 	}
 
-/**
+	/**
 	 *  Add additional template variables to the template output.
 	 *
 	 *  You can assign additional output values in the template here, instead of
@@ -50,62 +39,18 @@ class EuroTheme extends Theme
 	 *  template.  So the values here, unless checked, will overwrite any existing
 	 *  values.
 	 */
-	
-	public function add_template_vars()
-	{
-		
-		$this->assign('show_author', true ); //Display author in posts
-
-		$this->assign('home_page', $this->matched_rule->name == 'display_home' );	// home page is displayed
-
-		$this->assign('recent_posts', Posts::get( array( 'content_type' => array( 'article' ), 'limit' => 8, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); // Display the 8 most recent posts	
-
-		$this->assign('recent_debates', Posts::get( array( 'content_type' => array( 'debate' ), 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); // Display all debates
-
-		/*if( !$this->template_engine->assigned( 'any' ) ) {
-			$this->assign('any', Posts::get( array( 'content_type' => 'any', 'status' => Post::status('published'), 'nolimit' => 1 ) ) );
-		}*/
-		if( !$this->template_engine->assigned( 'page' ) ) {
-			$page = Controller::get_var( 'page' );
-			$this->assign('page', isset( $page ) ? $page : 1 );
-		}
-
-		if ( User::identify()->loggedin ) {
-			Stack::add( 'template_header_javascript', Site::get_url('scripts') . '/jquery.js', 'jquery' );
-		}
-		
-		// work with systags.plugin.php
-		//$this->assign( 'sides', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'mini' ), 'limit' => 2, 'status' => 'published' ) ) );
-		// slideshow
-		$this->assign( 'sliders', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => array('published') ) ) );
-		// debate menu
-		$this->assign( 'menus', Posts::get( array( 'vocabulary' => array( 'systags:term' => 'menu' ), 'limit' => 7, 'status' => 'published', 'content_type' => Post::type('debate') ) ) );
-		// initiative block frontpage (up to 4 + 3, see * below)
-		$this->assign( 'inits', Posts::get( array( 'content_type' => 'initiative', 'limit' => 7, 'status' => 'published' ) ) );
-		// brief sidebar box frontpage (up to 4 + 2 see * below)
-		$this->assign( 'briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => 6 ) ) );
-
-		// home page video
-		$this->assign('home_page_video', Posts::get( array( 'content_type' => array( 'video' ), 'limit' => 1, 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) );
-		
+	public function add_template_vars() {
+		// content of this function was moved to action_init_theme() function
 	}
-	
-	/* public function filter_theme_call_header ( $return, $theme ) {
-		if ( User::identify() != false ) {
-			Stack::add( 'template_header_javascript', Site::get_url('scripts') . '/jquery.js', 'jquery' );
-		}
-		return $return;
-	} */
 
 	/**
 	 * Return the title for the page
 	 * @return String the title.
 	 */
-	public function the_title( $head = false ){
+	public function the_title( $head = false ) {
+		echo 'the_title ';
 	    $title = '';
-	    //Copy Pasta from Andrew Rickman's ported theme, Dilectio http://www.habari-fun.co.uk/converting-wordpress-themes-to-habari-file-names
-	    //check against the matched rule
-	    switch( $this->matched_rule->name ){
+	    switch( $this->matched_rule->name ) {
 	        case 'display_404':
 	            $title = 'Error 404';
 	        break;
@@ -202,35 +147,20 @@ class EuroTheme extends Theme
 		);
 
 		$types = Post::list_active_post_types();
-		$types = array_keys( $types );
-		$types = array_diff( $types, array( 'profile, article, brief, debate, action' ) );
-		$default_filters = array(
-			'content_type' => $types,
-		);
+		$types = array_keys($types);
+		$types = array_diff($types, array( 'profile, article, brief, debate, action'));
+		$default_filters = array('content_type' => $types);
 
-		$paramarray['user_filters'] = array_merge( $default_filters,
-		$user_filters );
+		$paramarray['user_filters'] = array_merge($default_filters, $user_filters);
 
-		$this->assign( 'criteria', htmlentities( Controller::get_var('criteria'), ENT_QUOTES, 'UTF-8' ) );
-		return $this->act_display( $paramarray );
+		$this->assign('criteria', htmlentities( Controller::get_var('criteria'), ENT_QUOTES, 'UTF-8' ));
+		return $this->act_display($paramarray);
 	}
 	
 	public function act_display_home( $user_filters = array() ) {
-		$paramarray['fallback'] = array(
-			'home',
-		);
-
-		// has no effect:
-		parent::act_display_home( array( 'content_type' => array( Post::type('article') ) ) );
-
+		$paramarray['fallback'] = array('home');
+		parent::act_display_home( array( 'content_type' => array( Post::type('article') ) ) ); // has no effect:
 	}
-
-	/*public function act_display_home($paramarray = array( 'user_filters'=> array() ) ) {
-			$user_filters = array('all:info' => array( 'initiative' => '0' ), 'vocabulary' => array( 'systags:not:term' => 'mini' ) );
-			$paramarray['user_filters'] = array_merge($user_filters, $paramarray['user_filters']);
-			parent::act_display( $paramarray );
-		}*/
-
 }
 
 ?>

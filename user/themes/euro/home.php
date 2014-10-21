@@ -4,6 +4,7 @@
 			<div class="tabs featured-tabs">
 
 			<?php
+				$sliders = Posts::get(array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => array('published')));
 				$i = 1;	foreach ( $sliders as $post ) {	?>
 			    <div id="fragment-<?php echo $i; ?>" class="ui-tabs-panel <?php if ( $i != 1 ) { ?>ui-tabs-hide<?php } ?> thumbs-home">
 					<a href="<?php echo $post->permalink; ?>">
@@ -48,14 +49,15 @@
 
 			<div class="video">
 				<?php
-					$video = $home_page_video[0];
-					preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($video->content_fulltext, '<iframe>'), $matches);
+					$latest_video = Posts::get(array( 'content_type' => array( 'video' ), 'limit' => 1, 'status'=>'published', 'orderby'=>'pubdate DESC'));
+					$latest_video = $latest_video[0];
+					preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($latest_video->content_fulltext, '<iframe>'), $matches);
 					$iframe = preg_replace(
 						['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
 						['width="305"', 'height="172"', 'src="${1}?modestbranding=1&amp;rel=0&amp;showinfo=0&amp;controls=0&amp;wmode=transparent"'],
 						$matches[0]
 					);
-					echo $iframe . '<p><a href="' . $video->permalink . '" title="' . $video->title . '">' . $video->title . '</a></p>';
+					echo $iframe . '<p><a href="' . $latest_video->permalink . '" title="' . $latest_video->title . '">' . $latest_video->title . '</a></p>';
 				?>
 				<a href="<?php echo Site::out_url( 'habari' ); ?>/videos" class="all" title="View more videos">View more videos ›</a>
 			</div>
