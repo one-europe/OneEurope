@@ -3,7 +3,7 @@
 <div class="breadcrumbs">
 	<a href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a>
+	<a href="<?php Site::out_url( 'habari' ); ?>/team">Team</a>
 	<b>Donate</b>
 	<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a>

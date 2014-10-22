@@ -312,7 +312,7 @@ class MetaSeo extends Plugin
 				case 'display_videos':
 				case 'display_briefs':
 				case 'display_profiles':
-				case 'display_contributors':
+				case 'display_team':
 				case 'display_initiatives':
 					$desc = Options::get( 'MetaSEO__home_desc' );
 					break;
@@ -404,7 +404,7 @@ class MetaSeo extends Plugin
 				case 'display_videos':
 				case 'display_briefs':
 				case 'display_profiles':
-				case 'display_contributors':
+				case 'display_team':
 				case 'display_initiatives':
 					if( count( Options::get( 'MetaSEO__home_keywords' ) ) ) {
 						$keywords= implode( ', ', Options::get( 'MetaSEO__home_keywords' ) );
@@ -487,7 +487,7 @@ class MetaSeo extends Plugin
 				case 'display_videos':
 				case 'display_briefs':
 				case 'display_profiles':
-				case 'display_contributors':
+				case 'display_team':
 				case 'display_initiatives':
 					$robots = 'index, follow';
 					break;
@@ -597,8 +597,8 @@ class MetaSeo extends Plugin
 					$out = 'Profiles › All Profiles';
 					$out .= ' - ' . Options::get('title');
 					break;
-				case 'display_contributors':
-					$out = 'Profiles › All Contributors';
+				case 'display_team':
+					$out = 'Team';
 					$out .= ' - ' . Options::get( 'title' );
 					break;
 				case 'display_initiatives':
@@ -762,9 +762,9 @@ class MetaSeo extends Plugin
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
-				case 'display_contributors':
-					echo "\n<meta property=\"og:title\" content=\"All Contrbutors\" >\n";
-					echo "<meta property=\"og:url\" content=\"http://one-europe.info/contributors\" >\n";
+				case 'display_team':
+					echo "\n<meta property=\"og:title\" content=\"Team\" >\n";
+					echo "<meta property=\"og:url\" content=\"http://one-europe.info/team\" >\n";
 					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta property=\"og:description\" content=\"Who's contributing to this project?\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
@@ -910,10 +910,10 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:description\" content=\"Our cromplete profile database.\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
-				case 'display_contributors':
-					echo "\n<meta name=\"twitter:title\" content=\"All Contrbutors\" >\n";
+				case 'display_team':
+					echo "\n<meta name=\"twitter:title\" content=\"Team\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
-					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/contributors\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/team\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
 					echo "<meta name=\"twitter:description\" content=\"Who's contributing to this project?\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";

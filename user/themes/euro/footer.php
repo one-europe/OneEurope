@@ -16,7 +16,7 @@
 					<nav>
 						<a href="<?php Site::out_url( 'habari' ); ?>/about" title="About">About</a>
 						<a href="<?php Site::out_url( 'habari' ); ?>/join-us" title="Join us">Join us</a>
-						<a href="<?php Site::out_url( 'habari' ); ?>/contributors" title="Team">Team</a>
+						<a href="<?php Site::out_url( 'habari' ); ?>/team" title="Team">Team</a>
 						<a href="<?php Site::out_url( 'habari' ); ?>/donate" title="Donate">Donate</a>
 						<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron" title="Patron">Patron</a>
 						<a href="<?php Site::out_url( 'habari' ); ?>/contact" title="Contact">Contact</a>

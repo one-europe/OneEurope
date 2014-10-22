@@ -4,7 +4,7 @@
 	<ul>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/about">About</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a></li>
+		<li><a href="<?php Site::out_url( 'habari' ); ?>/team">Team</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding"><b>Crowdfunding</b></a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a></li>

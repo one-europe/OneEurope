@@ -33,7 +33,7 @@
 			<a href="<?php Site::out_url( 'habari' ); ?>/in-brief">Infographics</a>
 			<!-- <a href="<?php Site::out_url( 'habari' ); ?>/articles">Articles</a> -->
 			<a href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
-			<a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a>
+			<a href="<?php Site::out_url( 'habari' ); ?>/team">Team</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join Us</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Patrons</a>

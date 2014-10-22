@@ -11,7 +11,7 @@
 	}?>
 
 <div class="breadcrumbs">
-	<a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a>
+	<a href="<?php Site::out_url( 'habari' ); ?>/team">Team</a>
 	<b><?php echo $displayname; ?></b>
 </div>
 

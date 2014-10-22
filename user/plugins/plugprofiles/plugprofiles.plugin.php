@@ -222,20 +222,20 @@ class PlugProfile extends Plugin
 			'description' => 'Display all profiles' )
 		);
 		$rules[] = new RewriteRule(array(
-			'name' => 'display_contributors',
-			'parse_regex' => '%^contributors(?:/page/(?P<page>\d+))?/?$%',
-			'build_str' => 'contributors(/page/{$page})',
+			'name' => 'display_team',
+			'parse_regex' => '%^team(?:/page/(?P<page>\d+))?/?$%',
+			'build_str' => 'team(/page/{$page})',
 			'handler' => 'UserThemeHandler',
-			'action' => 'display_contributors',
+			'action' => 'display_team',
 			'priority' => 2,
 			'rule_class' => RewriteRule::RULE_PLUGIN,
 			'is_active' => 1,
-			'description' => 'Display contributors' )
+			'description' => 'Display team' )
 		);
 		$rules[] = new RewriteRule( array( 
 			'name' => 'display_profile',
 			'parse_regex' => '%profiles/(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$%i',
-			'build_str' => 'profiles/{$slug}(/page/{$page})',
+			'build_str' => '{$slug}(/page/{$page})',
 			'handler' => 'UserThemeHandler',
 			'action' => 'display_profile',
 			'priority' => 2,
@@ -256,7 +256,7 @@ class PlugProfile extends Plugin
 			 'profile.{$slug}', //match profile.my-project.php, where my-profile is the slug of the post
 			 'profile.tag.{$posttag}', //match profile.tag1.php, profile.tag2.php...where tag1,tag2... are post's tag
 			 'profile.single', //match profile.single.php
-			 'profile.multiple', //match profile.multiple.php
+			 'team.multiple', //match team.multiple.php
 			 'single', //single.php
 			 'multiple', //multiple.php
 		);
@@ -311,35 +311,34 @@ class PlugProfile extends Plugin
 	 */
 	public function filter_theme_act_display_profiles( $handled, $theme )
 	{
-	  // Try to use the profile.multiple.php template, and if that's not available,
+	  // Try to use the team.multiple.php template, and if that's not available,
 	  // use multiple.php
 	  $paramarray['fallback']= array(
-	    'profile.multiple',
+	    'team.multiple',
 	    'multiple',
 	  );
 
 	  // Retrieve all profiles.
-	  $allprofiles = Posts::get(array(
-	    'content_type' => Post::type('profile'),
-	    'status' => Post::status('published'),
-	    'nolimit' => TRUE,
-		'orderby' => 'title ASC'
-	
-	  ));
+	 //  $allprofiles = Posts::get(array(
+	 //    'content_type' => Post::type('profile'),
+	 //    'status' => Post::status('published'),
+	 //    'nolimit' => TRUE,
+		// 'orderby' => 'title ASC'
+	 //  ));
 
 	  // Add the profiles to the theme. Access this in your template with $allprofiles.
-	  $theme->allprofiles = $allprofiles;
+	  // $theme->allprofiles = $allprofiles;
 
 	  $theme->act_display( $paramarray );
 
 	}
 	
-	public function filter_theme_act_display_contributors( $handled, $theme )
+	public function filter_theme_act_display_team( $handled, $theme )
 	{
-	  // Try to use the profile.multiple.php template, and if that's not available,
+	  // Try to use the team.multiple.php template, and if that's not available,
 	  // use multiple.php
 	  $paramarray['fallback']= array(
-	    'profile.multiple',
+	    'team.multiple',
 	    'multiple',
 	  );
 	
@@ -371,13 +370,13 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));		  
-	  $formerpartners = Posts::get(array(
-	    'content_type' => Post::type('profile'),
-	    'status' => Post::status('published'),
-		'vocabulary' => array('systags:term' => 'former'),
-		'orderby' => 'title ASC',
-	    'nolimit' => TRUE
-	  ));		  
+	 //  $formerpartners = Posts::get(array(
+	 //    'content_type' => Post::type('profile'),
+	 //    'status' => Post::status('published'),
+		// 'vocabulary' => array('systags:term' => 'former'),
+		// 'orderby' => 'title ASC',
+	 //    'nolimit' => TRUE
+	 //  ));		  
 	  $editors = Posts::get(array(
 	    'content_type' => Post::type('profile'),
 	    'status' => Post::status('published'),
@@ -392,25 +391,25 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
-	  $fundraising = Posts::get(array(
-	    'content_type' => Post::type('profile'),
-	    'status' => Post::status('published'),
-		'vocabulary' => array('systags:term' => 'fundraising'),
-		'orderby' => 'title ASC',
-	    'nolimit' => TRUE
-	  ));
+	 //  $fundraising = Posts::get(array(
+	 //    'content_type' => Post::type('profile'),
+	 //    'status' => Post::status('published'),
+		// 'vocabulary' => array('systags:term' => 'fundraising'),
+		// 'orderby' => 'title ASC',
+	 //    'nolimit' => TRUE
+	 //  ));
 	  
 
 	  // Add the profiles to the theme. Access this in your template with $allprofiles.
-	  $theme->contributors = $contributors;
 	  $theme->directors = $directors;
+	  $theme->editors = $editors;
 	  $theme->authors = $authors;
 	  $theme->ambassadors = $ambassadors;
-	  $theme->formerpartners = $formerpartners;
-	  $theme->partners = $partners;
-	  $theme->editors = $editors;
 	  $theme->itdept = $itdept;
-	  $theme->fundraising = $fundraising;
+	  $theme->partners = $partners;
+	  // $theme->contributors = $contributors;
+	  // $theme->formerpartners = $formerpartners;
+	  // $theme->fundraising = $fundraising;
 
 	  $theme->act_display( $paramarray );
 

@@ -2,7 +2,7 @@
 <div class="breadcrumbs">
 	<b>About</b>
 	<a href="<?php Site::out_url( 'habari' ); ?>/join-us">Join us</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/contributors">Team</a>
+	<a href="<?php Site::out_url( 'habari' ); ?>/team">Team</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a>

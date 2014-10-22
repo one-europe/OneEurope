@@ -1,5 +1,5 @@
 	<section class="side-block">
-		<a class="top-link" href="<?php Site::out_url( 'habari' ); ?>/contributors">Profile Database</a>
+		<a class="top-link" href="<?php Site::out_url( 'habari' ); ?>/team">Profile Database</a>
 		<?php
 		/*
 		normally, show 2.
@@ -44,5 +44,5 @@
 				<?php } ?>	    
 
 		<?php } ?>
-		<a class="link-view-all" href="<?php Site::out_url( 'habari' ); ?>/contributors" title="View all profiles">view all</a>
+		<a class="link-view-all" href="<?php Site::out_url( 'habari' ); ?>/team" title="View all profiles">view all</a>
 	</section>
