@@ -288,25 +288,25 @@ class PlugBriefs extends Plugin
 	{
 		$rules[] = new RewriteRule(array(
 			'name' => 'display_briefs',
-			'parse_regex' => '%^in-brief(?:/page/(?P<page>\d+))?/?$%',
-			'build_str' => 'in-brief(/page/{$page})',
+			'parse_regex' => '%^infographics(?:/page/(?P<page>\d+))?/?$%',
+			'build_str' => 'infographics(/page/{$page})',
 			'handler' => 'UserThemeHandler',
 			'action' => 'display_briefs',
 			'priority' => 2,
 			'rule_class' => RewriteRule::RULE_PLUGIN,
 			'is_active' => 1,
-			'description' => 'Display all briefs' )
+			'description' => 'Display all infographics' )
 		);
 		$rules[] = new RewriteRule( array( 
 			'name' => 'display_brief',
-			'parse_regex' => '%in-brief/(?P<slug>[^/]+)/?$%i',
-			'build_str' => 'in-brief/{$slug}',
+			'parse_regex' => '%infographics/(?P<slug>[^/]+)/?$%i',
+			'build_str' => 'infographics/{$slug}',
 			'handler' => 'UserThemeHandler',
 			'action' => 'display_brief',
 			'priority' => 2,
 			'rule_class' => RewriteRule::RULE_PLUGIN,
 			'is_active' => 1,
-			'description' => 'Simple brief management' )
+			'description' => 'Simple infographic management' )
 		);
 	  return $rules;
 	}

@@ -4,6 +4,6 @@
 	<?php echo $theme->display('sidebar.elem.yearbook'); ?>
 	<?php echo $theme->display('sidebar.elem.most-shared'); ?>
 	<?php echo $theme->display('sidebar.elem.stay-tuned'); ?>
-	<?php echo $theme->display('sidebar.elem.in-brief'); ?>
+	<?php echo $theme->display('sidebar.elem.infographics'); ?>
 	<?php echo $theme->display('sidebar.elem.profiles-pool'); ?>
 </aside>

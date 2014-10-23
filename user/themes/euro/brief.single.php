@@ -2,7 +2,7 @@
 <?php if ( $post ) { ?>
 	<article>
 		<div class="breadcrumb">
-			<a class="to-root" href="<?php Site::out_url( 'habari' ); ?>/in-brief">Back to Images</a>
+			<a class="to-root" href="<?php Site::out_url( 'habari' ); ?>/infographics">Back to Infographics</a>
 			<div class="pager">
 				<?php if ($previous = $post->descend()): ?>
 				<a class="prev" href="<?php echo $previous->permalink ?>" title="<?php echo $previous->title; ?>">Previous</a>

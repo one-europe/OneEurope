@@ -3,7 +3,7 @@
 	<name>PlugBriefs</name>
 	<author url="http://valentinkotov.de">Valentin Kotov</author>
 	<description><![CDATA[Adds the 'brief' content type which looks for a brief.single.php and brief.multiple.php.
-		Creates a kind of 9gag-like content section that is reachable via /in-brief. Marvel at its awesomeness.]]></description>
+		Creates a kind of 9gag-like content section that is reachable via /infographics. Marvel at its awesomeness.]]></description>
 	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
 	<version>1.0</version>
 </pluggable>

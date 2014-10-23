@@ -590,7 +590,7 @@ class MetaSeo extends Plugin
 					$out .= ' - ' . Options::get('title');
 					break;
 				case 'display_briefs':
-					$out = 'All Briefs';
+					$out = 'All Infographics';
 					$out .= ' - ' . Options::get('title');
 					break;
 				case 'display_profiles':
@@ -686,10 +686,10 @@ class MetaSeo extends Plugin
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
 				case 'display_briefs':
-					echo "\n<meta property=\"og:title\" content=\"All image posts\" >\n";
-					echo "<meta property=\"og:url\" content=\"http://one-europe.info/nibbles\" >\n";
+					echo "\n<meta property=\"og:title\" content=\"All infographics posts\" >\n";
+					echo "<meta property=\"og:url\" content=\"http://one-europe.info/infographics\" >\n";
 					echo "<meta property=\"og:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
-					echo "<meta property=\"og:description\" content=\"Our complete image post database.\" >\n";
+					echo "<meta property=\"og:description\" content=\"Our complete infographics post database.\" >\n";
 					echo "<meta property=\"og:site_name\" content=\"OneEurope\" >\n";
 					echo "<meta property=\"fb:app_id\" content=\"121944181248560\" >\n\n";					
 					break;
@@ -840,11 +840,11 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				case 'display_briefs':
-					echo "\n<meta property=\"twitter:title\" content=\"All image posts\" >\n";
+					echo "\n<meta property=\"twitter:title\" content=\"All infographics posts\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
-					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/nibbles\" >\n";
+					echo "<meta name=\"twitter:url\" content=\"http://one-europe.info/infographics\" >\n";
 					echo "<meta name=\"twitter:image\" content=\"http://one-europe.info/user/themes/euro/img/static/logo_square.png\" >\n";
-					echo "<meta name=\"twitter:description\" content=\"The best image and info graphic content about European politics on the web.\" >\n";
+					echo "<meta name=\"twitter:description\" content=\"The best infographic content about European politics on the web.\" >\n";
 					echo "<meta name=\"twitter:site:id\" content=\"344621545\" >\n\n";
 					break;
 				case 'display_initiative':

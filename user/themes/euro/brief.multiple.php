@@ -3,7 +3,7 @@
 } else { ?>
 <?php echo $theme->display('header'); ?>
 	<div class="list-large">
-		<h1>Images</h1>
+		<h1>Infographics</h1>
 		<?php foreach ($briefs as $post ) { ?>						
 		<div class="item">
 			<?php if ( $post->status == Post::status('scheduled') ) { ?>
