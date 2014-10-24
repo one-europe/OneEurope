@@ -283,29 +283,15 @@ class PlugVideos extends Plugin
 
 	  $videos = Posts::get(array(
 	    'content_type' => Post::type('video'),
-	    'status' => array( Post::status('published'), Post::status('scheduled') ),
+	    'status' => array( Post::status('published') ),
 		'offset' => ($pagination)*($page)-$pagination,
 	    'limit' => $pagination
 	  ));
 	  // Add the videos to the theme. Access this in your template with $videos.
 	  $theme->videos = $videos;
 	  $theme->pagination = $pagination;
-	 
-	  $allvideos = Posts::get(array(
-	    'content_type' => Post::type('video'),
-	    'status' => array( Post::status('published'), Post::status('scheduled') ),
-		'offset' => ($pagination)*($page)-$pagination,
-	    'limit' => $pagination
-	  ));
-	  // Add the videos to the theme. Access this in your template with $videos.
-	  $theme->all = $allvideos->count_all();
-
-	
-
-
 
 	  $theme->act_display( $paramarray );
-
 	}
 	
 }

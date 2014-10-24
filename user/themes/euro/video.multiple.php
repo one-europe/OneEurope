@@ -6,11 +6,6 @@
 		<h1>Videos</h1>
 		<?php foreach ($videos as $post ) { ?>						
 		<div class="item">
-			<?php if ( $post->status == Post::status('scheduled') ) { ?>
-			<!-- 	<div class="content-badge scheduled">
-					<span>scheduled</span>
-				</div> -->
-			<?php } ?>
 			<div class="item-video">
 				<?php
 					preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($post->content_fulltext, '<iframe>'), $matches);
