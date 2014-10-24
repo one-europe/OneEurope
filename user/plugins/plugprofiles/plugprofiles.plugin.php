@@ -234,8 +234,8 @@ class PlugProfile extends Plugin
 		);
 		$rules[] = new RewriteRule( array( 
 			'name' => 'display_profile',
-			'parse_regex' => '%profiles/(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$%i',
-			'build_str' => '{$slug}(/page/{$page})',
+			'parse_regex' => '%team/(?P<slug>[^/]+)(?:/page/(?P<page>\d+))?/?$%i',
+			'build_str' => 'team/{$slug}(/page/{$page})',
 			'handler' => 'UserThemeHandler',
 			'action' => 'display_profile',
 			'priority' => 2,

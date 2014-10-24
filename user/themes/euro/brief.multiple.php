@@ -6,11 +6,6 @@
 		<h1>Infographics</h1>
 		<?php foreach ($briefs as $post ) { ?>						
 		<div class="item">
-			<?php if ( $post->status == Post::status('scheduled') ) { ?>
-				<!-- <div class="content-badge scheduled">
-					<span>scheduled</span>
-				</div> -->
-			<?php } ?>
 			<a class="item-image" href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>">
 				<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" />
 			</a>

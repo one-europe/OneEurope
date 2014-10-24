@@ -368,7 +368,7 @@ class PlugBriefs extends Plugin
 
 	  $briefs = Posts::get(array(
 	    'content_type' => Post::type('brief'),
-	    'status' => array( Post::status('published'), Post::status('scheduled') ),
+	    'status' => array( Post::status('published') ),
 		'offset' => ($pagination)*($page)-$pagination,
 	    'limit' => $pagination
 	  ));
