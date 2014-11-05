@@ -1,6 +1,6 @@
 <aside>
 	<?php echo $theme->display('sidebar.elem.newsletter'); ?>
-	<?php echo $theme->display('sidebar.elem.yearbook'); ?>
+	<?php echo $theme->display('sidebar.elem.made-in-europe'); ?>
 	<?php if ( $post->info->url || $post->info->twitter ) { ?>
 	<section class="side-block">
 		<span class="top-link">More about this</span>

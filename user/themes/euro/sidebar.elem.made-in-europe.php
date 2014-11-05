@@ -1,0 +1,1 @@
+<a class="made-in-europe" target="_blank" href="http://itismadeineurope.com" title="Only quality products that are made in European Union"></a>
