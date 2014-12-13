@@ -1,1 +1,2 @@
 <a class="made-in-europe" target="_blank" href="http://itismadeineurope.com/blog/qualitychristmaspresentsfromeurope" title="Only quality products that are made in European Union"></a>
+<p class="min-info">For information on Ads on OneEurope e-mail: <a>info@one-europe.info</a></p>

@@ -38,7 +38,7 @@
 	</script>
 
 	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.min.js?20140802"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20141012"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20141213"></script>
 
 </body>
 </html>

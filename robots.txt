@@ -1,4 +1,4 @@
-User Agent: *
+user-agent: *
 
 Disallow: /forum/member/*
 Disallow: /harming/humans
@@ -6,5 +6,6 @@ Disallow: /ignoring/human/orders
 Disallow: /harm/to/self
 Disallow: /profiles/ivan
 Disallow: /ivan
+Disallow: /pad
 
 Allow: /
