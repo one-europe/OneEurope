@@ -30,7 +30,7 @@
 		</div>
 		<?php } ?>
 		<nav>
-			<a href="<?php Site::out_url( 'habari' ); ?>/infographics">Infographics</a>
+			<a href="<?php Site::out_url( 'habari' ); ?>/eurographics">Eurographics</a>
 			<!-- <a href="<?php Site::out_url( 'habari' ); ?>/articles">Articles</a> -->
 			<a href="<?php Site::out_url( 'habari' ); ?>/about">About</a>
 			<a href="<?php Site::out_url( 'habari' ); ?>/team">Team</a>

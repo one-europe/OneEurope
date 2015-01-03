@@ -3,7 +3,7 @@
 } else { ?>
 <?php echo $theme->display('header'); ?>
 	<div class="list-large">
-		<h1>Infographics</h1>
+		<h1>Eurographics</h1>
 		<?php foreach ($briefs as $post ) { ?>						
 		<div class="item">
 			<a class="item-image" href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>">

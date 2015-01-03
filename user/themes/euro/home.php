@@ -66,7 +66,7 @@
 
 
 			<div class="pictures">
-				<h2><a href="<?php echo Site::out_url( 'habari' ); ?>/infographics" title="">Infographics</a></h2>
+				<h2><a href="<?php echo Site::out_url( 'habari' ); ?>/eurographics" title="">Eurographics</a></h2>
 				<div class="wrap">
 					<?php
 						$i = 0; $j = 1;

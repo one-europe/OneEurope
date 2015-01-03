@@ -1,5 +1,5 @@
 <section class="side-block">
-	<a class="top-link" href="<?php echo Site::out_url( 'habari' ); ?>/infographics">Infographics:</a>
+	<a class="top-link" href="<?php echo Site::out_url( 'habari' ); ?>/eurographics">Eurographics:</a>
 		<?php
 		$i = 0; $j = 1;
 		foreach ($briefsteaser as $brief ) { 	
@@ -20,5 +20,5 @@
 				<h2><?php echo $brief->title; ?></h2>
 			</a>
 		<?php } } ?>
-		<a class="link-view-all" href="<?php echo Site::out_url( 'habari' ); ?>/infographics" title="view all">view all</a>
+		<a class="link-view-all" href="<?php echo Site::out_url( 'habari' ); ?>/eurographics" title="view all">view all</a>
 </section>

@@ -121,7 +121,7 @@
 		<p class="pledge"><b>Donate &euro;50 or more</b>
 		Digital Yearbook, Best of OneEurope. 2013 was a great year for us
 		and to celebrate that we have put together a Yearbook of our best articles,
-		infographics and more. Donate 50 Euros or more and receive a digital version
+		eurographics and more. Donate 50 Euros or more and receive a digital version
 		of the Yearbook before anyone else. In
 		addition you will receive an exclusive OneEurope postcard with a personal
 		message from a team member, your name listed on our website, a Thank You message via 
@@ -133,7 +133,7 @@
 		OneEurope Yearbook 2013 - Collector's Print Edition. Get your
 		hands on the most exclusive item in our collection of rewards, the first
 		print edition magazine from OneEurope featuring 2013's best articles,
-		infographics and other content. Support us with €100 and be one of the first
+		eurographics and other content. Support us with €100 and be one of the first
 		to own it from the original print run, Hot off the Press! Plus
 		all the goodies mentioned above: Thank You's, stickers, postcards, window
 		sticker, flyers and OneEuropeans pin badge.</p>
