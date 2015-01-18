@@ -995,8 +995,8 @@ class Post extends QueryRecord implements IsContent, FormStorage
 		}
 
 		// TEMP: find how to disable in settings
-		// $settings->append( 'checkbox', 'comments_enabled', 'null:null', _t( 'Comments Allowed' ), 'tabcontrol_checkbox' );
-		// $settings->comments_enabled->value = $this->info->comments_disabled ? false : true;
+		$settings->append( 'checkbox', 'comments_enabled', 'null:null', _t( 'Comments Allowed' ), 'tabcontrol_checkbox' );
+		$settings->comments_enabled->value = $this->info->comments_disabled ? false : true;
 
 		$settings->append( 'text', 'pubdate', 'null:null', _t( 'Publication Time' ), 'tabcontrol_text' );
 		$settings->pubdate->value = $this->pubdate->format( 'Y-m-d H:i:s' );

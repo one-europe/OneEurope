@@ -17,7 +17,7 @@
 </head>
 <body>
 	<header>
-		<?php if ($home_page) { ?>
+		<?php if ($this->matched_rule->name == 'display_home') { ?>
 		<h1>
 			<span>OneEurope - One Society, One Democracy, One Europe</span>
 			<img src="<?php Site::out_url( 'theme' ); ?>/img/logo-shorter.png" alt="OneEurope - One Society, One Democracy, One Europe" />
@@ -55,7 +55,7 @@
 			<a href="<?php Site::out_url( 'habari' ); ?>/feeds" class="icon-rs" title="Subscribe via RSS"></a>
 		</div>
 		<div class="debates-list">
-			<?php foreach($recent_debates as $debate) {?>
+			<?php foreach ($recent_debates as $debate) { ?>
 				<span><a href="<?php echo $debate->permalink ?>" title="Debate – <?php echo $debate->title; ?>"><?php echo $debate->info->shorttitle; ?></a></span>
 			<?php } ?>
 		</div>

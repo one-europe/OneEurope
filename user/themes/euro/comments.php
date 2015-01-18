@@ -1,5 +1,3 @@
-<?php  echo 'comments.php'; exit; ?>
-
 <?php if ( !defined( 'HABARI_PATH' ) ) { die('No direct access'); } ?>
 
 <?php if ( $post->comments->moderated->count > 0 ) { ?>

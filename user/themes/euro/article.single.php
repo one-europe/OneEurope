@@ -74,6 +74,8 @@
 
 	<div class="fb-comments" style="padding-top: 20px; display: block; overflow: hidden;" data-width="100%" data-href="<?php echo $post->permalink; ?>" data-numposts="5" data-colorscheme="light"></div>
 
+	<?php /*echo $theme->display('comments');*/ ?>
+
 	<div class="further-reading post-list">
 		<p class="header">Further Reading:</p>
 	 	<div class="similar-posts">
