@@ -372,16 +372,16 @@ class PlugBriefs extends Plugin
 		'offset' => ($pagination)*($page)-$pagination,
 	    'limit' => $pagination
 	  ));
+
 	  // Add the briefs to the theme. Access this in your template with $briefs.
 	  $theme->briefs = $briefs;
 	  $theme->pagination = $pagination;
 
-	  $theme->act_display( $paramarray );
+	  $theme->act_display( $paramarray, true );
 	}
 
 	public static function theme_page_selector_briefs( $theme, $rr_name = null, $settings = array() )
 	{
-		// echo '<pre>'; print_r($settings); echo '</pre>';
 		// We can't detect proper pagination if $theme->briefs isn't a Posts object, 
 		// so if it's not, bail.
 		if(!$theme->briefs instanceof Posts) {
@@ -404,9 +404,6 @@ class PlugBriefs extends Plugin
 		// Number of pages to display on each side of the current page.
 		$leftSide = isset( $settings['leftSide'] ) ? $settings['leftSide'] : 1;
 		$rightSide = isset( $settings['rightSide'] ) ? $settings['rightSide'] : 1;
-
-		// echo $leftSide;
-		// echo $rightSide;
 
 		// Add the page '1'.
 		$pages[] = 1;
@@ -433,7 +430,6 @@ class PlugBriefs extends Plugin
 			return '';
 		}
 
-		// echo '<pre>'; print_r($pages); echo '</pre>';
 		foreach ( $pages as $page ) {
 			$settings['page'] = $page;
 

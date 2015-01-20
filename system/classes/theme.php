@@ -179,7 +179,8 @@ class Theme extends Pluggable
 	 * For instance, to filter by tag, ensure that handler_vars['tag']
 	 * contains the tag to filter by.  Simple as that.
 	 */
-	public function act_display( $paramarray = array( 'user_filters'=> array() ) )
+	/** custom $allow param was added on 20.01.2015 (pagination for eurographics) **/
+	public function act_display( $paramarray = array( 'user_filters'=> array() ), $allow )
 	{
 		Utils::check_request_method( array( 'GET', 'HEAD', 'POST' ) );
 
@@ -245,8 +246,8 @@ class Theme extends Pluggable
 			$this->assign( 'post', $post );
 			$type = Post::type_name( $post->content_type );
 		}
-		elseif ( ( $posts === false ) ||
-			( isset( $where_filters['page'] ) && $where_filters['page'] > 1 && count( $posts ) == 0 ) ) {
+		elseif ( !$allow && ( ( $posts === false ) ||
+			( isset( $where_filters['page'] ) && $where_filters['page'] > 1 && count( $posts ) == 0 ) ) ) {
 			if ( $this->template_exists( '404' ) ) {
 				$fallback = array( '404' );
 				// Replace template variables with the 404 rewrite rule
