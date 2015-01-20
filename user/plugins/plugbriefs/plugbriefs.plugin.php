@@ -442,7 +442,9 @@ class PlugBriefs extends Plugin
 			// Build the URL using the supplied $settings and the found RewriteRules arguments.
 			$url = URL::get( $rr_name, $settings, false );
 			// Build the HTML link.
-			$out .= '&nbsp;<a href="' . $url . '" ' . ( ( $page == $current ) ? 'class="current-page"' : '' ) . '>' . $caption . '</a>';
+			// $out .= '&nbsp;<a href="' . $url . '" ' . ( ( $page == $current ) ? 'class="current-page"' : '' ) . '>' . $caption . '</a>';
+			if ($page == $current) $out .= '&nbsp;<strong title="Current Page ' . $caption . '">' . $caption . '</strong>';
+			else $out .= '&nbsp;<a href="' . $url . '" title="Page ' . $caption . '">' . $caption . '</a>';
 
 			$prevpage = $page;
 		}
