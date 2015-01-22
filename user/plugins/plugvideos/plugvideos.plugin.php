@@ -291,7 +291,78 @@ class PlugVideos extends Plugin
 	  $theme->videos = $videos;
 	  $theme->pagination = $pagination;
 
-	  $theme->act_display( $paramarray );
+	  $theme->act_display( $paramarray, true );
+	}
+
+	public static function theme_page_selector_videos( $theme, $rr_name = null, $settings = array() )
+	{
+		// We can't detect proper pagination if $theme->videos isn't a Posts object, 
+		// so if it's not, bail.
+		if(!$theme->videos instanceof Posts) {
+			return '';
+		}
+		$current = $theme->page;
+		$items_per_page = isset( $theme->videos->get_param_cache['limit'] ) ?
+			$theme->videos->get_param_cache['limit'] :
+			Options::get( 'pagination' );
+		$total = Utils::archive_pages( $theme->videos->count_all(), $items_per_page );
+
+		// Make sure the current page is valid
+		if ( $current > $total ) {
+			$current = $total;
+		}
+		else if ( $current < 1 ) {
+			$current = 1;
+		}
+
+		// Number of pages to display on each side of the current page.
+		$leftSide = isset( $settings['leftSide'] ) ? $settings['leftSide'] : 1;
+		$rightSide = isset( $settings['rightSide'] ) ? $settings['rightSide'] : 1;
+
+		// Add the page '1'.
+		$pages[] = 1;
+
+		// Add the pages to display on each side of the current page, based on $leftSide and $rightSide.
+		for ( $i = max( $current - $leftSide, 2 ); $i < $total && $i <= $current + $rightSide; $i++ ) {
+			$pages[] = $i;
+		}
+
+		// Add the last page if there is more than one page.
+		if ( $total > 1 ) {
+			$pages[] = (int) $total;
+		}
+
+		// Sort the array by natural order.
+		natsort( $pages );
+
+		// This variable is used to know the last page processed by the foreach().
+		$prevpage = 0;
+		// Create the output variable.
+		$out = '';
+
+		if ( 1 === count( $pages ) && isset( $settings['hideIfSinglePage'] ) &&  $settings['hideIfSinglePage'] === true ) {
+			return '';
+		}
+
+		foreach ( $pages as $page ) {
+			$settings['page'] = $page;
+
+			// Add ... if the gap between the previous page is higher than 1.
+			if ( ( $page - $prevpage ) > 1 ) {
+				$out .= '&nbsp;<span class="sep">&hellip;</span>';
+			}
+			// Wrap the current page number with square brackets.
+			$caption = ( $page == $current ) ?  $current  : $page;
+			// Build the URL using the supplied $settings and the found RewriteRules arguments.
+			$url = URL::get( $rr_name, $settings, false );
+			// Build the HTML link.
+			if ($page == $current) $out .= '&nbsp;<strong title="' . $caption . '">' . $caption . '</strong>';
+			else $out .= '&nbsp;<a href="' . $url . '" title="Page ' . $caption . '">' . $caption . '</a>';
+
+			$prevpage = $page;
+		}
+
+		return $out;
 	}
 	
 }
