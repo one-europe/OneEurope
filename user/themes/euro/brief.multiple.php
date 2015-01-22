@@ -30,7 +30,7 @@
 	<div class="pagination">
 		<?php echo $theme->prev_page_link(_t('Previous'), array('class' => 'previous')); ?>
 		<?php echo $theme->page_selector_briefs(null, array('leftSide' => 6, 'rightSide' => 6, 'hideIfSinglePage' => true)); ?>
-		<?php echo $theme->next_page_link(_t('Next'), array('class' => 'next')); ?>
+		<?php echo $theme->next_page_link_briefs(_t('Next'), array('class' => 'next')); ?>
 	</div>
 </div>
 <?php echo $theme->display('sidebar.nibble.right'); ?>

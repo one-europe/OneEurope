@@ -1,6 +1,3 @@
-<?php if ($matched_rule->name != 'display_videos') {
-	echo $theme->display('home');
-} else { ?>
 <?php echo $theme->display('header'); ?>
 	<div class="list-large">
 		<h1>Videos</h1>
@@ -41,9 +38,8 @@
 		<div class="pagination">
 			<?php echo $theme->prev_page_link(_t('Previous'), array('class' => 'previous')); ?>
 			<?php echo $theme->page_selector_videos(null, array('leftSide' => 6, 'rightSide' => 6, 'hideIfSinglePage' => true)); ?>
-			<?php echo $theme->next_page_link(_t('Next'), array('class' => 'next')); ?>
+			<?php echo $theme->next_page_link_videos(_t('Next'), array('class' => 'next')); ?>
 		</div>
 	</div>
 <?php echo $theme->display ('sidebar.nibble.right'); ?>
 <?php echo $theme->display ('footer'); ?>
-<?php } ?>

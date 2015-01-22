@@ -364,6 +364,29 @@ class PlugVideos extends Plugin
 
 		return $out;
 	}
+
+	public function theme_next_page_link_videos( $theme, $text = null, $classes = array( 'next-page' ) )
+	{
+		$settings = array();
+
+		// If there's no next page, skip and return null
+		$settings['page'] = (int) ( $theme->page + 1 );
+		$items_per_page = isset( $theme->videos->get_param_cache['limit'] ) ?
+			$theme->videos->get_param_cache['limit'] :
+			Options::get( 'pagination' );
+		$total = Utils::archive_pages( $theme->videos->count_all(), $items_per_page );
+
+		if ( $settings['page'] > $total ) {
+			return null;
+		}
+
+		// If no text was supplied, use default text
+		if ( $text == '' ) {
+			$text = _t( 'Next' ) . ' &rarr;';
+		}
+
+		return '<a class="' . implode( ' ', $classes ) . '" href="' . URL::get( null, $settings, false ) . '" title="' . $text . '">' . $text . '</a>';
+	}
 	
 }
 ?>
