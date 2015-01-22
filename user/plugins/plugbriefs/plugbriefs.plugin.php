@@ -380,7 +380,7 @@ class PlugBriefs extends Plugin
 	  $theme->act_display( $paramarray, true );
 	}
 
-	public static function theme_page_selector_briefs( $theme, $rr_name = null, $settings = array() )
+	public static function theme_page_selector_briefs1( $theme, $rr_name = null, $settings = array() )
 	{
 		// We can't detect proper pagination if $theme->briefs isn't a Posts object, 
 		// so if it's not, bail.
@@ -452,7 +452,7 @@ class PlugBriefs extends Plugin
 		return $out;
 	}
 
-	public function theme_next_page_link_briefs( $theme, $text = null, $classes = array( 'next-page' ) )
+	public function theme_next_page_link_briefs1( $theme, $text = null, $classes = array( 'next-page' ) )
 	{
 		$settings = array();
 
