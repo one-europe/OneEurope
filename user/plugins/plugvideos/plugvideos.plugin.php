@@ -294,7 +294,7 @@ class PlugVideos extends Plugin
 	  $theme->act_display( $paramarray, true );
 	}
 
-	public static function theme_page_selector_videos1( $theme, $rr_name = null, $settings = array() )
+	public static function theme_page_selector_videos( $theme, $rr_name = null, $settings = array() )
 	{
 		// We can't detect proper pagination if $theme->videos isn't a Posts object, 
 		// so if it's not, bail.
@@ -365,7 +365,7 @@ class PlugVideos extends Plugin
 		return $out;
 	}
 
-	public function theme_next_page_link_videos1( $theme, $text = null, $classes = array( 'next-page' ) )
+	public function theme_next_page_link_videos( $theme, $text = null, $classes = array( 'next-page' ) )
 	{
 		$settings = array();
 
