@@ -238,14 +238,13 @@ class Theme extends Pluggable
 			if ( count( $posts ) == 1 ) {
 				$post = $posts instanceof Post ? $posts : reset( $posts );
 				Stack::add( 'body_class', Post::type_name( $post->content_type ) . '-' . $post->id );
-				$this->assign( 'post', $post );
 				$type = Post::type_name( $post->content_type );
 			}
 			else {
 				$post = reset( $posts );
 				Stack::add( 'body_class', 'multiple' );
 			}
-			// $this->assign( 'post', $post );
+			$this->assign( 'post', $post );
 			// $type = Post::type_name( $post->content_type );
 		}
 		elseif ( !$allow && ( ( $posts === false ) ||
