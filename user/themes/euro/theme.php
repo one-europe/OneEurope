@@ -17,7 +17,6 @@ class EuroTheme extends Theme {
 		/** block from add_template_vars() function  **/
 		$this->assign('show_author', true ); // Display author in posts
 		$this->assign('recent_debates', Posts::get( array( 'content_type' => array( 'debate' ), 'status'=>'published', 'orderby'=>'pubdate DESC' ) ) ); // Display all debates
-		$this->assign('briefsteaser', Posts::get( array( 'content_type' => 'brief', 'status' => array('published'), 'limit' => 6 ) ) ); // brief sidebar box frontpage (up to 4 + 2 see * below)
 	}
 
 	/**

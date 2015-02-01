@@ -4,8 +4,10 @@
 			<div class="tabs featured-tabs">
 
 			<?php
-				$sliders = Posts::get(array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'limit' => 4, 'status' => array('published')));
-				$i = 1;	foreach ( $sliders as $post ) {	?>
+				$sliders = Posts::get(array( 'content_type' => 'article', 'limit' => 4, 'status'=> 'published', 'orderby' => 'pubdate DESC'));
+				$i = 1;	foreach ( $sliders as $post ) {
+					$ignored_posts[] = $post->id;
+			?>
 			    <div id="fragment-<?php echo $i; ?>" class="ui-tabs-panel <?php if ( $i != 1 ) { ?>ui-tabs-hide<?php } ?> thumbs-home">
 					<a href="<?php echo $post->permalink; ?>">
 						<div class="img-wrap-f-large">
@@ -44,9 +46,6 @@
 				</ul>
 			</div>
 
-
-
-
 			<div class="video">
 				<?php
 					$latest_video = Posts::get(array( 'content_type' => array( 'video' ), 'limit' => 1, 'status'=>'published', 'orderby'=>'pubdate DESC'));
@@ -62,40 +61,30 @@
 				<a href="<?php echo Site::out_url( 'habari' ); ?>/videos" class="all" title="View more videos">View more videos ›</a>
 			</div>
 
-
-
-
 			<div class="pictures">
 				<h2><a href="<?php echo Site::out_url( 'habari' ); ?>/eurographics" title="Eurographics">Eurographics</a></h2>
 				<div class="wrap">
 					<?php
-						$i = 0; $j = 1;
-						foreach ($briefsteaser as $brief ) {	
-							// show only if not currently in the slideshow and if there aren't already two displayed
-							$inslideshow = is_object( Post::get( array( 'vocabulary' => array( 'systags:term' => 'slideshow' ), 'slug' => $brief->slug ) ));
-							if ( $inslideshow == true ) { 
-								if ( $i < $nibblescount ) $i++;
-							} elseif ( $j <= 4 ) {
-								$j++;
+						$briefsteaser = Posts::get(array( 'content_type' => 'brief', 'limit' => 4, 'status'=> 'published', 'orderby' => 'pubdate DESC'));
+						foreach ($briefsteaser as $brief ) {
+							$ignored_posts[] = $brief->id;
 					?>
 					<a href="<?php echo $brief->permalink; ?>">
 					<div class="img-wrap-large"><img src="<?php echo $brief->info->photourl; ?>" alt="<?php echo $brief->title; ?>" width="224" /></div>
 						<h3><?php echo $brief->title; ?></h3>
 					</a>
-					<?php } } ?>
+					<?php } ?>
 				</div>
 			</div>
 
-
 		</div>
-
 
 		<div class="home-content">
 
 			<div class="post-list">
 			<?php 
 			foreach ($posts as $post ) {
-				if ($post->content_type != 17) { ?>
+				if (!in_array($post->id, $ignored_posts)) { ?>
 				<section>
 					<div class="img-wrap">
 						<img src="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="160" />

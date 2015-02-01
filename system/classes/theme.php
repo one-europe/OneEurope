@@ -226,6 +226,13 @@ class Theme extends Pluggable
 				unset( $user_filters['tag'] );
 			}
 
+			/*** KIDS, DON'T DO IT AT HOME ***********************/
+			/*** rewrite content types for default posts *********/
+			if ($user_filters['preset'] === 'home') {
+				$user_filters['content_type'] = array(0 => 4, 1 => 16);
+			}
+			/*****************************************************/
+
 			$where_filters = $where_filters->merge( $user_filters );
 			$where_filters = Plugins::filter( 'template_where_filters', $where_filters );
 			$posts = Posts::get( $where_filters );
