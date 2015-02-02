@@ -6,7 +6,7 @@
 			<?php
 				$sliders = Posts::get(array( 'content_type' => 'article', 'limit' => 4, 'status'=> 'published', 'orderby' => 'pubdate DESC'));
 				$i = 1;	foreach ( $sliders as $post ) {
-					$ignored_posts[] = $post->id;
+					$ignored_posts['articles'][] = $post->id;
 			?>
 			    <div id="fragment-<?php echo $i; ?>" class="ui-tabs-panel <?php if ( $i != 1 ) { ?>ui-tabs-hide<?php } ?> thumbs-home">
 					<a href="<?php echo $post->permalink; ?>">
@@ -67,7 +67,7 @@
 					<?php
 						$briefsteaser = Posts::get(array( 'content_type' => 'brief', 'limit' => 4, 'status'=> 'published', 'orderby' => 'pubdate DESC'));
 						foreach ($briefsteaser as $brief ) {
-							$ignored_posts[] = $brief->id;
+							$ignored_posts['briefs'][] = $brief->id;
 					?>
 					<a href="<?php echo $brief->permalink; ?>">
 					<div class="img-wrap-large"><img src="<?php echo $brief->info->photourl; ?>" alt="<?php echo $brief->title; ?>" width="224" /></div>
@@ -83,9 +83,8 @@
 
 			<div class="post-list">
 			<?php 
-			foreach ($posts as $post ) {
-				if (!in_array($post->id, $ignored_posts)) { ?>
-				<section>
+			foreach ($posts as $post ) { ?>
+				<section class="<?php echo in_array($post->id, $ignored_posts['articles']) ? 'article-removed' : '' ?><?php echo in_array($post->id, $ignored_posts['briefs']) ? ' brief-removed' : '' ?>">
 					<div class="img-wrap">
 						<img src="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="160" />
 					</div>
@@ -112,7 +111,7 @@
 						<em>(<span title="Comments" class="fb-comments-count" data-href="<?php echo $post->permalink; ?>">0</span>)</em>
 					</p>
 				</section>
-			<?php }} ?>
+			<?php } ?>
 
 				<div class="pagination">
 					<?php echo $theme->prev_page_link(_t('Previous'), array('class' => 'previous')); ?>
