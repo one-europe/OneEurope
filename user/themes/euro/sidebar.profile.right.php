@@ -15,10 +15,10 @@
 				</div>
 			</section>
 	<?php } } ?>
-	<?php if ( $post->info->user == '0' ) { ?>
+	<?php /*if ( $post->info->user == '0' ) { ?>
 	<section class="side-block">
 		<span class="top-link">This is you?</span>
 		<div class="empty">This is you or your organisation?<br /><a href="/contact">Get in touch</a> to edit it yourself.</div>
 	</section>
-	<?php } ?>
+	<?php }*/ ?>
 </aside>
