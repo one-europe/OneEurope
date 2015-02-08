@@ -1,5 +1,5 @@
 	<section class="side-block">
-		<a class="top-link" href="<?php Site::out_url( 'habari' ); ?>/team">Profiles Database</a>
+		<a class="top-link" href="<?php Site::out_url( 'habari' ); ?>/team">Team</a>
 		<?php
 		/*
 		normally, show 2.
