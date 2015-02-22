@@ -35,11 +35,13 @@
 			</figure>			
 		<?php } ?>
 		<?php echo $post->content_out; ?>
-		<p>Edited by: <?php
+		<?php
 			$username = User::get_by_id($post->info->editor)->username;
-			$editor_slug = DB::get_results('SELECT slug FROM {posts} WHERE title LIKE "%' . $username . '%"')[0]->slug;
-			echo '<a href="/team/' . $editor_slug . '">' . $username . '</a>';
-		?></p>
+			if ($username) {
+				$editor_slug = DB::get_results('SELECT slug FROM {posts} WHERE title LIKE "%' . $username . '%"')[0]->slug;
+				echo '<p>Edited by: <a href="/team/' . $editor_slug . '">' . $username . '</a></p>';	
+			}
+		?>
 	</div>
 
 	<?php /*	Show an info sentence, if there is one (there can be one either as 'originfo', as that of the assigned author or
