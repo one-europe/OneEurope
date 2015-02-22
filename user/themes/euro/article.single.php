@@ -36,11 +36,11 @@
 		<?php } ?>
 		<?php echo $post->content_out; ?>
 		<?php
-			$username = User::get_by_id($post->info->editor)->username;
-			if ($username) {
-				$editor_slug = DB::get_results('SELECT slug FROM {posts} WHERE title LIKE "%' . $username . '%"')[0]->slug;
-				echo '<p>Edited by: <a href="/team/' . $editor_slug . '">' . $username . '</a></p>';	
-			}
+			// $username = User::get_by_id($post->info->editor)->username;
+			// if ($username) {
+			// 	$editor_slug = DB::get_results('SELECT slug FROM {posts} WHERE title LIKE "%' . $username . '%"')[0]->slug;
+			// 	echo '<p>Edited by: <a href="/team/' . $editor_slug . '">' . $username . '</a></p>';	
+			// }
 		?>
 	</div>
 

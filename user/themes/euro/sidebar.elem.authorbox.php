@@ -49,3 +49,21 @@
 		<?php } ?>
 	<?php } ?>
 </section>
+
+
+<?php
+	$username = User::get_by_id($post->info->editor)->username;
+	if ($username) {
+		$editor = DB::get_results('
+			SELECT {posts}.slug, {postinfo}.value as teaser
+			FROM {posts} 
+			JOIN {postinfo} ON {posts}.id = {postinfo}.post_id
+			WHERE title LIKE "%' . $username . '%" AND name = "teaser"
+		')[0]; ?>
+<section class="side-block">
+	<span class="top-link">Editor</span>
+	<a class="profile" href="<?= $editor->slug ?>">
+		<p class="teaser"><b><?= $username ?></b><?= $editor->teaser ?></p>
+	</a>
+</section>
+<?php } ?>
