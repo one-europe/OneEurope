@@ -174,6 +174,36 @@ class Plugticles extends Plugin
 			$form->debate->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
 			$form->debate->tabindex = 13;
 			$form->debate->move_after($form->photolicense);
+
+
+
+
+			$editors = DB::get_results('SELECT {users_groups}.user_id, {users}.username FROM {users_groups} LEFT JOIN {users} ON {users_groups}.user_id = {users}.id WHERE group_id=?', array(15));
+			// echo '<pre>'; print_r($editors); echo '</pre>'; exit;
+			$slugs = array();	// create second, empty array
+			$i = 1;
+			foreach ($editors as $editor) {	// for every editor of the first one... 
+				if ($i == 1) { $slugs[] = 'None'; $i++; }
+				if ($editor->username) { // ...if he has a displayname...
+					$slugs[] = $editor->username;	// ...fill an object in the new array aka [nr] => [displayname]
+				}
+			} 												// use this value in the dropdown
+			$form->append('select', 'editor', 'null:null', _t( 'Editor:' ), $slugs, 'tabcontrol_select' ); 
+			$ids = array();
+			$i = 1;
+			foreach ($editors as $editor) {
+				if ($i == 1) { $ids[] = '0'; $i++; }
+				if ($editor->username) {
+					$ids[] = $editor->user_id;	// overwrite the slugs with ids, cause this is what we receive from the db
+					$i++;
+				}
+			}
+			$key = array_search( $post->info->editor, $ids ); 
+			$form->editor->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
+			$form->editor->tabindex = 14;
+			$form->editor->move_after($form->debate);
+
+
 			
 			// make a dropdown of all initiatives with set slugs
 			// $initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
@@ -267,23 +297,17 @@ class Plugticles extends Plugin
 			$post->info->debate = $slugs[$form->debate->value];
 			
 			
-			// $initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
-			// $slugs = array();
-			// $i = 1;
-			// foreach ($initiatives as $initiative) { 
-			// 	if ( $i == 1 ) {
-			// 		$slugs[] = '0';
-			// 		$i++;
-			// 	}
-			// 	if ( $initiative->title ) {
-			// 		$slugs[] = $initiative->id;
-			// 		$i++;
-			// 	}
-			// }
-			// foreach ($initiatives as $initiative) {
-			// 	echo $initiative->title;
-			// }
-			// $post->info->initiative = $slugs[$form->initiative->value];
+			$editors = DB::get_results('SELECT {users_groups}.user_id, {users}.username FROM {users_groups} LEFT JOIN {users} ON {users_groups}.user_id = {users}.id WHERE group_id=?', array(15));
+			$slugs = array();
+			$i = 1;
+			foreach ($editors as $editor) { 
+				if ($i == 1) { $slugs[] = '0'; $i++; }
+				if ( $editor->username ) { $slugs[] = $editor->user_id; $i++; }
+			}
+			foreach ($editors as $editor) {
+				echo $editor->username;
+			}
+			$post->info->editor = $slugs[$form->editor->value];
 			
 		}
 	}

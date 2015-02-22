@@ -88,6 +88,9 @@ class EasyFeature extends Plugin
 			if (is_object($form->debate)) {
 				$form->debate->tabindex = $form->debate->tabindex + 1;
 			}
+			if (is_object($form->editor)) {
+				$form->editor->tabindex = $form->editor->tabindex + 1;
+			}
 			if (is_object($form->initiative)) {
 				$form->initiative->tabindex = $form->initiative->tabindex + 1;
 			}
