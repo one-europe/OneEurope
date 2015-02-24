@@ -62,7 +62,7 @@
 		')[0]; ?>
 <section class="side-block">
 	<span class="top-link">Editor</span>
-	<a class="profile" href="<?= $editor->slug ?>">
+	<a class="profile" href="/team/<?= $editor->slug ?>">
 		<p class="teaser"><b><?= $username ?></b><?= $editor->teaser ?></p>
 	</a>
 </section>
