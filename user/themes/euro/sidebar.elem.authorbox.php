@@ -58,7 +58,7 @@
 			SELECT {posts}.slug, {postinfo}.value as teaser
 			FROM {posts} 
 			JOIN {postinfo} ON {posts}.id = {postinfo}.post_id
-			WHERE title LIKE "%' . $username . '%" AND status = 2 AND name = "teaser"
+			WHERE title LIKE "%' . $username . '%" AND name = "teaser"
 		')[0]; ?>
 <section class="side-block">
 	<span class="top-link">Editor</span>
