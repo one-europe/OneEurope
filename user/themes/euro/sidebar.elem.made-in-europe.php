@@ -1,2 +1,2 @@
-<a class="made-in-europe" target="_blank" href="http://itismadeineurope.com/volunteering/" title="Gain the right experience with It is Made in Europe"></a>
+<a class="made-in-europe" target="_blank" href="http://itismadeineurope.com/jointheteam/" title="Gain the right experience with It is Made in Europe"></a>
 <p class="min-info">For information on Ads on OneEurope e-mail: <a>info@one-europe.info</a></p>
