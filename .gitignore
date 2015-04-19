@@ -15,8 +15,7 @@ Thumbs.db
 /config.php
 bareGitRepo/*
 php_errors.log
-builder
-src
+builder/node_modules
 
 # unnecessary for deving #
 ##########################
