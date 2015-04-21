@@ -1,9 +1,9 @@
 <?php exit; ?>
-1394134573
+1431947330
 32
 mysqli_version
 s:10:"5.0.95-log";
-1394134573
+1431947330
 10029
 config
 a:292:{s:15:"active_sessions";s:1:"0";s:17:"allow_attachments";s:1:"1";s:15:"allow_autologin";s:1:"1";s:12:"allow_avatar";s:1:"0";s:18:"allow_avatar_local";s:1:"0";s:19:"allow_avatar_remote";s:1:"0";s:19:"allow_avatar_upload";s:1:"0";s:26:"allow_avatar_remote_upload";s:1:"0";s:12:"allow_bbcode";s:1:"1";s:15:"allow_birthdays";s:1:"1";s:15:"allow_bookmarks";s:1:"1";s:16:"allow_emailreuse";s:1:"0";s:18:"allow_forum_notify";s:1:"1";s:13:"allow_mass_pm";s:1:"1";s:16:"allow_name_chars";s:18:"USERNAME_CHARS_ANY";s:16:"allow_namechange";s:1:"0";s:15:"allow_nocensors";s:1:"0";s:15:"allow_pm_attach";s:1:"0";s:15:"allow_pm_report";s:1:"1";s:16:"allow_post_flash";s:1:"1";s:16:"allow_post_links";s:1:"1";s:13:"allow_privmsg";s:1:"1";s:17:"allow_quick_reply";s:1:"1";s:9:"allow_sig";s:1:"1";s:16:"allow_sig_bbcode";s:1:"1";s:15:"allow_sig_flash";s:1:"0";s:13:"allow_sig_img";s:1:"1";s:15:"allow_sig_links";s:1:"1";s:12:"allow_sig_pm";s:1:"1";s:17:"allow_sig_smilies";s:1:"1";s:13:"allow_smilies";s:1:"1";s:18:"allow_topic_notify";s:1:"1";s:16:"attachment_quota";s:8:"52428800";s:14:"auth_bbcode_pm";s:1:"1";s:13:"auth_flash_pm";s:1:"0";s:11:"auth_img_pm";s:1:"1";s:11:"auth_method";s:2:"db";s:15:"auth_smilies_pm";s:1:"1";s:15:"avatar_filesize";s:4:"6144";s:19:"avatar_gallery_path";s:22:"images/avatars/gallery";s:17:"avatar_max_height";s:2:"90";s:16:"avatar_max_width";s:2:"90";s:17:"avatar_min_height";s:2:"20";s:16:"avatar_min_width";s:2:"20";s:11:"avatar_path";s:21:"images/avatars/upload";s:11:"avatar_salt";s:32:"d3dfa1b2530fe2249eb5b70aaa9a5468";s:13:"board_contact";s:21:"admin@one-europe.info";s:13:"board_disable";s:1:"0";s:17:"board_disable_msg";s:0:"";s:9:"board_dst";s:1:"0";s:11:"board_email";s:21:"admin@one-europe.info";s:16:"board_email_form";s:1:"0";s:15:"board_email_sig";s:31:"Thanks,
