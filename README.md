@@ -24,7 +24,7 @@ Folder structure
 
 **NEVER** update files in *user/themes/euro/js* and *user/themes/euro/css* folders as they are automatically generated from *src* folder by Grunt.
 
-In order to install grunt, first install [Node.js](https://nodejs.org). That will install node package manager (npm). Then when you clone repo to your local folder, go to *builder* and run **npm install**. This command will install *node_modules* from *package.json* file.
+In order to install Grunt, first install [Node.js](https://nodejs.org). That will install node package manager (npm). Then when you clone repo to your local folder, go to *builder* and run **npm install** in the console. This command will install *node_modules* from *package.json* file.
 
 Habari
 ----------------------------------------------------

@@ -13,10 +13,11 @@ Thumbs.db
 ######################
 /config.php
 /php_errors.log
-/builder/node_modules
+/builder/node_modules/
 
 # unnecessary for deving #
 ##########################
 /piwik/
 /forum/
 /user/cache/*
+/user/files/
