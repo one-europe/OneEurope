@@ -3,10 +3,11 @@ Installation
 
 For basic installation into your local directory called `htdocs`:
 
-1. Clone the OneEurope repo to your server: `git clone https://github.com/one-europe/habari.git htdocs`
-1. Use config-sample.php to create config.php file (will be ignored on commits) and configure your local database connection (DB dump will be provided separately).
-1. Use *master* branch for working on tasks.
-1. Use *dev* branch for playing around with stuff that is for demo only.
+1. Clone OneEurope repo to your server: `git clone https://github.com/one-europe/habari.git htdocs`
+2. Use *config-sample.php* to create *config.php* file (will be ignored on commits) and configure your local database connection (DB dump will be provided separately).
+3. We use two branches:
+  * *master* branch for working on tasks;
+  * *dev* branch for playing around with stuff that is for demo only.
 
 Habari
 ----------------------------------------------------
