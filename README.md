@@ -1,9 +1,9 @@
 Installation
 ----------------------------------------------------
 
-For basic installation into your local directory called `htdocs`:
+For basic installation into your local directory called `one-europe`:
 
-1. Clone this repo to your server: `git clone https://github.com/one-europe/habari.git htdocs`
+1. Clone this repo to your server: `git clone https://github.com/one-europe/habari.git one-europe`
 2. Use *config-sample.php* to create *config.php* file (will be ignored on commits) and configure your local database connection (DB dump will be provided separately).
 3. We use two branches:
   * *master* branch for working on tasks;
@@ -24,7 +24,7 @@ Folder structure
 
 **NEVER** update files in *user/themes/euro/js* and *user/themes/euro/css* folders as they are automatically generated from *src* folder by Grunt.
 
-In order to install Grunt, first install [Node.js](https://nodejs.org). That will install node package manager (npm). Then when you clone repo to your local folder, go to *builder* and run **npm install** in the console. This command will install *node_modules* from *package.json* file.
+In order to install Grunt, first install [Node.js](https://nodejs.org). That will install node package manager (npm). Then when you clone repo to your local folder, go to *builder* and run `npm install` in the console. This command will install *node_modules* from *package.json* file.
 
 Habari
 ----------------------------------------------------
