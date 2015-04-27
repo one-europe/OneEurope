@@ -11,13 +11,13 @@ Thumbs.db
 
 # security/convenience #
 ######################
-/config.php
-/php_errors.log
-/builder/node_modules/
+config.php
+php_errors.log
+builder/node_modules/
 
 # unnecessary for deving #
 ##########################
-/piwik/
-/forum/
-/user/cache/*
-/user/files/
+piwik/
+forum/
+user/cache/*
+user/files/

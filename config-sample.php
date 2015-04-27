@@ -1,6 +1,7 @@
-<?php if ( !defined( 'HABARI_PATH' ) ) { die( 'No direct access' ); } ?>
-
 <?php
+
+if ( !defined( 'HABARI_PATH' ) ) { die( 'No direct access' ); }
+
 Config::set( 'db_connection', array(
 	'connection_string'=>'mysql:host=HOST;dbname=DBNAME',
 	'username'=>'USERNAME',
@@ -8,5 +9,6 @@ Config::set( 'db_connection', array(
 	'prefix'=>'PREFIX'
 ));
 
-// $locale = 'en-us';
+error_reporting(E_PARSE);
+
 ?>
