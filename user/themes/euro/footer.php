@@ -37,8 +37,8 @@
 		ga('send', 'pageview');
 	</script>
 
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.min.js?20150422"></script>
-	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20150422"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/plugins.min.js?20150428"></script>
+	<script src="<?php Site::out_url( 'theme' ); ?>/js/scripts.min.js?20150428"></script>
 
 </body>
 </html>

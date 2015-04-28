@@ -60,59 +60,72 @@
 	// donateTable.addClass(cls);
 
 
-	$('.img-wrap').nailthumb({
-		width: 160,
-		height: 100,
-		replaceAnimation: null,
-		onFinish: function (c) {
-			c.find('img').addClass('resized');
-		}
-	});
+	/** imgLiquid (https://github.com/karacas/imgLiquid) **/
 
-	$('.img-wrap-f-large').nailthumb({
-		width: 430,
-		height: 200,
-		replaceAnimation: null,
-		onFinish: function (c) {
-			c.find('img').addClass('resized');
-		}
-	});
+	$('.img-wrap').imgLiquid({ fill: true, useBackgroundSize: false });
+	$('.img-wrap-f-large').imgLiquid({ fill: true, useBackgroundSize: false });
+	$('.img-wrap-f-small').imgLiquid({ fill: true, useBackgroundSize: false });
+	$('.img-wrap-large').imgLiquid({ fill: true, useBackgroundSize: false });
+	$('.img-wrap-result').imgLiquid({ fill: true, useBackgroundSize: false });
+	$('.img-wrap-profile').imgLiquid({ fill: true, useBackgroundSize: false });
 
-	$('.img-wrap-f-small').nailthumb({
-		width: 82,
-		height: 50,
-		replaceAnimation: null,
-		onFinish: function (c) {
-			c.find('img').addClass('resized');
-		}
-	});
 
-	$('.img-wrap-large').nailthumb({
-		width: 231,
-		height: 165,
-		replaceAnimation: null,
-		onFinish: function (c) {
-			c.find('img').addClass('resized');
-		}
-	});
 
-	$('.img-wrap-result').nailthumb({
-		width: 260,
-		height: 138,
-		replaceAnimation: null,
-		onFinish: function (c) {
-			c.find('img').addClass('resized');
-		}
-	});
+	/** nailthumb (http://www.garralab.com/nailthumb.php) **/
 
-	$('.img-wrap-profile').nailthumb({
-		width: 100,
-		height: 125,
-		replaceAnimation: null,
-		onFinish: function (c) {
-			c.find('img').addClass('resized');
-		}
-	});
+	// $('.img-wrap').nailthumb({
+	// 	width: 160,
+	// 	height: 100,
+	// 	replaceAnimation: null,
+	// 	onFinish: function (c) {
+	// 		c.find('img').addClass('resized');
+	// 	}
+	// });
+
+	// $('.img-wrap-f-large').nailthumb({
+	// 	width: 430,
+	// 	height: 200,
+	// 	replaceAnimation: null,
+	// 	onFinish: function (c) {
+	// 		c.find('img').addClass('resized');
+	// 	}
+	// });
+
+	// $('.img-wrap-f-small').nailthumb({
+	// 	width: 82,
+	// 	height: 50,
+	// 	replaceAnimation: null,
+	// 	onFinish: function (c) {
+	// 		c.find('img').addClass('resized');
+	// 	}
+	// });
+
+	// $('.img-wrap-large').nailthumb({
+	// 	width: 231,
+	// 	height: 165,
+	// 	replaceAnimation: null,
+	// 	onFinish: function (c) {
+	// 		c.find('img').addClass('resized');
+	// 	}
+	// });
+
+	// $('.img-wrap-result').nailthumb({
+	// 	width: 260,
+	// 	height: 138,
+	// 	replaceAnimation: null,
+	// 	onFinish: function (c) {
+	// 		c.find('img').addClass('resized');
+	// 	}
+	// });
+
+	// $('.img-wrap-profile').nailthumb({
+	// 	width: 100,
+	// 	height: 125,
+	// 	replaceAnimation: null,
+	// 	onFinish: function (c) {
+	// 		c.find('img').addClass('resized');
+	// 	}
+	// });
 
 })(jQuery);
 

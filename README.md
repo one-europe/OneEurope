@@ -12,7 +12,7 @@ For basic installation into your local directory called `one-europe`:
 Folder structure
 ----------------------------------------------------
 1. *user/themes/euro* - main OE theme files
-2. *builder* - JavaScript and CSS builder folder ([Grunt](http://gruntjs.com))
+2. *builder* - JavaScript and CSS build folder ([Grunt](http://gruntjs.com))
  * *gruntfile.js* - [Gruntfile](http://gruntjs.com/sample-gruntfile) used to configure or define tasks and load Grunt plugins
  * *package.json* - stores metadata of the modules used in this project
  * *.jshintrc* - special file used for configuration of [JSHINT](http://jshint.com/about)

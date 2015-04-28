@@ -20,7 +20,8 @@ module.exports = function (grunt) {
 					'../user/themes/euro/js/plugins.min.js': [
 						'../src/js/lib/jquery-1.11.1.min.js',
 						// '../src/js/lib/superfish.min.js',
-						'../src/js/lib/jquery.nailthumb.1.1.min.js',
+						// '../src/js/lib/jquery.nailthumb.1.1.min.js',
+						'../src/js/lib/imgLiquid.min.js',
 						'../src/js/lib/jquery-ui-1.10.4.custom.min.js',
 						'../src/js/lib/jquery-ui-tabs-extend.min.js'
 					],
