@@ -3,7 +3,7 @@ Installation
 
 For basic installation into your local directory called `one-europe`:
 
-1. Clone this repo to your server: `git clone https://github.com/one-europe/habari.git one-europe`
+1. Clone this repo to your server: `git clone git@github.com:one-europe/habari.git one-europe`
 2. Use *config-sample.php* to create *config.php* file (will be ignored on commits) and configure your local database connection (DB dump will be provided separately).
 3. We use two branches:
   * *master* branch for working on tasks;

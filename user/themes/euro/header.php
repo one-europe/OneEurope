@@ -7,7 +7,7 @@
 	<title><?php echo Options::get( 'title' ); ?></title>
 	<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
 	<link rel="shortcut icon" href="<?php Site::out_url( 'theme' ); ?>/img/favicon.ico" />
-	<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/main.css?20150428" />
+	<link rel="stylesheet" media="screen" href="<?php Site::out_url( 'theme' ); ?>/css/main.css?20150525" />
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon.png" />
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-72x72.png" sizes="72x72" />
 	<link rel="apple-touch-icon" href="<?php Site::out_url( 'theme' ); ?>/img/apple-touch-icon-114x114.png" sizes="114x114" />
