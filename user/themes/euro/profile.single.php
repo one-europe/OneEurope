@@ -1,5 +1,5 @@
 <?php echo $theme->display ( 'header'); ?>
-<?php if ( $post ) { ?>
+<?php if (!$post) { echo $theme->display('404msg'); } else { ?>
 	
 	<?php
 	if ($post->info->user) {
