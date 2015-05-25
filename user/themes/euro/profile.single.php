@@ -1,5 +1,5 @@
+<?php if (!$post) echo $theme->display('404'); else { ?>
 <?php echo $theme->display ( 'header'); ?>
-<?php if (!$post) { echo $theme->display('404msg'); } else { ?>
 	
 	<?php
 	if ($post->info->user) {
@@ -134,7 +134,5 @@
 	<?php } ?>
 </article>
 <?php echo $theme->display('sidebar.profile.right'); ?>
-<?php } else { ?>
-	<?php echo $theme->display('404msg'); ?>
-<?php } ?>
 <?php echo $theme->display('footer'); ?>
+<?php } ?>
