@@ -4,8 +4,11 @@ Disallow: /forum/member/*
 Disallow: /harming/humans
 Disallow: /ignoring/human/orders
 Disallow: /harm/to/self
-Disallow: /profiles/ivan
+Disallow: /profiles
+Disallow: /team/ivan
 Disallow: /ivan
+Disallow: /team/eimhin-mcevoy
+Disallow: /eimhin-mcevoy
 Disallow: /pad
 
 Allow: /
