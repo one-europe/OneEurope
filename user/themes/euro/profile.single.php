@@ -120,10 +120,10 @@
 			<?php if ( $current_page >= 2 || $there_are_more ) { ?>
 				<div class="pagination">
 					<?php if ( $there_are_more ) { ?>
-					<a href="<?php Site::out_url( 'habari' ); ?>/profiles/<?php echo $post->slug; ?>/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="previous">Previous</a>
+					<a href="<?php Site::out_url( 'habari' ); ?>/team/<?php echo $post->slug; ?>/page/<?php echo $current_page + 1; ?>" title="Previous Page" class="previous">Previous</a>
 					<?php } ?>
 					<?php if ( $current_page >= 2 ) { ?>
-					<a href="<?php Site::out_url( 'habari' ); ?>/profiles/<?php echo $post->slug; ?>/page/<?php echo $current_page - 1; ?>" title="Next Page" class="next">Next</a>
+					<a href="<?php Site::out_url( 'habari' ); ?>/team/<?php echo $post->slug; ?>/page/<?php echo $current_page - 1; ?>" title="Next Page" class="next">Next</a>
 					<?php } ?>
 				</div>
 			<?php } ?>

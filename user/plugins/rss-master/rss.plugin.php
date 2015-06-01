@@ -42,8 +42,8 @@ class RSS extends Plugin {
 		// authors!
 		$rules[] = new RewriteRule( array( 
 			'name' => 'rss_feed_profile',
-			'parse_regex' => '#^profiles/(?P<slug>[^/]+)/rss(?:/page/(?P<page>\d+))?/?$#i',
-			'build_str' => 'profiles/{$slug}/rss(/page/{$page})',
+			'parse_regex' => '#^team/(?P<slug>[^/]+)/rss(?:/page/(?P<page>\d+))?/?$#i',
+			'build_str' => 'team/{$slug}/rss(/page/{$page})',
 			'handler' => 'UserThemeHandler',
 			'action' => 'rss_profile_collection',
 			'priority' => 8,
