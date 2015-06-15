@@ -1,0 +1,1 @@
+<a class="european-republic" target="_blank" href="http://www.european-republic.eu/" title="Europe: A New Version is Available"></a>
