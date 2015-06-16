@@ -18,6 +18,5 @@ builder/node_modules/
 # unnecessary for deving #
 ##########################
 piwik/
-forum/
 user/cache/*
 user/files/
