@@ -54,7 +54,7 @@ class EasyFeature extends Plugin
 	public function action_form_publish ( $form, $post )
 	{
 		if ( User::identify()->can('manage_features') ) {
-			$form->append( 'text', 'systags', 'null:null', _t( 'available: "slideshow", "menu", "editor", "author", "ambassador", "partner", "former", "founder", "it", "fundraising"' ), 'admincontrol_text' );
+			$form->append( 'text', 'systags', 'null:null', _t( 'available: "slideshow", "menu", "editor", "author", "ambassador", "partner", "former", "founder", "it", "fundraising", "project_manager"' ), 'admincontrol_text' );
 			$form->systags->class = 'check-change';
 			$form->systags->tabindex = 5;
 			$form->move_before( $form->systags, $form->content );
