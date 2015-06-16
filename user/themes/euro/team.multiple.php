@@ -47,8 +47,26 @@
 			<?php } ?>
 		</div>
 		<div class="team-right">
-			<h2>IT Development:</h2>
+			<h2>Website Development:</h2>
 			<?php foreach ( $itdept as $profile ) { 
+				if ($profile->info->user) {
+					$source = User::get_by_id($profile->info->user)->info;
+					$title = User::get_by_id($profile->info->user)->displayname;
+			 	} else {
+					$source = $profile->info;
+					$title = $profile->title;
+				} ?>						
+			<a class="profile" href="<?php echo $profile->permalink; ?>" title="<?php echo $title; ?>">
+				<span class="img-wrap-profile">
+					<img src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( $profile->info->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title; ?>" width="100" height="125" />
+				</span>
+				<h3><?php echo $title; ?></h3>
+			</a>
+		<?php } ?>
+		</div>
+		<div class="team-right">
+			<h2>Project Management:</h2>
+			<?php foreach ( $projectManager as $profile ) { 
 				if ($profile->info->user) {
 					$source = User::get_by_id($profile->info->user)->info;
 					$title = User::get_by_id($profile->info->user)->displayname;

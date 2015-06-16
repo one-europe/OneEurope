@@ -391,6 +391,13 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
+	  $projectManager = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'project_manager'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
+	  ));
 	  $designers = Posts::get(array(
 	    'content_type' => Post::type('profile'),
 	    'status' => Post::status('published'),
@@ -413,6 +420,7 @@ class PlugProfile extends Plugin
 	  $theme->authors = $authors;
 	  $theme->ambassadors = $ambassadors;
 	  $theme->itdept = $itdept;
+	  $theme->projectManager = $projectManager;
 	  $theme->designers = $designers;
 	  $theme->partners = $partners;
 	  // $theme->contributors = $contributors;

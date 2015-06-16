@@ -324,7 +324,7 @@ main { max-width: 1020px; padding: 0 20px 20px; margin: 0 auto 40px; background:
 			&.half { h1 { text-align: left; } }
 
 			.team-left { max-width: 722px; float: left; }
-			.team-right { max-width: 258px; float: right; padding: 0 10px; margin-bottom: 20px;
+			.team-right { width: 258px; float: right; padding: 0 10px; margin-bottom: 20px; overflow: hidden;
 							border-radius: 10px 0 0 10px; border: 1px dashed #a8a8a8; background: #eee; }
 
 			.search-results { overflow: hidden;
@@ -628,6 +628,12 @@ footer { background: rgba(255, 255, 255, 0.15); width: 100%; color: #444;
 
 /*** SMALLER RESOLUTIONS ***/
 
+@media all and (max-width: 1036px) and (min-width: 0) {
+	main {
+		article { .team-left, .team-right { float: none; clear: both; width: 100%; } }
+	}
+}
+
 @media all and (max-width: 1010px) and (min-width: 0) {
 	main {
 		.featured-content {
@@ -640,7 +646,6 @@ footer { background: rgba(255, 255, 255, 0.15); width: 100%; color: #444;
 		.spread-the-word div form { margin: 0;
 			label { display: block; }
 		}
-		article { .team-left, .team-right { float: none; clear: both; max-width: 100%; } }
 	}
 }
 
