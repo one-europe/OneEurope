@@ -2,7 +2,7 @@
 <article class="in-debate">
 	<h1><?php echo $post->title; ?></h1>
 	<figure>
-		<span class="license"><?php echo $post->info->photolicense; ?></span>
+		<span class="license" title="<?php echo $post->info->photolicense; ?>"><?php echo $post->info->photolicense; ?></span>
 		<img src="<?php if ( $post->info->photourl ) { echo $post->info->photourl; } else { echo Site::out_url( 'theme' ) . '/img/face.jpg'; } ?>" width="100%" />
 		<figcaption><?php echo $post->info->photoinfo; ?></figcaption>
 	</figure>

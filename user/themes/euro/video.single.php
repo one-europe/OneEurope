@@ -28,7 +28,7 @@
 		<?php } ?>
 		<p class="meta">
 			<time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{d}</span> <span>{M}</span> <span>{Y}</span>'); ?></time>
-			<?php if ($post->tags_out) { ?> | archived in: <?php } ?><?php echo $post->tags_out; ?>
+			<?php if ($post->tags_out) { ?> | tags: <?php } else { ?> | no tags<?php } ?><?php echo $post->tags_out; ?>
 			<?php if ( User::identify()->loggedin ) { ?>
 				<span class="alignright article-edit"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span>
 			<?php } ?>

@@ -27,7 +27,7 @@
 		<?php } ?>
 		<p class="meta">
 			<time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{d}</span> <span>{M}</span> <span>{Y}</span>'); ?></time>
-			<?php if ($post->tags_out) { ?> | archived in: <?php } ?><?php echo $post->tags_out; ?>
+			<?php if ($post->tags_out) { ?> | tags: <?php } else { ?> | no tags<?php } ?><?php echo $post->tags_out; ?>
 			<?php if ( User::identify()->loggedin ) { ?>
 				<a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a>
 			<?php } ?>
@@ -38,7 +38,7 @@
 					<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photocaption; ?>" />
 				</a>
 				<figcaption>
-					<span class="license"><?php echo $post->info->photolicense; ?></span>
+					<span class="license" title="<?php echo $post->info->photolicense; ?>"><?php echo $post->info->photolicense; ?></span>
 					<?php echo $post->info->photoinfo; ?>
 				</figcaption>
 			</figure>

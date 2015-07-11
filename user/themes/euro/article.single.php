@@ -2,8 +2,8 @@
 <article>
 	<h1><?php echo $post->title_out; ?></h1>
 	<p class="descr"><?php echo $post->info->excerpt; ?></p>
-	<p class="author">
-		<?php if ( $show_author ) { ?>
+	<p class="meta">
+		<?php /* if ( $show_author ) { ?>
 			<?php if ( $post->info->origsource ) { ?>
 				<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="<?php echo $post->info->origauthor; ?>"><?php echo $post->info->origauthor; ?></a>
 			<?php } elseif ($post->info->author) { ?>
@@ -17,19 +17,17 @@
 				<?php echo $post->author->displayname; ?>
 					<?php } ?>
 			<?php } ?>
-		<?php } ?>
-		 | <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{d}</span> <span>{M}</span> <span>{Y}</span>'); ?></time></span>
-		<?php if ( User::identify()->loggedin ) { ?>
-				<span class="article-edit"> | <a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span>
-		<?php } ?>
+		<?php } */ ?>
+		<time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{d}</span> <span>{M}</span> <span>{Y}</span>'); ?></time></span>
+		<?php if ($post->tags_out) { ?> | tags: <?php } else { ?> | no tags<?php } ?><?php echo $post->tags_out; ?>
 	</p>
-	<p class="meta">
-		<?php if ($post->tags_out) { ?>archived in: <?php } ?><?php echo $post->tags_out; ?>
-	</p>
+	<?php if ( User::identify()->loggedin ) { ?>
+			<span class="article-edit"> | <a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span>
+	<?php } ?>
 	<div class="post-content">
 		<?php if ($post->info->photourl) { ?>
 			<figure>					
-				<span class="license"><?php echo $post->info->photolicense; ?></span>
+				<span class="license" title="<?php echo $post->info->photolicense; ?>"><?php echo $post->info->photolicense; ?></span>
 				<a href="<?php echo $post->info->photourl; ?>"><img alt="<?php echo $post->title; ?>" src="<?php echo $post->info->photourl; ?>" /></a>
 				<figcaption><?php echo $post->info->photoinfo; ?></figcaption>
 			</figure>			

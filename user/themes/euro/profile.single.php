@@ -129,7 +129,7 @@
 			<?php } ?>
 
 		<?php } else { ?>
-			<p class="profile-message">There's nothing to show from <?php echo $post->title; ?> at the moment.</p>
+			<p class="profile-message">There are no articles to show from <?php echo $post->title; ?> at the moment.</p>
 		<?php } ?>
 	<?php } ?>
 </article>
