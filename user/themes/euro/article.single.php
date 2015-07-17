@@ -41,34 +41,6 @@
 			// }
 		?>
 	</div>
-
-	<?php /*	Show an info sentence, if there is one (there can be one either as 'originfo', as that of the assigned author or
-				as that of the actual author, each of which should first be looked up from their user table and then from their profile
-				post table. */
-
-			if ( $post->info->origauthor 
-			|| ($post->author->info->description && !$post->info->author) 
-			|| (Post::get(array('all:info' => array('user' => $post->author)))->info->description && !$post->info->author) 
-			|| User::get($post->info->author)->info->description 
-			|| Post::get(array('all:info' => array('user' => $post->info->author)))->info->description ) { ?>
-	
-		<div class="author-bottom-box">
-			<?php if ( $post->info->origauthor && $post->info->origsource ) { ?>
-				This article was originally published by <a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>"><?php echo $post->info->origauthor; ?></a>. <?php echo $post->info->originfo; ?> 
-				<?php /* Introductory sentence about the author, this is sth he can edit himself, but written in 3rd person
-				.. this is linking to his/her profiles on twitter, flattr etc. .. and a link to the organisation they
-				come from, with profile here if existing.<br /> */ ?>
-			<?php } elseif ( User::get($post->info->author)->info->description ) { ?>
-				<?php echo User::get($post->info->author)->info->description; ?>
-			<?php } elseif ( Post::get(array('all:info' => array('user' => $post->info->author)))->info->description ) { ?>
-				<?php echo Post::get(array('all:info' => array('user' => $post->info->author)))->info->description; ?>
-			<?php } elseif ( !$post->info->author && $post->author->info->description ) { ?>
-				<?php echo $post->author->info->description; ?>
-			<?php } elseif ( !$post->info->author && Post::get(array('all:info' => array('user' => $post->author)))->info->description ) { ?>
-				<?php echo Post::get(array('all:info' => array('user' => $post->author)))->info->description; ?>
-			<?php } ?>
-		</div>
-	<?php } ?>
 		
 	<?php if ( User::identify()->loggedin ) { ?><span class="article-edit alignright"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span><?php } ?>
 
@@ -93,7 +65,7 @@
 					foreach ($list as $item ) { ?>
 					<section>
 						<div class="img-wrap">
-							<img src="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/>
+							<img src="<?php echo $item->info->photourl ? $item->info->photourl : Site::out_url('theme') . '/img/video-icon.png'; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/>
 						</div>
 						<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
 						<p><?php if ( $item->info->excerpt ) { echo $item->info->excerpt; } else { echo $item->content_out; } ?></p>

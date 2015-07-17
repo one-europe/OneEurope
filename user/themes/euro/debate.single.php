@@ -42,7 +42,7 @@
 		<?php if ($post) { ?>
 			<section>
 				<div class="img-wrap">
-					<img src="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" />
+					<img src="<?php echo $post->info->photourl ? $post->info->photourl : Site::out_url('theme') . '/img/video-icon.png'; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" />
 				</div>
 				<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
 				<p><?php if ( $post->info->excerpt ) { echo strip_tags($post->info->excerpt); } else { echo strip_tags($post->content_out); } ?></p>

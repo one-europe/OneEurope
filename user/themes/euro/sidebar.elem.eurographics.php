@@ -5,7 +5,7 @@
 		$briefsteaser = Posts::get(array( 'content_type' => 'brief', 'limit' => 2, 'status'=> 'published', 'orderby' => 'pubdate DESC'));
 		foreach ($briefsteaser as $brief ) { 	
 		?>
-			<a class="initiative" href="<?php echo $brief->permalink; ?>" title="<?php echo $initiative->title; ?>">
+			<a class="initiative" href="<?php echo $brief->permalink; ?>" title="<?php echo $brief->title; ?>">
 				<img src="<?php echo $brief->info->photourl; ?>" alt="<?php echo $brief->title; ?>" width="270" />
 				<h2><?php echo $brief->title; ?></h2>
 			</a>

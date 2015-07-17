@@ -270,7 +270,9 @@ class DatabaseConnection
 				$profile->params = $args;
 				$profile->start();
 			}
+
 			if ( ! $this->pdo_statement->execute( $args ) ) {
+				echo $query;
 				$this->add_error( array( 'query'=>$query,'error'=>$this->pdo_statement->errorInfo() ) );
 				return false;
 			}

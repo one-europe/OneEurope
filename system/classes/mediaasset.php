@@ -80,7 +80,7 @@ class MediaAsset
 
 	public function get_props()
 	{
-		return array_merge(
+		$arr = array_merge(
 			array(
 				'path' => $this->path,
 				'basename' => basename( $this->path ),
@@ -88,6 +88,10 @@ class MediaAsset
 			),
 			$this->props
 		);
+		foreach ($arr as $key => $value) {
+		    $arr[$key] = utf8_encode($value);
+		}
+		return $arr;
 	}
 
 	/**
@@ -109,7 +113,7 @@ class MediaAsset
 				$output = $this->path;
 				break;
 			case 'basename':
-				$output = basename( $this->path );
+				$output = basename( utf8_encode($this->path) );
 				break;
 			default:
 				$output = $this->props[$name];
@@ -167,7 +171,8 @@ class MediaAsset
 				return file_put_contents( $file, $this->content ) !== false;
 				break;
 			case self::MODE_UPLOAD:
-				return move_uploaded_file( $this->filename, $file ) !== false;
+				return $compressed = $this->compress_image($this->filename, $file, 90) !== false;
+				// return move_uploaded_file( $this->filename, $compressed ) !== false;
 				break;
 			case self::MODE_FILE:
 				return copy( $this->filename, $file );
@@ -179,6 +184,45 @@ class MediaAsset
 				return fclose( $dest );
 				break;
 		}
+	}
+
+	public function compress_image($source_url, $destination_url, $quality) {
+	    $info = getimagesize($source_url);
+	    
+	    if ($info['mime'] == 'image/jpeg') { header('Content-Type: image/jpeg'); $image = imagecreatefromjpeg($source_url); }
+	    else if ($info['mime'] == 'image/gif') { $image = imagecreatefromgif($source_url); }
+	    else if ($info['mime'] == 'image/png') { $image = imagecreatefrompng($source_url); }
+
+		list($src_width, $src_height) = $info;
+		$max_width = 850;
+		// $max_height = 500;
+
+
+	    // Calculate the output size based on the original's aspect ratio
+		$y_displacement = 0;
+		// if ( $src_width > $max_width ) {
+			$thumb_w = $max_width;
+			$thumb_h = $src_height * $max_width / $src_width;
+
+		// thumbnail is not full height, position it down so that it will be padded on the
+		// top and bottom with black
+		// $y_displacement = ( $thumb_h ) / 2;
+		// }
+		// else {
+		// 	$thumb_w = $src_width * $max_height / $src_height;
+		// 	$thumb_h = $max_height;
+		// }
+
+		// Create the output image and copy to source to it
+		$dst_img = ImageCreateTrueColor( $thumb_w, $thumb_h );
+		imagecopyresampled( $dst_img, $image, 0, $y_displacement, 0, 0, $thumb_w, $thumb_h, $src_width, $src_height );
+	    
+	    imagejpeg($dst_img, $destination_url, $quality);
+
+	    imagedestroy($image);
+	    imagedestroy($destination_url);
+	    
+	    return true;
 	}
 
 	/**

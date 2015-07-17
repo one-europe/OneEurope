@@ -4,7 +4,7 @@
 	<?php foreach ( $initiatives as $post ) { ?>
 	<section>
 		<div class="img-wrap">
-			<img src="<?php echo $post->info->photourl; ?>" alt="<?php echo $post->info->photoinfo; ?>" />
+			<img src="<?php echo $post->info->photourl ? $post->info->photourl : Site::out_url('theme') . '/img/video-icon.png'; ?>" alt="<?php echo $post->info->photoinfo; ?>" />
 		</div>
 		<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
 		<p><?php if ( $post->info->excerpt ) { echo $post->info->excerpt; } else { echo strip_tags($post->content_out, '<span><a>'); } ?></p>

@@ -38,7 +38,13 @@
 					<img src="<?php if ( $source->photourl ) { echo $source->photourl; } elseif ( !$source->photourl ) { echo $profile->info->photourl; } else { echo Site::out_url( 'theme' ) ?>/img/face.jpg<?php } ?>" alt="<?php echo $title ?>" width="95" />
 	   	    		<p class="teaser">
 	   	    			<b><?php echo $title; ?></b>
-	   	    			<?php echo $source->teaser ? $source->teaser :  strip_tags(explode('</p>', $profile->content)[0]); ?>
+	   	    			<?php
+	   	    			if ($source->teaser) echo $source->teaser;
+	   	    			else {
+	   	    				$string = trim(strip_tags(explode('</p>', $profile->content)[0]));
+	   	    				echo (strlen($string) > 300) ? substr($string, 0, 299) . '..' : $string;
+	   	    			}
+	   	    			?>
 	   	    		</p>
 				</a>
 				<?php } ?>	    

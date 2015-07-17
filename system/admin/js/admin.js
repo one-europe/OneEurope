@@ -1583,6 +1583,9 @@ habari.editor = {
 		if ('selectionStart' in contentel) {
 			var content = $('#content').val();
 			$('#content').val(content.substr(0, contentel.selectionStart) + value + contentel.value.substr(contentel.selectionEnd, content.length));
+			// console.log(0, contentel.selectionStart, content, document.getSelection().text);
+			// console.log($('#content').val());
+			// console.log($('iframe.redactor_frame')[0].contentDocument.getSelection().toString());
 		}
 		else if (document.selection) {
 			contentel.focus();

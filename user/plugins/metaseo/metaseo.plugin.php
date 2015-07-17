@@ -392,7 +392,8 @@ class MetaSeo extends Plugin
 							$keywords = $this->theme->post->info->metaseo_keywords;
 						}
 						else if( count( $this->theme->post->tags ) > 0 ) {
-							$keywords = implode( ', ', $this->theme->post->tags );
+							// commenting out, need more clarification on this
+							// $keywords = implode( ', ', $this->theme->post->tags );
 						}
 					}
 					break;
@@ -416,8 +417,8 @@ class MetaSeo extends Plugin
 							$keywords = $this->theme->post->info->metaseo_keywords;
 						}
 						else if( count( $this->theme->post->tags ) > 0 ) {
-							// something's strange here!!
-							$keywords = implode( ', ', $this->theme->post->tags );
+							// commenting out, need more clarification on this
+							// $keywords = implode( ', ', $this->theme->post->tags );
 						}
 					}
 					break;
@@ -741,9 +742,11 @@ class MetaSeo extends Plugin
 					if ($this->theme->post->info->user) {
 						$source = User::get_by_id($this->theme->post->info->user)->info;
 						$displayname = User::get_by_id($this->theme->post->info->user)->displayname;
-				 	} else {
+				 	} elseif (isset($post)) {
 						$source = $post->info;
 						$displayname = $post->title;
+					} else {
+						break;
 					}
 					echo "\n<meta property=\"og:title\" content=\"{$displayname}\" >\n";
 					echo "<meta property=\"og:type\" content=\"profile\" >\n";
@@ -891,9 +894,11 @@ class MetaSeo extends Plugin
 					if ($this->theme->post->info->user) {
 						$source = User::get_by_id($this->theme->post->info->user)->info;
 						$displayname = User::get_by_id($this->theme->post->info->user)->displayname;
-				 	} else {
+				 	} elseif (isset($post)) {
 						$source = $post->info;
 						$displayname = $post->title;
+					} else {
+						break;
 					}
 					echo "\n<meta name=\"twitter:title\" content=\"" . $displayname . "\" >\n";
 					echo "<meta name=\"twitter:card\" content=\"summary\" >\n";
@@ -941,7 +946,7 @@ class MetaSeo extends Plugin
 					echo "<meta name=\"twitter:description\" content=\"" . $this->theme->post->info->excerpt . "\" >\n";
 					echo "<meta name=\"twitter:url\" content=\"" . $this->theme->post->permalink . "\" >\n";
 					// don't display post->info->author->info->twitter if the author is actually somebody else
-					if ( !$this->theme->post->info->origsource ) { 
+					if ( !$this->theme->post->info->origsource && $this->theme->post->info->author ) { 
 						$author = User::get_by_id($this->theme->post->info->author)->info->twitter;
 						echo "<meta name=\"twitter:creator\" content=\"" . $author . "\" >\n";
 					}

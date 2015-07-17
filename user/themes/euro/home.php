@@ -86,10 +86,10 @@
 			foreach ($posts as $post ) { ?>
 				<section class="<?php echo in_array($post->id, $ignored_posts['articles']) ? 'article-removed' : '' ?><?php echo in_array($post->id, $ignored_posts['briefs']) ? ' brief-removed' : '' ?>">
 					<div class="img-wrap">
-						<img src="<?php echo $post->info->photourl; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="160" />
+						<img src="<?php echo $post->info->photourl ? $post->info->photourl : Site::out_url('theme') . '/img/video-icon.png'; ?>" alt="<?php if ( $post->info->photoinfo ) { echo $post->info->photoinfo; } else { echo $post->title; } ?>" width="160" />
 					</div>
 					<h2><a href="<?php echo $post->permalink; ?>" title="<?php echo $post->title; ?>"><?php echo $post->title_out; ?></a></h2>
-					<p><?php echo $post->info->excerpt ? strip_tags($post->info->excerpt) : strip_tags($post->content_out); ?></p>
+					<p><?php echo $post->info->excerpt ? strip_tags($post->info->excerpt) : (isset($post->content_out) ? strip_tags($post->content_out) : ''); ?></p>
 					<p class="meta">
 						<?php if ( $show_author && $post->typename == 'article' ) { ?>
 							by 
@@ -97,7 +97,7 @@
 								<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="<?php echo $post->info->origauthor; ?>"><?php echo $post->info->origauthor; ?></a>
 							<?php } elseif ($post->info->author) { ?>
 								<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
-								<a href="<?php echo $publisher->permalink; ?>" title="<?php echo User::get($post->info->author)->displayname; ?>"><?php echo User::get($post->info->author)->displayname; ?></a>
+								<a href="<?php echo $publisher ? $publisher->permalink : ''; ?>" title="<?php echo User::get($post->info->author)->displayname; ?>"><?php echo User::get($post->info->author)->displayname; ?></a>
 							<?php } else { 
 									if (is_object(Post::get(array( 'all:info' => array( 'user' => $post->author->id ) )))) { 
 										$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>

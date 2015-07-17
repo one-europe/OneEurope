@@ -76,7 +76,7 @@
 						foreach ($list as $item ) { ?>
 						<section>
 							<div class="img-wrap">
-								<img src="<?php echo $item->info->photourl; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/>
+								<img src="<?php echo $item->info->photourl ? $item->info->photourl : Site::out_url('theme') . '/img/video-icon.png'; ?>" alt="<?php if ( $item->info->photoinfo ) { echo $item->info->photoinfo; } else { echo $item->title; } ?>" height="100" width="160"/>
 							</div>
 							<h2><a href="<?php echo $item->permalink; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title_out; ?></a></h2>
 							<p><?php if ( $item->info->excerpt ) { echo $item->info->excerpt; } else { echo $item->content_out; } ?></p>

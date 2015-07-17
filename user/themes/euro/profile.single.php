@@ -20,7 +20,8 @@
 	// this is for deciding if the article is in full mode
 	$source = $post->info->user ? $source = User::get_by_id($post->info->user)->info : $post->info;
 	$twname = $source->twitter ? $source->twitter : $post->info->twitter;
-	$twname = explode('-', $twname)[1];
+	$twname = explode('-', $twname);
+	$twname = isset($twname[1]) ? $twname[1] : null;
 
 ?>
 

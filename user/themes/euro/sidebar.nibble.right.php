@@ -1,6 +1,6 @@
 <aside>
 	<?php echo $theme->display('sidebar.elem.european-republic'); ?>
-	<?php if ( $post->info->showauthor == 1 ) { ?>
+	<?php if (isset($post) && $post->info->showauthor == 1) { ?>
 		<section class="side-block">
 			<span class="top-link" href="#">Author</span>
 				<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) ); ?>

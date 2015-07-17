@@ -6,7 +6,7 @@
 
 	if ($twname) {
 		$tw_data = explode('-', $twname);
-		$tw_id = $tw_data[1];
+		$tw_id = isset($tw_data[1]) ? $tw_data[1] : null;
 		$tw_name = $tw_data[0];
 		if ($tw_id && $tw_name) { ?>
 			<section class="side-block">

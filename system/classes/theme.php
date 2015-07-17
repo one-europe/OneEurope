@@ -180,7 +180,7 @@ class Theme extends Pluggable
 	 * contains the tag to filter by.  Simple as that.
 	 */
 	/** custom $allow param was added on 20.01.2015 (pagination for eurographics) **/
-	public function act_display( $paramarray = array( 'user_filters'=> array() ), $allow )
+	public function act_display( $paramarray = array( 'user_filters'=> array() ), $allow = null )
 	{
 		Utils::check_request_method( array( 'GET', 'HEAD', 'POST' ) );
 
@@ -214,6 +214,10 @@ class Theme extends Pluggable
 		}
 
 		if ( !isset( $posts ) ) {
+			
+			// don't know why it doesn't catch the defaults
+			if (!isset($user_filters)) $user_filters = array();
+
 			$user_filters = Plugins::filter( 'template_user_filters', $user_filters );
 
 			// Work around the tags parameters to Posts::get() being subsumed by the vocabulary parameter
@@ -228,7 +232,7 @@ class Theme extends Pluggable
 
 			/*** KIDS, DON'T DO IT AT HOME ***********************/
 			/*** rewrite content types for default posts *********/
-			if ($user_filters['preset'] === 'home') {
+			if (isset($user_filters['preset']) && $user_filters['preset'] === 'home') {
 				$user_filters['content_type'] = array(0 => 4, 1 => 16);
 			}
 			/*****************************************************/
