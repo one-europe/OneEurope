@@ -50,7 +50,7 @@
 				<?php
 					$latest_video = Posts::get(array( 'content_type' => array( 'video' ), 'limit' => 1, 'status'=>'published', 'orderby'=>'pubdate DESC'));
 					$latest_video = $latest_video[0];
-					preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($latest_video->content_fulltext, '<iframe>'), $matches);
+					preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($latest_video->content, '<iframe>'), $matches);
 					$iframe = preg_replace(
 						['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
 						['width="305"', 'height="172"', 'src="${1}?modestbranding=1&amp;rel=0&amp;showinfo=0&amp;controls=0&amp;wmode=transparent"'],

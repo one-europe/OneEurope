@@ -7,12 +7,9 @@ class EuroTheme extends Theme {
 	 */
 	public function action_init_theme() {
 		Format::apply('tag_and_list', 'post_tags_out');
-		Format::apply('summarize', 'post_content_fulltext', 10000, 100);
-		
+
 		Format::apply_with_hook_params('more', 'post_content_excerpt', ' <span class="more-exc">more</span>', 17, 1); // big excerpt
 		Format::apply_with_hook_params('more', 'post_content_out', '', 30, 1); // short excerpt
-		Format::apply_with_hook_params('more', 'post_content_videotext', '<span class="more-out">› more</span>', 1000, 2); // short excerpt
-
 
 		/** block from add_template_vars() function  **/
 		$this->assign('show_author', true ); // Display author in posts

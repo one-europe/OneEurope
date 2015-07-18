@@ -5,7 +5,7 @@
 		<div class="item">
 			<div class="item-video">
 				<?php
-					preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($post->content_fulltext, '<iframe>'), $matches);
+					preg_match('/<iframe(.*?)>(.*?)<\/iframe>/si', strip_tags($post->content, '<iframe>'), $matches);
 					$iframe = preg_replace(
 						['/width=\"\d+\"/', '/height=\"\d+\"/', '/src=\"(.*?)\"/'],
 						['width="400"', 'height="245"', 'src="${1}?modestbranding=1&rel=0&showinfo=0"'],
