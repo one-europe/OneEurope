@@ -197,21 +197,24 @@ class MediaAsset
 		$max_width = 850;
 		// $max_height = 500;
 
+		if ($src_width > $max_width) {
 
-	    // Calculate the output size based on the original's aspect ratio
-		$y_displacement = 0;
-		// if ( $src_width > $max_width ) {
-			$thumb_w = $max_width;
-			$thumb_h = $src_height * $max_width / $src_width;
+			// Calculate the output size based on the original's aspect ratio
+			$y_displacement = 0;
+			// if ( $src_width > $max_width ) {
+				$thumb_w = $max_width;
+				$thumb_h = $src_height * $max_width / $src_width;
 
-		// thumbnail is not full height, position it down so that it will be padded on the
-		// top and bottom with black
-		// $y_displacement = ( $thumb_h ) / 2;
-		// }
-		// else {
-		// 	$thumb_w = $src_width * $max_height / $src_height;
-		// 	$thumb_h = $max_height;
-		// }
+			// thumbnail is not full height, position it down so that it will be padded on the
+			// top and bottom with black
+			// $y_displacement = ( $thumb_h ) / 2;
+			// }
+			// else {
+			// 	$thumb_w = $src_width * $max_height / $src_height;
+			// 	$thumb_h = $max_height;
+			// }	
+
+		}
 
 		// Create the output image and copy to source to it
 		$dst_img = ImageCreateTrueColor( $thumb_w, $thumb_h );
