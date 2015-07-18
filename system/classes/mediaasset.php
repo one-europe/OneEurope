@@ -214,6 +214,9 @@ class MediaAsset
 			// 	$thumb_h = $max_height;
 			// }	
 
+		} else {
+			$thumb_w = $src_width;
+			$thumb_h = $src_height;
 		}
 
 		// Create the output image and copy to source to it
