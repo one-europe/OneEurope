@@ -83,6 +83,12 @@
 
 			<div class="post-list">
 			<?php 
+
+			$usersIds = array();
+			foreach ($posts as $post ) {
+				if ($post->info->author) $usersIds[$post->info->author] = User::get($post->info->author)->displayname;
+			}
+
 			foreach ($posts as $post ) { ?>
 				<section class="<?php echo in_array($post->id, $ignored_posts['articles']) ? 'article-removed' : '' ?><?php echo in_array($post->id, $ignored_posts['briefs']) ? ' brief-removed' : '' ?>">
 					<div class="img-wrap">
@@ -94,14 +100,13 @@
 						<?php if ( $show_author && $post->typename == 'article' ) { ?>
 							by 
 							<?php if ( $post->info->origauthor ) { ?>
-								<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="<?php echo $post->info->origauthor; ?>"><?php echo $post->info->origauthor; ?></a>
+								<span><?php echo $post->info->origauthor; ?></span>
 							<?php } elseif ($post->info->author) { ?>
-								<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
-								<a href="<?php echo $publisher ? $publisher->permalink : ''; ?>" title="<?php echo User::get($post->info->author)->displayname; ?>"><?php echo User::get($post->info->author)->displayname; ?></a>
-							<?php } else { 
-									if (is_object(Post::get(array( 'all:info' => array( 'user' => $post->author->id ) )))) { 
-										$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
-								<a href="<?php echo $publisher->permalink; ?>" title="<?php echo $post->author->displayname; ?>"><?php echo $post->author->displayname; ?></a>
+								<span><?php echo $usersIds[$post->info->author]; ?></span>
+							<?php } else {
+								$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );
+								if (is_object($publisher)) { ?>
+								<span><?php echo $post->author->displayname; ?></span>
 									<?php } else { ?>
 								<span><?php echo $post->author->displayname; ?></span>
 									<?php } ?>
