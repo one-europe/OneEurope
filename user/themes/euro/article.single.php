@@ -49,6 +49,7 @@
 						<p><?php if ( $item->info->excerpt ) { echo $item->info->excerpt; } else { echo $item->content_out; } ?></p>
 						<p class="meta">
 					        <?php if ( $show_author && $item->typename == 'article' ) { ?>
+					        	by 
 								<?php if ( $item->info->origauthor ) { ?>
 									<a href="<?php if ( $item->info->origprofile ) { echo $item->info->origprofile; } else { echo $item->info->origsource; } ?>" title="<?php echo $item->info->origauthor; ?>"><?php echo $item->info->origauthor; ?></a>
 								<?php } elseif ($item->info->author) { ?>

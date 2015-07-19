@@ -55,17 +55,16 @@
 				<p><?php if ( $post->info->excerpt ) { echo strip_tags($post->info->excerpt); } else { echo strip_tags($post->content_out); } ?></p>
 				<p class="meta">
 			        <?php if ( $show_author && $post->typename == 'article' ) { ?>
-						<span class="entry-autor">
-							<?php if ( $post->info->origauthor ) { ?>
-								<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="Portrait"><span><?php echo $post->info->origauthor; ?></span></a>
-							<?php } elseif ($post->info->author) { ?>
-								<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
-								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($post->info->author)->displayname; ?></span></a>
-							<?php } else { 
-								$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
-								<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $post->author->displayname; ?></span></a>
-							<?php } ?>
-						</span>
+			        	by 
+						<?php if ( $post->info->origauthor ) { ?>
+							<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="Portrait"><span><?php echo $post->info->origauthor; ?></span></a>
+						<?php } elseif ($post->info->author) { ?>
+							<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
+							<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo User::get($post->info->author)->displayname; ?></span></a>
+						<?php } else { 
+							$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
+							<a href="<?php echo $publisher->permalink; ?>" title="Portrait"><span><?php echo $post->author->displayname; ?></span></a>
+						<?php } ?>
 					<?php } ?>
 			        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
 				</p>

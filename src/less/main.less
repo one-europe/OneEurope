@@ -180,7 +180,9 @@ main { max-width: 1020px; padding: 0 20px 20px; margin: 0 auto 40px; background:
 			&.post-list { margin: 20px 0 0; float: none;
 				p.header { font-size: 18px; }
 				section { border-top: 1px solid #eef1f5; border-bottom: 0;
-					.meta { border-bottom: 0; border-top: 0; padding: 0; }
+					.meta { border-bottom: 0; border-top: 0; padding: 0;
+						a { text-decoration: none; color: inherit; }
+					}
 				}
 			}
 		}
@@ -197,9 +199,7 @@ main { max-width: 1020px; padding: 0 20px 20px; margin: 0 auto 40px; background:
 				h2 { font-size: 24px; line-height: 28px; margin-bottom: 10px; margin-left: 177px; clear: none; padding: 0; }
 				p { color: #444; line-height: 20px; margin-left: 177px;
 					&.meta, a { color: #666; }
-					&.meta { margin-bottom: 0;
-						a, span { text-transform: uppercase; }
-					}
+					&.meta { margin-bottom: 0; }
 					.more:after { content: '\203A'; padding-left: 3px; }
 				}
 			}
