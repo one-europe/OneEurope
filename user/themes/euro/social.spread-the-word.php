@@ -18,6 +18,8 @@
 	<a class="addthis_button_hootsuite"></a>
 	<a class="addthis_button_buffer"></a>
 	<a class="addthis_button_email"></a>
+	<a class="addthis_button_flipboard"></a>
+	<a class="addthis_button_pocket"></a>
 	<a class="addthis_button_compact"></a>
 </div>
 <div id="mc_embed_signup">

@@ -3,21 +3,6 @@
 	<h1><?php echo $post->title_out; ?></h1>
 	<p class="descr"><?php echo $post->info->excerpt; ?></p>
 	<p class="meta">
-		<?php /* if ( $show_author ) { ?>
-			<?php if ( $post->info->origsource ) { ?>
-				<a href="<?php if ( $post->info->origprofile ) { echo $post->info->origprofile; } else { echo $post->info->origsource; } ?>" title="<?php echo $post->info->origauthor; ?>"><?php echo $post->info->origauthor; ?></a>
-			<?php } elseif ($post->info->author) { ?>
-				<?php $publisher = Post::get(array( 'all:info' => array( 'user' => $post->info->author ) ) );?>
-				<a href="<?php echo $publisher->permalink; ?>" title="<?php echo User::get($post->info->author)->displayname; ?>"><?php echo User::get($post->info->author)->displayname; ?></a>
-			<?php } else { 
-					if (is_object(Post::get(array( 'all:info' => array( 'user' => $post->author->id ) )))) { 
-						$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
-				<a href="<?php echo $publisher->permalink; ?>" title="<?php echo $post->author->displayname; ?>"><?php echo $post->author->displayname; ?></a>
-					<?php } else { ?>
-				<?php echo $post->author->displayname; ?>
-					<?php } ?>
-			<?php } ?>
-		<?php } */ ?>
 		<time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{d}</span> <span>{M}</span> <span>{Y}</span>'); ?></time></span>
 		<?php if ($post->tags_out) { ?> | tags: <?php } else { ?> | no tags<?php } ?><?php echo $post->tags_out; ?>
 	</p>
@@ -27,19 +12,12 @@
 	<div class="post-content">
 		<?php if ($post->info->photourl) { ?>
 			<figure>					
-				<span class="license" title="<?php echo $post->info->photolicense; ?>"><?php echo $post->info->photolicense; ?></span>
 				<a href="<?php echo $post->info->photourl; ?>"><img alt="<?php echo $post->title; ?>" src="<?php echo $post->info->photourl; ?>" /></a>
+				<span class="license" title="<?php echo $post->info->photolicense; ?>"><?php echo $post->info->photolicense; ?></span>
 				<figcaption><?php echo $post->info->photoinfo; ?></figcaption>
 			</figure>			
 		<?php } ?>
 		<?php echo $post->content_out; ?>
-		<?php
-			// $username = User::get_by_id($post->info->editor)->username;
-			// if ($username) {
-			// 	$editor_slug = DB::get_results('SELECT slug FROM {posts} WHERE title LIKE "%' . $username . '%"')[0]->slug;
-			// 	echo '<p>Edited by: <a href="/team/' . $editor_slug . '">' . $username . '</a></p>';	
-			// }
-		?>
 	</div>
 		
 	<?php if ( User::identify()->loggedin ) { ?><span class="article-edit alignright"><a href="<?php echo $post->editlink; ?>" title="<?php _e('Edit post'); ?>"><?php _e('Edit'); ?></a></span><?php } ?>

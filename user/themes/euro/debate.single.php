@@ -18,15 +18,22 @@
 			<a class="addthis_button_twitter"></a>
 			<a class="addthis_button_pinterest_share"></a>
 			<a class="addthis_button_linkedin"></a>
-			<a class="addthis_button_stumbleupon"></a>
-			<a class="addthis_button_vk"></a>
 			<a class="addthis_button_reddit"></a>
-			<a class="addthis_button_scoopit"></a>
+			<a class="addthis_button_vk"></a>
+			<a class="addthis_button_stumbleupon"></a>
 			<a class="addthis_button_tumblr"></a>
-			<a class="addthis_button_digg"></a>
+			<a class="addthis_button_scoopit"></a>
 			<a class="addthis_button_wordpress"></a>
 			<a class="addthis_button_blogger"></a>
+			<a class="addthis_button_xing"></a>
+			<a class="addthis_button_digg"></a>
+			<a class="addthis_button_whatsapp"></a>
 			<a class="addthis_button_delicious"></a>
+			<a class="addthis_button_hootsuite"></a>
+			<a class="addthis_button_buffer"></a>
+			<a class="addthis_button_email"></a>
+			<a class="addthis_button_flipboard"></a>
+			<a class="addthis_button_pocket"></a>
 			<a class="addthis_button_compact"></a>
 		</div>
 	</div>
