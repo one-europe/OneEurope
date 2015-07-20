@@ -1,5 +1,5 @@
 /* OneEurope webiste styles */
-html, body { font-family: 'Open Sans'; font-size: 14px; color: #000; width: 100%; height: 100%;
+html, body { font-family: arial, 'san-serif'; font-size: 14px; color: #000; width: 100%; height: 100%;
 				background: url('../img/bg.png'); line-height: 20px; }
 body { position: relative; background: transparent; }
 a { color: #000; text-decoration: none; outline: none;
@@ -7,6 +7,7 @@ a { color: #000; text-decoration: none; outline: none;
 }
 p { padding-bottom: 10px; }
 h2 { font-size: 18px; }
+h1, h2, h3 { font-family: georgia; }
 b, strong { font-weight: 600; }
 i, em { font-style: italic; }
 
@@ -31,7 +32,7 @@ button { padding: 3px 10px; font-size: 12px; }
 
 /** HEADER ***/
 
-header { max-width: 1020px; padding: 15px 20px 0; margin: 0 auto; background: #fff; overflow: hidden;
+header { max-width: 1020px; padding: 15px 20px 0; margin: 0 auto; background: #fff; overflow: hidden; font-family: georgia;
 		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 		-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
@@ -147,7 +148,7 @@ main { max-width: 1020px; padding: 0 20px 20px; margin: 0 auto 40px; background:
 
 		.further-reading { border: 1px solid #eef1f5; padding: 10px; clear: both;
 			&.post-list { margin: 20px 0 0; float: none;
-				p.header { font-size: 18px; }
+				p.header { font-size: 18px; font-family: georgia; }
 				section { border-top: 1px solid #eef1f5; border-bottom: 0;
 					.meta { border-bottom: 0; border-top: 0; padding: 0;
 						a { text-decoration: none; color: inherit; }
@@ -215,9 +216,9 @@ main { max-width: 1020px; padding: 0 20px 20px; margin: 0 auto 40px; background:
 					&:hover { color: #527bd2; }
 				}
 			}
-			.post-content { padding: 6px 0; overflow: hidden;
+			.post-content { padding: 6px 0; overflow: hidden; font-family: georgia;
 				&.on-profile { x-overflow: visible; }
-				figure { max-width: 50%; float: left; margin: 4px 15px 5px 0; overflow: hidden;
+				figure { max-width: 50%; float: left; margin: 4px 15px 5px 0; overflow: hidden; font-family: arial;
 					.license { color: #bbb; font-size: 11px; line-height: 16px; white-space: nowrap; }
 					img { width: 100%; border: 1px solid #ccc; margin: 0; }
 					figcaption { font-size: 12px; line-height: 16px; }
@@ -489,7 +490,7 @@ main { max-width: 1020px; padding: 0 20px 20px; margin: 0 auto 40px; background:
 				.profile { display: block; padding: 10px; border-bottom: 1px solid #eef1f5; overflow: hidden;
 					img { float: right; margin-left: 10px; }
 					p { color: #777; font-size: 12px; line-height: 18px;
-						b { font-size: 16px; color: #333; line-height: 20px;
+						b { font-size: 16px; color: #333; line-height: 20px; font-family: georgia;
 							display: block; padding-bottom: 5px; font-weight: normal; }
 					}
 				}
@@ -586,7 +587,7 @@ footer { background: rgba(255, 255, 255, 0.15); width: 100%; color: #444;
 }
 
 /*** social buttons ***/
-.social-buttons { float: right; padding: 15px 0; margin: 72px 0 0 -100%; overflow: hidden;
+.social-buttons { float: right; padding: 15px 0; margin: 72px 0 0 -100%; overflow: hidden; font-family: georgia;
 	&.at-the-bottom { margin-top: 0; }
 	span { float: left; line-height: 32px; text-shadow: 0 1px 1px rgba(0,0,0, .3); padding-right: 10px; }
 	a { width: 32px; height: 32px; float: left; margin-left: 5px; background: url('../img/social-icons32x32-01.png') -10px 0 no-repeat; }
