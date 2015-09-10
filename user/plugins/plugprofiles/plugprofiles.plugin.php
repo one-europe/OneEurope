@@ -370,13 +370,6 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));		  
-	 //  $formerpartners = Posts::get(array(
-	 //    'content_type' => Post::type('profile'),
-	 //    'status' => Post::status('published'),
-		// 'vocabulary' => array('systags:term' => 'former'),
-		// 'orderby' => 'title ASC',
-	 //    'nolimit' => TRUE
-	 //  ));		  
 	  $editors = Posts::get(array(
 	    'content_type' => Post::type('profile'),
 	    'status' => Post::status('published'),
@@ -405,27 +398,49 @@ class PlugProfile extends Plugin
 		'orderby' => 'title ASC',
 	    'nolimit' => TRUE
 	  ));
-	 //  $fundraising = Posts::get(array(
-	 //    'content_type' => Post::type('profile'),
-	 //    'status' => Post::status('published'),
-		// 'vocabulary' => array('systags:term' => 'fundraising'),
-		// 'orderby' => 'title ASC',
-	 //    'nolimit' => TRUE
-	 //  ));
-	  
+	  $socialMedia = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'social_media'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
+	  ));
+	  $formerSocialMedia = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'former_social_media'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
+	  ));
+	  $formerEditor = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'former_editor'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
+	  ));
+	  $contributors = Posts::get(array(
+	    'content_type' => Post::type('profile'),
+	    'status' => Post::status('published'),
+		'vocabulary' => array('systags:term' => 'contributor'),
+		'orderby' => 'title ASC',
+	    'nolimit' => TRUE
+	  ));
+ 
 
 	  // Add the profiles to the theme. Access this in your template with $allprofiles.
-	  $theme->directors = $directors;
-	  $theme->editors = $editors;
 	  $theme->authors = $authors;
+	  $theme->directors = $directors;
 	  $theme->ambassadors = $ambassadors;
+	  $theme->partners = $partners;
+	  $theme->editors = $editors;
 	  $theme->itdept = $itdept;
 	  $theme->projectManager = $projectManager;
 	  $theme->designers = $designers;
-	  $theme->partners = $partners;
-	  // $theme->contributors = $contributors;
-	  // $theme->formerpartners = $formerpartners;
-	  // $theme->fundraising = $fundraising;
+	  $theme->socialMedia = $socialMedia;
+	  $theme->formerSocialMedia = $formerSocialMedia;
+	  $theme->formerEditor = $formerEditor;
+	  $theme->contributors = $contributors;
 
 	  $theme->act_display( $paramarray );
 
