@@ -118,9 +118,9 @@
 			</a>
 			<?php } ?>
 		</div>
-		<div class="team-left">
-			<h2>Authors:</h2>
-			<?php foreach ( $authors as $profile ) { 
+		<div class="team-right">
+			<h2>Ambassadors:</h2>
+			<?php foreach ( $ambassadors as $profile ) { 
 				if ($profile->info->user) {
 					$source = User::get_by_id($profile->info->user)->info;
 					$title = User::get_by_id($profile->info->user)->displayname;
@@ -136,9 +136,9 @@
 			</a>
 			<?php } ?>
 		</div>
-		<div class="team-right">
-			<h2>Ambassadors:</h2>
-			<?php foreach ( $ambassadors as $profile ) { 
+		<div class="team-left">
+			<h2>Authors:</h2>
+			<?php foreach ( $authors as $profile ) { 
 				if ($profile->info->user) {
 					$source = User::get_by_id($profile->info->user)->info;
 					$title = User::get_by_id($profile->info->user)->displayname;
