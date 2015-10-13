@@ -27,7 +27,11 @@
 		<?php echo $theme->display('social.spread-the-word'); ?>
 	</div>
 
-	<div class="fb-comments" style="padding-top: 20px; display: block; overflow: hidden;" data-width="100%" data-href="<?php echo $post->permalink; ?>" data-numposts="5" data-colorscheme="light"></div>
+	<div class="disqus-comments">
+		<?php $theme->comments($post); ?>
+	</div>
+
+	<div class="fb-comments" data-width="100%" data-href="<?php echo $post->permalink; ?>" data-numposts="5" data-colorscheme="light"></div>
 
 	<?php /*echo $theme->display('comments');*/ ?>
 

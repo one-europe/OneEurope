@@ -621,9 +621,14 @@ footer { background: rgba(255, 255, 255, 0.15); width: 100%; color: #444;
 	box-shadow: 2px 2px 5px #444; /* for Safari and Chrome */
 }
 
-/*** FACEBOOK COMMENTS fluid width ***/
+/*** FACEBOOK AND DISQUS COMMENTS fluid width ***/
 
-.fb-comments {
+.disqus-comments {
+	overflow: hidden; margin-top: 20px; padding: 15px; border-radius: 5px;
+	border: 1px solid #eaedee; box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2);
+}
+
+.fb-comments { padding-top: 20px; display: block !important; overflow: hidden;
 	span[style], iframe[style] { width: 100% !important; }
 }
 
