@@ -1,18 +1,28 @@
+<IfModule mod_rewrite.c>
+  Options +SymLinksIfOwnerMatch
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !=/favicon.ico
+  RewriteRule . index.php [PT]
+  RewriteRule ^(system/(classes|locale|schema|$)) index.php [PT]
 
-### HABARI START
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !=/favicon.ico
-RewriteRule . index.php [PT]
-RewriteRule ^(system/(classes|locale|schema|$)) index.php [PT]
-### HABARI END
+  ## in order not to break old incoming links, rewrite the following URLs
+  Redirect 301 /profiles/valentin-kotov /profiles/valentin
+  Redirect 301 /profiles/valentin-kotov /profiles/valentin
+  Redirect 301 /valentin-kotov /profiles/valentin
+  Redirect 301 /contributors /team
+  Redirect 301 /in-brief /eurographics
+  Redirect 301 /infographics /eurographics
 
-
+  RedirectMatch 301 /profiles/(.*) /team/$1
+  RedirectMatch 301 /in-brief/(.*) /eurographics/$1
+  RedirectMatch 301 /infographics/(.*) /eurographics/$1
+</IfModule>
 
 ########
 ###
-###		html5boilerplate.com cheat sheet
+###   html5boilerplate.com cheat sheet
 ###
 ########
 
@@ -341,10 +351,10 @@ FileETag None
 # Turning on the rewrite engine is necessary for the following rules and features.
 # SymLinksIfOwnerMatch must be enabled for this to work.
 
-<IfModule mod_rewrite.c>
-  Options +SymLinksIfOwnerMatch
-  RewriteEngine On
-</IfModule>
+# <IfModule mod_rewrite.c>
+#   Options +SymLinksIfOwnerMatch
+#   RewriteEngine On
+# </IfModule>
 
 
 
