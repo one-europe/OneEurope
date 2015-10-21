@@ -1,1 +1,1 @@
-<a class="european-republic" target="_blank" href="http://www.european-republic.eu/" title="Europe: A New Version is Available"></a>
+<a onClick="ga('send', 'event', 'Banner', 'Click', 'European-Republic', 1, true)" class="european-republic" target="_blank" href="http://www.european-republic.eu/" title="Europe: A New Version is Available"></a>
