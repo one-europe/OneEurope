@@ -113,7 +113,7 @@
 							<?php } ?>
 						<?php } ?>
 				        on <time datetime="<?php echo $post->pubdate->text_format('{Y}-{m}-{d}'); ?>"><?php echo $post->pubdate->text_format('<span>{M}</span> <span>{d}</span>, <span>{Y}</span>'); ?></time>
-						<em>(<span title="Comments" class="fb-comments-count" data-href="<?php echo $post->permalink; ?>">0</span>)</em>
+						<?php /* <em>(<span title="Comments" class="fb-comments-count" data-href="<?php echo $post->permalink; ?>">0</span>)</em> */ ?>
 					</p>
 				</section>
 			<?php } ?>
