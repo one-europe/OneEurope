@@ -21,7 +21,6 @@
 						<a href="<?php Site::out_url( 'habari' ); ?>/donate" title="Donate">Donate</a>
 						<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron" title="Patron">Patron</a>
 						<a href="<?php Site::out_url( 'habari' ); ?>/contact" title="Contact">Contact</a>
-						<a href="<?php Site::out_url( 'habari' ); ?>/imprint" title="Terms">Terms</a>
 					</nav>
 				</div>
 			</div>

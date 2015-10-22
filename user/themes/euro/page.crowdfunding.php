@@ -8,8 +8,6 @@
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/crowdfunding"><b>Crowdfunding</b></a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a></li>
 		<li><a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a></li>
-		<li><a href="<?php Site::out_url( 'habari' ); ?>/imprint">Terms</a></li>
-		<li class="clear"></li>
 	</ul>
 </div>
 <a name="top"></a>

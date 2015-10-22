@@ -6,7 +6,6 @@
 	<a href="<?php Site::out_url( 'habari' ); ?>/donate">Donate</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/imprint">Terms</a>
 </div>
 <article class="full">
 	<h1>Get involved!</h1>

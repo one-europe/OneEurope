@@ -7,7 +7,6 @@
 	<b>Donate</b>
 	<a href="<?php Site::out_url( 'habari' ); ?>/become-a-patron">Become a Patron</a>
 	<a href="<?php Site::out_url( 'habari' ); ?>/contact">Contact</a>
-	<a href="<?php Site::out_url( 'habari' ); ?>/imprint">Terms</a>
 </div>
 <a name="top"></a>
 <article class="full crowd">
