@@ -34,7 +34,7 @@
 			</div>
 		<?php } ?>
 		<?php } else { echo '<p class="profile">' . User::get($post->info->author)->displayname . '</p>'; }?>
-	<?php } else { 
+	<?php } else {
 		$publisher = Post::get(array( 'all:info' => array( 'user' => $post->author->id ) ) );?>
 		<a class="profile" href="<?php echo $publisher->permalink; ?>">
 			<img alt="<?php echo $post->author->displayname; ?>" src="<?php if ( $post->author->info->photourl ) { echo $post->author->info->photourl; } else { echo $publisher->info->photurl; } ?>" />
@@ -60,7 +60,7 @@
 		$username = User::get_by_id($post->info->editor)->username;
 		$editor = DB::get_row('
 			SELECT {posts}.slug, {postinfo}.value as teaser
-			FROM {posts} 
+			FROM {posts}
 			JOIN {postinfo} ON {posts}.id = {postinfo}.post_id
 			WHERE title LIKE "%' . $username . '%" AND name = "teaser" LIMIT 1
 		');
@@ -72,5 +72,24 @@
 				<a class="profile" href="/team/<?= $editor->slug ?>">
 					<p class="teaser"><b><?= $username ?></b><?= $editor->teaser ?></p>
 				</a>
-			</section>
+
 <?php } } ?>
+
+<?php
+	if ($post->info->editor2) {
+		$username2 = User::get_by_id($post->info->editor2)->username;
+		$editor2 = DB::get_row('
+			SELECT {posts}.slug, {postinfo}.value as teaser
+			FROM {posts}
+			JOIN {postinfo} ON {posts}.id = {postinfo}.post_id
+			WHERE title LIKE "%' . $username2 . '%" AND name = "teaser" LIMIT 1
+		');
+
+		if ($editor2) {
+		?>
+				<a class="profile" href="/team/<?= $editor->slug ?>">
+					<p class="teaser"><b><?= $username2 ?></b><?= $editor2->teaser ?></p>
+				</a>
+<?php } } ?>
+
+<?php if ($editor || $editor2) { ?></section><?php } ?>

@@ -1,10 +1,10 @@
 <?php
 
 class Plugticles extends Plugin
-{ 
-	
+{
+
 	const CONTENT_TYPE = 'article';
-	
+
 	/**
 	 * Create help file
 	 **/
@@ -23,7 +23,7 @@ class Plugticles extends Plugin
 	{
     // add the content type.
 		Post::add_new_type( self::CONTENT_TYPE );
-		
+
 		// Give anonymous users access, if the group exists
 		$group = UserGroup::get_by_name( 'anonymous ');
 		if ( $group ) {
@@ -45,21 +45,21 @@ class Plugticles extends Plugin
 		ACL::destroy_token( 'republish' );
 
 	}
-	
+
 	/**
 	 * Make the displaying pretty.
 	 */
-	public function filter_post_type_display($type, $foruse) 
-	{ 
-		$names = array( 
+	public function filter_post_type_display($type, $foruse)
+	{
+		$names = array(
 			self::CONTENT_TYPE => array(
 				'singular' => _t( 'Article', self::CONTENT_TYPE ),
 				'plural' => _t( 'Articles', self::CONTENT_TYPE ),
 			)
-		); 
- 		return isset($names[$type][$foruse]) ? $names[$type][$foruse] : $type; 
+		);
+ 		return isset($names[$type][$foruse]) ? $names[$type][$foruse] : $type;
 	}
-	
+
 	/**
 	 * Modify publish form.
 	 *
@@ -69,43 +69,43 @@ class Plugticles extends Plugin
 	{
 		// only edit the form if it's an article
 		if ( $form->content_type->value == Post::type( self::CONTENT_TYPE ) ) {
-			
+
 			// add shorttitle input field
 			$form->append('text', 'shorttitle', 'null:null', _t('Short Title (for display on frontpage - can be the actual title itself if it\'s short enough)'), 'admincontrol_text');
 			$form->shorttitle->value = $post->info->shorttitle;
 			$form->shorttitle->tabindex = 2;
 		    $form->shorttitle->move_after($form->title);
-			
-			
+
+
 			// add excerpt field
 			$form->append('text', 'excerpt', 'null:null', _t('Subtitle'), 'admincontrol_text');
 			$form->excerpt->tabindex = 3;
 			$form->excerpt->value = $post->info->excerpt;
 			$form->excerpt->move_after($form->shorttitle);
-			
+
 			$form->tags->tabindex = 4;
 			$form->tags->move_after($form->excerpt);
 
 			$form->content->tabindex = 5;
-			
+
 			// add photo url input field
 			$form->append('text', 'photourl', 'null:null', _t('Photo URL (1. upload the image to the media silo, 2. grab its URL, 3. paste it here)'), 'admincontrol_text');
 			$form->photourl->tabindex = 6;
 			$form->photourl->value = $post->info->photourl;
 			$form->photourl->move_after($form->content);
-			
+
 			// add photo caption
 			$form->append('text', 'photoinfo', 'null:null', _t('Photo Caption'), 'admincontrol_text');
 			$form->photoinfo->tabindex = 7;
 			$form->photoinfo->value = $post->info->photoinfo;
 			$form->photoinfo->move_after($form->photourl);
-			
+
 			// add photo licensor field
 			$form->append('text', 'photolicense', 'null:null', _t('Photo Licensor'), 'admincontrol_text');
 			$form->photolicense->tabindex = 8;
 			$form->photolicense->value = $post->info->photolicense;
 			$form->photolicense->move_after($form->photoinfo);
-			
+
 			// add the articles category
 			/*$form->append('text', 'metacat', 'null:null', _t('Category'), 'admincontrol_text');
 			$form->metacat->tabindex = 100;
@@ -120,8 +120,8 @@ class Plugticles extends Plugin
 				// $form->append('text', 'origsource', 'null:null', _t('Is this article re-published? If so, enter the full url of the original source here.'), 'admincontrol_text');
 				// $form->origsource->tabindex = 9;
 				// $form->origsource->value = $post->info->origsource;
-				// $form->origsource->move_after($form->photolicense);	
-	
+				// $form->origsource->move_after($form->photolicense);
+
 				// add field for the name of the source
 				// $form->append('text', 'origauthor', 'null:null', _t('In case this is re-published, enter the name of that source/author here'), 'admincontrol_text');
 				// $form->origauthor->tabindex = 10;
@@ -147,7 +147,7 @@ class Plugticles extends Plugin
 			$debates = Posts::get( array( 'content_type' => 'debate', 'status' => 'published' ) );
 			$slugs = array(); 								// create second, empty array
 			$i = 1;
-			foreach ($debates as $debate) { 					// for every debate of the first one... 
+			foreach ($debates as $debate) { 					// for every debate of the first one...
 				if ( $i == 1 ) {
 					$slugs[] = 'None';
 					$i++;
@@ -156,8 +156,8 @@ class Plugticles extends Plugin
 					$slugs[] = $debate->title;	// ...fill an object in the new array aka [nr] => [displayname]
 				}
 			} 												// use this value in the dropdown
-			$form->append( 'select', 'debate', 'null:null', _t( 'Contributes to the following debate:' ), $slugs, 'tabcontrol_select' ); 
-			
+			$form->append( 'select', 'debate', 'null:null', _t( 'Contributes to the following debate:' ), $slugs, 'tabcontrol_select' );
+
 			$ids = array();
 			$i = 1;
 			foreach ($debates as $debate) { 					// ..
@@ -170,7 +170,7 @@ class Plugticles extends Plugin
 					$i++;
 				}
 			}
-			$key = array_search( $post->info->debate, $ids ); 
+			$key = array_search( $post->info->debate, $ids );
 			$form->debate->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
 			$form->debate->tabindex = 13;
 			$form->debate->move_after($form->photolicense);
@@ -179,16 +179,16 @@ class Plugticles extends Plugin
 
 
 			$editors = DB::get_results('SELECT {users_groups}.user_id, {users}.username FROM {users_groups} LEFT JOIN {users} ON {users_groups}.user_id = {users}.id WHERE group_id=?', array(15));
-			// echo '<pre>'; print_r($editors); echo '</pre>'; exit;
 			$slugs = array();	// create second, empty array
 			$i = 1;
-			foreach ($editors as $editor) {	// for every editor of the first one... 
+			foreach ($editors as $editor) {	// for every editor of the first one...
 				if ($i == 1) { $slugs[] = 'None'; $i++; }
 				if ($editor->username) { // ...if he has a displayname...
 					$slugs[] = $editor->username;	// ...fill an object in the new array aka [nr] => [displayname]
 				}
 			} 												// use this value in the dropdown
-			$form->append('select', 'editor', 'null:null', _t( 'Editor:' ), $slugs, 'tabcontrol_select' ); 
+			$form->append('select', 'editor', 'null:null', _t( 'Editor:' ), $slugs, 'tabcontrol_select' );
+			$form->append('select', 'editor2', 'null:null', _t( 'Second Editor:' ), $slugs, 'tabcontrol_select' );
 			$ids = array();
 			$i = 1;
 			foreach ($editors as $editor) {
@@ -198,18 +198,25 @@ class Plugticles extends Plugin
 					$i++;
 				}
 			}
-			$key = array_search( $post->info->editor, $ids ); 
+			$key = array_search( $post->info->editor, $ids );
 			$form->editor->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
 			$form->editor->tabindex = 14;
 			$form->editor->move_after($form->debate);
 
+			// echo '<pre>'; print_r($post->info); echo '</pre>';
 
-			
+			$key2 = array_search( $post->info->editor2, $ids );
+			$form->editor2->value = $key2;						// ..& retranslate this id to the right correct index in the dropdown.
+			$form->editor2->tabindex = 14;
+			$form->editor2->move_after($form->editor);
+
+
+
 			// make a dropdown of all initiatives with set slugs
 			// $initiatives = Posts::get( array( 'content_type' => 'initiative', 'status' => 'published' ) );
 			// $slugs = array(); 								// create second, empty array
 			// $i = 1;
-			// foreach ($initiatives as $initiative) { 					// for every initiative of the first one... 
+			// foreach ($initiatives as $initiative) { 					// for every initiative of the first one...
 			// 	if ( $i == 1 ) {
 			// 		$slugs[] = 'None';
 			// 		$i++;
@@ -218,7 +225,7 @@ class Plugticles extends Plugin
 			// 		$slugs[] = $initiative->title;	// ...fill an object in the new array aka [nr] => [displayname]
 			// 	}
 			// } 												// use this value in the dropdown
-			// $form->append( 'select', 'initiative', 'null:null', _t( 'Reports about the following initiative:' ), $slugs, 'tabcontrol_select' ); 
+			// $form->append( 'select', 'initiative', 'null:null', _t( 'Reports about the following initiative:' ), $slugs, 'tabcontrol_select' );
 			// $ids = array();
 			// $i = 1;
 			// foreach ($initiatives as $initiative) { 					// ..
@@ -231,30 +238,30 @@ class Plugticles extends Plugin
 			// 		$i++;
 			// 	}
 			// }
-			// $key = array_search( $post->info->initiative, $ids ); 
+			// $key = array_search( $post->info->initiative, $ids );
 			// $form->initiative->value = $key;						// ..& retranslate this id to the right correct index in the dropdown.
 			// $form->initiative->tabindex = 14;
 			// $form->initiative->move_after($form->debate);
-			
-							
-			
+
+
+
 			$form->save->tabindex = $form->save->tabindex + 20;
 			// nonworking & causing errors on MAMP
 			//$form->publish->tabindex = $form->publish->tabindex + 20;
 			//$form->delete->tabindex = $form->delete->tabindex + 20;
-			
-			
+
+
 			// append this post to the profile of ... need: list of profiles, similar to the list of authors in plugprofiles
 			//$form->append('text', 'append', 'null:null', _t('Append this article to the institution profile of ... (make sure that the name is spelled correctly!)'), 'admincontrol_text');
 			//$form->append->value = $post->info->append;
 			//$form->append->template = 'admincontrol_text';
-			
+
 			//$form->append('file', 'photo', 'path:' . Site::get_dir('files') . '/photos', 'Thumbnail Image');
 			// load values and display the fields
 		}
 
 	}
-	
+
 	/**
 	 * Save our data to the database
 	 **/
@@ -268,11 +275,11 @@ class Plugticles extends Plugin
 			$post->info->photoinfo = $form->photoinfo->value;
 			$post->info->photolicense = $form->photolicense->value;
 			//$post->info->metacat = $form->metacat->value;
-			
+
 			// only change db entry if user can have entered something new
 			if ( User::identify()->can('republish') ) {
 				//$post->info->origsource = $form->origsource->value;
-				//$post->info->origauthor = $form->origauthor->value;			
+				//$post->info->origauthor = $form->origauthor->value;
 				//$post->info->originfo = $form->originfo->value;
 				//$post->info->origprofile = $form->origprofile->value;
 			}
@@ -281,7 +288,7 @@ class Plugticles extends Plugin
 			$debates = Posts::get( array( 'content_type' => 'debate', 'status' => 'published' ) );
 			$slugs = array();
 			$i = 1;
-			foreach ($debates as $debate) { 
+			foreach ($debates as $debate) {
 				if ( $i == 1 ) {
 					$slugs[] = '0';
 					$i++;
@@ -295,12 +302,12 @@ class Plugticles extends Plugin
 				echo $debate->title;
 			}
 			$post->info->debate = $slugs[$form->debate->value];
-			
-			
+
+
 			$editors = DB::get_results('SELECT {users_groups}.user_id, {users}.username FROM {users_groups} LEFT JOIN {users} ON {users_groups}.user_id = {users}.id WHERE group_id=?', array(15));
 			$slugs = array();
 			$i = 1;
-			foreach ($editors as $editor) { 
+			foreach ($editors as $editor) {
 				if ($i == 1) { $slugs[] = '0'; $i++; }
 				if ( $editor->username ) { $slugs[] = $editor->user_id; $i++; }
 			}
@@ -308,11 +315,12 @@ class Plugticles extends Plugin
 				echo $editor->username;
 			}
 			$post->info->editor = $slugs[$form->editor->value];
-			
+			$post->info->editor2 = $slugs[$form->editor2->value];
+
 		}
 	}
-	
-	
+
+
 	// not working yet
 	/*public function filter_template_user_filters( $user_filters = array() ) {
 		parent::act_display( array( 'not:any:info' => array( 'debate' => '0' ) ) );
@@ -341,9 +349,9 @@ class Plugticles extends Plugin
 		}
 		return $filters;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Modify output in the rss feed (include post info metadata)
 	 **/
@@ -379,7 +387,7 @@ class Plugticles extends Plugin
 		if( Post::type( self::CONTENT_TYPE ) == $post->content_type )
 			$feed_entry->content[0] = '<strong>'.$post->info->excerpt.'</strong> '.$feed_entry->content[0];
     }
-	
+
 	/**
 	 * Add articles to the global posts atom feed
 	 **/
